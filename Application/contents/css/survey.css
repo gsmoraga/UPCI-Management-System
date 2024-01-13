@@ -1,0 +1,25 @@
+﻿/*FONT CSS*/
+@font-face {
+    font-family: poppinsLight;
+    src: url(contents/fonts/Poppins-Light.ttf);
+}
+
+@font-face {
+    font-family: poppinsMedium;
+    src: url(contents/fonts/Poppins-Medium.ttf);
+}
+
+@font-face {
+    font-family: poppinsBold;
+    src: url(contents/fonts/Poppins-Bold.ttf);
+}
+
+/*Elements*/
+custom-header {
+    font-family: poppinsMedium;
+}
+
+row {
+    font-family: poppinsMedium;
+}
+

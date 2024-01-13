@@ -1,0 +1,245 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="Template.Main" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>Application</title>
+    <link rel="shortcut icon" href="contents/images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="contents/css/semantic.min.css" />
+    <link rel="stylesheet" type="text/css" href="contents/css/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="contents/css/bootstrap.min.css" />
+    <script type="text/javascript" src="contents/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="contents/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="contents/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="contents/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="contents/js/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="contents/js/main.js"></script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" AsyncPostBackTimeout="360">
+    </asp:ScriptManager>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-maan1" ondragstart="return false"
+        draggable="false">
+        <a class="navbar-brand"><img src="contents/images/UCPB Logo.png" style="width:55px; height:55px; margin:-10px" alt=""/></a>
+        
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a id="btnHome" runat="server" class="nav-link pr-2" href="home.aspx"><i class="home icon"></i>Home</a>
+            </li>
+        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#templateNavbar" aria-controls="templateNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="templateNavbar">
+        <ul class="navbar-nav mr-auto">
+            <li id="liReports" runat="server" class="nav-item" visible="false">
+                <asp:LinkButton class="nav-link" runat="server" id="lbReports" onclick="lbReports_Click" causesvalidation="false"><i class="chart bar icon"></i>Reports</asp:LinkButton>
+            </li>
+            <li id="menuMaintenance" runat="server" class="nav-item dropdown" style="z-index:1031; display:none">
+                <a runat="server" class="nav-link dropdown-toggle" id="MaintenanceDropDown" data-toggle="dropdown" aria-expanded="false"
+                    href="#" role="button" aria-haspopup="true"><i class="wrench icon"></i>Maintenance</a>
+                <ul class="dropdown-menu" aria-labelledby="MaintenanceDropDown">
+                    <li id="menuApplicationAdministration" runat="server" class="dropdown-submenu" visible="false">
+                        <a class="dropdown-item dropdown-toggle" id="ApplicationAdministrationDropDown" data-toggle="dropdown" aria-expanded="false"
+                            href="#" role="button" aria-haspopup="true">Application Administration</a>
+                        <ul class="dropdown-menu" aria-labelledby="ApplicationAdministrationDropDown">
+                            <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbApplicationParameters" onclick="lbApplicationParameters_Click" causesvalidation="false" visible="false">Application Parameters</asp:LinkButton>
+                            <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbSecurityParameters" onclick="lbSecurityParameters_Click" causesvalidation="false" visible="false">Security Parameters</asp:LinkButton>
+                        </ul>
+                    </li>
+                    <li id="menuUserManagement" runat="server" class="dropdown-submenu" visible="false">
+                        <a class="dropdown-item dropdown-toggle" id="UserManagementDropDown" data-toggle="dropdown" aria-expanded="false"
+                            href="#" role="button" aria-haspopup="true">User Management</a>
+                        <ul class="dropdown-menu" aria-labelledby="UserManagementDropDown">
+                            <li id="menuBranch" runat="server" class="dropdown-submenu" visible="false">
+                                <a class="dropdown-item dropdown-toggle" id="BranchDropDown" data-toggle="dropdown" aria-expanded="false"
+                                    href="#" role="button" aria-haspopup="true">Branch</a>
+                                <ul class="dropdown-menu" aria-labelledby="BranchDropDown">
+                                    <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbBranchAdd" onclick="lbBranchAdd_Click" causesvalidation="false" visible="false">Add</asp:LinkButton>
+                                    <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbBranchSearch" onclick="lbBranchSearch_Click" causesvalidation="false">Search</asp:LinkButton>
+						        </ul>
+					        </li>
+                            <li id="menuDepartment" runat="server" class="dropdown-submenu" visible="false">
+                                <a class="dropdown-item dropdown-toggle" id="DepartmentDropDown" data-toggle="dropdown" aria-expanded="false"
+                                    href="#" role="button" aria-haspopup="true">Department</a>
+                                <ul class="dropdown-menu" aria-labelledby="DepartmentDropDown">
+                                    <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbDepartmentAdd" onclick="lbDepartmentAdd_Click" causesvalidation="false" visible="false">Add</asp:LinkButton>
+                                    <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbDepartmentSearch" onclick="lbDepartmentSearch_Click" causesvalidation="false">Search</asp:LinkButton>
+						        </ul>
+					        </li>
+                            <li id="menuDivision" runat="server" class="dropdown-submenu" visible="false">
+                                <a class="dropdown-item dropdown-toggle" id="DivisionDropDown" data-toggle="dropdown" aria-expanded="false"
+                                    href="#" role="button" aria-haspopup="true">Division</a>
+                                <ul class="dropdown-menu" aria-labelledby="DivisionDropDown">
+                                    <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbDivisionAdd" onclick="lbDivisionAdd_Click" causesvalidation="false" visible="false">Add</asp:LinkButton>
+                                    <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbDivisionSearch" onclick="lbDivisionSearch_Click" causesvalidation="false">Search</asp:LinkButton>
+						        </ul>
+					        </li>
+                            <li id="menuUser" runat="server" class="dropdown-submenu" visible="false">
+                                <a class="dropdown-item dropdown-toggle" id="UserDropDown" data-toggle="dropdown" aria-expanded="false"
+                                    href="#" role="button" aria-haspopup="true">User</a>
+                                <ul class="dropdown-menu" aria-labelledby="UserDropDown">
+                                    <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbUserAdd" onclick="lbUserAdd_Click" causesvalidation="false" visible="false">Add</asp:LinkButton>
+                                    <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbUserSearch" onclick="lbUserSearch_Click" causesvalidation="false">Search</asp:LinkButton>
+						        </ul>
+					        </li>
+                            <li id="menuUserGroup" runat="server" class="dropdown-submenu" visible="false">
+                                <a class="dropdown-item dropdown-toggle" id="UserGroupDropDown" data-toggle="dropdown" aria-expanded="false"
+                                    href="#" role="button" aria-haspopup="true">User Group</a>
+                                <ul class="dropdown-menu" aria-labelledby="UserGroupDropDown">
+                                    <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbUserGroupAdd" onclick="lbUserGroupAdd_Click" causesvalidation="false" visible="false">Add</asp:LinkButton>
+                                    <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbUserGroupSearch" onclick="lbUserGroupSearch_Click" causesvalidation="false">Search</asp:LinkButton>
+						        </ul>
+					        </li>
+                        </ul>
+                    </li>
+                    <li id="menuBankUserSecurity" runat="server" class="dropdown-submenu" visible="false">
+                        <a class="dropdown-item dropdown-toggle" id="BankUserSecurityDropDown" data-toggle="dropdown" aria-expanded="false"
+                            href="#" role="button" aria-haspopup="true">Bank User Security</a>
+                        <ul class="dropdown-menu" aria-labelledby="BankUserSecurityDropDown">
+                            <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbUnlockUser" onclick="lbUnlockUser_Click" causesvalidation="false" visible="false">Unlock User</asp:LinkButton>
+                            <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbResetPassword" onclick="lbResetPassword_Click" causesvalidation="false" visible="false">Reset Password</asp:LinkButton>
+                            <asp:LinkButton CssClass="dropdown-item text-dark" runat="server" id="lbActiveSessions" onclick="lbActiveSessions_Click" CausesValidation="False" Visible="false">Active Sessions</asp:LinkButton>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <asp:LinkButton class="nav-link" runat="server" id="lbChangePW" onclick="lbChangePW_Click" CausesValidation="False"><i class="lock icon"></i>Change Password</asp:LinkButton>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <asp:LinkButton class="nav-link" runat="server" id="lbLogout" OnClientClick="return logoutAlert(this);" CausesValidation="false"><i class="sign-out icon"></i>Log Out</asp:LinkButton>
+        </ul>
+        </div>
+    </nav>
+    <div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <footer class="footer fixed-bottom text-light bg-maan1">
+    <br />
+        <div class="container">
+            <span><i class="copyright icon"></i>2020 UCPB Savings Bank</span>
+            <a class="float-right text-light" href="#" style="text-decoration:none" data-toggle="modal" data-target="#supportModal"><i class="phone icon"></i>Support</a>
+        </div>
+    <br />
+    </footer>
+    <div class="modal fade" id="supportModal" tabindex="-1" role="dialog" aria-labelledby="supportModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="supportModalTitle">
+                        Support</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="mb-3"><i class="universal access icon"></i>Access-related concerns</div>
+                        <div class="offset-md-1 mb-3">
+                            Dennis L. Abaygar&emsp;
+                            <span class="text-muted">IT Security Head</span><br />
+                            <i class="phone icon"></i>7613<br />
+                            <i class="envelope icon"></i>DLAbaygar@ucpbsavings.com<br />
+                        </div>
+                        <div class="offset-md-1 mb-3">
+                            Kevin E. Miranda&emsp;
+                            <span class="text-muted">IT Security and Systems Support Analyst</span><br />
+                            <i class="phone icon"></i>7283<br />
+                            <i class="envelope icon"></i>KEMiranda@ucpbsavings.com<br />
+                        </div>
+                        <div class="offset-md-1 mb-3">
+                            Rowena S. Bitancor&emsp;
+                            <span class="text-muted">IT Security and Systems Support Analyst</span><br />
+                            <i class="phone icon"></i>7262<br />
+                            <i class="envelope icon"></i>RSBitancor@ucpbsavings.com<br />
+                        </div>
+                    </div>
+                    <hr />
+                    <div>
+                        <div class="mb-3"><i class="cogs icon"></i>Application-related concerns</div>
+                        <div class="offset-md-1 mb-3">
+                           Carlo N. Tisbe&emsp;
+                            <span class="text-muted">SQA Officer</span><br />
+                            <i class="phone icon"></i>9076<br />
+                            <i class="envelope icon"></i>CNTisbe@ucpbsavings.com<br />
+                        </div>
+                        <div class="offset-md-1 mb-3">
+                            -&emsp;
+                            <span class="text-muted">Application Development Head</span><br />
+                            <i class="phone icon"></i>9076<br />
+                            <i class="envelope icon"></i>-<br />
+                        </div>
+                        <div class="offset-md-1 mb-3">
+                            Juan Ramon H. Alemania&emsp;
+                            <span class="text-muted">Programmer Associate</span><br />
+                            <i class="phone icon"></i>9076<br />
+                            <i class="envelope icon"></i>JHAlemania@ucpbsavings.com<br />
+                        </div>
+                        <div class="offset-md-1 mb-3">
+                            James Limuel A. Marquez&emsp;
+                            <span class="text-muted">Programmer Associate</span><br />
+                            <i class="phone icon"></i>9076<br />
+                            <i class="envelope icon"></i>JAMarquez@ucpbsavings.com<br />
+                        </div>
+                        <div class="offset-md-1 mb-3">
+                            Maria Angeli U. Fernandez&emsp;
+                            <span class="text-muted">Programmer Associate</span><br />
+                            <i class="phone icon"></i>9076<br />
+                            <i class="envelope icon"></i>MUFernandez@ucpbsavings.com<br />
+                        </div>
+                    </div>
+                    <hr />
+                    <div>
+                        <div class="mb-3"><i class="server icon"></i>Server and performance-related concerns</div>
+                        <div class="offset-md-1 mb-3">
+                            Mark Niño T. Jimenez&emsp;
+                            <span class="text-muted">Database Administrator Head</span><br />
+                            <i class="phone icon"></i>7304<br />
+                            <i class="envelope icon"></i>NTJimenez@ucpbsavings.com<br />
+                        </div>
+                        <div class="offset-md-1 mb-3">
+                            John Michael M. Cauyan&emsp;
+                            <span class="text-muted">Systems Administrator</span><br />
+                            <i class="phone icon"></i>7288<br />
+                            <i class="envelope icon"></i>JMCauyan@ucpbsavings.com<br />
+                        </div>
+                        <div class="offset-md-1 mb-3">
+                            Jerico R. Panlilio&emsp;
+                            <span class="text-muted">Database Associate</span><br />
+                            <i class="phone icon"></i>7288<br />
+                            <i class="envelope icon"></i>JRPanlilio@ucpbsavings.com<br />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" language="javascript">
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+    </form>
+</body>
+</html>
