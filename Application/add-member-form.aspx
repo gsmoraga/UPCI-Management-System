@@ -86,7 +86,7 @@
                     <div class="card card-secondary">
                         <div class="card-header">
                             <h3 class="card-title">Church Details</h3>
-                            
+
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                     <i class="fas fa-minus"></i>
@@ -97,6 +97,7 @@
                             <div class="form-group">
                                 <label for="inputSpentBudget">Ministry</label>
                                 <asp:DropDownList ID="ddMinistry" CssClass="form-control custom-select" runat="server">
+                                    <asp:ListItem>--Select--</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                             <div class="form-group">
@@ -111,6 +112,32 @@
                             <div class="form-group">
                                 <label for="inputStatus">Membership Status</label>
                                 <asp:DropDownList ID="ddStatus" CssClass="form-control custom-select" runat="server">
+                                    <asp:ListItem>--Select--</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputStatus">Cell Group</label>
+                                <asp:DropDownList ID="ddCellGroup" CssClass="form-control custom-select" runat="server">
+                                    <asp:ListItem>--Select--</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputStatus">Baptismal Status</label>
+                                <asp:DropDownList ID="ddBaptismalStatus" CssClass="form-control custom-select" runat="server">
+                                    <asp:ListItem>--Select--</asp:ListItem>
+                                    <asp:ListItem>Yes</asp:ListItem>
+                                    <asp:ListItem>No</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputStatus">PEPSOL Level</label>
+                                <asp:DropDownList ID="ddPepsol" CssClass="form-control custom-select" runat="server">
+                                    <asp:ListItem>--Select--</asp:ListItem>
+                                    <asp:ListItem>Pre-Encounter</asp:ListItem>
+                                    <asp:ListItem>Post Encounter</asp:ListItem>
+                                    <asp:ListItem>School of Leaders 1</asp:ListItem>
+                                    <asp:ListItem>School of Leaders 2</asp:ListItem>
+                                    <asp:ListItem>School of Leaders 3</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                         </div>

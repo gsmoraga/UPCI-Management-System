@@ -123,6 +123,33 @@ namespace Template
         protected global::System.Web.UI.WebControls.DropDownList ddStatus;
 
         /// <summary>
+        /// ddCellGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddCellGroup;
+
+        /// <summary>
+        /// ddBaptismalStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddBaptismalStatus;
+
+        /// <summary>
+        /// ddPepsol control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddPepsol;
+
+        /// <summary>
         /// btnCancel control.
         /// </summary>
         /// <remarks>
