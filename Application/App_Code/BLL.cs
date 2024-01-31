@@ -1693,6 +1693,39 @@ public class BLL
 
     #endregion
 
+    #region UPCI
 
+    #region Member
+    /**
+    * Filters the data table of users that match the filter string
+    * 
+    * @since version 1.0 
+    * @param GridView pObj - grid view where the data table will be binded to
+    * @param string code - code to search
+    * @param string description - description to search
+    * @param string userId - user ID of the current user
+    * @return Boolean true if successful, false otherwise
+    */
+    public Boolean FilterMembers(GridView pObj, string memberId, string name, string gender, string membershipStatus, string ministry, string status)
+    {
+        DataTable dt = _DAL.FilterMembershipId(memberId, name, gender, membershipStatus, ministry, status);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            pObj.DataSource = null;
+            pObj.DataBind();
+            return false;
+        }
+        else
+        {
+            pObj.DataSource = dt;
+            pObj.DataBind();
+
+            return true;
+        }
+    }
+    #endregion
+
+    #endregion
 
 }

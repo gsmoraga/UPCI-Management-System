@@ -35,14 +35,6 @@ namespace Template
         {
             string accessRights = Employee.access_rights;
 
-            #region Reports
-            if (accessRights.Contains("&r"))
-            {
-                liReports.Visible = true;
-                lbReports.Attributes.Add("href", "view-report.aspx");
-            }
-            #endregion
-
             #region Maintenance
             Regex r = new Regex("&m[0-9]", RegexOptions.IgnoreCase);
             if (r.Match(accessRights).Success)
@@ -136,72 +128,14 @@ namespace Template
 
 
             }
-            //Survey Maintenance
-            if (accessRights.Contains(VG.ar_civil_status))
+            
+            #endregion
+
+            #region Reports
+            if (accessRights.Contains("&r"))
             {
-                menuCivilStatus.Visible = true;
-
-                if (accessRights.Contains("&m10a,"))
-                    lbCivilStatusAdd.Visible = true;
-                if (accessRights.Contains("&m10d,") || accessRights.Contains("&m10e,"))
-                    lbCivilStatusSearch.Visible = true;
-            }
-            if (accessRights.Contains(VG.ar_civil_status))
-            {
-                menuEducationalAttainment.Visible = true;
-
-                if (accessRights.Contains("&m11a,"))
-                    lbEducationalAttainmentAdd.Visible = true;
-                if (accessRights.Contains("&m11d,") || accessRights.Contains("&m11e,"))
-                    lbEducationalAttainmentSearch.Visible = true;
-            }
-            if (accessRights.Contains(VG.ar_region))
-            {
-                menuRegion.Visible = true;
-
-                if (accessRights.Contains("&m12a,"))
-                    lbRegionResidenceAdd.Visible = true;
-                if (accessRights.Contains("&m12d,") || accessRights.Contains("&m12e,"))
-                    lbRegionResidenceSearch.Visible = true;
-            }
-            if (accessRights.Contains(VG.ar_age_group))
-            {
-                menuAgeGroup.Visible = true;
-
-                if (accessRights.Contains("&m13a,"))
-                    lbAgeGroupAdd.Visible = true;
-                if (accessRights.Contains("&m13d,") || accessRights.Contains("&m13e,"))
-                    lbAgeGroupSearch.Visible = true;
-            }
-
-            if (accessRights.Contains(VG.ar_services))
-            {
-                menuServices.Visible = true;
-
-                if (accessRights.Contains("&m14a,"))
-                    lbServiceAvailedAdd.Visible = true;
-                if (accessRights.Contains("&m14d,") || accessRights.Contains("&m14e,"))
-                    lbServiceAvailedSearch.Visible = true;
-            }
-
-            if (accessRights.Contains(VG.ar_working_status))
-            {
-                menuWorkingStatus.Visible = true;
-
-                if (accessRights.Contains("&m15a,"))
-                    lbWorkingStatusAdd.Visible = true;
-                if (accessRights.Contains("&m15d,") || accessRights.Contains("&m15e,"))
-                    lbWorkingStatusSearch.Visible = true;
-            }
-
-            if (accessRights.Contains(VG.ar_branch_services))
-            {
-                menuBranchServices.Visible = true;
-
-                if (accessRights.Contains("&m16a,"))
-                    lbBranchServicesAdd.Visible = true;
-                if (accessRights.Contains("&m16d,") || accessRights.Contains("&m16e,"))
-                    lbBranchServicesSearch.Visible = true;
+                liReports.Visible = true;
+                lbReports.Attributes.Add("href", "view-report.aspx");
             }
             #endregion
 
@@ -210,8 +144,6 @@ namespace Template
             //lbChangePW.Attributes.Add("href", "password-change.aspx");
 
             #endregion
-
-
 
             #region Active State
             if (Request.ServerVariables["URL"].Contains("home"))
@@ -438,146 +370,6 @@ namespace Template
             Maintenance.description_filter = "";
             Maintenance.page_index = 0; ;
         }
-
-        protected void lbAgeGroupAdd_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_age_group;
-            Maintenance.mode = "Add";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("add_age_group.aspx", false);
-        }
-
-        protected void lbAgeGroupSearch_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_age_group;
-            Maintenance.mode = "Search";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("search_age_group.aspx", false);
-        }
-
-        protected void lbCivilStatusAdd_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_civil_status;
-            Maintenance.mode = "Add";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("add_civil_status.aspx", false);
-        }
-
-        protected void lbCivilStatusSearch_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_civil_status;
-            Maintenance.mode = "Search";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("search_civil_status.aspx", false);
-        }
-
-        protected void lbEducationalAttainmentAdd_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_educational_attainment;
-            Maintenance.mode = "Add";
-
-            ResetMaintenanceFilters();
-            Response.Redirect("add_educational_attainment.aspx", false);
-        }
-
-        protected void lbEducationalAttainmentSearch_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_educational_attainment;
-            Maintenance.mode = "Search";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("search_educational_attainment.aspx", false);
-        }
-
-        protected void lbRegionResidenceAdd_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_region;
-            Maintenance.mode = "Add";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("add_region_of_residence.aspx", false);
-        }
-
-        protected void lbRegionResidenceSearch_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_region;
-            Maintenance.mode = "Search";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("search_region_of_residence.aspx", false);
-        }
-
-        protected void lbServiceAvailedAdd_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_services;
-            Maintenance.mode = "Add";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("add_service_availed.aspx", false);
-        }
-
-        protected void lbServiceAvailedSearch_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_services;
-            Maintenance.mode = "Search";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("search_service_availed.aspx", false);
-        }
-
-        protected void lbWorkingStatusAdd_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_working_status;
-            Maintenance.mode = "Add";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("add_working_status.aspx", false);
-        }
-
-        protected void lbWorkingStatusSearch_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_working_status;
-            Maintenance.mode = "Search";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("search_working_status.aspx", false);
-        }
-        protected void lbBranchServicesAdd_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_branch_services;
-            Maintenance.mode = "Add";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("add_branch_services.aspx", false);
-        }
-
-        protected void lbBranchServicesSearch_Click(object sender, EventArgs e)
-        {
-            Maintenance.content_code = VG.c_branch_services;
-            Maintenance.mode = "Search";
-
-            ResetMaintenanceFilters();
-
-            Response.Redirect("search_branch_services.aspx", false);
-        }
-
-
         protected void lbSurveyInquiry_Click(object sender, EventArgs e)
         {
 

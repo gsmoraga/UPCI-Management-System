@@ -35,11 +35,11 @@ namespace Template
                         string accessRights = Employee.access_rights;
 
 
-                        lblHeader.Text = "Inquiry-All";
-                        pnlInquiry.Visible = true;
+                        //lblHeader.Text = "Inquiry-All";
+                        //pnlInquiry.Visible = true;
 
-                        LoadDropdowns();
-                        LoadMaintenanceData(txtMemberId.Text, txtName.Text, ddGender.SelectedValue, ddMembershipStatus.SelectedValue, ddMinistry.SelectedValue,ddStatus.SelectedValue);
+                        //LoadDropdowns();
+                        //LoadMaintenanceData(gvMaintenance,"","","","","","");
                     }
                 }
             }
@@ -47,96 +47,88 @@ namespace Template
 
         protected void LoadDropdowns()
         {
-            DataTable dtMinistry = new DataTable();
-            dtMinistry = _DAL.GetMinistry();
-            ddMinistry.DataSource = dtMinistry;
-            ddMinistry.DataValueField = "Code";
-            ddMinistry.DataTextField = "Description";
-            ddMinistry.DataBind();
-            ddMinistry.Items.Insert(0, new System.Web.UI.WebControls.ListItem("--All--", "0"));
+            //DataTable dtMinistry = new DataTable();
+            //dtMinistry = _DAL.GetMinistry();
+            //ddMinistry.DataSource = dtMinistry;
+            //ddMinistry.DataValueField = "Code";
+            //ddMinistry.DataTextField = "Description";
+            //ddMinistry.DataBind();
+            //ddMinistry.Items.Insert(0, new System.Web.UI.WebControls.ListItem("--All--", "0"));
 
-            DataTable dtStatus = new DataTable();
-            dtStatus = _DAL.GetMembershipStatus();
-            ddMembershipStatus.DataSource = dtStatus;
-            ddMembershipStatus.DataValueField = "Code";
-            ddMembershipStatus.DataTextField = "Description";
-            ddMembershipStatus.DataBind();
-            ddMembershipStatus.Items.Insert(0, new System.Web.UI.WebControls.ListItem("--All--", "0"));
+            //DataTable dtStatus = new DataTable();
+            //dtStatus = _DAL.GetMembershipStatus();
+            //ddMembershipStatus.DataSource = dtStatus;
+            //ddMembershipStatus.DataValueField = "Code";
+            //ddMembershipStatus.DataTextField = "Description";
+            //ddMembershipStatus.DataBind();
+            //ddMembershipStatus.Items.Insert(0, new System.Web.UI.WebControls.ListItem("--All--", "0"));
 
 
         }
-        protected void LoadMaintenanceData(string memberId, string name, string gender, string membershipStatus, string ministry,string status)
+        protected void LoadMaintenanceData(GridView gv, string memberId, string name, string gender, string membershipStatus, string ministry,string status)
         {
-
-            DataTable dt = new DataTable();
-            dt = _DAL.FilterMembershipId(memberId, name, gender, membershipStatus, ministry,status);
-
-            gvApplication.DataSource = dt;
-            gvApplication.DataBind();
-
-
-            if (dt.Rows == null || dt.Rows.Count == 0)
+            Boolean result = false;
+            result = _BLL.FilterMembers(gv, memberId, name, gender, membershipStatus, ministry, status);
+            
+            if (result == false)
             {
-                lblSearchError.Text = "No records found.";
-                divExport.Visible = false;
-                divPager.Visible = false;
+                //gvCheckBox.Visible = false;
+                //lbDeleteSelected.Visible = false;
+                //divExport.Visible = false;
             }
             else
             {
-                lblSearchError.Text = "";
-                divExport.Visible = true;
-
-                divPager.Visible = true;
-                PopulatePager(gvApplication.PageCount);
-
+                //gvCheckBox.Visible = true;
+                //lbDeleteSelected.Visible = true;
+                //divExport.Visible = true;
             }
         }
 
         protected void lbSearch_Click(object sender, EventArgs e)
         {
-            LoadMaintenanceData(txtMemberId.Text, txtName.Text, ddGender.SelectedValue, ddMembershipStatus.SelectedValue, ddMinistry.SelectedValue,ddStatus.SelectedValue);
+            //LoadMaintenanceData(txtMemberId.Text, txtName.Text, ddGender.SelectedValue, ddMembershipStatus.SelectedValue, ddMinistry.SelectedValue,ddStatus.SelectedValue);
         }
 
         protected void lbRefresh_Click(object sender, EventArgs e)
         {
-            txtMemberId.Text = "";
-            txtName.Text = "";
-            ddGender.SelectedIndex = 0; 
-            ddMembershipStatus.SelectedIndex = 0; 
-            ddMinistry.SelectedIndex = 0;
-            ddStatus.SelectedIndex = 0;
+            //txtMemberId.Text = "";
+            //txtName.Text = "";
+            //ddGender.SelectedIndex = 0; 
+            //ddMembershipStatus.SelectedIndex = 0; 
+            //ddMinistry.SelectedIndex = 0;
+            //ddStatus.SelectedIndex = 0;
             
 
-            LoadMaintenanceData(txtMemberId.Text, txtName.Text, ddGender.SelectedValue, ddMembershipStatus.SelectedValue, ddMinistry.SelectedValue,ddStatus.SelectedValue);
+            //LoadMaintenanceData(txtMemberId.Text, txtName.Text, ddGender.SelectedValue, ddMembershipStatus.SelectedValue, ddMinistry.SelectedValue,ddStatus.SelectedValue);
         }
 
         protected void lbView_Click(object sender, EventArgs e)
         {
-            if (_BLL.SessionIsActive(this))
-            {
-                LinkButton lbView = (LinkButton)sender;
-                Maintenance.entry_code = lbView.CommandArgument;
+            //if (_BLL.SessionIsActive(this))
+            //{
+            //    LinkButton lbView = (LinkButton)sender;
+            //    Maintenance.entry_code = lbView.CommandArgument;
 
-                Maintenance.mode = "Inquiry";
+            //    Maintenance.mode = "Inquiry";
 
-                Session["transactionReferenceNumber"] = lbView.CommandArgument;
+            //    Session["transactionReferenceNumber"] = lbView.CommandArgument;
 
-                _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString());
+            //    _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString());
 
-                //Response.Redirect("view-purchase-requisition-form.aspx", false);
-            }
+            //    //Response.Redirect("view-purchase-requisition-form.aspx", false);
+            //}
         }
 
         protected void lbEdit_Click(object sender, EventArgs e)
         {
-            if (_BLL.SessionIsActive(this))
-            {
-                LinkButton lbEdit = (LinkButton)sender;
-                Maintenance.entry_code = lbEdit.CommandArgument;
-                Maintenance.mode = "Edit";
+            //if (_BLL.SessionIsActive(this))
+            //{
+            //    LinkButton lbEdit = (LinkButton)sender;
+            //    Maintenance.entry_code = lbEdit.CommandArgument;
+            //    Maintenance.mode = "Edit";
 
-                //Response.Redirect("maintenance-parameters.aspx", false);
-            }
+            //    //Response.Redirect("maintenance-parameters.aspx", false);
+            //}
         }
 
         
@@ -160,9 +152,9 @@ namespace Template
         */
         protected void gvApplication_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gvApplication.PageIndex = e.NewPageIndex;
-            EPS.page_index = e.NewPageIndex;
-            BindGridView();
+            //gvApplication.PageIndex = e.NewPageIndex;
+            //EPS.page_index = e.NewPageIndex;
+            //BindGridView();
         }
 
         #region Custom Pager
@@ -170,17 +162,17 @@ namespace Template
         private void PopulatePager(int pageCount)
         {
             //lblTotalRowCount.Text = Convert.ToString(DTSorting.Rows.Count);
-            lblTotalPageCount.Text = Convert.ToString(pageCount);
+            //lblTotalPageCount.Text = Convert.ToString(pageCount);
 
-            ddPageNumber.Items.Clear();
-            for (int i = 1; i <= pageCount; i++)
-            {
-                ddPageNumber.Items.Add(new System.Web.UI.WebControls.ListItem(Convert.ToString(i), Convert.ToString(i - 1)));
-            }
-            if (pageCount > EPS.page_index)
-                ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
-            else
-                ddPageNumber.SelectedIndex = -1;
+            //ddPageNumber.Items.Clear();
+            //for (int i = 1; i <= pageCount; i++)
+            //{
+            //    ddPageNumber.Items.Add(new System.Web.UI.WebControls.ListItem(Convert.ToString(i), Convert.ToString(i - 1)));
+            //}
+            //if (pageCount > EPS.page_index)
+            //    ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
+            //else
+            //    ddPageNumber.SelectedIndex = -1;
         }
 
         /**
@@ -192,9 +184,9 @@ namespace Template
         */
         protected void ddPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gvApplication.PageSize = Convert.ToInt16(ddPageSize.SelectedValue);
-            BindGridView();
-            PopulatePager(gvApplication.PageCount);
+            //gvApplication.PageSize = Convert.ToInt16(ddPageSize.SelectedValue);
+            //BindGridView();
+            //PopulatePager(gvApplication.PageCount);
         }
 
         /**
@@ -206,9 +198,9 @@ namespace Template
         */
         protected void ddPageNumber_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gvApplication.PageIndex = Convert.ToInt16(ddPageNumber.SelectedValue);
-            EPS.page_index = Convert.ToInt16(ddPageNumber.SelectedValue);
-            BindGridView();
+            //gvApplication.PageIndex = Convert.ToInt16(ddPageNumber.SelectedValue);
+            //EPS.page_index = Convert.ToInt16(ddPageNumber.SelectedValue);
+            //BindGridView();
         }
 
         /**
@@ -218,13 +210,13 @@ namespace Template
         */
         protected void lbFirstPage_Click(object sender, EventArgs e)
         {
-            if (gvApplication.PageIndex > 0)
-            {
-                gvApplication.PageIndex = Convert.ToInt16(ddPageNumber.Items[0].Value);
-                EPS.page_index = Convert.ToInt16(ddPageNumber.Items[0].Value);
-                BindGridView();
-                ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
-            }
+            //if (gvApplication.PageIndex > 0)
+            //{
+            //    gvApplication.PageIndex = Convert.ToInt16(ddPageNumber.Items[0].Value);
+            //    EPS.page_index = Convert.ToInt16(ddPageNumber.Items[0].Value);
+            //    BindGridView();
+            //    ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
+            //}
         }
 
         /**
@@ -234,13 +226,13 @@ namespace Template
         */
         protected void lbPreviousPage_Click(object sender, EventArgs e)
         {
-            if (gvApplication.PageIndex > 0)
-            {
-                EPS.page_index -= 1;
-                gvApplication.PageIndex -= 1;
-                BindGridView();
-                ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
-            }
+            //if (gvApplication.PageIndex > 0)
+            //{
+            //    EPS.page_index -= 1;
+            //    gvApplication.PageIndex -= 1;
+            //    BindGridView();
+            //    ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
+            //}
         }
 
         /**
@@ -250,13 +242,13 @@ namespace Template
         */
         protected void lbNextPage_Click(object sender, EventArgs e)
         {
-            if (gvApplication.PageIndex < gvApplication.PageCount - 1)
-            {
-                EPS.page_index += 1;
-                gvApplication.PageIndex += 1;
-                BindGridView();
-                ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
-            }
+            //if (gvApplication.PageIndex < gvApplication.PageCount - 1)
+            //{
+            //    EPS.page_index += 1;
+            //    gvApplication.PageIndex += 1;
+            //    BindGridView();
+            //    ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
+            //}
         }
 
         /**
@@ -266,83 +258,83 @@ namespace Template
         */
         protected void lbLastPage_Click(object sender, EventArgs e)
         {
-            if (gvApplication.PageIndex < gvApplication.PageCount)
-            {
-                EPS.page_index = gvApplication.PageCount - 1;
-                gvApplication.PageIndex = gvApplication.PageCount - 1;
-                BindGridView();
-                ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
-            }
+            //if (gvApplication.PageIndex < gvApplication.PageCount)
+            //{
+            //    EPS.page_index = gvApplication.PageCount - 1;
+            //    gvApplication.PageIndex = gvApplication.PageCount - 1;
+            //    BindGridView();
+            //    ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
+            //}
         }
 
         #endregion
 
         protected void BindGridView()
         {
-            gvApplication.DataSource = DTSorting;
-            gvApplication.DataBind();
+            //gvApplication.DataSource = DTSorting;
+            //gvApplication.DataBind();
 
-            if (ViewState["z_sortexpression"] != null)
-            {
-                SortGridView(gvApplication, Convert.ToString(ViewState["z_sortexpression"]), Convert.ToString(ViewState["CurrentSortDirection"]));
-            }
+            //if (ViewState["z_sortexpression"] != null)
+            //{
+            //    SortGridView(gvApplication, Convert.ToString(ViewState["z_sortexpression"]), Convert.ToString(ViewState["CurrentSortDirection"]));
+            //}
         }
 
         protected void lbExportExcel_Click(object sender, EventArgs e)
         {
-            if (_BLL.SessionIsActive(this))
-            {
-                if (gvApplication.Rows.Count > 0)
-                {
-                    DataTable dt = new DataTable();
-                    dt.Clear();
-                    dt = (DataTable)ViewState["Sorting"];
+            //if (_BLL.SessionIsActive(this))
+            //{
+            //    if (gvApplication.Rows.Count > 0)
+            //    {
+            //        DataTable dt = new DataTable();
+            //        dt.Clear();
+            //        dt = (DataTable)ViewState["Sorting"];
 
-                    if (Maintenance.content_code == VG.c_user || Maintenance.content_code == VG.c_active_session)
-                    {
-                        dt.Columns.RemoveAt(0);
-                    }
+            //        if (Maintenance.content_code == VG.c_user || Maintenance.content_code == VG.c_active_session)
+            //        {
+            //            dt.Columns.RemoveAt(0);
+            //        }
 
-                    _BLL.GetApplicationParameters();
-                    int maxExtractableCount = 1;
-                    if (Convert.ToInt32(Maintenance.max_extractable_record_count) > dt.Rows.Count)
-                        maxExtractableCount = dt.Rows.Count;
-                    else
-                        maxExtractableCount = Convert.ToInt32(Maintenance.max_extractable_record_count);
+            //        _BLL.GetApplicationParameters();
+            //        int maxExtractableCount = 1;
+            //        if (Convert.ToInt32(Maintenance.max_extractable_record_count) > dt.Rows.Count)
+            //            maxExtractableCount = dt.Rows.Count;
+            //        else
+            //            maxExtractableCount = Convert.ToInt32(Maintenance.max_extractable_record_count);
 
-                    DataTable dtn = dt.Clone();
-                    for (int i = 0; i < maxExtractableCount; i++)
-                    {
-                        dtn.ImportRow(dt.Rows[i]);
-                    }
+            //        DataTable dtn = dt.Clone();
+            //        for (int i = 0; i < maxExtractableCount; i++)
+            //        {
+            //            dtn.ImportRow(dt.Rows[i]);
+            //        }
 
-                    Response.Clear();
-                    Response.Buffer = true;
-                    Response.Charset = "";
-                    Response.ContentEncoding = System.Text.Encoding.UTF8;
-                    Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                    Response.AddHeader("content-disposition", "attachment;filename=\"EPS " + Maintenance.content_description + " " + DateTime.Now.ToString("yyyyMMdd") + ".xlsx\"");
+            //        Response.Clear();
+            //        Response.Buffer = true;
+            //        Response.Charset = "";
+            //        Response.ContentEncoding = System.Text.Encoding.UTF8;
+            //        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            //        Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            //        Response.AddHeader("content-disposition", "attachment;filename=\"EPS " + Maintenance.content_description + " " + DateTime.Now.ToString("yyyyMMdd") + ".xlsx\"");
 
-                    using (ExcelPackage pck = new ExcelPackage())
-                    {
-                        ExcelWorksheet wsDt = pck.Workbook.Worksheets.Add(Maintenance.content_description);
-                        wsDt.Cells["A1:" + alphabet[dtn.Columns.Count - 1].ToString() + "1"].Merge = true;
-                        wsDt.Cells["A1"].Value = Maintenance.report_header;
-                        wsDt.Cells["A2"].LoadFromDataTable(dtn, true, TableStyles.Medium2);
-                        wsDt.Cells[wsDt.Dimension.Address].AutoFitColumns();
+            //        using (ExcelPackage pck = new ExcelPackage())
+            //        {
+            //            ExcelWorksheet wsDt = pck.Workbook.Worksheets.Add(Maintenance.content_description);
+            //            wsDt.Cells["A1:" + alphabet[dtn.Columns.Count - 1].ToString() + "1"].Merge = true;
+            //            wsDt.Cells["A1"].Value = Maintenance.report_header;
+            //            wsDt.Cells["A2"].LoadFromDataTable(dtn, true, TableStyles.Medium2);
+            //            wsDt.Cells[wsDt.Dimension.Address].AutoFitColumns();
 
-                        Response.BinaryWrite(pck.GetAsByteArray());
-                    }
+            //            Response.BinaryWrite(pck.GetAsByteArray());
+            //        }
 
-                    Response.Flush();
-                    Response.End();
-                }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Nothing to export.', 'error');", true);
-                }
-            }
+            //        Response.Flush();
+            //        Response.End();
+            //    }
+            //    else
+            //    {
+            //        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Nothing to export.', 'error');", true);
+            //    }
+            //}
         }
 
         /**
@@ -354,63 +346,63 @@ namespace Template
         */
         protected void lbExportPdf_Click(object sender, EventArgs e)
         {
-            if (_BLL.SessionIsActive(this))
-            {
-                if (gvApplication.Rows.Count > 0)
-                {
-                    this.gvApplication.Columns[0].Visible = false;
-                    gvApplication.AllowPaging = false;
-                    gvApplication.AllowSorting = false;
+            //if (_BLL.SessionIsActive(this))
+            //{
+            //    if (gvApplication.Rows.Count > 0)
+            //    {
+            //        this.gvApplication.Columns[0].Visible = false;
+            //        gvApplication.AllowPaging = false;
+            //        gvApplication.AllowSorting = false;
 
-                    DataTable dt = new DataTable();
-                    dt.Clear();
-                    dt = (DataTable)ViewState["Sorting"];
+            //        DataTable dt = new DataTable();
+            //        dt.Clear();
+            //        dt = (DataTable)ViewState["Sorting"];
 
-                    _BLL.GetApplicationParameters();
-                    int maxExtractableCount = 1;
-                    if (Convert.ToInt32(Maintenance.max_extractable_record_count) > dt.Rows.Count)
-                        maxExtractableCount = dt.Rows.Count;
-                    else
-                        maxExtractableCount = Convert.ToInt32(Maintenance.max_extractable_record_count);
+            //        _BLL.GetApplicationParameters();
+            //        int maxExtractableCount = 1;
+            //        if (Convert.ToInt32(Maintenance.max_extractable_record_count) > dt.Rows.Count)
+            //            maxExtractableCount = dt.Rows.Count;
+            //        else
+            //            maxExtractableCount = Convert.ToInt32(Maintenance.max_extractable_record_count);
 
-                    DataTable dtn = dt.Clone();
-                    for (int i = 0; i < maxExtractableCount; i++)
-                    {
-                        dtn.ImportRow(dt.Rows[i]);
-                    }
+            //        DataTable dtn = dt.Clone();
+            //        for (int i = 0; i < maxExtractableCount; i++)
+            //        {
+            //            dtn.ImportRow(dt.Rows[i]);
+            //        }
 
-                    gvApplication.DataSource = dtn;
-                    gvApplication.DataBind();
+            //        gvApplication.DataSource = dtn;
+            //        gvApplication.DataBind();
 
-                    using (StringWriter sw = new StringWriter())
-                    {
-                        using (HtmlTextWriter hw = new HtmlTextWriter(sw))
-                        {
-                            gvApplication.RenderControl(hw);
-                            StringReader sr = new StringReader(sw.ToString());
-                            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-                            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
-                            pdfDoc.Open();
-                            Paragraph para = new Paragraph(Maintenance.report_header, new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 16));
-                            para.Alignment = Element.ALIGN_CENTER;
-                            Paragraph space = new Paragraph("\n");
-                            pdfDoc.Add(para);
-                            pdfDoc.Add(space);
-                            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                            pdfDoc.Close();
-                            Response.ContentType = "application/pdf";
-                            Response.AddHeader("content-disposition", "attachment;filename=\"EPS " + Maintenance.content_description + " " + DateTime.Now.ToString("yyyyMMdd") + ".pdf\"");
-                            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                            Response.Write(pdfDoc);
-                            Response.End();
-                        }
-                    }
-                }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Nothing to export.', 'error');", true);
-                }
-            }
+            //        using (StringWriter sw = new StringWriter())
+            //        {
+            //            using (HtmlTextWriter hw = new HtmlTextWriter(sw))
+            //            {
+            //                gvApplication.RenderControl(hw);
+            //                StringReader sr = new StringReader(sw.ToString());
+            //                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+            //                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+            //                pdfDoc.Open();
+            //                Paragraph para = new Paragraph(Maintenance.report_header, new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 16));
+            //                para.Alignment = Element.ALIGN_CENTER;
+            //                Paragraph space = new Paragraph("\n");
+            //                pdfDoc.Add(para);
+            //                pdfDoc.Add(space);
+            //                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+            //                pdfDoc.Close();
+            //                Response.ContentType = "application/pdf";
+            //                Response.AddHeader("content-disposition", "attachment;filename=\"EPS " + Maintenance.content_description + " " + DateTime.Now.ToString("yyyyMMdd") + ".pdf\"");
+            //                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            //                Response.Write(pdfDoc);
+            //                Response.End();
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Nothing to export.', 'error');", true);
+            //    }
+            //}
         }
 
         /**
@@ -434,20 +426,20 @@ namespace Template
          */
         protected void gvApplication_Sorting(object sender, GridViewSortEventArgs e)
         {
-            string sortExpression = e.SortExpression;
-            ViewState["z_sortexpression"] = e.SortExpression;
-            if (GridViewSortDirection == SortDirection.Ascending)
-            {
-                ViewState["CurrentSortDirection"] = "DESC";
-                GridViewSortDirection = SortDirection.Descending;
-                SortGridView(gvApplication, sortExpression, "DESC");
-            }
-            else
-            {
-                ViewState["CurrentSortDirection"] = "ASC";
-                GridViewSortDirection = SortDirection.Ascending;
-                SortGridView(gvApplication, sortExpression, "ASC");
-            }
+            //string sortExpression = e.SortExpression;
+            //ViewState["z_sortexpression"] = e.SortExpression;
+            //if (GridViewSortDirection == SortDirection.Ascending)
+            //{
+            //    ViewState["CurrentSortDirection"] = "DESC";
+            //    GridViewSortDirection = SortDirection.Descending;
+            //    SortGridView(gvApplication, sortExpression, "DESC");
+            //}
+            //else
+            //{
+            //    ViewState["CurrentSortDirection"] = "ASC";
+            //    GridViewSortDirection = SortDirection.Ascending;
+            //    SortGridView(gvApplication, sortExpression, "ASC");
+            //}
         }
 
         /**
@@ -511,5 +503,13 @@ namespace Template
 
 
         #endregion
+
+        protected void lbAdd_Click(object sender, EventArgs e)
+        {
+            if (_BLL.SessionIsActive(this))
+            {
+                Response.Redirect("add-member-form.aspx", false);
+            }
+        }
     }
 }

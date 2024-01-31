@@ -151,7 +151,7 @@ namespace Template
                                 _BLL.GetLatestLoginDate(txtUserId.Text);
                                 _BLL.AddAccessLogEntry(VG.access_login, txtUserId.Text, VG.action_success, Request.UserHostAddress.ToString());
 
-                                Response.Redirect("Homepage.aspx", false);
+                                Response.Redirect("home.aspx", false);
                             }
                         }
                     }

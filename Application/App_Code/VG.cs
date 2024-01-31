@@ -3,7 +3,7 @@
     /** 
      * Global Variables
      */
-
+    #region Global Variables
     public static string action_success
     {
         get { return "1"; }
@@ -26,10 +26,10 @@
         get { return "USB-itsec@ucpbsavings.com"; }
         set { usb_itsec_email = value; }
     }
-
-
+    #endregion
 
     /** Content Codes **/
+    #region Content Codes
     public static string c_access
     {
         get { return "0"; }
@@ -112,13 +112,10 @@
         get { return "105"; }
         set { c_r_user_group_access_matrix = value; }
     }
-
-    //survey
-
-
-
+    #endregion
 
     /** Access Rights **/
+    #region Access Rights
     public static string ar_security_parameters
     {
         get { return "&m1e,"; }
@@ -216,9 +213,10 @@
         set { ar_r_user_group_access_matrix = value; }
     }
 
-
+    #endregion
 
     /** Access Log Codes **/
+    #region Access Log Codes
     public static string access_login
     {
         get { return "1"; }
@@ -242,10 +240,10 @@
         get { return "4"; }
         set { access_reports = value; }
     }
-
-
+    #endregion
 
     /** User Status Codes **/
+    #region User Status codes
     public static string s_disabled
     {
         get { return "0"; }
@@ -281,141 +279,12 @@
         get { return 10485760; }
         set { max_file_size_in_bytes = value; }
     }
-    //Survey Form
-    #region Survey
-
-    #region Access Rights
-    public static string ar_civil_status
-    {
-        get { return "&m10,"; }
-        set { ar_civil_status = value; }
-    }
-
-    public static string ar_educational_attainment
-    {
-        get { return "&m11,"; }
-        set { ar_educational_attainment = value; }
-    }
-
-    public static string ar_region
-    {
-        get { return "&m12,"; }
-        set { ar_region = value; }
-    }
-
-    public static string ar_age_group
-    {
-        get { return "&m13,"; }
-        set { ar_age_group = value; }
-    }
-
-    public static string ar_services
-    {
-        get { return "&m14,"; }
-        set { ar_services = value; }
-    }
-
-    public static string ar_working_status
-    {
-        get { return "&m15,"; }
-        set { ar_working_status = value; }
-    }
-    public static string ar_branch_services
-    {
-        get { return "&m16,"; }
-        set { ar_branch_services = value; }
-    }
-    public static string ar_survey_report_per_branch
-    {
-        get { return "&r106g,"; }
-        set { ar_survey_report_per_branch = value; }
-    }
-
-    public static string ar_survey_report_nationwide
-    {
-        get { return "&r107g,"; }
-        set { ar_survey_report_nationwide = value; }
-    }
-    public static string ar_survey_report_transactions
-    {
-        get { return "&r108g,"; }
-        set { ar_survey_report_transactions = value; }
-    }
-
-    public static string ar_survey_report_per_customer
-    {
-        get { return "&r109g,"; }
-        set { ar_survey_report_per_customer = value; }
-    }
     #endregion
-
-    #region Contents
-    //content codes
-    public static string c_civil_status
-    {
-        get { return "10"; }
-        set { c_civil_status = value; }
-    }
-
-    public static string c_educational_attainment
-    {
-        get { return "11"; }
-        set { c_educational_attainment = value; }
-    }
-
-    public static string c_region
-    {
-        get { return "12"; }
-        set { c_region = value; }
-    }
-
-    public static string c_age_group
-    {
-        get { return "13"; }
-        set { c_age_group = value; }
-    }
-
-    public static string c_services
-    {
-        get { return "14"; }
-        set { c_services = value; }
-    }
-
-    public static string c_working_status
-    {
-        get { return "15"; }
-        set { c_working_status = value; }
-    }
-
-    public static string c_branch_services
-    {
-        get { return "16"; }
-        set { c_branch_services = value; }
-    }
-    #endregion
-
-    #endregion
-
-
-    /*
-     * * Content Codes
-     */
-    public static string c_purchase_request
-    {
-        get { return "1000"; }
-        set { c_purchase_request = value; }
-    }
-
-    public static string c_quotation_request
-    {
-        get { return "2000"; }
-        set { c_quotation_request = value; }
-    }
-
 
     /*
      * Transaction Status
      * */
+    #region Transaction Status
     public static string pending
     {
         get { return "1"; }
@@ -433,194 +302,12 @@
         get { return "3"; }
         set { declined = value; }
     }
-
-    /*
-     * Workflow Status
-     */
-    public static string ws_submitted_by_requesting_officer
-    {
-        get { return "100"; }
-        set { ws_submitted_by_requesting_officer = value; }
-    }
-
-    public static string ws_recommend_by_budget_custodian
-    {
-        get { return "200"; }
-        set { ws_recommend_by_budget_custodian = value; }
-    }
-    public static string ws_returned_by_budget_custodian
-    {
-        get { return "201"; }
-        set { ws_returned_by_budget_custodian = value; }
-    }
-
-    public static string ws_approved_by_division_head
-    {
-        get { return "300"; }
-        set { ws_approved_by_division_head = value; }
-    }
-    public static string ws_returned_by_division_head
-    {
-        get { return "301"; }
-        set { ws_returned_by_division_head = value; }
-    }
-    public static string ws_declined_by_division_head
-    {
-        get { return "302"; }
-        set { ws_declined_by_division_head = value; }
-    }
-
-    public static string ws_recommended_by_procurement_department
-    {
-        get { return "400"; }
-        set { ws_recommended_by_procurement_department = value; }
-    }
-
-    public static string ws_returned_by_procurement_department
-    {
-        get { return "401"; }
-        set { ws_returned_by_procurement_department = value; }
-    }
-
-    public static string ws_declined_by_procurement_department
-    {
-        get { return "402"; }
-        set { ws_declined_by_procurement_department = value; }
-    }
-
-    public static string ws_submitted_to_bac
-    {
-        get { return "403"; }
-        set { ws_submitted_to_bac = value; }
-    }
-
-    public static string ws_approved_by_hope
-    {
-        get { return "500"; }
-        set { ws_approved_by_hope = value; }
-    }
-
-    public static string ws_returned_by_hope
-    {
-        get { return "501"; }
-        set { ws_returned_by_hope = value; }
-    }
-
-    public static string ws_declined_by_hope
-    {
-        get { return "502"; }
-        set { ws_declined_by_hope = value; }
-    }
-
-    public static string ws_approved_by_bac
-    {
-        get { return "600"; }
-        set { ws_approved_by_bac = value; }
-    }
-
-    public static string ws_returned_by_bac
-    {
-        get { return "601"; }
-        set { ws_returned_by_bac = value; }
-    }
-
-    public static string ws_declined_by_bac
-    {
-        get { return "602"; }
-        set { ws_declined_by_bac = value; }
-    }
-    /*
-     * Access Rights 
-     */
-
-
-    #region Access Rights
-    public static string ar_req_officer
-    {
-        get { return "&fRO,"; }
-        set { ar_req_officer = value; }
-    }
-
-    public static string ar_budg_cust
-    {
-        get { return "&fdBcus,"; }
-        set { ar_budg_cust = value; }
-    }
-
-    public static string ar_budg_cust_recommend
-    {
-        get { return "&fdBcusRec,"; }
-        set { ar_budg_cust_recommend = value; }
-    }
-
-    public static string ar_budg_cust_return
-    {
-        get { return "&fBcusRet,"; }
-        set { ar_budg_cust_return = value; }
-    }
-
-
-    public static string ar_div_head
-    {
-        get { return "&fdivHead,"; }
-        set { ar_div_head = value; }
-    }
-    public static string ar_div_head_approve
-    {
-        get { return "&fdHeadApp,"; }
-        set { ar_div_head_approve = value; }
-    }
-
-    public static string ar_div_head_return
-    {
-        get { return "&fdHeadRet,"; }
-        set { ar_div_head_return = value; }
-    }
-    public static string ar_div_head_decline
-    {
-        get { return "&fdHeadDec,"; }
-        set { ar_div_head_decline = value; }
-    }
-    public static string ar_proc_dept
-    {
-        get { return "&fProcDep,"; }
-        set { ar_proc_dept = value; }
-    }
-
-    public static string ar_proc_dept_recommend
-    {
-        get { return "&fProcDepApp,"; }
-        set { ar_proc_dept_recommend = value; }
-    }
-    public static string ar_proc_dept_return
-    {
-        get { return "&fProcDepRet,"; }
-        set { ar_proc_dept_return = value; }
-    }
-
-    public static string ar_proc_dept_decline
-    {
-        get { return "&fProcDepDec,"; }
-        set { ar_proc_dept_decline = value; }
-    }
-    public static string ar_hope
-    {
-        get { return "&fHope,"; }
-        set { ar_hope = value; }
-    }
-
-    public static string ar_bac
-    {
-        get { return "&fBAC,"; }
-        set { ar_bac = value; }
-    }
-
-    public static string ar_bac_approve
-    {
-        get { return "&fBacApp,"; }
-        set { ar_bac_approve = value; }
-    }
     #endregion
+
+
+
+
+
 
 
 }

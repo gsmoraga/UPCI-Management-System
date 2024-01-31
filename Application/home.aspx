@@ -1,73 +1,161 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UMS.Master" AutoEventWireup="true"
     CodeBehind="home.aspx.cs" Inherits="Template.home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
-        @font-face {
-            font-family: poppinsMedium;
-            src: url(contents/fonts/Poppins-Medium.ttf);
-        }
-        @font-face {
-            font-family: poppinsLight;
-            src: url(contents/fonts/Poppins-Light.ttf);
-        }
-        .display-4 {
-            font-family: poppinsMedium;
-        }
-        .lead {
-            font-family:poppinsLight;
+        .card-title {
+            font-size: 25px;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
-        <br />
-        <br />
-        <div class="card border">
-            <div class="card-body">
-                <div class="jumbotron">
-                    <h1 class="display-4">Welcome<asp:Label ID="lblName" runat="server"></asp:Label>!</h1>
-                    <hr class="my-4 hr hr-blurry" />
-                    <p class="lead">
-                        <asp:Label ID="lblLatestLogInDate" runat="server"></asp:Label><br />
-                        <asp:Label ID="lblExpirationAlert" runat="server" Visible="false"></asp:Label>
-                    </p>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Dashboard</h1>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard v1</li>
+                        </ol>
+                    </div>
+                    <!-- /.col -->
                 </div>
+                <!-- /.row -->
             </div>
-
+            <!-- /.container-fluid -->
         </div>
-        <br />
-        <br />
-        <%--<div class="row">
-            <div class="card col-md-2">
-                <div class="card-body text-center">
-                    <asp:LinkButton ID="btnSurvey" runat="server" OnClick="btnSurvey_Click"><i class="far fa-file-lines fa-10x"></i></asp:LinkButton>
-                    <div class="text-center">
-                        <br />
-                        <p>Survey Form</p>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>150</h3>
+
+                                <p>Young Professionals</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-bag"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
                     </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                                <p>Youth</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>44</h3>
+
+                                <p>Mens</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>65</h3>
+
+                                <p>Womens</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
                 </div>
 
-            </div>
-        </div>--%>
+                <div class="row">
 
-        <%--<div class="row">
-            <div class="col-md-6 mb-3">
-                <div id="divRecentActivity" class="ui-widget-content scrollable-container mb-3">
-                    <div class="col-md-12 font-weight-bold bg-maan2">
-                        Recent Activity
-                        <button type="button" class="btn back-to-top float-right">
-                            &nbsp;<i class="large angle double up icon" ></i></button>
+                    <!-- Welcome Card -->
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h1 class="card-title">Welcome,<asp:Label runat="server" ID="lblName"></asp:Label></h1>
+                                        <br />
+                                        <br />
+                                        <asp:Label ID="lblLatestLogInDate" runat="server"></asp:Label><br />
+                                        <asp:Label ID="lblExpirationAlert" runat="server" Visible="false"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="scrollable-gridview" style="max-height: 350px; overflow: scroll; overflow-x: hidden;">
-                        <asp:GridView ID="gvRecentActivity" runat="server" AllowPaging="False" CssClass="table"
-                            GridLines="None" ShowHeader="False" CellPadding="4" ForeColor="#333333" OnRowDataBound="gvRecentActivity_RowDataBound">
-                        </asp:GridView>
+
+                    <!-- Recent Activity -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Recent Activity
+                                </h5>
+                                <div class="activity">
+                                    <div class="list-unstyled list-unstyled-border" style="max-height: 350px; overflow: scroll; overflow-x: hidden;">
+                                        <asp:GridView ID="gvRecentActivity" runat="server" AllowPaging="False" CssClass="table"
+                                            GridLines="None" ShowHeader="False" CellPadding="4" ForeColor="#333333" OnRowDataBound="gvRecentActivity_RowDataBound">
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
+
+
             </div>
-        </div>--%>
+        </section>
+
+
+
+
     </div>
+
+
+
+
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -193,4 +281,6 @@
             }, 500);
         });
     </script>
+
+
 </asp:Content>

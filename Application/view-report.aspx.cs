@@ -55,15 +55,7 @@ namespace Template
                             if (accessRights.Contains(VG.ar_r_user_group_access_matrix))
                                 sb.Append(VG.ar_r_user_group_access_matrix);
 
-                            //Survey Reports
-                            if (accessRights.Contains(VG.ar_survey_report_per_branch))
-                                sb.Append(VG.ar_survey_report_per_branch);
-                            if (accessRights.Contains(VG.ar_survey_report_nationwide))
-                                sb.Append(VG.ar_survey_report_nationwide);
-                            if (accessRights.Contains(VG.ar_survey_report_transactions))
-                                sb.Append(VG.ar_survey_report_transactions);
-                            if (accessRights.Contains(VG.ar_survey_report_per_customer))
-                                sb.Append(VG.ar_survey_report_per_customer);
+                           
 
                             _BLL.GetReportsDropDown(ddReport, Convert.ToString(sb));
                         }
@@ -137,62 +129,7 @@ namespace Template
                 userGroupAccessMatrixCard.Visible = true;
             }
 
-            else if (ddReport.SelectedValue == VG.ar_survey_report_per_branch) 
-            {
-                HideOtherReports();
-                
-                divReportSurveyPerBranch.Visible = true;
-
-                //DataTable dtBranch = _DAL.GetBranchDropdown();
-                //LoadDropdownValues(ddBranch, dtBranch, "code", "description", true);
-
-                //DataTable dtServicesPerBranch = _DAL.dtServiceAvailed("", "", "", "", "GET");
-                //LoadDropdownValues(ddServicesPerBranch, dtServicesPerBranch, "code", "description", true);
-
-                ClearValues();
-
-                divGridView.Visible = false;
-                gvSurveyReport.DataBind();
-            }
-            else if (ddReport.SelectedValue == VG.ar_survey_report_nationwide) 
-            {
-                HideOtherReports();
-                
-                //DataTable dtServices = _DAL.dtServiceAvailed("", "", "", "", "GET");
-                //LoadDropdownValues(ddServices, dtServices, "code", "description", true);
-                
-                divReportSurveyNationwide.Visible = true;
-
-                ClearValues();
-
-                divGridView.Visible = false;
-                gvSurveyReport.DataBind();
-            }
-            else if (ddReport.SelectedValue == VG.ar_survey_report_transactions)
-            {
-                GetDropdowns();
-
-                HideOtherReports();
-
-                divReportTransactions.Visible = true;
-
-                ClearValues();
-
-                divGridView.Visible = false;
-                gvSurveyReport.DataBind();
-            }
-            else if (ddReport.SelectedValue == VG.ar_survey_report_per_customer)
-            {
-                HideOtherReports();
-
-                GetDropdowns();
-                divReportPerCustomer.Visible = true;
-
-                ClearValues();
-
-                divGridView.Visible = false;
-                gvSurveyReport.DataBind();
-            }
+            
             else
             {
                 HideOtherReports();
@@ -1184,22 +1121,6 @@ namespace Template
             Employee.page_index = 0;
 
             DataTable dt = new DataTable();
-            if (ddReport.SelectedValue == VG.ar_survey_report_transactions)
-            {
-                //dt = _DAL.SurveyReportsTransaction(ddTransactionsServices.SelectedValue, ddTransactionsBranch.SelectedValue, txtYearDate.Text);
-            }
-            if (ddReport.SelectedValue == VG.ar_survey_report_per_customer)
-            {
-                //dt = _DAL.SurveyReportPerCustomer(txtDatePerCustomer.Text,ddCustomerService.SelectedValue);
-            }
-            if (ddReport.SelectedValue == VG.ar_survey_report_nationwide)
-            {
-                //dt = _DAL.SurveyReportNationwide(txtStartDate.Text, txtEndDate.Text,ddServices.SelectedValue);
-            }
-            if (ddReport.SelectedValue == VG.ar_survey_report_per_branch)
-            {
-                //dt = _DAL.SurveyReportPerBranch(txtPerBranchStartDate.Text, txtPerBranchEndDate.Text,ddBranch.SelectedValue,ddServicesPerBranch.SelectedValue);
-            }
 
             gvSurveyReport.DataSource = dt;
             gvSurveyReport.DataBind();

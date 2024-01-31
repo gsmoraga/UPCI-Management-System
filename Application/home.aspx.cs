@@ -6,7 +6,7 @@ namespace Template
 {
     public partial class home : System.Web.UI.Page
     {
-        private BLL _BLL = new BLL();
+        BLL _BLL = new BLL();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,27 +45,18 @@ namespace Template
                         }
 
                         if (Employee.first_name.Length > 0)
-                            lblName.Text = ", " + Employee.first_name;
+                            lblName.Text = Employee.first_name;
                         else
-                            lblName.Text = "";
+                            lblName.Text = "[first_name]";
 
-                        #region Recent Activity
-                        //if (_BLL.FilterRecentActivity(gvRecentActivity, Employee.user_id) == false)
-                        //{
-                        //}
-                        #endregion
+                        if (_BLL.FilterRecentActivity(gvRecentActivity, Employee.user_id) == false)
+                        {
+                        }
                     }
                 }
             }
         }
 
-        /**
-        * Formats the date time column to MM/DD/YYYY H:MM:SS AM/PM
-        * 
-        * @since version 1.0 
-        * @param object sender - reference to the object that raised the event
-        * @param GridViewRowEventArgs e - contains the event data
-        */
         protected void gvRecentActivity_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType != DataControlRowType.Pager)
@@ -78,9 +69,6 @@ namespace Template
             }
         }
 
-        protected void btnSurvey_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Homepage.aspx", false);
-        }
+
     }
 }

@@ -1,0 +1,374 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="UMS.master.cs" Inherits="Template.UMS" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UPCI | Dashboard </title>
+
+    <!-- AdminLTE Template-->
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="contents/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="contents/AdminLTE/dist/css/adminlte.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="contents/AdminLTE/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="contents/AdminLTE/plugins/select2/css/select2.min.css">
+
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" AsyncPostBackTimeout="360">
+        </asp:ScriptManager>
+
+        <div class="wrapper">
+
+            <!-- Preloader -->
+            <div class="preloader flex-column justify-content-center align-items-center">
+                <img class="animation__shake" src="contents/images/upci.png" height="60" width="60">
+            </div>
+
+            <!-- Navbar -->
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                <!-- Left navbar links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="index3.html" class="nav-link">Home</a>
+                    </li>
+                </ul>
+
+                <!-- Right navbar links -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Navbar Search -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                            <i class="fas fa-search"></i>
+                        </a>
+                        <div class="navbar-search-block">
+                            <%--<form class="form-inline">--%>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <%--</form>--%>
+                        </div>
+                    </li>
+
+                    <!-- Notifications Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#">
+                            <%--<i class="far fa-bell"></i>--%>
+                            <i class="fa fa-cog"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <span class="dropdown-item dropdown-header">Settings</span>
+                            <div class="dropdown-divider"></div>
+                            <div class="text-center">
+                                <div>
+                                    <asp:Label ID="lblFullName" runat="server"></asp:Label>
+                                </div>
+                                <div>
+                                    <asp:Label ID="lblUserGroup" runat="server"></asp:Label>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <asp:LinkButton class="dropdown-item d-flex align-items-center" runat="server" ID="lbChangePW" OnClick="lbChangePW_Click" CausesValidation="False"><i class="fa fa-lock mr-2"></i>Change Password
+                            </asp:LinkButton>
+                            <div class="dropdown-divider"></div>
+                            <asp:LinkButton class="dropdown-item d-flex align-items-center" runat="server" ID="lbLockscreen" OnClick="lbLockscreen_Click" CausesValidation="False"><i class="fa fa-user-lock mr-2"></i> Lockscreen
+                            </asp:LinkButton>
+                            <div class="dropdown-divider"></div>
+                            <asp:LinkButton CssClass="dropdown-item d-flex align-items-center" runat="server" ID="lbLogout" data-toggle="modal" data-target="#modal-default" CausesValidation="false"><i class="fa fa-sign-out-alt mr-2"></i>Sign Out</asp:LinkButton>
+
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                            <i class="fas fa-th-large"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.navbar -->
+
+            <!-- Main Sidebar Container -->
+            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+                <!-- Brand Logo -->
+                <a href="index3.html" class="brand-link">
+                    <img src="contents/images/upci-logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <span class="brand-text font-weight-light">UPCI</span>
+                </a>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Sidebar user panel (optional) -->
+                    <!-- SidebarSearch Form -->
+                    <div class="form-inline">
+                        <div class="input-group" data-widget="sidebar-search">
+                            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-sidebar">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Menu -->
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                            <li class="nav-item">
+                                <a href="home.aspx" class="nav-link">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            </li>
+                            <!-- Maintenance -->
+                            <li id="menuMaintenance" runat="server" class="nav-item" visible="false">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-wrench"></i>
+                                    <p>
+                                        Maintenance<i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li id="menuApplicationAdministration" runat="server" class="nav-item" visible="false">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Application Admin<i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <asp:LinkButton ID="lbApplicationParameters" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Application Parameters</asp:LinkButton>
+                                            </li>
+                                            <li class="nav-item">
+                                                <asp:LinkButton ID="lbSecurityParameters" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Security Parameters</asp:LinkButton>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- User Management -->
+                                    <li id="menuUserManagement" runat="server" class="nav-item" visible="false">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                User Management<i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <!-- Ministry-->
+                                            <li id="menuMinistry" runat="server" class="nav-item" visible="false">
+                                                <a href="#" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>
+                                                        Ministry<i class="right fas fa-angle-left"></i>
+                                                    </p>
+                                                </a>
+                                                <ul class="nav nav-treeview">
+                                                    <li class="nav-item">
+                                                        <asp:LinkButton ID="lbMinistryAdd" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Add</asp:LinkButton>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <asp:LinkButton ID="lbministrySearch" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Search</asp:LinkButton>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Department -->
+                                            <li id="menuDepartment" runat="server" class="nav-item" visible="false">
+                                                <a href="#" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>
+                                                        Department<i class="right fas fa-angle-left"></i>
+                                                    </p>
+                                                </a>
+                                                <ul class="nav nav-treeview">
+                                                    <li class="nav-item">
+                                                        <asp:LinkButton ID="lbDepartmentAdd" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Add</asp:LinkButton>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <asp:LinkButton ID="lbDepartmentSearch" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Search</asp:LinkButton>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <!-- User -->
+                                            <li id="menuUser" runat="server" class="nav-item" visible="false">
+                                                <a href="#" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>
+                                                        User<i class="right fas fa-angle-left"></i>
+                                                    </p>
+                                                </a>
+                                                <ul class="nav nav-treeview">
+                                                    <li class="nav-item">
+                                                        <asp:LinkButton ID="lbUserAdd" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Add</asp:LinkButton>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <asp:LinkButton ID="lbUserSearch" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Search</asp:LinkButton>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <!-- User Group -->
+                                            <li id="menuUserGroup" runat="server" class="nav-item" visible="false">
+                                                <a href="#" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>
+                                                        User Group<i class="right fas fa-angle-left"></i>
+                                                    </p>
+                                                </a>
+                                                <ul class="nav nav-treeview">
+                                                    <li class="nav-item">
+                                                        <asp:LinkButton ID="lbUserGroupAdd" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Add</asp:LinkButton>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <asp:LinkButton ID="lbUserGroupSearch" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Search</asp:LinkButton>
+                                                    </li>
+
+                                                </ul>
+                                            </li>
+
+
+                                        </ul>
+                                    </li>
+
+                                    <!-- User Security -->
+                                    <li id="menuUserSecurity" runat="server" class="nav-item" visible="false">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                User Security<i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <asp:LinkButton ID="lbUnlockUser" runat="server" CssClass="nav-link"><i class="far fa-dot-circle nav-icon"></i>Unlock User</asp:LinkButton>
+                                            </li>
+                                            <li class="nav-item">
+                                                <asp:LinkButton ID="lbResetPassword" runat="server" CssClass="nav-link"><i class="far fa-dot-circle nav-icon"></i>Reset Password</asp:LinkButton>
+                                            </li>
+                                            <li class="nav-item">
+                                                <asp:LinkButton ID="lbActiveSessions" runat="server" CssClass="nav-link"><i class="far fa-dot-circle nav-icon"></i>Active Sessions</asp:LinkButton>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+
+                                </ul>
+                            </li>
+                            <!-- End Maintenance -->
+
+                            <!-- Member List -->
+                            <li id="menuMembers" runat="server" class="nav-item" visible="false">
+                                <asp:LinkButton ID="lbMemberList" runat="server" CssClass="nav-link" OnClick="lbMemberList_Click" Visible="false"><i class="nav-icon fas fa-user"></i>Member List</asp:LinkButton>
+                            </li>
+                            <!-- Reports -->
+                            <li class="nav-item">
+                                <a href="home.aspx" class="nav-link">
+                                    <i class="nav-icon fas fa-chart-pie"></i>
+                                    <p>
+                                        Reports
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- /.sidebar-menu -->
+                </div>
+                <!-- /.sidebar -->
+            </aside>
+
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <footer class="main-footer">
+                <strong>Copyright &copy; 2024 <a href="#">Universal Pentecostal Church Inc</a>.</strong>
+                All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0
+    </div>
+            </footer>
+        </div>
+    </form>
+
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign Out</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to Sign-out ?</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <%--<button type="button" class="btn btn-primary">Yes</button>--%>
+                    <a href="logout.aspx" class="btn btn-primary">Yes</a>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+
+    <!-- AdminLTE Javascript -->
+    <!-- jQuery -->
+    <script src="contents/AdminLTE/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="contents/AdminLTE/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="contents/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="contents/AdminLTE/dist/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="contents/AdminLTE/dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="contents/AdminLTE/dist/js/pages/dashboard.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="contents/AdminLTE/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        //if (window.history.replaceState) {
+        //    window.history.replaceState(null, null, window.location.href);
+        //}
+    </script>
+</body>
+</html>

@@ -15,7 +15,7 @@ namespace Template
 
             Session.Clear();
 
-            Response.Redirect("login-form.aspx", false);
+            Response.Redirect("login.aspx", false);
         }
     }
 }

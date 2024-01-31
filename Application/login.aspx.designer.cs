@@ -60,15 +60,6 @@ namespace Template
         protected global::System.Web.UI.WebControls.Button btnLogin;
 
         /// <summary>
-        /// activeSessionModal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl activeSessionModal;
-
-        /// <summary>
         /// lbActiveSessionModal control.
         /// </summary>
         /// <remarks>
@@ -76,5 +67,14 @@ namespace Template
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbActiveSessionModal;
+
+        /// <summary>
+        /// activeSessionModals control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl activeSessionModals;
     }
 }
