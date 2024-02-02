@@ -36,7 +36,7 @@
                 <!-- Gridview -->
                 <div class="row mt-3">
                     <div class="col-md-10 offset-md-1">
-                        <%--<div class="list-group">
+                        <div class="list-group">
                             <asp:GridView ID="gvMaintenance" runat="server" AllowPaging="True" CssClass="table table-striped"
                                 GridLines="None" CellPadding="4" PageSize="10" ForeColor="#333333" AllowSorting="true"
                                 OnPageIndexChanging="gvMaintenance_PageIndexChanging" OnRowDataBound="gvMaintenance_RowDataBound"
@@ -56,7 +56,7 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="Action">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="lbView" runat="server" CommandArgument='<%# Eval("Code")%>' ToolTip="View"
+                                            <%--<asp:LinkButton ID="lbView" runat="server" CommandArgument='<%# Eval("Code")%>' ToolTip="View"
                                                 Text="" OnClick="lbView_Click" class="mr-2"><i class="bi bi-eye-fill text-dark" style="text-decoration:none"></i></asp:LinkButton>
                                             <asp:LinkButton ID="lbEdit" runat="server" CommandArgument='<%# Eval("Code")%>' ToolTip="Edit"
                                                 Text="" OnClick="lbEdit_Click" Visible="false" class="mr-2"><i class="bi bi-pencil-square text-primary" style="text-decoration:none"></i></asp:LinkButton>
@@ -71,13 +71,13 @@
                                                 OnClick="lbResetPassword_Click" Visible="false" class="mr-2"><i class="bx bx-reset text-success" style="text-decoration:none"></i></asp:LinkButton>
                                             <asp:LinkButton ID="lbRemoveSession" runat="server" CommandArgument='<%# Eval("Code")%>'
                                                 ToolTip="Remove Session" OnClientClick="return deleteAlert(this);" Text="" OnClick="lbRemoveSession_Click"
-                                                Visible="false" class="mr-2"><i class="bi bi-ban-fill text-danger" style="text-decoration:none"></i></asp:LinkButton>
+                                                Visible="false" class="mr-2"><i class="bi bi-ban-fill text-danger" style="text-decoration:none"></i></asp:LinkButton>--%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
 
-                        </div>--%>
+                        </div>
                     </div>
                 </div>
 

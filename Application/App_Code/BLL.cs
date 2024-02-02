@@ -1696,6 +1696,15 @@ public class BLL
     #region UPCI
 
     #region Member
+    public Boolean AddMember(string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber,string ministry, string ministryDepartment
+        ,string dateFirstAttend, string cell, string baptismal, string pepsol, string membershipStatus, string createdBy)
+    {
+        if (_DAL.AddMember(firstName, middleName, lastName, gender, birthdate, email, mobileNumber,ministry,ministryDepartment,dateFirstAttend,cell,baptismal,pepsol, membershipStatus, createdBy) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
     /**
     * Filters the data table of users that match the filter string
     * 
@@ -1706,9 +1715,9 @@ public class BLL
     * @param string userId - user ID of the current user
     * @return Boolean true if successful, false otherwise
     */
-    public Boolean FilterMembers(GridView pObj, string memberId, string name, string gender, string membershipStatus, string ministry, string status)
+    public Boolean FilterMembers(GridView pObj,string name)
     {
-        DataTable dt = _DAL.FilterMembershipId(memberId, name, gender, membershipStatus, ministry, status);
+        DataTable dt = _DAL.FilterMember(name);
 
         if (dt == null || dt.Rows.Count < 1)
         {
@@ -1726,6 +1735,61 @@ public class BLL
     }
     #endregion
 
+    #region Dropdowns
+    public Boolean GetMinistryDropdown(DropDownList dd, string item)
+    {
+        try
+        {
+            DataTable dt = _DAL.GetMinistryDropdown();
+            dd.DataSource = dt;
+            dd.DataValueField = "code";
+            dd.DataTextField = "description";
+            dd.DataBind();
+            dd.Items.Insert(0, new ListItem(item, "0"));
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public Boolean GetMinistryDepartmentDropdown(DropDownList dd, string item, string ministryCode)
+    {
+        try
+        {
+            DataTable dt = _DAL.GetMinistryDepartmentDropdown(ministryCode);
+            dd.DataSource = dt;
+            dd.DataValueField = "code";
+            dd.DataTextField = "description";
+            dd.DataBind();
+            dd.Items.Insert(0, new ListItem(item, "0"));
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public Boolean GetPepsolDropdown(DropDownList dd, string item)
+    {
+        try
+        {
+            DataTable dt = _DAL.GetPepsolDropdown();
+            dd.DataSource = dt;
+            dd.DataValueField = "code";
+            dd.DataTextField = "description";
+            dd.DataBind();
+            dd.Items.Insert(0, new ListItem(item, "0"));
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    #endregion
     #endregion
 
 }

@@ -2736,7 +2736,8 @@ public class DAL
     #region UPCI
 
     #region Add
-    public Boolean AddMember(string transactionNumber, string firstName, string middleName, string lastName, string gender, string ministry, string birthdate, string dateFirstAttend, string email, string mobileNumber, string memberId)
+    public Boolean AddMember(string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment, string dateFirstAttend
+        , string cell, string baptismal, string pepsol, string membershipStatus, string createdBy)
     {
         //    try
         {
@@ -2747,19 +2748,23 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spAddMembers";
+                    cmd.CommandText = "spMemberAdd";
 
-                    cmd.Parameters.AddWithValue("@member_id", memberId);
                     cmd.Parameters.AddWithValue("@first_name", firstName);
                     cmd.Parameters.AddWithValue("@middle_name", middleName);
                     cmd.Parameters.AddWithValue("@last_name", lastName);
                     cmd.Parameters.AddWithValue("@gender", gender);
-                    cmd.Parameters.AddWithValue("@ministry", ministry);
-                    cmd.Parameters.AddWithValue("@birthdate", birthdate);
-                    cmd.Parameters.AddWithValue("@date_first_attend", dateFirstAttend);
+                    cmd.Parameters.AddWithValue("@birthday", birthdate);
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@mobile_number", mobileNumber);
-                    cmd.Parameters.AddWithValue("@transaction_number", transactionNumber);
+                    cmd.Parameters.AddWithValue("@ministry", ministry);
+                    cmd.Parameters.AddWithValue("@ministry_department", ministryDepartment);
+                    cmd.Parameters.AddWithValue("@date_first_attend", dateFirstAttend);
+                    cmd.Parameters.AddWithValue("@cell", cell);
+                    cmd.Parameters.AddWithValue("@baptismal", baptismal);
+                    cmd.Parameters.AddWithValue("@pepsol", pepsol);
+                    cmd.Parameters.AddWithValue("@membership_status", membershipStatus);
+                    cmd.Parameters.AddWithValue("@created_by", createdBy);
 
 
                     cmd.Connection = connection; cmd.CommandTimeout = 360;
@@ -2774,7 +2779,7 @@ public class DAL
     #endregion
 
     #region Get
-    public DataTable GetMembershipId(string transactionReference)
+    public DataTable GetMinistryDropdown()
     {
         DataTable dt = new DataTable();
 
@@ -2794,9 +2799,7 @@ public class DAL
 
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spGetMembershipId";
-
-                        cmd.Parameters.AddWithValue("@transactionReference", transactionReference);
+                        cmd.CommandText = "spGetMinistryDropdown";
 
                         adp.SelectCommand = cmd;
                         adp.Fill(dt);
@@ -2813,8 +2816,7 @@ public class DAL
         //else return dt;
     }
 
-
-    public DataTable GetMinistry()
+    public DataTable GetMinistryDepartmentDropdown(string ministryCode)
     {
         DataTable dt = new DataTable();
 
@@ -2834,8 +2836,9 @@ public class DAL
 
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spGetMinistry";
+                        cmd.CommandText = "spGetMinistryDepartmentDropdown";
 
+                        cmd.Parameters.AddWithValue("@ministry_code", ministryCode);
 
                         adp.SelectCommand = cmd;
                         adp.Fill(dt);
@@ -2852,7 +2855,7 @@ public class DAL
         //else return dt;
     }
 
-    public DataTable GetMembershipStatus()
+    public DataTable GetPepsolDropdown()
     {
         DataTable dt = new DataTable();
 
@@ -2872,8 +2875,9 @@ public class DAL
 
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spGetMembershipStatus";
+                        cmd.CommandText = "spGetPepsolDropdown";
 
+                        
 
                         adp.SelectCommand = cmd;
                         adp.Fill(dt);
@@ -2930,7 +2934,7 @@ public class DAL
     #endregion
 
     #region Filter
-    public DataTable FilterMembershipId(string memberId, string name, string gender, string membershipStatus, string ministry, string status)
+    public DataTable FilterMember(string name)
     {
         DataTable dt = new DataTable();
 
@@ -2950,14 +2954,9 @@ public class DAL
 
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spFilterMembers";
+                        cmd.CommandText = "spMemberFilter";
 
-                        cmd.Parameters.AddWithValue("@member_id", memberId);
-                        cmd.Parameters.AddWithValue("@name", name);
-                        cmd.Parameters.AddWithValue("@gender", gender);
-                        cmd.Parameters.AddWithValue("@member_status", membershipStatus);
-                        cmd.Parameters.AddWithValue("@ministry", ministry);
-                        cmd.Parameters.AddWithValue("@status", status);
+                        cmd.Parameters.AddWithValue("@full_name", name);
 
                         adp.SelectCommand = cmd;
                         adp.Fill(dt);

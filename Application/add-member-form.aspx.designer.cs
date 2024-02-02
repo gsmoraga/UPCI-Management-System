@@ -33,6 +33,24 @@ namespace Template
         protected global::System.Web.UI.WebControls.TextBox txtFirstName;
 
         /// <summary>
+        /// reqFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqFirstName;
+
+        /// <summary>
+        /// revFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFirstName;
+
+        /// <summary>
         /// txtMiddleName control.
         /// </summary>
         /// <remarks>
@@ -40,6 +58,24 @@ namespace Template
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMiddleName;
+
+        /// <summary>
+        /// reqMiddleName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqMiddleName;
+
+        /// <summary>
+        /// revMiddleName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMiddleName;
 
         /// <summary>
         /// txtLastName control.
@@ -51,6 +87,24 @@ namespace Template
         protected global::System.Web.UI.WebControls.TextBox txtLastName;
 
         /// <summary>
+        /// reqLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqLastName;
+
+        /// <summary>
+        /// revLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revLastName;
+
+        /// <summary>
         /// ddGender control.
         /// </summary>
         /// <remarks>
@@ -58,6 +112,15 @@ namespace Template
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddGender;
+
+        /// <summary>
+        /// reqGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqGender;
 
         /// <summary>
         /// txtBirthday control.
@@ -69,6 +132,24 @@ namespace Template
         protected global::System.Web.UI.WebControls.TextBox txtBirthday;
 
         /// <summary>
+        /// reqBirthdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqBirthdate;
+
+        /// <summary>
+        /// revBirthdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revBirthdate;
+
+        /// <summary>
         /// txtEmail control.
         /// </summary>
         /// <remarks>
@@ -76,6 +157,15 @@ namespace Template
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
+
+        /// <summary>
+        /// revEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revEmail;
 
         /// <summary>
         /// txtMobileNumber control.
@@ -87,6 +177,15 @@ namespace Template
         protected global::System.Web.UI.WebControls.TextBox txtMobileNumber;
 
         /// <summary>
+        /// revMobileNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMobileNumber;
+
+        /// <summary>
         /// ddMinistry control.
         /// </summary>
         /// <remarks>
@@ -96,13 +195,13 @@ namespace Template
         protected global::System.Web.UI.WebControls.DropDownList ddMinistry;
 
         /// <summary>
-        /// ddDepartment control.
+        /// ddMinistryDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddDepartment;
+        protected global::System.Web.UI.WebControls.DropDownList ddMinistryDepartment;
 
         /// <summary>
         /// txtDateFirstAttend control.
@@ -114,13 +213,13 @@ namespace Template
         protected global::System.Web.UI.WebControls.TextBox txtDateFirstAttend;
 
         /// <summary>
-        /// ddStatus control.
+        /// revDatedFirstAttend control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddStatus;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revDatedFirstAttend;
 
         /// <summary>
         /// ddCellGroup control.
@@ -132,6 +231,15 @@ namespace Template
         protected global::System.Web.UI.WebControls.DropDownList ddCellGroup;
 
         /// <summary>
+        /// rfvCellGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCellGroup;
+
+        /// <summary>
         /// ddBaptismalStatus control.
         /// </summary>
         /// <remarks>
@@ -141,6 +249,15 @@ namespace Template
         protected global::System.Web.UI.WebControls.DropDownList ddBaptismalStatus;
 
         /// <summary>
+        /// rfvBaptismalStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBaptismalStatus;
+
+        /// <summary>
         /// ddPepsol control.
         /// </summary>
         /// <remarks>
@@ -148,6 +265,33 @@ namespace Template
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddPepsol;
+
+        /// <summary>
+        /// rfvPepsol control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPepsol;
+
+        /// <summary>
+        /// ddStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddStatus;
+
+        /// <summary>
+        /// rfvStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvStatus;
 
         /// <summary>
         /// btnCancel control.

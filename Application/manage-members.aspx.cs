@@ -38,8 +38,8 @@ namespace Template
                         //lblHeader.Text = "Inquiry-All";
                         //pnlInquiry.Visible = true;
 
-                        //LoadDropdowns();
-                        //LoadMaintenanceData(gvMaintenance,"","","","","","");
+
+                        LoadMaintenanceData("");
                     }
                 }
             }
@@ -65,10 +65,10 @@ namespace Template
 
 
         }
-        protected void LoadMaintenanceData(GridView gv, string memberId, string name, string gender, string membershipStatus, string ministry,string status)
+        protected void LoadMaintenanceData(string name)
         {
             Boolean result = false;
-            result = _BLL.FilterMembers(gv, memberId, name, gender, membershipStatus, ministry, status);
+            result = _BLL.FilterMembers(gvMaintenance, name);
             
             if (result == false)
             {
@@ -131,10 +131,23 @@ namespace Template
             //}
         }
 
-        
+
 
         #region Gridview
-        protected void gvApplication_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void gvMaintenance_OnRowCreated(object sender, GridViewRowEventArgs e)
+        {
+            GridViewRow row = e.Row;
+            List<TableCell> columns = new List<TableCell>();
+            foreach (DataControlField column in gvMaintenance.Columns)
+            {
+                TableCell cell = row.Cells[0];
+                row.Cells.Remove(cell);
+                columns.Add(cell);
+            }
+
+            row.Cells.AddRange(columns.ToArray());
+        }
+        protected void gvMaintenance_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             string accessRights = Employee.access_rights;
 
@@ -150,11 +163,11 @@ namespace Template
         * @param object sender - reference to the object that raised the event
         * @param GridViewPageEventArgs e - contains the event data
         */
-        protected void gvApplication_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void gvMaintenance_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            //gvApplication.PageIndex = e.NewPageIndex;
-            //EPS.page_index = e.NewPageIndex;
-            //BindGridView();
+            gvMaintenance.PageIndex = e.NewPageIndex;
+            EPS.page_index = e.NewPageIndex;
+            BindGridView();
         }
 
         #region Custom Pager
@@ -184,9 +197,9 @@ namespace Template
         */
         protected void ddPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //gvApplication.PageSize = Convert.ToInt16(ddPageSize.SelectedValue);
-            //BindGridView();
-            //PopulatePager(gvApplication.PageCount);
+            //gvMaintenance.PageSize = Convert.ToInt16(ddPageSize.SelectedValue);
+            BindGridView();
+            PopulatePager(gvMaintenance.PageCount);
         }
 
         /**
@@ -198,9 +211,9 @@ namespace Template
         */
         protected void ddPageNumber_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //gvApplication.PageIndex = Convert.ToInt16(ddPageNumber.SelectedValue);
+            //gvMaintenance.PageIndex = Convert.ToInt16(ddPageNumber.SelectedValue);
             //EPS.page_index = Convert.ToInt16(ddPageNumber.SelectedValue);
-            //BindGridView();
+            BindGridView();
         }
 
         /**
@@ -210,13 +223,13 @@ namespace Template
         */
         protected void lbFirstPage_Click(object sender, EventArgs e)
         {
-            //if (gvApplication.PageIndex > 0)
-            //{
-            //    gvApplication.PageIndex = Convert.ToInt16(ddPageNumber.Items[0].Value);
-            //    EPS.page_index = Convert.ToInt16(ddPageNumber.Items[0].Value);
-            //    BindGridView();
-            //    ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
-            //}
+            if (gvMaintenance.PageIndex > 0)
+            {
+                //gvMaintenance.PageIndex = Convert.ToInt16(ddPageNumber.Items[0].Value);
+                //EPS.page_index = Convert.ToInt16(ddPageNumber.Items[0].Value);
+                //BindGridView();
+                //ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
+            }
         }
 
         /**
@@ -226,13 +239,13 @@ namespace Template
         */
         protected void lbPreviousPage_Click(object sender, EventArgs e)
         {
-            //if (gvApplication.PageIndex > 0)
-            //{
-            //    EPS.page_index -= 1;
-            //    gvApplication.PageIndex -= 1;
-            //    BindGridView();
-            //    ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
-            //}
+            if (gvMaintenance.PageIndex > 0)
+            {
+                EPS.page_index -= 1;
+                gvMaintenance.PageIndex -= 1;
+                BindGridView();
+                //ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
+            }
         }
 
         /**
@@ -242,13 +255,13 @@ namespace Template
         */
         protected void lbNextPage_Click(object sender, EventArgs e)
         {
-            //if (gvApplication.PageIndex < gvApplication.PageCount - 1)
-            //{
-            //    EPS.page_index += 1;
-            //    gvApplication.PageIndex += 1;
-            //    BindGridView();
-            //    ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
-            //}
+            if (gvMaintenance.PageIndex < gvMaintenance.PageCount - 1)
+            {
+                EPS.page_index += 1;
+                gvMaintenance.PageIndex += 1;
+                BindGridView();
+                //ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
+            }
         }
 
         /**
@@ -258,26 +271,26 @@ namespace Template
         */
         protected void lbLastPage_Click(object sender, EventArgs e)
         {
-            //if (gvApplication.PageIndex < gvApplication.PageCount)
-            //{
-            //    EPS.page_index = gvApplication.PageCount - 1;
-            //    gvApplication.PageIndex = gvApplication.PageCount - 1;
-            //    BindGridView();
-            //    ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
-            //}
+            if (gvMaintenance.PageIndex < gvMaintenance.PageCount)
+            {
+                EPS.page_index = gvMaintenance.PageCount - 1;
+                gvMaintenance.PageIndex = gvMaintenance.PageCount - 1;
+                BindGridView();
+                //ddPageNumber.SelectedValue = Convert.ToString(EPS.page_index);
+            }
         }
 
         #endregion
 
         protected void BindGridView()
         {
-            //gvApplication.DataSource = DTSorting;
-            //gvApplication.DataBind();
+            gvMaintenance.DataSource = DTSorting;
+            gvMaintenance.DataBind();
 
-            //if (ViewState["z_sortexpression"] != null)
-            //{
-            //    SortGridView(gvApplication, Convert.ToString(ViewState["z_sortexpression"]), Convert.ToString(ViewState["CurrentSortDirection"]));
-            //}
+            if (ViewState["z_sortexpression"] != null)
+            {
+                SortGridView(gvMaintenance, Convert.ToString(ViewState["z_sortexpression"]), Convert.ToString(ViewState["CurrentSortDirection"]));
+            }
         }
 
         protected void lbExportExcel_Click(object sender, EventArgs e)
@@ -424,22 +437,22 @@ namespace Template
          * @param object sender - reference to the object that raised the event
          * @param GridViewSortEventArgs e - contains the event data
          */
-        protected void gvApplication_Sorting(object sender, GridViewSortEventArgs e)
+        protected void gvMaintenance_Sorting(object sender, GridViewSortEventArgs e)
         {
-            //string sortExpression = e.SortExpression;
-            //ViewState["z_sortexpression"] = e.SortExpression;
-            //if (GridViewSortDirection == SortDirection.Ascending)
-            //{
-            //    ViewState["CurrentSortDirection"] = "DESC";
-            //    GridViewSortDirection = SortDirection.Descending;
-            //    SortGridView(gvApplication, sortExpression, "DESC");
-            //}
-            //else
-            //{
-            //    ViewState["CurrentSortDirection"] = "ASC";
-            //    GridViewSortDirection = SortDirection.Ascending;
-            //    SortGridView(gvApplication, sortExpression, "ASC");
-            //}
+            string sortExpression = e.SortExpression;
+            ViewState["z_sortexpression"] = e.SortExpression;
+            if (GridViewSortDirection == SortDirection.Ascending)
+            {
+                ViewState["CurrentSortDirection"] = "DESC";
+                GridViewSortDirection = SortDirection.Descending;
+                SortGridView(gvMaintenance, sortExpression, "DESC");
+            }
+            else
+            {
+                ViewState["CurrentSortDirection"] = "ASC";
+                GridViewSortDirection = SortDirection.Ascending;
+                SortGridView(gvMaintenance, sortExpression, "ASC");
+            }
         }
 
         /**
