@@ -11,268 +11,331 @@ namespace Template
 {
 
 
-    public partial class UMS
+    public partial class parameters_security
     {
 
         /// <summary>
-        /// HeadContent control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label1;
 
         /// <summary>
-        /// form1 control.
+        /// txtMinPasswordLength control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.TextBox txtMinPasswordLength;
 
         /// <summary>
-        /// ScriptManager1 control.
+        /// RequiredFieldValidator36 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator36;
 
         /// <summary>
-        /// lblFullName control.
+        /// RegularExpressionValidator38 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFullName;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator38;
 
         /// <summary>
-        /// lblUserGroup control.
+        /// txtPasswordExpiration control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserGroup;
+        protected global::System.Web.UI.WebControls.TextBox txtPasswordExpiration;
 
         /// <summary>
-        /// lbChangePW control.
+        /// RequiredFieldValidator38 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbChangePW;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator38;
 
         /// <summary>
-        /// lbLockscreen control.
+        /// RegularExpressionValidator40 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbLockscreen;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator40;
 
         /// <summary>
-        /// lbLogout control.
+        /// txtAllowedRepeatingCharacters control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbLogout;
+        protected global::System.Web.UI.WebControls.TextBox txtAllowedRepeatingCharacters;
 
         /// <summary>
-        /// menuMaintenance control.
+        /// RequiredFieldValidator39 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuMaintenance;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator39;
 
         /// <summary>
-        /// menuApplicationAdministration control.
+        /// RegularExpressionValidator41 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuApplicationAdministration;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator41;
 
         /// <summary>
-        /// lbApplicationParameters control.
+        /// txtAllowedSequentialCharacters control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbApplicationParameters;
+        protected global::System.Web.UI.WebControls.TextBox txtAllowedSequentialCharacters;
 
         /// <summary>
-        /// lbSecurityParameters control.
+        /// RequiredFieldValidator40 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbSecurityParameters;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator40;
 
         /// <summary>
-        /// menuMinistry control.
+        /// RegularExpressionValidator42 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuMinistry;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator42;
 
         /// <summary>
-        /// lbMinistrySearch control.
+        /// Label5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbMinistrySearch;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label5;
 
         /// <summary>
-        /// lbMinistryDepartmentSearch control.
+        /// txtCumulativeInvalidPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbMinistryDepartmentSearch;
+        protected global::System.Web.UI.WebControls.TextBox txtCumulativeInvalidPassword;
 
         /// <summary>
-        /// menuUserManagement control.
+        /// RequiredFieldValidator41 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuUserManagement;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator41;
 
         /// <summary>
-        /// menuUser control.
+        /// RegularExpressionValidator43 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuUser;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator43;
 
         /// <summary>
-        /// lbUserAdd control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUserAdd;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label2;
 
         /// <summary>
-        /// lbUserSearch control.
+        /// txtInvalidPasswordTries control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUserSearch;
+        protected global::System.Web.UI.WebControls.TextBox txtInvalidPasswordTries;
 
         /// <summary>
-        /// menuUserGroup control.
+        /// RequiredFieldValidator43 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuUserGroup;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator43;
 
         /// <summary>
-        /// lbUserGroupAdd control.
+        /// RegularExpressionValidator45 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUserGroupAdd;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator45;
 
         /// <summary>
-        /// lbUserGroupSearch control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUserGroupSearch;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label3;
 
         /// <summary>
-        /// menuUserSecurity control.
+        /// txtRecentPasswordsNotAllowed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuUserSecurity;
+        protected global::System.Web.UI.WebControls.TextBox txtRecentPasswordsNotAllowed;
 
         /// <summary>
-        /// lbUnlockUser control.
+        /// RequiredFieldValidator44 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUnlockUser;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator44;
 
         /// <summary>
-        /// lbResetPassword control.
+        /// RegularExpressionValidator46 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbResetPassword;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator46;
 
         /// <summary>
-        /// lbActiveSessions control.
+        /// Label4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbActiveSessions;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label4;
 
         /// <summary>
-        /// menuMembers control.
+        /// txtSpecialCharactersAllowedSP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuMembers;
+        protected global::System.Web.UI.WebControls.TextBox txtSpecialCharactersAllowedSP;
 
         /// <summary>
-        /// lbMemberList control.
+        /// RequiredFieldValidator45 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbMemberList;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator45;
 
         /// <summary>
-        /// MainContent control.
+        /// RegularExpressionValidator48 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator48;
+
+        /// <summary>
+        /// Label6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label6;
+
+        /// <summary>
+        /// ddPasswordType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddPasswordType;
+
+        /// <summary>
+        /// Label7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label7;
+
+        /// <summary>
+        /// txtMobileActivation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMobileActivation;
+
+        /// <summary>
+        /// RequiredFieldValidator47 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator47;
+
+        /// <summary>
+        /// RegularExpressionValidator47 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator47;
+
+        /// <summary>
+        /// lbSaveSecurityParameters control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbSaveSecurityParameters;
     }
 }

@@ -11,79 +11,88 @@ namespace Template
 {
 
 
-    public partial class home
+    public partial class manage_members
     {
 
         /// <summary>
-        /// lblYouth control.
+        /// divExport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblYouth;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divExport;
 
         /// <summary>
-        /// lblYoungAdults control.
+        /// lbExportExcel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblYoungAdults;
+        protected global::System.Web.UI.WebControls.LinkButton lbExportExcel;
 
         /// <summary>
-        /// lblMens control.
+        /// lbExportPdf control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMens;
+        protected global::System.Web.UI.WebControls.LinkButton lbExportPdf;
 
         /// <summary>
-        /// lblWomens control.
+        /// divSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblWomens;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSearch;
 
         /// <summary>
-        /// lblName control.
+        /// lbAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblName;
+        protected global::System.Web.UI.WebControls.LinkButton lbAdd;
 
         /// <summary>
-        /// lblLatestLogInDate control.
+        /// txtDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLatestLogInDate;
+        protected global::System.Web.UI.WebControls.TextBox txtDescription;
 
         /// <summary>
-        /// lblExpirationAlert control.
+        /// lbSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblExpirationAlert;
+        protected global::System.Web.UI.WebControls.LinkButton lbSearch;
 
         /// <summary>
-        /// gvRecentActivity control.
+        /// lbRefresh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvRecentActivity;
+        protected global::System.Web.UI.WebControls.LinkButton lbRefresh;
+
+        /// <summary>
+        /// gvMaintenance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvMaintenance;
     }
 }

@@ -11,268 +11,295 @@ namespace Template
 {
 
 
-    public partial class UMS
+    public partial class member_edit
     {
 
         /// <summary>
-        /// HeadContent control.
+        /// txtFirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
+        protected global::System.Web.UI.WebControls.TextBox txtFirstName;
 
         /// <summary>
-        /// form1 control.
+        /// reqFirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqFirstName;
 
         /// <summary>
-        /// ScriptManager1 control.
+        /// revFirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFirstName;
 
         /// <summary>
-        /// lblFullName control.
+        /// txtMiddleName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFullName;
+        protected global::System.Web.UI.WebControls.TextBox txtMiddleName;
 
         /// <summary>
-        /// lblUserGroup control.
+        /// reqMiddleName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserGroup;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqMiddleName;
 
         /// <summary>
-        /// lbChangePW control.
+        /// revMiddleName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbChangePW;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMiddleName;
 
         /// <summary>
-        /// lbLockscreen control.
+        /// txtLastName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbLockscreen;
+        protected global::System.Web.UI.WebControls.TextBox txtLastName;
 
         /// <summary>
-        /// lbLogout control.
+        /// reqLastName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbLogout;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqLastName;
 
         /// <summary>
-        /// menuMaintenance control.
+        /// revLastName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuMaintenance;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revLastName;
 
         /// <summary>
-        /// menuApplicationAdministration control.
+        /// ddGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuApplicationAdministration;
+        protected global::System.Web.UI.WebControls.DropDownList ddGender;
 
         /// <summary>
-        /// lbApplicationParameters control.
+        /// reqGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbApplicationParameters;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqGender;
 
         /// <summary>
-        /// lbSecurityParameters control.
+        /// txtBirthday control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbSecurityParameters;
+        protected global::System.Web.UI.WebControls.TextBox txtBirthday;
 
         /// <summary>
-        /// menuMinistry control.
+        /// reqBirthdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuMinistry;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqBirthdate;
 
         /// <summary>
-        /// lbMinistrySearch control.
+        /// revBirthdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbMinistrySearch;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revBirthdate;
 
         /// <summary>
-        /// lbMinistryDepartmentSearch control.
+        /// txtEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbMinistryDepartmentSearch;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
-        /// menuUserManagement control.
+        /// revEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuUserManagement;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revEmail;
 
         /// <summary>
-        /// menuUser control.
+        /// txtMobileNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuUser;
+        protected global::System.Web.UI.WebControls.TextBox txtMobileNumber;
 
         /// <summary>
-        /// lbUserAdd control.
+        /// revMobileNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUserAdd;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMobileNumber;
 
         /// <summary>
-        /// lbUserSearch control.
+        /// ddMinistry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUserSearch;
+        protected global::System.Web.UI.WebControls.DropDownList ddMinistry;
 
         /// <summary>
-        /// menuUserGroup control.
+        /// ddMinistryDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuUserGroup;
+        protected global::System.Web.UI.WebControls.DropDownList ddMinistryDepartment;
 
         /// <summary>
-        /// lbUserGroupAdd control.
+        /// txtDateFirstAttend control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUserGroupAdd;
+        protected global::System.Web.UI.WebControls.TextBox txtDateFirstAttend;
 
         /// <summary>
-        /// lbUserGroupSearch control.
+        /// revDatedFirstAttend control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUserGroupSearch;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revDatedFirstAttend;
 
         /// <summary>
-        /// menuUserSecurity control.
+        /// ddCellGroup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuUserSecurity;
+        protected global::System.Web.UI.WebControls.DropDownList ddCellGroup;
 
         /// <summary>
-        /// lbUnlockUser control.
+        /// rfvCellGroup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUnlockUser;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCellGroup;
 
         /// <summary>
-        /// lbResetPassword control.
+        /// ddBaptismalStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbResetPassword;
+        protected global::System.Web.UI.WebControls.DropDownList ddBaptismalStatus;
 
         /// <summary>
-        /// lbActiveSessions control.
+        /// rfvBaptismalStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbActiveSessions;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBaptismalStatus;
 
         /// <summary>
-        /// menuMembers control.
+        /// ddPepsol control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuMembers;
+        protected global::System.Web.UI.WebControls.DropDownList ddPepsol;
 
         /// <summary>
-        /// lbMemberList control.
+        /// rfvPepsol control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbMemberList;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPepsol;
 
         /// <summary>
-        /// MainContent control.
+        /// ddStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.DropDownList ddStatus;
+
+        /// <summary>
+        /// rfvStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvStatus;
+
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
+
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSave;
     }
 }

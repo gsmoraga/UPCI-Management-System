@@ -51,7 +51,7 @@ namespace Template
                             {
                                 lblHeader.Text = Maintenance.content_description + " Maintenance";
 
-                                if (Maintenance.content_code == VG.c_department)
+                                if (Maintenance.content_code == VG.c_ministry_department)
                                 {
                                     _BLL.GetDivisionDropDown(ddDivision, "All");
                                     divDivision.Visible = true;
@@ -134,7 +134,7 @@ namespace Template
         {
             Boolean result = false;
 
-            if (contentCode == VG.c_department)
+            if (contentCode == VG.c_ministry_department)
             {
                 result = _BLL.FilterDepartment(gvMaintenance, code, description, ddDivision.SelectedValue);
             }
@@ -161,7 +161,7 @@ namespace Template
             {
                 result = _BLL.FilterBranch(gvMaintenance, code, description);
             }
-            else if (contentCode == VG.c_division)
+            else if (contentCode == VG.c_ministry)
             {
                 result = _BLL.FilterDivision(gvMaintenance, code, description);
             }
@@ -386,7 +386,7 @@ namespace Template
                 string code = lbDelete.CommandArgument;
                 Boolean result = false;
 
-                if (Maintenance.content_code == VG.c_department)
+                if (Maintenance.content_code == VG.c_ministry_department)
                 {
                     result = _BLL.DeleteDepartment(code);
                 }
@@ -425,7 +425,7 @@ namespace Template
                 {
                     result = _BLL.DeleteBranch(code);
                 }
-                else if (Maintenance.content_code == VG.c_division)
+                else if (Maintenance.content_code == VG.c_ministry)
                 {
                     result = _BLL.DeleteDivision(code);
                 }
@@ -865,7 +865,7 @@ namespace Template
                             {
                                 builder.Append(gvMaintenance.Rows[i].Cells[0].Text + ",");
 
-                                if (Maintenance.content_code == VG.c_department)
+                                if (Maintenance.content_code == VG.c_ministry_department)
                                 {
                                     _BLL.DeleteDepartment(gvMaintenance.Rows[i].Cells[0].Text);
                                 }
@@ -904,7 +904,7 @@ namespace Template
                                 {
                                     _BLL.DeleteBranch(gvMaintenance.Rows[i].Cells[0].Text);
                                 }
-                                else if (Maintenance.content_code == VG.c_division)
+                                else if (Maintenance.content_code == VG.c_ministry)
                                 {
                                     _BLL.DeleteDivision(gvMaintenance.Rows[i].Cells[0].Text);
                                 }

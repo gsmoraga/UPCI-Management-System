@@ -79,21 +79,12 @@ namespace Template
                         lbApplicationParameters.Visible = true;
                 }
 
-                if (accessRights.Contains(VG.ar_department) ||
-                    accessRights.Contains(VG.ar_user_group) ||
+                if (accessRights.Contains(VG.ar_user_group) ||
                     accessRights.Contains(VG.ar_user) ||
-                    accessRights.Contains(VG.ar_branch) ||
-                    accessRights.Contains(VG.ar_division))
+                    accessRights.Contains(VG.ar_branch))
                 {
                     menuUserManagement.Visible = true;
 
-                    if (accessRights.Contains(VG.ar_department))
-                    {
-                        if (accessRights.Contains("&m3a"))
-                            lbDepartmentAdd.Visible = true;
-                        if (accessRights.Contains("&m3d,") || accessRights.Contains("&m3e,") || accessRights.Contains("&m3v,"))
-                            lbDepartmentSearch.Visible = true;
-                    }
                     if (accessRights.Contains(VG.ar_user_group))
                     {
                         menuUserGroup.Visible = true;
@@ -127,27 +118,28 @@ namespace Template
                         if (accessRights.Contains(VG.ar_bank_user_security_session))
                             lbActiveSessions.Visible = true;
                     }
-
-                    if (accessRights.Contains(VG.ar_division))
-                    {
-                        menuMinistry.Visible = true;
-
-                        if (accessRights.Contains("&m8a,"))
-                            lbMinistryAdd.Visible = true;
-                        if (accessRights.Contains("&m8d,") || accessRights.Contains("&m8e,") || accessRights.Contains("&m8v,"))
-                            lbministrySearch.Visible = true;
-                    }
-
-                    if (accessRights.Contains(VG.ar_branch))
-                    {
-                        menuMembers.Visible = true;
-
-                        if (accessRights.Contains("&m7a,"))
-                            lbMemberList.Visible = true;
-                    }
                 }
 
+                if (accessRights.Contains(VG.ar_ministry_department))
+                {
+                    if (accessRights.Contains("&m3d,") || accessRights.Contains("&m3e,"))
+                        lbMinistryDepartmentSearch.Visible = true;
+                }
 
+                if (accessRights.Contains(VG.ar_ministry))
+                {
+                    menuMinistry.Visible = true;
+                    if (accessRights.Contains("&m8d,") || accessRights.Contains("&m8e,"))
+                        lbMinistrySearch.Visible = true;
+                }
+
+                if (accessRights.Contains(VG.ar_member))
+                {
+                    menuMembers.Visible = true;
+
+                    if (accessRights.Contains("&a9s,") || accessRights.Contains("&a9e,"))
+                        lbMemberList.Visible = true;
+                }
             }
         }
         protected void lbChangePW_Click(object sender, EventArgs e)
@@ -159,7 +151,8 @@ namespace Template
         #region Members
         protected void lbMemberList_Click(object sender, EventArgs e)
         {
-            Response.Redirect("manage-members.aspx");
+            Maintenance.content_code = VG.c_member;
+            Response.Redirect("member-search.aspx");
         }
 
         #endregion
@@ -171,6 +164,70 @@ namespace Template
         }
 
         #endregion
+
+        #region Application Administration
+        protected void lbApplicationParameters_Click(object sender, EventArgs e)
+        {
+            Maintenance.content_code = VG.c_application_parameters;
+            Maintenance.bank_user_security = false;
+
+            ResetMaintenanceFilters();
+
+            if (_BLL.GetApplicationParameters() == false)
+            {
+                //error message
+            }
+            else
+            {
+                _BLL.GetContentType(Maintenance.content_code);
+                Response.Redirect("parameters-application.aspx", false);
+            }
+        }
+
+        protected void lbSecurityParameters_Click(object sender, EventArgs e)
+        {
+            Maintenance.content_code = VG.c_security_parameters;
+            Maintenance.bank_user_security = false;
+
+            ResetMaintenanceFilters();
+
+            if (_BLL.GetSecurityParameters() == false)
+            {
+                //error message
+            }
+            else
+            {
+                _BLL.GetContentType(Maintenance.content_code);
+                Response.Redirect("parameters-security.aspx", false);
+            }
+        }
+        #endregion
+
+        #region Ministry
+        protected void lbMinistrySearch_Click(object sender, EventArgs e)
+        {
+            Maintenance.content_code = VG.c_ministry;
+
+            ResetMaintenanceFilters();
+            Response.Redirect("ministry-search.aspx", false);
+        }
+        #endregion
+
+        #region Ministry Department
+        protected void lbMinistryDepartmentSearch_Click(object sender, EventArgs e)
+        {
+            Maintenance.content_code = VG.c_ministry_department;
+
+            ResetMaintenanceFilters();
+            Response.Redirect("dept-ministry-search.aspx", false);
+        }
+        #endregion
+        public void ResetMaintenanceFilters()
+        {
+            Maintenance.code_filter = "";
+            Maintenance.description_filter = "";
+            Maintenance.page_index = 0; ;
+        }
 
     }
 }

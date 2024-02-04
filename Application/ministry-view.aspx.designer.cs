@@ -11,34 +11,34 @@ namespace Template
 {
 
 
-    public partial class manage_members
+    public partial class ministry_view
     {
 
         /// <summary>
-        /// lbAdd control.
+        /// lblCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbAdd;
+        protected global::System.Web.UI.WebControls.Label lblCode;
 
         /// <summary>
-        /// txtSearch control.
+        /// lblDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        protected global::System.Web.UI.WebControls.Label lblDescription;
 
         /// <summary>
-        /// gvMaintenance control.
+        /// btnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvMaintenance;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
     }
 }

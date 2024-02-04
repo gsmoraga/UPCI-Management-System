@@ -77,7 +77,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="add-member-form.aspx" />
+    <Content Include="dept-ministry-view.aspx" />
+    <Content Include="ministry-add.aspx" />
+    <Content Include="dept-ministry-add.aspx" />
+    <Content Include="ministry-edit.aspx" />
+    <Content Include="ministry-search.aspx" />
+    <Content Include="ministry-view.aspx" />
+    <Content Include="dept-ministry-search.aspx" />
+    <Content Include="parameters-application.aspx" />
+    <Content Include="maintenance-edit.aspx" />
+    <Content Include="member-add.aspx" />
     <Content Include="add_age_group.aspx" />
     <Content Include="contents\AdminLTE\build\config\postcss.config.js" />
     <Content Include="contents\AdminLTE\build\config\rollup.config.js" />
@@ -2575,10 +2584,13 @@
     <Content Include="contents\NiceAdmin\vendor\tinymce\tinymce.js" />
     <Content Include="contents\NiceAdmin\vendor\tinymce\tinymce.min.js" />
     <Content Include="lockscreen.aspx" />
+    <Content Include="member-edit.aspx" />
+    <Content Include="member-view.aspx" />
     <Content Include="Pages\Homepage.aspx" />
     <Content Include="inquiry-all.aspx" />
     <Content Include="login-form.aspx" />
-    <Content Include="manage-members.aspx" />
+    <Content Include="member-search.aspx" />
+    <Content Include="parameters-security.aspx" />
     <Content Include="password-change.aspx" />
     <Content Include="contents\css\bootstrap-combobox.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -2720,12 +2732,76 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="add-member-form.aspx.cs">
-      <DependentUpon>add-member-form.aspx</DependentUpon>
+    <Compile Include="dept-ministry-view.aspx.cs">
+      <DependentUpon>dept-ministry-view.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="add-member-form.aspx.designer.cs">
-      <DependentUpon>add-member-form.aspx</DependentUpon>
+    <Compile Include="dept-ministry-view.aspx.designer.cs">
+      <DependentUpon>dept-ministry-view.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ministry-add.aspx.cs">
+      <DependentUpon>ministry-add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ministry-add.aspx.designer.cs">
+      <DependentUpon>ministry-add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dept-ministry-add.aspx.cs">
+      <DependentUpon>dept-ministry-add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dept-ministry-add.aspx.designer.cs">
+      <DependentUpon>dept-ministry-add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ministry-edit.aspx.cs">
+      <DependentUpon>ministry-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ministry-edit.aspx.designer.cs">
+      <DependentUpon>ministry-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ministry-search.aspx.cs">
+      <DependentUpon>ministry-search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ministry-search.aspx.designer.cs">
+      <DependentUpon>ministry-search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ministry-view.aspx.cs">
+      <DependentUpon>ministry-view.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ministry-view.aspx.designer.cs">
+      <DependentUpon>ministry-view.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dept-ministry-search.aspx.cs">
+      <DependentUpon>dept-ministry-search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dept-ministry-search.aspx.designer.cs">
+      <DependentUpon>dept-ministry-search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="parameters-application.aspx.cs">
+      <DependentUpon>parameters-application.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="parameters-application.aspx.designer.cs">
+      <DependentUpon>parameters-application.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Member.cs" />
+    <Compile Include="maintenance-edit.aspx.cs">
+      <DependentUpon>maintenance-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="maintenance-edit.aspx.designer.cs">
+      <DependentUpon>maintenance-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="member-add.aspx.cs">
+      <DependentUpon>member-add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="member-add.aspx.designer.cs">
+      <DependentUpon>member-add.aspx</DependentUpon>
     </Compile>
     <Compile Include="add_age_group.aspx.cs">
       <DependentUpon>add_age_group.aspx</DependentUpon>
@@ -2755,6 +2831,20 @@
     <Compile Include="lockscreen.aspx.designer.cs">
       <DependentUpon>lockscreen.aspx</DependentUpon>
     </Compile>
+    <Compile Include="member-edit.aspx.cs">
+      <DependentUpon>member-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="member-edit.aspx.designer.cs">
+      <DependentUpon>member-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="member-view.aspx.cs">
+      <DependentUpon>member-view.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="member-view.aspx.designer.cs">
+      <DependentUpon>member-view.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Homepage.aspx.cs">
       <DependentUpon>Homepage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2776,12 +2866,19 @@
     <Compile Include="login-form.aspx.designer.cs">
       <DependentUpon>login-form.aspx</DependentUpon>
     </Compile>
-    <Compile Include="manage-members.aspx.cs">
-      <DependentUpon>manage-members.aspx</DependentUpon>
+    <Compile Include="member-search.aspx.cs">
+      <DependentUpon>member-search.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="manage-members.aspx.designer.cs">
-      <DependentUpon>manage-members.aspx</DependentUpon>
+    <Compile Include="member-search.aspx.designer.cs">
+      <DependentUpon>member-search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="parameters-security.aspx.cs">
+      <DependentUpon>parameters-security.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="parameters-security.aspx.designer.cs">
+      <DependentUpon>parameters-security.aspx</DependentUpon>
     </Compile>
     <Compile Include="password-change.aspx.cs">
       <DependentUpon>password-change.aspx</DependentUpon>

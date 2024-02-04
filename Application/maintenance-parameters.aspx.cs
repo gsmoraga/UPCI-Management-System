@@ -121,7 +121,7 @@ namespace Template
                                         hCodeDesc.InnerText = Maintenance.mode + " " + Maintenance.content_description;
                                         codeDescCard.Visible = true;
 
-                                        if (Maintenance.content_code == VG.c_department)
+                                        if (Maintenance.content_code == VG.c_ministry_department)
                                         {
                                             lblCode.InnerText = "Department Code";
                                             lblCode2.InnerText = "Division";
@@ -186,7 +186,7 @@ namespace Template
                                         codeDescCard.Visible = true;
 
                                         #region Department
-                                        if (Maintenance.content_code == VG.c_department)
+                                        if (Maintenance.content_code == VG.c_ministry_department)
                                         {
                                             txtCode.ReadOnly = true;
                                             txtCode.Attributes.Add("class", "form-control-plaintext");
@@ -203,7 +203,7 @@ namespace Template
                                             }
                                             else
                                             {
-                                                ddCode.SelectedValue = Maintenance.division_code;
+                                                ddCode.SelectedValue = Maintenance.ministry_code;
                                             }
                                         }
                                         #endregion
@@ -231,7 +231,7 @@ namespace Template
                                         #endregion
 
                                         #region Division
-                                        else if (Maintenance.content_code == VG.c_division)
+                                        else if (Maintenance.content_code == VG.c_ministry)
                                         {
                                             if (_BLL.GetDivision(Maintenance.entry_code) == false)
                                             {
@@ -277,7 +277,7 @@ namespace Template
 
                                                 if (ddDepartment.Items.FindByValue(Maintenance.department) == null)
                                                 {
-                                                    _BLL.AppendDeletedItem(ddDepartment, VG.c_department, Maintenance.department);
+                                                    _BLL.AppendDeletedItem(ddDepartment, VG.c_ministry_department, Maintenance.department);
                                                 }
 
                                                 txtEmployeeNumber.Text = Maintenance.member_number;
@@ -349,7 +349,7 @@ namespace Template
                                         lbCodeDescCard.Visible = false;
                                         codeDescCard.Visible = true;
 
-                                        if (Maintenance.content_code == VG.c_department)
+                                        if (Maintenance.content_code == VG.c_ministry_department)
                                         {
                                             lblCode.InnerText = "Department Code";
                                             lblCode2.InnerText = "Division";
@@ -361,7 +361,7 @@ namespace Template
                                             }
                                             else
                                             {
-                                                ddCode.SelectedValue = Maintenance.division_code;
+                                                ddCode.SelectedValue = Maintenance.ministry_code;
                                                 lblDdCode.Text = ddCode.SelectedItem.Text;
                                                 lblDdCode.Visible = true;
                                             }
@@ -383,7 +383,7 @@ namespace Template
                                             lblRegion.Visible = true;
                                             ddRegion.Visible = false;
                                         }
-                                        else if (Maintenance.content_code == VG.c_division)
+                                        else if (Maintenance.content_code == VG.c_ministry)
                                         {
                                             if (_BLL.GetDivision(Maintenance.entry_code) == false)
                                             {
@@ -451,7 +451,7 @@ namespace Template
 
                                                 if (ddDepartment.Items.FindByValue(Maintenance.department) == null)
                                                 {
-                                                    _BLL.AppendDeletedItem(ddDepartment, VG.c_department, Maintenance.department);
+                                                    _BLL.AppendDeletedItem(ddDepartment, VG.c_ministry_department, Maintenance.department);
                                                 }
 
                                                 txtEmployeeNumber.Text = Maintenance.member_number;
@@ -543,7 +543,7 @@ namespace Template
 
                 if (Maintenance.mode == "Edit")
                 {
-                    if (Maintenance.content_code == VG.c_department)
+                    if (Maintenance.content_code == VG.c_ministry_department)
                     {
                         result = _BLL.EditDepartment(Maintenance.entry_code, txtDescription.Text, ddCode.SelectedValue);
                         cacheKey = "GetDepartment" + Maintenance.entry_code;
@@ -554,7 +554,7 @@ namespace Template
                         result = _BLL.EditBranch(Maintenance.entry_code, txtDescription.Text, txtCodeDescEmail.Text, ddRegion.SelectedValue);
                         cacheKey = "GetBranch" + Maintenance.entry_code;
                     }
-                    else if (Maintenance.content_code == VG.c_division)
+                    else if (Maintenance.content_code == VG.c_ministry)
                     {
                         result = _BLL.EditDivision(Maintenance.entry_code, txtDescription.Text);
                         cacheKey = "GetDivision" + Maintenance.entry_code;
@@ -591,7 +591,7 @@ namespace Template
                     }
                     else
                     {
-                        if (Maintenance.content_code == VG.c_department)
+                        if (Maintenance.content_code == VG.c_ministry_department)
                         {
                             result = _BLL.AddDepartment(txtCode.Text, txtDescription.Text, ddCode.SelectedValue);
                             cacheKey = "GetDepartment" + txtCode.Text;
@@ -601,7 +601,7 @@ namespace Template
                             result = _BLL.AddBranch(txtCode.Text, txtDescription.Text,ddRegion.SelectedValue,txtCodeDescEmail.Text);
                             cacheKey = "GetBranch" + txtCode.Text;
                         }
-                        else if (Maintenance.content_code == VG.c_division)
+                        else if (Maintenance.content_code == VG.c_ministry)
                         {
                             result = _BLL.AddDivision(txtCode.Text, txtDescription.Text);
                             cacheKey = "GetDivision" + txtCode.Text;
@@ -1054,7 +1054,7 @@ namespace Template
         */
         public Boolean IfExisting(string contentCode, string code)
         {
-            if (Maintenance.content_code == VG.c_department)
+            if (Maintenance.content_code == VG.c_ministry_department)
             {
                 return _BLL.GetDepartment(code);
             }
@@ -1070,7 +1070,7 @@ namespace Template
             {
                 return _BLL.GetBranch(code);
             }
-            else if (Maintenance.content_code == VG.c_division)
+            else if (Maintenance.content_code == VG.c_ministry)
             {
                 return _BLL.GetDivision(code);
             }

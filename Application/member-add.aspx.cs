@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -26,12 +27,21 @@ namespace Template
                     if (_BLL.SessionIsActive(this))
                     {
                         string accessRights = Employee.access_rights;
-                        //pnlFirstPage.Visible = true;
-                        //lbNextFirstPage.Visible = true;
-                        //lbSave.Visible = true;
-                        _BLL.GetMinistryDropdown(ddMinistry, "--Select--");
-                        _BLL.GetMinistryDepartmentDropdown(ddMinistryDepartment, "--Select--", ddMinistry.SelectedValue);
-                        _BLL.GetPepsolDropdown(ddPepsol, "--Select--");
+                        Regex r = new Regex("&m[0-9]", RegexOptions.IgnoreCase);
+
+                        if (!r.Match(accessRights).Success)
+                        {
+                            _BLL.AddAccessLogEntry(VG.access_maintenance, Employee.user_id, "0", Request.UserHostAddress.ToString());
+
+                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "noAccessRedirect('logout.aspx');", true);
+                        }
+                        else
+                        {
+                            _BLL.GetMinistryDropdown(ddMinistry, "--Select--");
+                            _BLL.GetMinistryDepartmentDropdown(ddMinistryDepartment, "--Select--", ddMinistry.SelectedValue);
+                            _BLL.GetPepsolDropdown(ddPepsol, "--Select--");
+                        }
+
                     }
                 }
             }
@@ -64,15 +74,16 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
-                Response.Redirect("manage-members.aspx", false);
+                Response.Redirect("members-search.aspx", false);
             }
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (_BLL.SessionIsActive(this))
             {
+                
                 if (_BLL.AddMember(txtFirstName.Text.Trim(), txtMiddleName.Text.Trim(), txtLastName.Text.Trim(), ddGender.SelectedValue, txtBirthday.Text, txtEmail.Text.Trim()
-                    ,txtMobileNumber.Text.Trim(), ddMinistry.SelectedValue, ddMinistryDepartment.SelectedValue, txtDateFirstAttend.Text,
+                    , txtMobileNumber.Text.Trim(), ddMinistry.SelectedValue, ddMinistryDepartment.SelectedValue, txtDateFirstAttend.Text,
                     ddCellGroup.Text, ddBaptismalStatus.SelectedValue, ddPepsol.SelectedValue, ddStatus.SelectedValue, Employee.user_id) == false)
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!','Unable to add the user.','error');", true);

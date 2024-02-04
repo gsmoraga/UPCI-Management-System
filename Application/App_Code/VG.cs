@@ -47,10 +47,10 @@
         set { c_application_parameters = value; }
     }
 
-    public static string c_department
+    public static string c_ministry_department
     {
         get { return "3"; }
-        set { c_department = value; }
+        set { c_ministry_department = value; }
     }
 
     public static string c_user_group
@@ -77,12 +77,16 @@
         set { c_branch = value; }
     }
 
-    public static string c_division
+    public static string c_ministry
     {
         get { return "8"; }
-        set { c_division = value; }
+        set { c_ministry = value; }
     }
-
+    public static string c_member
+    {
+        get { return "9"; }
+        set { c_member = value; }
+    }
     public static string c_r_audit_log
     {
         get { return "101"; }
@@ -128,10 +132,10 @@
         set { ar_security_parameters = value; }
     }
 
-    public static string ar_department
+    public static string ar_ministry_department
     {
         get { return "&m3,"; }
-        set { ar_department = value; }
+        set { ar_ministry_department = value; }
     }
 
     public static string ar_user_group
@@ -177,10 +181,16 @@
         set { ar_branch = value; }
     }
 
-    public static string ar_division
+    public static string ar_ministry
     {
         get { return "&m8,"; }
-        set { ar_division = value; }
+        set { ar_ministry = value; }
+    }
+
+    public static string ar_member
+    {
+        get { return "&a9,"; }
+        set { ar_member = value; }
     }
 
     public static string ar_r_audit_log
@@ -270,7 +280,7 @@
 
     public static string application_name
     {
-        get { return "EPS"; }
+        get { return "UPCI"; }
         set { application_name = value; }
     }
 

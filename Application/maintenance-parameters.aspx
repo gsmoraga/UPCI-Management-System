@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UPCI.Master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UMS.Master" AutoEventWireup="true"
     CodeBehind="maintenance-parameters.aspx.cs" Inherits="Template.maintenance_parameters" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row justify-content-left">
                 <div class="col-md-12">
-                    <div class="card" id="codeDescCard" runat="server" visible="false">
+                    <div class="card card-primary" id="codeDescCard" runat="server" visible="false">
                         <div class="card-header" id="hCodeDesc" runat="server"></div>
                         <div class="card-body">
                             <div class="form-group row align-items-center" id="rowCode" runat="server">
@@ -348,7 +348,7 @@
                             </div>
 
                             <div class="form-group row align-items-center">
-                                <label for="txtBankEmail" class="col-md-4 col-form-label text-md-right">Bank email address</label>
+                                <label for="txtBankEmail" class="col-md-4 col-form-label text-md-right">Church email address</label>
                                 <div class="col-md-4 input-group">
                                     <asp:TextBox runat="server" ID="txtBankEmail" MaxLength="50" class="form-control" autocomplete="off"></asp:TextBox>
                                     <div class="input-group-append">
@@ -366,7 +366,7 @@
                             </div>
 
                             <div class="form-group row align-items-center">
-                                <label for="txtBankHotline" class="col-md-4 col-form-label text-md-right">Bank hotline no.</label>
+                                <label for="txtBankHotline" class="col-md-4 col-form-label text-md-right">Church hotline no.</label>
                                 <div class="col-md-4 input-group">
                                     <asp:TextBox runat="server" ID="txtBankHotline" MaxLength="50" class="form-control" autocomplete="off"></asp:TextBox>
                                     <div class="input-group-append">
@@ -384,7 +384,7 @@
                             </div>
 
                             <div class="form-group row align-items-center">
-                                <label for="txtBankName" class="col-md-4 col-form-label text-md-right">Bank name</label>
+                                <label for="txtBankName" class="col-md-4 col-form-label text-md-right">Church name</label>
                                 <div class="col-md-4 input-group">
                                     <asp:TextBox runat="server" ID="txtBankName" MaxLength="50" class="form-control" autocomplete="off"></asp:TextBox>
                                     <div class="input-group-append">

@@ -175,18 +175,33 @@ public class Maintenance
                 HttpContext.Current.Session["MaintenanceGroupCode"] = value;
         }
     }
-    public static string division_code
+    public static string ministry_code
     {
         get
         {
             if (HttpContext.Current.Session != null)
-                return Convert.ToString(HttpContext.Current.Session["MaintenanceDivisionCode"]);
+                return Convert.ToString(HttpContext.Current.Session["MaintenanceMinistryCode"]);
             else return string.Empty;
         }
         set
         {
             if (HttpContext.Current.Session != null)
-                HttpContext.Current.Session["MaintenanceDivisionCode"] = value;
+                HttpContext.Current.Session["MaintenanceMinistryCode"] = value;
+        }
+    }
+
+    public static string ministry_description
+    {
+        get
+        {
+            if (HttpContext.Current.Session != null)
+                return Convert.ToString(HttpContext.Current.Session["MaintenanceMinistryDesc"]);
+            else return string.Empty;
+        }
+        set
+        {
+            if (HttpContext.Current.Session != null)
+                HttpContext.Current.Session["MaintenanceMinistryDesc"] = value;
         }
     }
     public static string content_code

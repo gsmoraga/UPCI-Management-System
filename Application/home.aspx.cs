@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Globalization;
 using System.Web.UI.WebControls;
 
@@ -7,7 +8,7 @@ namespace Template
     public partial class home : System.Web.UI.Page
     {
         BLL _BLL = new BLL();
-
+        DAL _DAL = new DAL();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
@@ -52,6 +53,8 @@ namespace Template
                         if (_BLL.FilterRecentActivity(gvRecentActivity, Employee.user_id) == false)
                         {
                         }
+
+                        LoadCount();
                     }
                 }
             }
@@ -69,6 +72,24 @@ namespace Template
             }
         }
 
+        protected void LoadCount()
+        {
+            DataTable dtWomens = new DataTable();
+            dtWomens = _DAL.WomensCount();
 
+            lblWomens.Text = Convert.ToString(dtWomens.Rows[0]["womens"]);
+
+            DataTable dtMens = new DataTable();
+            dtMens = _DAL.MensCount();
+            lblMens.Text = Convert.ToString(dtMens.Rows[0]["mens"]);
+
+            DataTable dtYouth = new DataTable();
+            dtYouth = _DAL.YouthCounts();
+            lblYouth.Text = Convert.ToString(dtYouth.Rows[0]["youth"]);
+
+            DataTable dtYoungAdult = new DataTable();
+            dtYoungAdult = _DAL.YoungAdult();
+            lblYoungAdults.Text = Convert.ToString(dtYoungAdult.Rows[0]["young_adults"]);
+        }
     }
 }

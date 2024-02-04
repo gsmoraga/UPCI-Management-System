@@ -21,6 +21,16 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="contents/AdminLTE/plugins/select2/css/select2.min.css">
 
+    <%--<!-- Maan Contents Template -->
+    <link rel="stylesheet" type="text/css" href="contents/css/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="contents/css/bootstrap.min.css" />
+    <script type="text/javascript" src="contents/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="contents/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="contents/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="contents/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="contents/js/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="contents/js/main.js"></script>--%>
+
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
@@ -78,6 +88,7 @@
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <%--<i class="far fa-bell"></i>--%>
                             <i class="fa fa-cog"></i>
+
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <span class="dropdown-item dropdown-header">Settings</span>
@@ -169,12 +180,20 @@
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <asp:LinkButton ID="lbApplicationParameters" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Application Parameters</asp:LinkButton>
+                                                <asp:LinkButton ID="lbApplicationParameters" runat="server" CssClass="nav-link" OnClick="lbApplicationParameters_Click" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Application Parameters</asp:LinkButton>
                                             </li>
                                             <li class="nav-item">
-                                                <asp:LinkButton ID="lbSecurityParameters" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Security Parameters</asp:LinkButton>
+                                                <asp:LinkButton ID="lbSecurityParameters" runat="server" CssClass="nav-link" OnClick="lbSecurityParameters_Click" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Security Parameters</asp:LinkButton>
                                             </li>
                                         </ul>
+                                    </li>
+                                    <!-- Ministry-->
+                                    <li id="menuMinistry" runat="server" class="nav-item" visible="false">
+                                        <asp:LinkButton ID="lbMinistrySearch" runat="server" CssClass="nav-link" OnClick="lbMinistrySearch_Click" Visible="false"><i class="far fa-circle nav-icon"></i>Ministry</asp:LinkButton>
+                                    </li>
+                                    <!-- Ministry Department -->
+                                    <li class="nav-item">
+                                        <asp:LinkButton ID="lbMinistryDepartmentSearch" runat="server" CssClass="nav-link" OnClick="lbMinistryDepartmentSearch_Click" Visible="false"><i class="far fa-circle nav-icon"></i>Ministry Department</asp:LinkButton>
                                     </li>
                                     <!-- User Management -->
                                     <li id="menuUserManagement" runat="server" class="nav-item" visible="false">
@@ -185,41 +204,6 @@
                                             </p>
                                         </a>
                                         <ul class="nav nav-treeview">
-                                            <!-- Ministry-->
-                                            <li id="menuMinistry" runat="server" class="nav-item" visible="false">
-                                                <a href="#" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>
-                                                        Ministry<i class="right fas fa-angle-left"></i>
-                                                    </p>
-                                                </a>
-                                                <ul class="nav nav-treeview">
-                                                    <li class="nav-item">
-                                                        <asp:LinkButton ID="lbMinistryAdd" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Add</asp:LinkButton>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <asp:LinkButton ID="lbministrySearch" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Search</asp:LinkButton>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <!-- Department -->
-                                            <li id="menuDepartment" runat="server" class="nav-item" visible="false">
-                                                <a href="#" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>
-                                                        Department<i class="right fas fa-angle-left"></i>
-                                                    </p>
-                                                </a>
-                                                <ul class="nav nav-treeview">
-                                                    <li class="nav-item">
-                                                        <asp:LinkButton ID="lbDepartmentAdd" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Add</asp:LinkButton>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <asp:LinkButton ID="lbDepartmentSearch" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Search</asp:LinkButton>
-                                                    </li>
-                                                </ul>
-                                            </li>
-
                                             <!-- User -->
                                             <li id="menuUser" runat="server" class="nav-item" visible="false">
                                                 <a href="#" class="nav-link">
@@ -309,21 +293,23 @@
 
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <footer class="main-footer">
-                <strong>Copyright &copy; 2024 <a href="#">Universal Pentecostal Church Inc</a>.</strong>
-                All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 1.0
-    </div>
-            </footer>
+
+
         </div>
     </form>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <footer class="main-footer">
 
+        <strong>Copyright &copy; <span id="year"></span><a href="#">Universal Pentecostal Church Inc</a>.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 1.0
+        </div>
+    </footer>
     <div class="modal fade" id="modal-default">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -373,6 +359,7 @@
         //if (window.history.replaceState) {
         //    window.history.replaceState(null, null, window.location.href);
         //}
+        document.getElementById("year").innerHTML = new Date().getFullYear();
     </script>
 </body>
 </html>

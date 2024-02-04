@@ -52,15 +52,15 @@ namespace Template
                         lbApplicationParameters.Visible = true;
                 }
 
-                if (accessRights.Contains(VG.ar_department) ||
+                if (accessRights.Contains(VG.ar_ministry_department) ||
                     accessRights.Contains(VG.ar_user_group) ||
                     accessRights.Contains(VG.ar_user) ||
                     accessRights.Contains(VG.ar_branch) ||
-                    accessRights.Contains(VG.ar_division))
+                    accessRights.Contains(VG.ar_ministry))
                 {
                     menuUserManagement.Visible = true;
 
-                    if (accessRights.Contains(VG.ar_department))
+                    if (accessRights.Contains(VG.ar_ministry_department))
                     {
                         menuDepartment.Visible = true;
 
@@ -101,7 +101,7 @@ namespace Template
                             lbBranchSearch.Visible = true;
                     }
 
-                    if (accessRights.Contains(VG.ar_division))
+                    if (accessRights.Contains(VG.ar_ministry))
                     {
                         menuDivision.Visible = true;
 
@@ -239,7 +239,7 @@ namespace Template
 
         protected void lbDepartmentAdd_Click(object sender, EventArgs e)
         {
-            Maintenance.content_code = VG.c_department;
+            Maintenance.content_code = VG.c_ministry_department;
             Maintenance.bank_user_security = false;
             Maintenance.mode = "Add";
 
@@ -250,7 +250,7 @@ namespace Template
 
         protected void lbDepartmentSearch_Click(object sender, EventArgs e)
         {
-            Maintenance.content_code = VG.c_department;
+            Maintenance.content_code = VG.c_ministry_department;
             Maintenance.bank_user_security = false;
 
             ResetMaintenanceFilters();
@@ -260,7 +260,7 @@ namespace Template
 
         protected void lbDivisionAdd_Click(object sender, EventArgs e)
         {
-            Maintenance.content_code = VG.c_division;
+            Maintenance.content_code = VG.c_ministry;
             Maintenance.bank_user_security = false;
             Maintenance.mode = "Add";
 
@@ -271,7 +271,7 @@ namespace Template
 
         protected void lbDivisionSearch_Click(object sender, EventArgs e)
         {
-            Maintenance.content_code = VG.c_division;
+            Maintenance.content_code = VG.c_ministry;
             Maintenance.bank_user_security = false;
 
             ResetMaintenanceFilters();

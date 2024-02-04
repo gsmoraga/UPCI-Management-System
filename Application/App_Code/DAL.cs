@@ -497,7 +497,7 @@ public class DAL
 
                     cmd.Parameters.AddWithValue("@department_code", departmentCode);
                     cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@division_code", divisionCode);
+                    cmd.Parameters.AddWithValue("@ministry_code", divisionCode);
 
                     cmd.Connection = connection; cmd.CommandTimeout = 360;
                     cmd.ExecuteNonQuery();
@@ -532,7 +532,7 @@ public class DAL
 
                     cmd.Parameters.AddWithValue("@department_code", departmentCode);
                     cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@division_code", divisionCode);
+                    cmd.Parameters.AddWithValue("@ministry_code", divisionCode);
 
                     cmd.Connection = connection; cmd.CommandTimeout = 360;
                     cmd.ExecuteNonQuery();
@@ -586,7 +586,7 @@ public class DAL
     */
     public DataTable FilterDepartment(string code, string description, string division)
     {
-        string cacheKey = "Filter" + VG.c_department + "&" + code + "&" + description + "&" + division;
+        string cacheKey = "Filter" + VG.c_ministry_department + "&" + code + "&" + description + "&" + division;
         DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
 
         if (dt == null)
@@ -786,7 +786,7 @@ public class DAL
     */
     public DataTable FilterDivision(string code, string description)
     {
-        string cacheKey = "Filter" + VG.c_division + "&" + code + "&" + description;
+        string cacheKey = "Filter" + VG.c_ministry + "&" + code + "&" + description;
         DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
 
         if (dt == null)
@@ -2735,7 +2735,7 @@ public class DAL
 
     #region UPCI
 
-    #region Add
+    #region Member
     public Boolean AddMember(string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment, string dateFirstAttend
         , string cell, string baptismal, string pepsol, string membershipStatus, string createdBy)
     {
@@ -2776,10 +2776,48 @@ public class DAL
         }
         //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
     }
-    #endregion
 
-    #region Get
-    public DataTable GetMinistryDropdown()
+    public Boolean EditMember(string memberId, string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment, string dateFirstAttend
+        , string cell, string baptismal, string pepsol, string membershipStatus)
+    {
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spMemberEdit";
+
+                    cmd.Parameters.AddWithValue("@first_name", firstName);
+                    cmd.Parameters.AddWithValue("@middle_name", middleName);
+                    cmd.Parameters.AddWithValue("@last_name", lastName);
+                    cmd.Parameters.AddWithValue("@gender", gender);
+                    cmd.Parameters.AddWithValue("@birthday", birthdate);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@mobile_number", mobileNumber);
+                    cmd.Parameters.AddWithValue("@ministry", ministry);
+                    cmd.Parameters.AddWithValue("@ministry_department", ministryDepartment);
+                    cmd.Parameters.AddWithValue("@date_first_attend", dateFirstAttend);
+                    cmd.Parameters.AddWithValue("@cell", cell);
+                    cmd.Parameters.AddWithValue("@baptismal", baptismal);
+                    cmd.Parameters.AddWithValue("@pepsol", pepsol);
+                    cmd.Parameters.AddWithValue("@membership_status", membershipStatus);
+                    cmd.Parameters.AddWithValue("@member_id", memberId);
+
+                    cmd.Connection = connection; cmd.CommandTimeout = 360;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
+    }
+
+    public DataTable GetMemberDetails(string memberId)
     {
         DataTable dt = new DataTable();
 
@@ -2799,7 +2837,197 @@ public class DAL
 
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spGetMinistryDropdown";
+                        cmd.CommandText = "spMemberGet";
+
+                        cmd.Parameters.AddWithValue("@member_id", memberId);
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    public DataTable FilterMember(string name)
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spMemberFilter";
+
+                        cmd.Parameters.AddWithValue("@full_name", name);
+
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    #endregion
+
+    #region Maintenance
+
+    #region Ministry Department
+    public DataTable CheckDepartmentMinistry(string code)
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spDeptMinistryCheckExist";
+
+                        cmd.Parameters.AddWithValue("@code", code);
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    public Boolean AddMinistryDepartment(string code,string ministryCode,string description, string createdBy)
+    {
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spDeptMinistryAdd";
+
+                    cmd.Parameters.AddWithValue("@code", code);
+                    cmd.Parameters.AddWithValue("@ministry_code", ministryCode);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@created_by", createdBy);
+
+                    cmd.Connection = connection; cmd.CommandTimeout = 360;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
+    }
+
+    public DataTable FilterMinistryDepartment(string code,string description)
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spDeptMinsitryFilter";
+
+                        cmd.Parameters.AddWithValue("@code", code);
+                        cmd.Parameters.AddWithValue("@description", description);
+
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    public DataTable GetMinistryDepartmentDetails(string code)
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spDeptMinistryGet";
+
+                        cmd.Parameters.AddWithValue("@code", code);
 
                         adp.SelectCommand = cmd;
                         adp.Fill(dt);
@@ -2854,7 +3082,244 @@ public class DAL
         //}
         //else return dt;
     }
+    #endregion
 
+    #region Ministry
+    public Boolean AddMinistry(string code, string description, string createdBy)
+    {
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spMinistryAdd";
+
+                    cmd.Parameters.AddWithValue("@code", code);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@created_by", createdBy);
+
+                    cmd.Connection = connection; cmd.CommandTimeout = 360;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
+    }
+    public Boolean EditMinistry(string code, string description)
+    {
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spMinistryEdit";
+
+                    cmd.Parameters.AddWithValue("@code", code);
+                    cmd.Parameters.AddWithValue("@description", description);
+
+
+                    cmd.Connection = connection; cmd.CommandTimeout = 360;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
+    }
+
+    public Boolean DeleteMinistry(string code)
+    {
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spMinistryDelete";
+
+                    cmd.Parameters.AddWithValue("@code", code);
+
+
+                    cmd.Connection = connection; cmd.CommandTimeout = 360;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
+    }
+
+    public DataTable GetMinistryDetails(string code)
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spMinistryGet";
+
+                        cmd.Parameters.AddWithValue("@code", code);
+
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    public DataTable GetMinistryDropdown()
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spGetMinistryDropdown";
+
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    public DataTable CheckExistingMinistry(string code)
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spMinistryCheckExist";
+
+                        cmd.Parameters.AddWithValue("@code", code);
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    public DataTable FilterMinistry(string code, string description)
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spMinistryFilter";
+
+                        cmd.Parameters.AddWithValue("@code", code);
+                        cmd.Parameters.AddWithValue("@description", description);
+
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+    #endregion
+
+    #region PEPSOL
     public DataTable GetPepsolDropdown()
     {
         DataTable dt = new DataTable();
@@ -2877,46 +3342,8 @@ public class DAL
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandText = "spGetPepsolDropdown";
 
-                        
-
-                        adp.SelectCommand = cmd;
-                        adp.Fill(dt);
 
 
-
-                        return dt;
-                    }
-                }
-            }
-        }
-        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
-        //}
-        //else return dt;
-    }
-
-    public DataTable CheckExist(string memberId)
-    {
-        DataTable dt = new DataTable();
-
-        //if (dt == null)
-        //{
-        //    try
-        {
-            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    using (SqlDataAdapter adp = new SqlDataAdapter())
-                    {
-                        dt = new DataTable();
-
-                        cmd.Connection = connection; cmd.CommandTimeout = 360;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spCheckMember";
-
-                        cmd.Parameters.AddWithValue("@member_id", memberId);
                         adp.SelectCommand = cmd;
                         adp.Fill(dt);
 
@@ -2933,8 +3360,10 @@ public class DAL
     }
     #endregion
 
-    #region Filter
-    public DataTable FilterMember(string name)
+    #endregion
+
+    #region Counts
+    public DataTable WomensCount()
     {
         DataTable dt = new DataTable();
 
@@ -2954,9 +3383,118 @@ public class DAL
 
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spMemberFilter";
+                        cmd.CommandText = "spGetWomensCount";
 
-                        cmd.Parameters.AddWithValue("@full_name", name);
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    public DataTable MensCount()
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spGetMensCount";
+
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    public DataTable YouthCounts()
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spGetYouthCount";
+
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    public DataTable YoungAdult()
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spGetYoungAdultsCount";
 
                         adp.SelectCommand = cmd;
                         adp.Fill(dt);

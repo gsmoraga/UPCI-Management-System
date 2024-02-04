@@ -456,7 +456,7 @@ public class BLL
         {
             Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
             Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
-            Maintenance.division_code = Convert.ToString(dt.Rows[0]["division_code"]);
+            Maintenance.ministry_code = Convert.ToString(dt.Rows[0]["ministry_code"]);
 
             return true;
         }
@@ -1696,10 +1696,19 @@ public class BLL
     #region UPCI
 
     #region Member
-    public Boolean AddMember(string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber,string ministry, string ministryDepartment
-        ,string dateFirstAttend, string cell, string baptismal, string pepsol, string membershipStatus, string createdBy)
+    public Boolean AddMember(string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment
+        , string dateFirstAttend, string cell, string baptismal, string pepsol, string membershipStatus, string createdBy)
     {
-        if (_DAL.AddMember(firstName, middleName, lastName, gender, birthdate, email, mobileNumber,ministry,ministryDepartment,dateFirstAttend,cell,baptismal,pepsol, membershipStatus, createdBy) == false)
+        if (_DAL.AddMember(firstName, middleName, lastName, gender, birthdate, email, mobileNumber, ministry, ministryDepartment, dateFirstAttend, cell, baptismal, pepsol, membershipStatus, createdBy) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+    public Boolean EditMember(string memberId, string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment
+        , string dateFirstAttend, string cell, string baptismal, string pepsol, string membershipStatus)
+    {
+        if (_DAL.EditMember(memberId, firstName, middleName, lastName, gender, birthdate, email, mobileNumber, ministry, ministryDepartment, dateFirstAttend, cell, baptismal, pepsol, membershipStatus) == false)
         {
             return false;
         }
@@ -1715,7 +1724,7 @@ public class BLL
     * @param string userId - user ID of the current user
     * @return Boolean true if successful, false otherwise
     */
-    public Boolean FilterMembers(GridView pObj,string name)
+    public Boolean FilterMembers(GridView pObj, string name)
     {
         DataTable dt = _DAL.FilterMember(name);
 
@@ -1729,6 +1738,155 @@ public class BLL
         {
             pObj.DataSource = dt;
             pObj.DataBind();
+
+            return true;
+        }
+    }
+
+    public Boolean GetMemberDeatils(string value)
+    {
+        DataTable dt = _DAL.GetMemberDetails(value);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            return false;
+        }
+        else
+        {
+            Member.member_id = Convert.ToString(dt.Rows[0]["Member ID"]);
+            Member.first_name = Convert.ToString(dt.Rows[0]["first_name"]);
+            Member.middle_name = Convert.ToString(dt.Rows[0]["middle_name"]);
+            Member.last_name = Convert.ToString(dt.Rows[0]["last_name"]);
+            Member.email = Convert.ToString(dt.Rows[0]["Email"]);
+            Member.gender = Convert.ToString(dt.Rows[0]["gender_desc"]);
+            Member.birthday = Convert.ToString(dt.Rows[0]["Birthday"]);
+            Member.mobile_number = Convert.ToString(dt.Rows[0]["Mobile Number"]);
+
+            Member.ministry = Convert.ToString(dt.Rows[0]["ministry_desc"]);
+            Member.ministry_department = Convert.ToString(dt.Rows[0]["ministry_dept"]);
+            Member.cell_status = Convert.ToString(dt.Rows[0]["cell_desc"]);
+            Member.baptismal_status = Convert.ToString(dt.Rows[0]["baptismal_desc"]);
+            Member.pepsol_level = Convert.ToString(dt.Rows[0]["pepsol_desc"]);
+            Member.membership_status = Convert.ToString(dt.Rows[0]["status_desc"]);
+
+            Member.gender_code = Convert.ToString(dt.Rows[0]["gender"]);
+            Member.ministry_code = Convert.ToString(dt.Rows[0]["ministry"]);
+            Member.ministry_dept_code = Convert.ToString(dt.Rows[0]["ministry_department"]);
+            Member.cell_status_code = Convert.ToString(dt.Rows[0]["cell"]);
+            Member.baptismal_status_code = Convert.ToString(dt.Rows[0]["baptismal"]);
+            Member.pepsol_level_code = Convert.ToString(dt.Rows[0]["pepsol"]);
+            Member.membership_status_code = Convert.ToString(dt.Rows[0]["membership_status"]);
+            return true;
+        }
+    }
+    #endregion
+
+    #region Ministry Department
+    public Boolean AddMinistryDepartment(string code, string ministryCode, string description, string createdBy)
+    {
+        if (_DAL.AddMinistryDepartment(code, ministryCode, description, createdBy) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+    public Boolean FilterMinistryDepartment(GridView pObj, string code, string description)
+    {
+        DataTable dt = _DAL.FilterMinistryDepartment(code, description);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            pObj.DataSource = null;
+            pObj.DataBind();
+            return false;
+        }
+        else
+        {
+            pObj.DataSource = dt;
+            pObj.DataBind();
+
+            return true;
+        }
+    }
+
+    public Boolean GetMinistryDepartmentDetails(string value)
+    {
+        DataTable dt = _DAL.GetMinistryDepartmentDetails(value);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            return false;
+        }
+        else
+        {
+            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
+            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
+            Maintenance.ministry_description = Convert.ToString(dt.Rows[0]["ministry_desc"]);
+            Maintenance.ministry_code = Convert.ToString(dt.Rows[0]["ministry_code"]);
+
+            return true;
+        }
+    }
+
+    #endregion
+
+    #region Ministry
+    public Boolean DeleteMinistry(string code)
+    {
+        if (_DAL.DeleteMinistry(code) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+    public Boolean EditMinistry(string code, string description)
+    {
+        if (_DAL.EditMinistry(code, description) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+    public Boolean AddMinistry(string code, string description, string createdBy)
+    {
+        if (_DAL.AddMinistry(code, description, createdBy) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    public Boolean FilterMinistry(GridView pObj, string code, string description)
+    {
+        DataTable dt = _DAL.FilterMinistry(code, description);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            pObj.DataSource = null;
+            pObj.DataBind();
+            return false;
+        }
+        else
+        {
+            pObj.DataSource = dt;
+            pObj.DataBind();
+
+            return true;
+        }
+    }
+
+    public Boolean GetMinistryDetails(string value)
+    {
+        DataTable dt = _DAL.GetMinistryDetails(value);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            return false;
+        }
+        else
+        {
+            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
+            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
 
             return true;
         }
@@ -1790,6 +1948,7 @@ public class BLL
         }
     }
     #endregion
+
     #endregion
 
 }
