@@ -81,7 +81,7 @@ namespace Template
 
                 if (accessRights.Contains(VG.ar_user_group) ||
                     accessRights.Contains(VG.ar_user) ||
-                    accessRights.Contains(VG.ar_branch))
+                    accessRights.Contains(VG.ar_pepsol))
                 {
                     menuUserManagement.Visible = true;
 
@@ -122,6 +122,7 @@ namespace Template
 
                 if (accessRights.Contains(VG.ar_ministry_department))
                 {
+                    menuMinistryDepartment.Visible = true;
                     if (accessRights.Contains("&m3d,") || accessRights.Contains("&m3e,"))
                         lbMinistryDepartmentSearch.Visible = true;
                 }
@@ -139,6 +140,14 @@ namespace Template
 
                     if (accessRights.Contains("&a9s,") || accessRights.Contains("&a9e,"))
                         lbMemberList.Visible = true;
+                }
+
+                if (accessRights.Contains(VG.ar_pepsol))
+                {
+                    menuPepsol.Visible = true;
+
+                    if (accessRights.Contains("&m7s,") || accessRights.Contains("&m7e,") || accessRights.Contains("&m7d,"))
+                        lbPepsolMaintenance.Visible = true;
                 }
             }
         }
@@ -222,12 +231,23 @@ namespace Template
             Response.Redirect("dept-ministry-search.aspx", false);
         }
         #endregion
+
+        #region Pepsol
+        protected void lbPepsolMaintenance_Click(object sender, EventArgs e)
+        {
+            Maintenance.content_code = VG.c_ministry_department;
+
+            ResetMaintenanceFilters();
+            Response.Redirect("pepsol-search.aspx", false);
+        }
+        #endregion
         public void ResetMaintenanceFilters()
         {
             Maintenance.code_filter = "";
             Maintenance.description_filter = "";
             Maintenance.page_index = 0; ;
         }
+
 
     }
 }

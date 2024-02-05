@@ -8,10 +8,10 @@ using System.Web.UI.WebControls;
 
 namespace Template
 {
-    public partial class dept_ministry_view : System.Web.UI.Page
+    public partial class dept_ministry_edit : System.Web.UI.Page
     {
-        DAL _DAL = new DAL();
         private BLL _BLL = new BLL();
+        private DAL _DAL = new DAL();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
@@ -36,10 +36,17 @@ namespace Template
                         }
                         else
                         {
-                            LoadMinistryDepartmentDetails(Maintenance.entry_code);
+                            if (_BLL.GetContentType(Maintenance.content_code) == false)
+                            { }
+                            else
+                            {
+                                LoadMinistryDepartmentDetails(Maintenance.entry_code);
+                                _BLL.GetMinistryDropdown(ddMinistry, "--Select--");
+                            }
                         }
                     }
                 }
+
             }
         }
 
@@ -50,8 +57,8 @@ namespace Template
             else
             {
                 lblCode.Text = Maintenance.code;
-                lblDescription.Text = Maintenance.description;
-                lblMinistry.Text = Maintenance.ministry_description;
+                txtDescription.Text = Maintenance.description;
+                ddMinistry.SelectedValue = Maintenance.ministry_description;
             }
         }
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -61,5 +68,32 @@ namespace Template
                 Response.Redirect("dept-ministry-search.aspx", false);
             }
         }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            if (_BLL.SessionIsActive(this))
+            {
+                Boolean result = false;
+                result = _BLL.EditMinistryDepartment(Maintenance.entry_code, txtDescription.Text.Trim(),ddMinistry.SelectedValue);
+
+                if (result == false)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to update the entry.', 'error');", true);
+                }
+                else
+                {
+                    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, Maintenance.mode, "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString()) == false)
+                    { }
+                    else
+                    {
+
+                        string transactionReferenceNumber = "UPCI-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmm") + "-" + DateTime.Now.ToString("ssff");
+                        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Entry has been updated.','" + transactionReferenceNumber + "');", true);
+                    }
+
+                }
+            }
+        }
+
     }
 }

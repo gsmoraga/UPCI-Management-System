@@ -49,16 +49,21 @@ namespace Template
                             { }
                             else
                             {
-                                if (accessRights.Contains("&a9s,") || accessRights.Contains("&a9a,"))
+                                if (accessRights.Contains("&a9s,"))
                                 {
                                     divSearch.Visible = true;
                                     lbSearch.Visible = true;
                                     divExport.Visible = true;
                                 }
+
+                                if (accessRights.Contains("&a9a,"))
+                                {
+                                    lbAdd.Visible = true;
+                                }
                             }
                         }
 
-
+                        gvMaintenance.PagerSettings.Visible = false; //hide Gridview Pager 
                         LoadMaintenanceData("");
 
                         _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "", Request.UserHostAddress.ToString());
@@ -78,13 +83,16 @@ namespace Template
             {
                 //gvCheckBox.Visible = false;
                 //lbDeleteSelected.Visible = false;
+                divPager.Visible = true;
                 divExport.Visible = false;
             }
             else
             {
                 //gvCheckBox.Visible = true;
                 //lbDeleteSelected.Visible = true;
+                divPager.Visible = true;
                 divExport.Visible = true;
+                PopulatePager(gvMaintenance.PageCount);
             }
         }
 
@@ -107,7 +115,7 @@ namespace Template
         }
         #endregion
 
-
+        #region Action Buttons
         protected void lbView_Click(object sender, EventArgs e)
         {
             if (_BLL.SessionIsActive(this))
@@ -133,7 +141,16 @@ namespace Template
                 Response.Redirect("member-edit.aspx", false);
             }
         }
+        protected void lbAdd_Click(object sender, EventArgs e)
+        {
+            if (_BLL.SessionIsActive(this))
+            {
+                Response.Redirect("member-add.aspx", false);
+            }
+        }
+        #endregion
 
+        #region GridView
         /**
         * Disables text-wrapping and hides the code column.
         * Displays or hides action buttons depending on the user access rights.
@@ -159,55 +176,38 @@ namespace Template
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                if (accessRights.Contains("&a9e,"))
+                if (accessRights.Contains("&m" + Maintenance.content_code + "e,"))
                 {
                     LinkButton lb = (LinkButton)e.Row.FindControl("lbEdit");
                     lb.Visible = true;
                 }
-
+                //if (accessRights.Contains("&m" + Maintenance.content_code + "d,"))
+                //{
+                //    LinkButton lb = (LinkButton)e.Row.FindControl("lbDelete");
+                //    lb.Visible = true;
+                //}
 
                 System.Data.DataView dv = (e.Row.DataItem as System.Data.DataRowView).DataView;
                 ViewState["Sorting"] = dv.ToTable();
 
-                if (!Maintenance.bank_user_security && accessRights.Contains("&m" + Maintenance.content_code + "d,"))
-                {
-                    int numRows = 0;
-                    if (gvMaintenance.Rows.Count > 9)
-                        numRows = 10;
-                    else
-                        numRows = gvMaintenance.Rows.Count;
+                //if (!Maintenance.bank_user_security && accessRights.Contains("&m" + Maintenance.content_code + "d,"))
+                //{
+                //    int numRows = 0;
+                //    if (gvMaintenance.Rows.Count > 9)
+                //        numRows = 10;
+                //    else
+                //        numRows = gvMaintenance.Rows.Count;
 
-                    List<int> rows = new List<int>();
+                //    List<int> rows = new List<int>();
 
-                    for (int i = 0; i <= numRows; i++)
-                    {
-                        rows.Add(i);
-                    }
-                    //gvCheckBox.DataSource = rows;
-                    //gvCheckBox.DataBind();
-                }
+                //    for (int i = 0; i <= numRows; i++)
+                //    {
+                //        rows.Add(i);
+                //    }
+                //    //gvCheckBox.DataSource = rows;
+                //    //gvCheckBox.DataBind();
+                //}
             }
-        }
-
-        /**
-        * Moves the Action column of the GridView when the rows are created
-        * 
-        * @since version 1.0 
-        * @param object sender - reference to the object that raised the event
-        * @param GridViewRowEventArgs e - contains the event data
-        */
-        protected void gvMaintenance_OnRowCreated(object sender, GridViewRowEventArgs e)
-        {
-            GridViewRow row = e.Row;
-            List<TableCell> columns = new List<TableCell>();
-            foreach (DataControlField column in gvMaintenance.Columns)
-            {
-                TableCell cell = row.Cells[0];
-                row.Cells.Remove(cell);
-                columns.Add(cell);
-            }
-
-            row.Cells.AddRange(columns.ToArray());
         }
 
         /**
@@ -221,20 +221,139 @@ namespace Template
         {
             Maintenance.page_index = e.NewPageIndex;
             gvMaintenance.PageIndex = e.NewPageIndex;
-            gvMaintenance.DataSource = DTSorting;
-            gvMaintenance.DataBind();
+            BindGridView();
+        }
 
-            if (ViewState["z_sortexpresion"] != null)
+        #region Custom Pager
+
+
+        private void PopulatePager(int pageCount)
+        {
+            //lblTotalRowCount.Text = Convert.ToString(DTSorting.Rows.Count);
+            lblTotalPageCount.Text = Convert.ToString(pageCount);
+
+            ddPageNumber.Items.Clear();
+            for (int i = 1; i <= pageCount; i++)
             {
-                SortGridView(gvMaintenance, Convert.ToString(ViewState["z_sortexpresion"]), Convert.ToString(ViewState["CurrentSortDirection"]));
+
+                ddPageNumber.Items.Add(new System.Web.UI.WebControls.ListItem(Convert.ToString(i), Convert.ToString(i - 1)));
+
+            }
+            if (pageCount > Maintenance.page_index)
+            {
+
+                ddPageNumber.SelectedValue = Convert.ToString(Maintenance.page_index);
+            }
+            else
+            {
+                ddPageNumber.SelectedIndex = -1;
+
             }
         }
 
-        protected void lbAdd_Click(object sender, EventArgs e)
+        /**
+        * 
+        * 
+        * @since version 1.0 
+        * @param object sender - reference to the object that raised the event
+        * @param EventArgs e - contains the event data
+        */
+        protected void ddPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_BLL.SessionIsActive(this))
+            //gvMaintenance.PageSize = Convert.ToInt16(ddPageSize.SelectedValue);
+            //BindGridView();
+            //PopulatePager(gvMaintenance.PageCount);
+        }
+
+        /**
+        * 
+        * 
+        * @since version 1.0 
+        * @param object sender - reference to the object that raised the event
+        * @param EventArgs e - contains the event data
+        */
+        protected void ddPageNumber_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvMaintenance.PageIndex = Convert.ToInt16(ddPageNumber.SelectedValue);
+            Maintenance.page_index = Convert.ToInt16(ddPageNumber.SelectedValue);
+            BindGridView();
+        }
+
+        /**
+        * @since version 1.0 
+        * @param object sender - reference to the object that raised the event
+        * @param EventArgs e - contains the event data
+        */
+        protected void lbFirstPage_Click(object sender, EventArgs e)
+        {
+            if (gvMaintenance.PageIndex > 0)
             {
-                Response.Redirect("member-add.aspx", false);
+                gvMaintenance.PageIndex = Convert.ToInt16(ddPageNumber.Items[0].Value);
+                Maintenance.page_index = Convert.ToInt16(ddPageNumber.Items[0].Value);
+                BindGridView();
+                ddPageNumber.SelectedValue = Convert.ToString(Maintenance.page_index);
+            }
+        }
+
+        /**
+        * @since version 1.0 
+        * @param object sender - reference to the object that raised the event
+        * @param EventArgs e - contains the event data
+        */
+        protected void lbPreviousPage_Click(object sender, EventArgs e)
+        {
+            if (gvMaintenance.PageIndex > 0)
+            {
+                Maintenance.page_index -= 1;
+                gvMaintenance.PageIndex -= 1;
+                BindGridView();
+                ddPageNumber.SelectedValue = Convert.ToString(Maintenance.page_index);
+            }
+        }
+
+        /**
+        * @since version 1.0 
+        * @param object sender - reference to the object that raised the event
+        * @param EventArgs e - contains the event data
+        */
+        protected void lbNextPage_Click(object sender, EventArgs e)
+        {
+            if (gvMaintenance.PageIndex < gvMaintenance.PageCount - 1)
+            {
+                Maintenance.page_index += 1;
+                gvMaintenance.PageIndex += 1;
+                BindGridView();
+                ddPageNumber.SelectedValue = Convert.ToString(Maintenance.page_index);
+            }
+        }
+
+        /**
+        * @since version 1.0 
+        * @param object sender - reference to the object that raised the event
+        * @param EventArgs e - contains the event data
+        */
+        protected void lbLastPage_Click(object sender, EventArgs e)
+        {
+            if (gvMaintenance.PageIndex < gvMaintenance.PageCount)
+            {
+                Maintenance.page_index = gvMaintenance.PageCount - 1;
+                gvMaintenance.PageIndex = gvMaintenance.PageCount - 1;
+                BindGridView();
+                ddPageNumber.SelectedValue = Convert.ToString(Maintenance.page_index);
+            }
+        }
+
+        #endregion
+
+
+        protected void BindGridView()
+        {
+            gvMaintenance.DataSource = DTSorting;
+            gvMaintenance.DataBind();
+
+            if (ViewState["z_sortexpression"] != null)
+            {
+                SortGridView(gvMaintenance, Convert.ToString(ViewState["z_sortexpression"]), Convert.ToString(ViewState["CurrentSortDirection"]));
             }
         }
 
@@ -274,7 +393,7 @@ namespace Template
                     Response.ContentEncoding = System.Text.Encoding.UTF8;
                     Response.Cache.SetCacheability(HttpCacheability.NoCache);
                     Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                    Response.AddHeader("content-disposition", "attachment;filename=\"UPCI-" + Maintenance.content_description + " " + DateTime.Now.ToString("yyyyMMdd") + ".xlsx\"");
+                    Response.AddHeader("content-disposition", "attachment;filename=\"" + VG.application_name + "-" + Maintenance.content_description + " - " + DateTime.Now.ToString("yyyyMMdd") + ".xlsx\"");
 
                     using (ExcelPackage pck = new ExcelPackage())
                     {
@@ -345,14 +464,14 @@ namespace Template
                             pdfDoc.Open();
                             Paragraph para = new Paragraph(Maintenance.report_header, new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 16));
                             para.Alignment = Element.ALIGN_CENTER;
-                            
+
                             Paragraph space = new Paragraph("\n");
                             pdfDoc.Add(para);
                             pdfDoc.Add(space);
                             XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                             pdfDoc.Close();
                             Response.ContentType = "application/pdf";
-                            Response.AddHeader("content-disposition", "attachment;filename=\"UPCI-" + Maintenance.content_description + " " + DateTime.Now.ToString("yyyyMMdd") + ".pdf\"");
+                            Response.AddHeader("content-disposition", "attachment;filename=\"" + VG.application_name + "-" + Maintenance.content_description + "-" + DateTime.Now.ToString("yyyyMMdd") + ".pdf\"");
                             Response.Cache.SetCacheability(HttpCacheability.NoCache);
                             Response.Write(pdfDoc);
                             Response.End();
@@ -377,6 +496,7 @@ namespace Template
             /* Confirms that an HtmlForm control is rendered for the specified ASP.NET
                server control at run time. */
         }
+
 
         /**
         * Called when the column headers are clicked and sorts te GridView accordingly
@@ -461,9 +581,28 @@ namespace Template
             }
         }
 
-        protected void lbDelete_Click(object sender, EventArgs e)
+        /**
+        * Moves the Action column of the GridView when the rows are created
+        * 
+        * @since version 1.0 
+        * @param object sender - reference to the object that raised the event
+        * @param GridViewRowEventArgs e - contains the event data
+        */
+        protected void gvMaintenance_OnRowCreated(object sender, GridViewRowEventArgs e)
         {
+            GridViewRow row = e.Row;
+            List<TableCell> columns = new List<TableCell>();
+            foreach (DataControlField column in gvMaintenance.Columns)
+            {
+                TableCell cell = row.Cells[0];
+                row.Cells.Remove(cell);
+                columns.Add(cell);
+            }
 
+            row.Cells.AddRange(columns.ToArray());
         }
+
+        #endregion
+
     }
 }

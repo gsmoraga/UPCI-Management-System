@@ -141,6 +141,15 @@ namespace Template
         protected global::System.Web.UI.WebControls.LinkButton lbMinistrySearch;
 
         /// <summary>
+        /// menuMinistryDepartment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuMinistryDepartment;
+
+        /// <summary>
         /// lbMinistryDepartmentSearch control.
         /// </summary>
         /// <remarks>
@@ -148,6 +157,24 @@ namespace Template
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbMinistryDepartmentSearch;
+
+        /// <summary>
+        /// menuPepsol control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuPepsol;
+
+        /// <summary>
+        /// lbPepsolMaintenance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbPepsolMaintenance;
 
         /// <summary>
         /// menuUserManagement control.

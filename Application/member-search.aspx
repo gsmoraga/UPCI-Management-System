@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="col-sm-12 col-md-6" id="divSearch" runat="server" visible="false">
                                             <div class="dataTables_filter">
-                                                <asp:LinkButton ID="lbAdd" runat="server" CssClass="btn btn-sm btn-primary" OnClick="lbAdd_Click"><i class="fa fa-plus-circle mr-2"></i>Add Member</asp:LinkButton>
+                                                <asp:LinkButton ID="lbAdd" runat="server" CssClass="btn btn-sm btn-primary" OnClick="lbAdd_Click"><i class="fa fa-plus-circle mr-2"></i>Add</asp:LinkButton>
                                                 <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control form-control-sm" placeholder="Search Name" autocomplete="off"></asp:TextBox>
                                                 <asp:LinkButton ID="lbSearch" runat="server" CssClass="btn btn-sm" OnClick="lbSearch_Click" ToolTip="Search"><i class="fa fa-search"></i></asp:LinkButton>
                                                 <asp:LinkButton ID="lbRefresh" runat="server" CssClass="btn btn-sm" OnClick="lbRefresh_Click" ToolTip="Refresh"><i class="bi bi-arrow-repeat text-dark"></i></asp:LinkButton>
@@ -89,19 +89,35 @@
                                                 </Columns>
                                             </asp:GridView>
                                             <!-- Gridview -->
+                                            <div id="divPager" runat="server" class="form-inline mb-3" visible="false">
+                                                <asp:LinkButton ID="lbFirstPage" runat="server" ToolTip="First" OnClick="lbFirstPage_Click" Visible="false"><i class="fas fa-angle-double-left text-dark" style="text-decoration:none"></i></asp:LinkButton>
+                                                
+                                                &nbsp; Page&nbsp;
+                                                <asp:DropDownList ID="ddPageNumber" runat="server" CssClass="custom-select" OnSelectedIndexChanged="ddPageNumber_SelectedIndexChanged"
+                                                    AutoPostBack="true">
+                                                </asp:DropDownList>
+                                                &nbsp; of&nbsp;
+                                                <asp:Label ID="lblTotalPageCount" runat="server" />
+                                                &nbsp;&nbsp;&nbsp;
+                                                <asp:LinkButton ID="lbPreviousPage" runat="server" ToolTip="Previous" OnClick="lbPreviousPage_Click"><i class="fas fa-angle-left text-dark" style="text-decoration:none"></i></asp:LinkButton>
+                                                &emsp;
+                                                <asp:LinkButton ID="lbNextPage" runat="server" ToolTip="Next" OnClick="lbNextPage_Click"><i class="fas fa-angle-right  text-dark" style="text-decoration:none"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="lbLastPage" runat="server" ToolTip="Last" OnClick="lbLastPage_Click" Visible="false"><i class="fas fa-angle-double-right text-dark" style="text-decoration:none"></i></asp:LinkButton>
+                                                &emsp;
+                                            </div>
                                         </div>
                                     </div>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-5">
-                                <div class="dataTables_info">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-12 col-md-7">
-                                <div class="dataTables_paginate paging_simple_numbers">
-                                </div>
-                            </div>
-                        </div>
-                        </div>
                                 </asp:Panel>
 
 

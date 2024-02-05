@@ -16,7 +16,7 @@ using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace Template
 {
-    public partial class minsitry_dept_search : System.Web.UI.Page
+    public partial class pepsol_search : System.Web.UI.Page
     {
         DAL _DAL = new DAL();
         private BLL _BLL = new BLL();
@@ -69,16 +69,13 @@ namespace Template
                     }
                 }
             }
-
-
-
         }
 
         #region Search
         protected void LoadMaintenanceData(string code, string description)
         {
             Boolean result = false;
-            result = _BLL.FilterMinistryDepartment(gvMaintenance, code, description);
+            result = _BLL.FilterPepsol(gvMaintenance, code, description);
 
             if (result == false)
             {
@@ -92,7 +89,7 @@ namespace Template
                 PopulatePager(gvMaintenance.PageCount);
             }
 
-            
+
         }
 
         protected void lbSearch_Click(object sender, EventArgs e)
@@ -631,6 +628,5 @@ namespace Template
         }
 
         #endregion
-
     }
 }

@@ -26,6 +26,14 @@ namespace Template
                 {
                     if (_BLL.SessionIsActive(this))
                     {
+                        #region Validation
+                        revCode.ValidationExpression = Validation.RegexAlphanumeric;
+                        revCode.ErrorMessage = Validation.ErrorMessageAlphanumeric;
+
+                        revDescription.ValidationExpression = Validation.RegexAlphabeticWithSpace;
+                        revDescription.ErrorMessage = Validation.ErrorMessageAlphabeticWithSpace;
+                        #endregion
+
                         string accessRights = Employee.access_rights;
                         Regex r = new Regex("&m[0-9]", RegexOptions.IgnoreCase);
 

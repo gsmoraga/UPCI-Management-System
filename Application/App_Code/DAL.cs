@@ -348,7 +348,7 @@ public class DAL
     */
     public DataTable FilterBranch(string code, string description)
     {
-        string cacheKey = "Filter" + VG.c_branch + "&" + code + "&" + description;
+        string cacheKey = "Filter" + VG.c_pepsol + "&" + code + "&" + description;
         DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
 
         if (dt == null)
@@ -2965,6 +2965,57 @@ public class DAL
         //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
     }
 
+    public Boolean EditMinistryDepartment(string code, string description, string ministryCode)
+    {
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spDeptMinistryEdit";
+
+                    cmd.Parameters.AddWithValue("@code", code);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@ministry_code", ministryCode);
+
+                    cmd.Connection = connection; cmd.CommandTimeout = 360;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
+    }
+
+    public Boolean DeleteMinistryDepartment(string code)
+    {
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spDeptMinistryDelete";
+
+                    cmd.Parameters.AddWithValue("@code", code);
+
+                    cmd.Connection = connection; cmd.CommandTimeout = 360;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
+    }
     public DataTable FilterMinistryDepartment(string code,string description)
     {
         DataTable dt = new DataTable();
@@ -3320,6 +3371,202 @@ public class DAL
     #endregion
 
     #region PEPSOL
+    public Boolean AddPepsol(string code, string description, string createdBy)
+    {
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spMinistryAdd";
+
+                    cmd.Parameters.AddWithValue("@code", code);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@created_by", createdBy);
+
+                    cmd.Connection = connection; cmd.CommandTimeout = 360;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
+    }
+    public Boolean EditPepsol(string code, string description)
+    {
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spMinistryEdit";
+
+                    cmd.Parameters.AddWithValue("@code", code);
+                    cmd.Parameters.AddWithValue("@description", description);
+
+
+                    cmd.Connection = connection; cmd.CommandTimeout = 360;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
+    }
+
+    public Boolean DeletePepsol(string code)
+    {
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spMinistryDelete";
+
+                    cmd.Parameters.AddWithValue("@code", code);
+
+
+                    cmd.Connection = connection; cmd.CommandTimeout = 360;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
+    }
+
+    public DataTable GetPepsolDetails(string code)
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spMinistryGet";
+
+                        cmd.Parameters.AddWithValue("@code", code);
+
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    public DataTable CheckExistingPepsol(string code)
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spMinistryCheckExist";
+
+                        cmd.Parameters.AddWithValue("@code", code);
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
+    public DataTable FilterPepsol(string code, string description)
+    {
+        DataTable dt = new DataTable();
+
+        //if (dt == null)
+        //{
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        dt = new DataTable();
+
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spPepsolFilter";
+
+                        cmd.Parameters.AddWithValue("@code", code);
+                        cmd.Parameters.AddWithValue("@description", description);
+
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        //}
+        //else return dt;
+    }
+
     public DataTable GetPepsolDropdown()
     {
         DataTable dt = new DataTable();

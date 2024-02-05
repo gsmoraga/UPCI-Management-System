@@ -1790,6 +1790,24 @@ public class BLL
         }
         else return true;
     }
+
+    public Boolean EditMinistryDepartment(string code, string description, string ministryCode)
+    {
+        if (_DAL.EditMinistryDepartment(code, description, ministryCode) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    public Boolean DeleteMinistryDepartment(string code)
+    {
+        if (_DAL.DeleteMinistryDepartment(code) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
     public Boolean FilterMinistryDepartment(GridView pObj, string code, string description)
     {
         DataTable dt = _DAL.FilterMinistryDepartment(code, description);
@@ -1891,6 +1909,71 @@ public class BLL
             return true;
         }
     }
+    #endregion
+
+    #region Pepsol
+    public Boolean AddPepsol(string code, string ministryCode, string description, string createdBy)
+    {
+        if (_DAL.AddMinistryDepartment(code, ministryCode, description, createdBy) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    public Boolean EditPepsol(string code, string description, string ministryCode)
+    {
+        if (_DAL.EditMinistryDepartment(code, description, ministryCode) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    public Boolean DeletePepsol(string code)
+    {
+        if (_DAL.DeleteMinistryDepartment(code) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+    public Boolean FilterPepsol(GridView pObj, string code, string description)
+    {
+        DataTable dt = _DAL.FilterPepsol(code, description);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            pObj.DataSource = null;
+            pObj.DataBind();
+            return false;
+        }
+        else
+        {
+            pObj.DataSource = dt;
+            pObj.DataBind();
+
+            return true;
+        }
+    }
+
+    public Boolean GetPepsolDetails(string value)
+    {
+        DataTable dt = _DAL.GetMinistryDepartmentDetails(value);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            return false;
+        }
+        else
+        {
+            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
+            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
+
+            return true;
+        }
+    }
+
     #endregion
 
     #region Dropdowns

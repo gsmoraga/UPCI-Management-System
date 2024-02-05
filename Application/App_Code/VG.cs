@@ -71,10 +71,10 @@
         set { c_active_session = value; }
     }
 
-    public static string c_branch
+    public static string c_pepsol
     {
         get { return "7"; }
-        set { c_branch = value; }
+        set { c_pepsol = value; }
     }
 
     public static string c_ministry
@@ -175,10 +175,10 @@
         set { ar_bank_user_security_session = value; }
     }
 
-    public static string ar_branch
+    public static string ar_pepsol
     {
         get { return "&m7,"; }
-        set { ar_branch = value; }
+        set { ar_pepsol = value; }
     }
 
     public static string ar_ministry

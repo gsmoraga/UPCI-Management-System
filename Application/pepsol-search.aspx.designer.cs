@@ -11,7 +11,7 @@ namespace Template
 {
 
 
-    public partial class ministry_search
+    public partial class pepsol_search
     {
 
         /// <summary>

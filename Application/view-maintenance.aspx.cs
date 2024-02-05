@@ -157,7 +157,7 @@ namespace Template
             {
                 result = _BLL.FilterActiveSession(gvMaintenance, code, description);
             }
-            else if (contentCode == VG.c_branch)
+            else if (contentCode == VG.c_pepsol)
             {
                 result = _BLL.FilterBranch(gvMaintenance, code, description);
             }
@@ -421,7 +421,7 @@ namespace Template
                 {
                     _BLL.DeleteActiveSessionBySessionId(code);
                 }
-                else if (Maintenance.content_code == VG.c_branch)
+                else if (Maintenance.content_code == VG.c_pepsol)
                 {
                     result = _BLL.DeleteBranch(code);
                 }
@@ -900,7 +900,7 @@ namespace Template
                                 {
                                     _BLL.DeleteActiveSessionByUserId(gvMaintenance.Rows[i].Cells[0].Text);
                                 }
-                                else if (Maintenance.content_code == VG.c_branch)
+                                else if (Maintenance.content_code == VG.c_pepsol)
                                 {
                                     _BLL.DeleteBranch(gvMaintenance.Rows[i].Cells[0].Text);
                                 }

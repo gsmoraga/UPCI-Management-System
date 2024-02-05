@@ -140,7 +140,7 @@ namespace Template
                 if (accessRights.Contains(VG.ar_ministry_department) ||
                     accessRights.Contains(VG.ar_user_group) ||
                     accessRights.Contains(VG.ar_user) ||
-                    accessRights.Contains(VG.ar_branch) ||
+                    accessRights.Contains(VG.ar_pepsol) ||
                     accessRights.Contains(VG.ar_ministry))
                 {
                     menuUserManagement.Visible = true;
@@ -175,7 +175,7 @@ namespace Template
                             lbUserSearch.Visible = true;
                     }
 
-                    if (accessRights.Contains(VG.ar_branch))
+                    if (accessRights.Contains(VG.ar_pepsol))
                     {
                         menuBranch.Visible = true;
 
@@ -279,7 +279,7 @@ namespace Template
         #region Branch
         protected void lbBranchAdd_Click(object sender, EventArgs e)
         {
-            Maintenance.content_code = VG.c_branch;
+            Maintenance.content_code = VG.c_pepsol;
             Maintenance.bank_user_security = false;
             Maintenance.mode = "Add";
 
@@ -289,7 +289,7 @@ namespace Template
         }
         protected void lbBranchSearch_Click(object sender, EventArgs e)
         {
-            Maintenance.content_code = VG.c_branch;
+            Maintenance.content_code = VG.c_pepsol;
             Maintenance.bank_user_security = false;
 
             ResetMaintenanceFilters();

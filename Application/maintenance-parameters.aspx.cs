@@ -128,7 +128,7 @@ namespace Template
                                             _BLL.GetDivisionDropDown(ddCode, "--Select--");
                                             rowCode2.Visible = true;
                                         }
-                                        else if (Maintenance.content_code == VG.c_branch)
+                                        else if (Maintenance.content_code == VG.c_pepsol)
                                         {
                                             _BLL.GetRegionDropdown(ddRegion, "--Select--");
                                             rowEmail.Visible = true;
@@ -272,7 +272,7 @@ namespace Template
 
                                                 if (ddBranch.Items.FindByValue(Maintenance.branch) == null)
                                                 {
-                                                    _BLL.AppendDeletedItem(ddBranch, VG.c_branch, Maintenance.branch);
+                                                    _BLL.AppendDeletedItem(ddBranch, VG.c_pepsol, Maintenance.branch);
                                                 }
 
                                                 if (ddDepartment.Items.FindByValue(Maintenance.department) == null)
@@ -366,7 +366,7 @@ namespace Template
                                                 lblDdCode.Visible = true;
                                             }
                                         }
-                                        else if (Maintenance.content_code == VG.c_branch)
+                                        else if (Maintenance.content_code == VG.c_pepsol)
                                         {
                                             if (_BLL.GetBranch(Maintenance.entry_code) == false)
                                             {
@@ -446,7 +446,7 @@ namespace Template
 
                                                 if (ddBranch.Items.FindByValue(Maintenance.branch) == null)
                                                 {
-                                                    _BLL.AppendDeletedItem(ddBranch, VG.c_branch, Maintenance.branch);
+                                                    _BLL.AppendDeletedItem(ddBranch, VG.c_pepsol, Maintenance.branch);
                                                 }
 
                                                 if (ddDepartment.Items.FindByValue(Maintenance.department) == null)
@@ -548,7 +548,7 @@ namespace Template
                         result = _BLL.EditDepartment(Maintenance.entry_code, txtDescription.Text, ddCode.SelectedValue);
                         cacheKey = "GetDepartment" + Maintenance.entry_code;
                     }
-                    else if (Maintenance.content_code == VG.c_branch)
+                    else if (Maintenance.content_code == VG.c_pepsol)
                     {
                         //8/16/2023 Additional Parameter for Region
                         result = _BLL.EditBranch(Maintenance.entry_code, txtDescription.Text, txtCodeDescEmail.Text, ddRegion.SelectedValue);
@@ -596,7 +596,7 @@ namespace Template
                             result = _BLL.AddDepartment(txtCode.Text, txtDescription.Text, ddCode.SelectedValue);
                             cacheKey = "GetDepartment" + txtCode.Text;
                         }
-                        else if (Maintenance.content_code == VG.c_branch)
+                        else if (Maintenance.content_code == VG.c_pepsol)
                         {
                             result = _BLL.AddBranch(txtCode.Text, txtDescription.Text,ddRegion.SelectedValue,txtCodeDescEmail.Text);
                             cacheKey = "GetBranch" + txtCode.Text;
@@ -1066,7 +1066,7 @@ namespace Template
             {
                 return _BLL.GetUser(code);
             }
-            else if (Maintenance.content_code == VG.c_branch)
+            else if (Maintenance.content_code == VG.c_pepsol)
             {
                 return _BLL.GetBranch(code);
             }

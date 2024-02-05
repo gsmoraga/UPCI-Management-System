@@ -172,33 +172,36 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li id="menuApplicationAdministration" runat="server" class="nav-item" visible="false">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
+                                        <a href="#" class="nav-link">&emsp;
                                             <p>
                                                 Application Admin<i class="right fas fa-angle-left"></i>
                                             </p>
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <asp:LinkButton ID="lbApplicationParameters" runat="server" CssClass="nav-link" OnClick="lbApplicationParameters_Click" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Application Parameters</asp:LinkButton>
+                                                <asp:LinkButton ID="lbApplicationParameters" runat="server" CssClass="nav-link" OnClick="lbApplicationParameters_Click" Visible="false">&emsp;&emsp;Application Parameters</asp:LinkButton>
                                             </li>
                                             <li class="nav-item">
-                                                <asp:LinkButton ID="lbSecurityParameters" runat="server" CssClass="nav-link" OnClick="lbSecurityParameters_Click" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Security Parameters</asp:LinkButton>
+                                                <asp:LinkButton ID="lbSecurityParameters" runat="server" CssClass="nav-link" OnClick="lbSecurityParameters_Click" Visible="false">&emsp;&emsp;Security Parameters</asp:LinkButton>
                                             </li>
                                         </ul>
                                     </li>
                                     <!-- Ministry-->
                                     <li id="menuMinistry" runat="server" class="nav-item" visible="false">
-                                        <asp:LinkButton ID="lbMinistrySearch" runat="server" CssClass="nav-link" OnClick="lbMinistrySearch_Click" Visible="false"><i class="far fa-circle nav-icon"></i>Ministry</asp:LinkButton>
+                                        <asp:LinkButton ID="lbMinistrySearch" runat="server" CssClass="nav-link" OnClick="lbMinistrySearch_Click" Visible="false">&emsp;Ministry</asp:LinkButton>
                                     </li>
                                     <!-- Ministry Department -->
-                                    <li class="nav-item">
-                                        <asp:LinkButton ID="lbMinistryDepartmentSearch" runat="server" CssClass="nav-link" OnClick="lbMinistryDepartmentSearch_Click" Visible="false"><i class="far fa-circle nav-icon"></i>Ministry Department</asp:LinkButton>
+                                    <li id="menuMinistryDepartment" runat="server" class="nav-item" visible="false">
+                                        <asp:LinkButton ID="lbMinistryDepartmentSearch" runat="server" CssClass="nav-link" OnClick="lbMinistryDepartmentSearch_Click" Visible="false">&emsp;Ministry Department</asp:LinkButton>
+                                    </li>
+                                    <!-- PEPSOL -->
+                                    <li id="menuPepsol" runat="server" class="nav-item" visible="false">
+                                        <asp:LinkButton ID="lbPepsolMaintenance" runat="server" CssClass="nav-link" OnClick="lbPepsolMaintenance_Click" Visible="false">&emsp;PEPSOL</asp:LinkButton>
                                     </li>
                                     <!-- User Management -->
                                     <li id="menuUserManagement" runat="server" class="nav-item" visible="false">
                                         <a href="#" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
+                                            &emsp;
                                             <p>
                                                 User Management<i class="right fas fa-angle-left"></i>
                                             </p>
@@ -207,17 +210,17 @@
                                             <!-- User -->
                                             <li id="menuUser" runat="server" class="nav-item" visible="false">
                                                 <a href="#" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    &emsp;&emsp;
                                                     <p>
                                                         User<i class="right fas fa-angle-left"></i>
                                                     </p>
                                                 </a>
                                                 <ul class="nav nav-treeview">
                                                     <li class="nav-item">
-                                                        <asp:LinkButton ID="lbUserAdd" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Add</asp:LinkButton>
+                                                        <asp:LinkButton ID="lbUserAdd" runat="server" CssClass="nav-link" Visible="false">&emsp;&emsp;&emsp;Add</asp:LinkButton>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <asp:LinkButton ID="lbUserSearch" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Search</asp:LinkButton>
+                                                        <asp:LinkButton ID="lbUserSearch" runat="server" CssClass="nav-link" Visible="false">&emsp;&emsp;&emsp;Search</asp:LinkButton>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -225,17 +228,17 @@
                                             <!-- User Group -->
                                             <li id="menuUserGroup" runat="server" class="nav-item" visible="false">
                                                 <a href="#" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    &emsp;&emsp;
                                                     <p>
                                                         User Group<i class="right fas fa-angle-left"></i>
                                                     </p>
                                                 </a>
                                                 <ul class="nav nav-treeview">
                                                     <li class="nav-item">
-                                                        <asp:LinkButton ID="lbUserGroupAdd" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Add</asp:LinkButton>
+                                                        <asp:LinkButton ID="lbUserGroupAdd" runat="server" CssClass="nav-link" Visible="false">&emsp;&emsp;&emsp;Add</asp:LinkButton>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <asp:LinkButton ID="lbUserGroupSearch" runat="server" CssClass="nav-link" Visible="false"><i class="far fa-dot-circle nav-icon"></i>Search</asp:LinkButton>
+                                                        <asp:LinkButton ID="lbUserGroupSearch" runat="server" CssClass="nav-link" Visible="false">&emsp;&emsp;&emsp;Search</asp:LinkButton>
                                                     </li>
 
                                                 </ul>
@@ -248,20 +251,20 @@
                                     <!-- User Security -->
                                     <li id="menuUserSecurity" runat="server" class="nav-item" visible="false">
                                         <a href="#" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
+                                            &emsp;
                                             <p>
                                                 User Security<i class="right fas fa-angle-left"></i>
                                             </p>
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <asp:LinkButton ID="lbUnlockUser" runat="server" CssClass="nav-link"><i class="far fa-dot-circle nav-icon"></i>Unlock User</asp:LinkButton>
+                                                <asp:LinkButton ID="lbUnlockUser" runat="server" CssClass="nav-link">&emsp;&emsp;Unlock User</asp:LinkButton>
                                             </li>
                                             <li class="nav-item">
-                                                <asp:LinkButton ID="lbResetPassword" runat="server" CssClass="nav-link"><i class="far fa-dot-circle nav-icon"></i>Reset Password</asp:LinkButton>
+                                                <asp:LinkButton ID="lbResetPassword" runat="server" CssClass="nav-link">&emsp;&emsp;Reset Password</asp:LinkButton>
                                             </li>
                                             <li class="nav-item">
-                                                <asp:LinkButton ID="lbActiveSessions" runat="server" CssClass="nav-link"><i class="far fa-dot-circle nav-icon"></i>Active Sessions</asp:LinkButton>
+                                                <asp:LinkButton ID="lbActiveSessions" runat="server" CssClass="nav-link">&emsp;&emsp;Active Sessions</asp:LinkButton>
                                             </li>
                                         </ul>
                                     </li>
@@ -273,7 +276,7 @@
 
                             <!-- Member List -->
                             <li id="menuMembers" runat="server" class="nav-item" visible="false">
-                                <asp:LinkButton ID="lbMemberList" runat="server" CssClass="nav-link" OnClick="lbMemberList_Click" Visible="false"><i class="nav-icon fas fa-user"></i>Member List</asp:LinkButton>
+                                <asp:LinkButton ID="lbMemberList" runat="server" CssClass="nav-link" OnClick="lbMemberList_Click" Visible="false"><i class="nav-icon fas fa-user"></i>Manage Member</asp:LinkButton>
                             </li>
                             <!-- Reports -->
                             <li class="nav-item">
