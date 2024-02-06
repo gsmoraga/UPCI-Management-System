@@ -3382,7 +3382,7 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spMinistryAdd";
+                    cmd.CommandText = "spPepsolAdd";
 
                     cmd.Parameters.AddWithValue("@code", code);
                     cmd.Parameters.AddWithValue("@description", description);
@@ -3408,7 +3408,7 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spMinistryEdit";
+                    cmd.CommandText = "spPepsolEdit";
 
                     cmd.Parameters.AddWithValue("@code", code);
                     cmd.Parameters.AddWithValue("@description", description);
@@ -3435,7 +3435,7 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spMinistryDelete";
+                    cmd.CommandText = "spPepsolDelete";
 
                     cmd.Parameters.AddWithValue("@code", code);
 
@@ -3470,7 +3470,7 @@ public class DAL
 
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spMinistryGet";
+                        cmd.CommandText = "spPepsolGet";
 
                         cmd.Parameters.AddWithValue("@code", code);
 
@@ -3509,7 +3509,7 @@ public class DAL
 
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spMinistryCheckExist";
+                        cmd.CommandText = "spPepsolCheckExist";
 
                         cmd.Parameters.AddWithValue("@code", code);
                         adp.SelectCommand = cmd;

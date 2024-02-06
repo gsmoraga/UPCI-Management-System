@@ -5,7 +5,7 @@
 <head runat="server">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UPCI | Dashboard </title>
+    <title>UPCI Management System </title>
 
     <!-- AdminLTE Template-->
     <!-- Google Font: Source Sans Pro -->
@@ -20,16 +20,6 @@
     <link rel="stylesheet" href="contents/AdminLTE/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="contents/AdminLTE/plugins/select2/css/select2.min.css">
-
-    <%--<!-- Maan Contents Template -->
-    <link rel="stylesheet" type="text/css" href="contents/css/jquery-ui.min.css" />
-    <link rel="stylesheet" type="text/css" href="contents/css/bootstrap.min.css" />
-    <script type="text/javascript" src="contents/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="contents/js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="contents/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="contents/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="contents/js/sweetalert2.all.min.js"></script>
-    <script type="text/javascript" src="contents/js/main.js"></script>--%>
 
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">

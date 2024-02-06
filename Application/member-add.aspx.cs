@@ -37,9 +37,24 @@ namespace Template
                         }
                         else
                         {
-                            _BLL.GetMinistryDropdown(ddMinistry, "--Select--");
-                            _BLL.GetMinistryDepartmentDropdown(ddMinistryDepartment, "--Select--", ddMinistry.SelectedValue);
-                            _BLL.GetPepsolDropdown(ddPepsol, "--Select--");
+                            if (_BLL.GetContentType(Maintenance.content_code) == false)
+                            { }
+                            else
+                            {
+                                #region Titles
+                                contentHeader.Text = Maintenance.content_description + " Maintenance";
+                                mainBreadcrumb.Text = Maintenance.content_description;
+                                subItemBreadcrumb.Text = Maintenance.mode;
+                                //cardTitle.Text = Maintenance.mode + " " + Maintenance.content_description;
+                                #endregion
+
+                                _BLL.GetMinistryDropdown(ddMinistry, "--Select--");
+                                _BLL.GetMinistryDepartmentDropdown(ddMinistryDepartment, "--Select--", ddMinistry.SelectedValue);
+                                _BLL.GetPepsolDropdown(ddPepsol, "--Select--");
+
+                                divCard.Visible = true;
+                            }
+                            
                         }
 
                     }

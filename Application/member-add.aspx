@@ -16,12 +16,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Membership Form</h1>
+                        <h1><asp:Label ID="contentHeader" runat="server"></asp:Label></h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Add Member</li>
+                            <li class="breadcrumb-item"><a href="home.aspx">Home</a></li>
+                            <li class="breadcrumb-item"><asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></li>
+                            <li class="breadcrumb-item active"><asp:Label ID="subItemBreadcrumb" runat="server"></asp:Label></li>
                         </ol>
                     </div>
                 </div>
@@ -32,7 +33,7 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card card-primary">
+                    <div id="divCard" runat="server" class="card card-primary" visible="false">
                         <div class="card-header">
                             <h3 class="card-title">General Information</h3>
 

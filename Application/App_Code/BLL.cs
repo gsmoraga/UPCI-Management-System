@@ -1912,18 +1912,18 @@ public class BLL
     #endregion
 
     #region Pepsol
-    public Boolean AddPepsol(string code, string ministryCode, string description, string createdBy)
+    public Boolean AddPepsol(string code, string description, string createdBy)
     {
-        if (_DAL.AddMinistryDepartment(code, ministryCode, description, createdBy) == false)
+        if (_DAL.AddPepsol(code, description, createdBy) == false)
         {
             return false;
         }
         else return true;
     }
 
-    public Boolean EditPepsol(string code, string description, string ministryCode)
+    public Boolean EditPepsol(string code, string description)
     {
-        if (_DAL.EditMinistryDepartment(code, description, ministryCode) == false)
+        if (_DAL.EditPepsol(code, description) == false)
         {
             return false;
         }
@@ -1932,7 +1932,7 @@ public class BLL
 
     public Boolean DeletePepsol(string code)
     {
-        if (_DAL.DeleteMinistryDepartment(code) == false)
+        if (_DAL.DeletePepsol(code) == false)
         {
             return false;
         }
@@ -1959,7 +1959,7 @@ public class BLL
 
     public Boolean GetPepsolDetails(string value)
     {
-        DataTable dt = _DAL.GetMinistryDepartmentDetails(value);
+        DataTable dt = _DAL.GetPepsolDetails(value);
 
         if (dt == null || dt.Rows.Count < 1)
         {

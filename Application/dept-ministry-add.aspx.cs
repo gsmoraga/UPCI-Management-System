@@ -45,8 +45,21 @@ namespace Template
                         }
                         else
                         {
-                            cardMaintenance.Visible = true;
-                            _BLL.GetMinistryDropdown(ddMinistry, "--Select--");
+                            if (_BLL.GetContentType(Maintenance.content_code) == false)
+                            { }
+                            else
+                            {
+                                #region Titles
+                                contentHeader.Text = Maintenance.content_description;
+                                mainBreadcrumb.Text = Maintenance.content_description;
+                                subItemBreadcrumb.Text = Maintenance.mode;
+                                cardTitle.Text = Maintenance.mode + " " + Maintenance.content_description;
+                                #endregion
+
+                                cardMaintenance.Visible = true;
+                                _BLL.GetMinistryDropdown(ddMinistry, "--Select--");
+                            }
+
                         }
                     }
                 }
@@ -62,7 +75,7 @@ namespace Template
                 dt = _DAL.CheckDepartmentMinistry(txtCode.Text);
                 if (Convert.ToInt32(dt.Rows[0][0]) == 0)
                 {
-                    if (_BLL.AddMinistryDepartment(txtCode.Text.Trim(),ddMinistry.SelectedValue, txtDescription.Text, Employee.user_id) == false)
+                    if (_BLL.AddMinistryDepartment(txtCode.Text.Trim(), ddMinistry.SelectedValue, txtDescription.Text, Employee.user_id) == false)
                     {
                         ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!','Unable to add the user.','error');", true);
                     }
@@ -87,7 +100,7 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
-                Response.Redirect("ministry-dept-search.aspx", false);
+                Response.Redirect("dept-ministry-search.aspx", false);
             }
         }
         #endregion

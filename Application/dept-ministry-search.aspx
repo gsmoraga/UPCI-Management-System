@@ -55,7 +55,7 @@
                                             </div>
                                             <div class="col-sm-12 col-md-6" id="divSearch" runat="server" visible="false">
                                                 <div class="dataTables_filter">
-                                                    <asp:LinkButton ID="lbAdd" runat="server" CssClass="btn btn-sm btn-primary" OnClick="lbAdd_Click" Visible="false"><i class="fa fa-plus-circle mr-2"></i>Add Department</asp:LinkButton>
+                                                    <asp:LinkButton ID="lbAdd" runat="server" CssClass="btn btn-sm btn-primary" OnClick="lbAdd_Click" Visible="false"><i class="fa fa-plus-circle mr-2"></i>Add</asp:LinkButton>
                                                     <asp:TextBox ID="txtCode" runat="server" CssClass="form-control form-control-sm" placeholder="Search Code" autocomplete="off"></asp:TextBox>
                                                     <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control form-control-sm" placeholder="Search Description" autocomplete="off"></asp:TextBox>
                                                     <asp:LinkButton ID="lbSearch" runat="server" CssClass="btn btn-sm" OnClick="lbSearch_Click" ToolTip="Search"><i class="fa fa-search"></i></asp:LinkButton>

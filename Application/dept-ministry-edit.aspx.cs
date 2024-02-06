@@ -40,6 +40,13 @@ namespace Template
                             { }
                             else
                             {
+                                #region Titles
+                                contentHeader.Text = Maintenance.content_description + " Maintenance";
+                                mainBreadcrumb.Text = Maintenance.content_description;
+                                subItemBreadcrumb.Text = Maintenance.mode;
+                                cardTitle.Text = Maintenance.mode + " " + Maintenance.content_description;
+                                #endregion
+
                                 LoadMinistryDepartmentDetails(Maintenance.entry_code);
                                 _BLL.GetMinistryDropdown(ddMinistry, "--Select--");
                             }

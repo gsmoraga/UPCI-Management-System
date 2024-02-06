@@ -122,6 +122,7 @@ namespace Template
             {
                 LinkButton lbView = (LinkButton)sender;
                 Maintenance.entry_code = lbView.CommandArgument;
+                Maintenance.content_code = VG.c_ministry_department;
                 Maintenance.mode = "View";
 
                 _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString());
@@ -136,6 +137,7 @@ namespace Template
             {
                 LinkButton lbEdit = (LinkButton)sender;
                 Maintenance.entry_code = lbEdit.CommandArgument;
+                Maintenance.content_code = VG.c_ministry_department;
                 Maintenance.mode = "Edit";
 
                 Response.Redirect("dept-ministry-edit.aspx", false);
@@ -146,6 +148,8 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
+                Maintenance.content_code = VG.c_ministry_department;
+                Maintenance.mode = "Add";
                 Response.Redirect("dept-ministry-add.aspx", false);
             }
         }

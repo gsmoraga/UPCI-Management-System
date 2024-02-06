@@ -123,7 +123,7 @@ namespace Template
 
                 _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString());
 
-                Response.Redirect("dept-ministry-view.aspx", false);
+                Response.Redirect("pepsol-view.aspx", false);
             }
         }
 
@@ -135,7 +135,7 @@ namespace Template
                 Maintenance.entry_code = lbEdit.CommandArgument;
                 Maintenance.mode = "Edit";
 
-                Response.Redirect("dept-ministry-edit.aspx", false);
+                Response.Redirect("pepsol-edit.aspx", false);
             }
         }
 
@@ -143,7 +143,7 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
-                Response.Redirect("dept-ministry-add.aspx", false);
+                Response.Redirect("pepsol-add.aspx", false);
             }
         }
 
@@ -155,7 +155,7 @@ namespace Template
                 string code = lbDelete.CommandArgument;
                 Boolean result = false;
 
-                result = _BLL.DeleteMinistryDepartment(code);
+                result = _BLL.DeletePepsol(code);
 
                 if (result == false)
                 {
@@ -168,7 +168,7 @@ namespace Template
                     if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Delete", "Code: " + code, Request.UserHostAddress.ToString()))
                         transactionReferenceNumber = "UPCI-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmm") + "-" + DateTime.Now.ToString("ssff");
 
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Ministry has been deleted.','" + transactionReferenceNumber + "');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Data has been deleted.','" + transactionReferenceNumber + "');", true);
                     LoadMaintenanceData("", "");
                 }
             }

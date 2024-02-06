@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
@@ -9,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace Template
 {
-    public partial class ministry_edit : System.Web.UI.Page
+    public partial class pepsol_edit : System.Web.UI.Page
     {
         private BLL _BLL = new BLL();
         private DAL _DAL = new DAL();
@@ -48,11 +47,12 @@ namespace Template
                 }
 
             }
+
         }
 
         protected void LoadDetails(string code)
         {
-            if (_BLL.GetMinistryDetails(code) == false)
+            if (_BLL.GetPepsolDetails(code) == false)
             { }
             else
             {
@@ -64,7 +64,7 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
-                Response.Redirect("ministry-search.aspx", false);
+                Response.Redirect("pepsol-search.aspx", false);
             }
         }
 
@@ -73,7 +73,7 @@ namespace Template
             if (_BLL.SessionIsActive(this))
             {
                 Boolean result = false;
-                result = _BLL.EditMinistry(Maintenance.entry_code, txtDescription.Text.Trim());
+                result = _BLL.EditPepsol(Maintenance.entry_code, txtDescription.Text.Trim());
 
                 if (result == false)
                 {
@@ -93,5 +93,7 @@ namespace Template
                 }
             }
         }
+
+
     }
 }

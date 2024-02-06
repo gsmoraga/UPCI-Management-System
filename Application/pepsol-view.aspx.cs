@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace Template
 {
-    public partial class dept_ministry_view : System.Web.UI.Page
+    public partial class pepsol_view : System.Web.UI.Page
     {
         DAL _DAL = new DAL();
         private BLL _BLL = new BLL();
@@ -36,42 +36,27 @@ namespace Template
                         }
                         else
                         {
-                            if (_BLL.GetContentType(Maintenance.content_code) == false)
-                            {}
-                            else
-                            {
-                                #region Titles
-                                contentHeader.Text = Maintenance.content_description + " Maintenance";
-                                mainBreadcrumb.Text = Maintenance.content_description;
-                                subItemBreadcrumb.Text = Maintenance.mode;
-                                cardTitle.Text = Maintenance.mode + " " + Maintenance.content_description;
-                                #endregion
-
-                                LoadMinistryDepartmentDetails(Maintenance.entry_code);
-                            }
-                            
+                            LoadPepsolDetails(Maintenance.entry_code);
                         }
                     }
                 }
             }
         }
-
-        protected void LoadMinistryDepartmentDetails(string code)
+        protected void LoadPepsolDetails(string code)
         {
-            if (_BLL.GetMinistryDepartmentDetails(code) == false)
+            if (_BLL.GetPepsolDetails(code) == false)
             { }
             else
             {
                 lblCode.Text = Maintenance.code;
                 lblDescription.Text = Maintenance.description;
-                lblMinistry.Text = Maintenance.ministry_description;
             }
         }
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             if (_BLL.SessionIsActive(this))
             {
-                Response.Redirect("dept-ministry-search.aspx", false);
+                Response.Redirect("pepsol-search.aspx", false);
             }
         }
     }

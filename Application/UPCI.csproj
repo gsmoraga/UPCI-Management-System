@@ -88,7 +88,6 @@
     <Content Include="parameters-application.aspx" />
     <Content Include="maintenance-edit.aspx" />
     <Content Include="member-add.aspx" />
-    <Content Include="add_age_group.aspx" />
     <Content Include="contents\AdminLTE\build\config\postcss.config.js" />
     <Content Include="contents\AdminLTE\build\config\rollup.config.js" />
     <Content Include="contents\AdminLTE\build\js\AdminLTE.js" />
@@ -2721,7 +2720,9 @@
     <Content Include="logout.aspx" />
     <Content Include="maintenance-parameters.aspx" />
     <Content Include="pepsol-add.aspx" />
+    <Content Include="pepsol-edit.aspx" />
     <Content Include="pepsol-search.aspx" />
+    <Content Include="pepsol-view.aspx" />
     <Content Include="search_age_group.aspx" />
     <Content Include="user-manual.aspx" />
     <Content Include="view-maintenance.aspx" />
@@ -2812,13 +2813,6 @@
     </Compile>
     <Compile Include="member-add.aspx.designer.cs">
       <DependentUpon>member-add.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="add_age_group.aspx.cs">
-      <DependentUpon>add_age_group.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="add_age_group.aspx.designer.cs">
-      <DependentUpon>add_age_group.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\BLL.cs" />
     <Compile Include="App_Code\DAL.cs" />
@@ -2960,12 +2954,26 @@
     <Compile Include="pepsol-add.aspx.designer.cs">
       <DependentUpon>pepsol-add.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pepsol-edit.aspx.cs">
+      <DependentUpon>pepsol-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pepsol-edit.aspx.designer.cs">
+      <DependentUpon>pepsol-edit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pepsol-search.aspx.cs">
       <DependentUpon>pepsol-search.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="pepsol-search.aspx.designer.cs">
       <DependentUpon>pepsol-search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pepsol-view.aspx.cs">
+      <DependentUpon>pepsol-view.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pepsol-view.aspx.designer.cs">
+      <DependentUpon>pepsol-view.aspx</DependentUpon>
     </Compile>
     <Compile Include="UMS.Master.cs">
       <DependentUpon>UMS.Master</DependentUpon>
@@ -3791,6 +3799,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Maintenance\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

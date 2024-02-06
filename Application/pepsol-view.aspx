@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UMS.Master" AutoEventWireup="true" CodeBehind="dept-ministry-view.aspx.cs" Inherits="Template.dept_ministry_view" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UMS.Master" AutoEventWireup="true" CodeBehind="pepsol-view.aspx.cs" Inherits="Template.pepsol_view" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -10,13 +10,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1><asp:Label ID="contentHeader" runat="server"></asp:Label></h1>
+                        <h1>PEPSOL Maintenance</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="home.aspx">Home</a></li>
-                            <li class="breadcrumb-item"><a><asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></a></li>
-                            <li class="breadcrumb-item active"><asp:Label ID="subItemBreadcrumb" runat="server"></asp:Label></li>
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a>PEPSOL Maintenance</a></li>
+                            <li class="breadcrumb-item active">View</li>
                         </ol>
                     </div>
                 </div>
@@ -27,9 +27,9 @@
         <!-- Main content -->
         <section class="content">
             <!-- Default box -->
-            <div class="card card-secondary">
+            <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title"><asp:Label ID="cardTitle" runat="server"></asp:Label></h3>
+                    <h3 class="card-title">View</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                             <i class="fas fa-minus"></i>
@@ -53,18 +53,9 @@
                                 <div class="col-12 col-sm-12">
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Description</span>
+                                            <span class="info-box-text text-center text-muted">Descrtiption</span>
                                             <span class="info-box-number text-center text-muted mb-0">
                                                 <asp:Label ID="lblDescription" runat="server"></asp:Label></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-12">
-                                    <div class="info-box bg-light">
-                                        <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Ministry</span>
-                                            <span class="info-box-number text-center text-muted mb-0">
-                                                <asp:Label ID="lblMinistry" runat="server"></asp:Label></span>
                                         </div>
                                     </div>
                                 </div>

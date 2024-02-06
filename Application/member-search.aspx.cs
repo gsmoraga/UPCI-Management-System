@@ -145,6 +145,7 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
+                Maintenance.mode = "Add";
                 Response.Redirect("member-add.aspx", false);
             }
         }
