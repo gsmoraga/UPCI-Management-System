@@ -59,7 +59,6 @@ namespace Template
                 lblGender.Text = Member.gender;
                 lblBirthday.Text = Member.birthday;
                 lblMobileNumber.Text = Member.mobile_number;
-
                 lblMinistry.Text = Member.ministry;
                 lblMinistryDepartment.Text = Member.ministry_department;
                 lblCell.Text = Member.cell_status;

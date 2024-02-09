@@ -79,6 +79,9 @@
   <ItemGroup>
     <Content Include="dept-ministry-edit.aspx" />
     <Content Include="dept-ministry-view.aspx" />
+    <Content Include="group-user-add.aspx" />
+    <Content Include="group-user-edit.aspx" />
+    <Content Include="group-user-view.aspx" />
     <Content Include="ministry-add.aspx" />
     <Content Include="dept-ministry-add.aspx" />
     <Content Include="ministry-edit.aspx" />
@@ -2586,9 +2589,6 @@
     <Content Include="lockscreen.aspx" />
     <Content Include="member-edit.aspx" />
     <Content Include="member-view.aspx" />
-    <Content Include="Pages\Homepage.aspx" />
-    <Content Include="inquiry-all.aspx" />
-    <Content Include="login-form.aspx" />
     <Content Include="member-search.aspx" />
     <Content Include="parameters-security.aspx" />
     <Content Include="password-change.aspx" />
@@ -2724,7 +2724,11 @@
     <Content Include="pepsol-search.aspx" />
     <Content Include="pepsol-view.aspx" />
     <Content Include="search_age_group.aspx" />
-    <Content Include="user-manual.aspx" />
+    <Content Include="user-add.aspx" />
+    <Content Include="user-edit.aspx" />
+    <Content Include="group-user-search.aspx" />
+    <Content Include="user-search.aspx" />
+    <Content Include="user-view.aspx" />
     <Content Include="view-maintenance.aspx" />
     <Content Include="view-report.aspx" />
     <Content Include="Web.config" />
@@ -2749,6 +2753,27 @@
     </Compile>
     <Compile Include="dept-ministry-view.aspx.designer.cs">
       <DependentUpon>dept-ministry-view.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="group-user-add.aspx.cs">
+      <DependentUpon>group-user-add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="group-user-add.aspx.designer.cs">
+      <DependentUpon>group-user-add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="group-user-edit.aspx.cs">
+      <DependentUpon>group-user-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="group-user-edit.aspx.designer.cs">
+      <DependentUpon>group-user-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="group-user-view.aspx.cs">
+      <DependentUpon>group-user-view.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="group-user-view.aspx.designer.cs">
+      <DependentUpon>group-user-view.aspx</DependentUpon>
     </Compile>
     <Compile Include="ministry-add.aspx.cs">
       <DependentUpon>ministry-add.aspx</DependentUpon>
@@ -2848,27 +2873,6 @@
     </Compile>
     <Compile Include="member-view.aspx.designer.cs">
       <DependentUpon>member-view.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Homepage.aspx.cs">
-      <DependentUpon>Homepage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Homepage.aspx.designer.cs">
-      <DependentUpon>Homepage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="inquiry-all.aspx.cs">
-      <DependentUpon>inquiry-all.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="inquiry-all.aspx.designer.cs">
-      <DependentUpon>inquiry-all.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="login-form.aspx.cs">
-      <DependentUpon>login-form.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="login-form.aspx.designer.cs">
-      <DependentUpon>login-form.aspx</DependentUpon>
     </Compile>
     <Compile Include="member-search.aspx.cs">
       <DependentUpon>member-search.aspx</DependentUpon>
@@ -2982,13 +2986,6 @@
     <Compile Include="UMS.Master.designer.cs">
       <DependentUpon>UMS.Master</DependentUpon>
     </Compile>
-    <Compile Include="UPCI.Master.cs">
-      <DependentUpon>UPCI.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UPCI.Master.designer.cs">
-      <DependentUpon>UPCI.Master</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3004,12 +3001,40 @@
     <Compile Include="search_age_group.aspx.designer.cs">
       <DependentUpon>search_age_group.aspx</DependentUpon>
     </Compile>
-    <Compile Include="user-manual.aspx.cs">
-      <DependentUpon>user-manual.aspx</DependentUpon>
+    <Compile Include="user-add.aspx.cs">
+      <DependentUpon>user-add.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="user-manual.aspx.designer.cs">
-      <DependentUpon>user-manual.aspx</DependentUpon>
+    <Compile Include="user-add.aspx.designer.cs">
+      <DependentUpon>user-add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user-edit.aspx.cs">
+      <DependentUpon>user-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user-edit.aspx.designer.cs">
+      <DependentUpon>user-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="group-user-search.aspx.cs">
+      <DependentUpon>group-user-search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="group-user-search.aspx.designer.cs">
+      <DependentUpon>group-user-search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user-search.aspx.cs">
+      <DependentUpon>user-search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user-search.aspx.designer.cs">
+      <DependentUpon>user-search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user-view.aspx.cs">
+      <DependentUpon>user-view.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user-view.aspx.designer.cs">
+      <DependentUpon>user-view.aspx</DependentUpon>
     </Compile>
     <Compile Include="view-maintenance.aspx.cs">
       <DependentUpon>view-maintenance.aspx</DependentUpon>
@@ -3425,7 +3450,6 @@
     <Content Include="contents\Login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="contents\Login\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="contents\Login\vendor\bootstrap\css\bootstrap.min.css.map" />
-    <Content Include="UPCI.Master" />
     <Content Include="contents\NiceAdmin\vendor\apexcharts\locales\ar.json" />
     <Content Include="contents\NiceAdmin\vendor\apexcharts\locales\ca.json" />
     <Content Include="contents\NiceAdmin\vendor\apexcharts\locales\cs.json" />
@@ -3800,9 +3824,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\Maintenance\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

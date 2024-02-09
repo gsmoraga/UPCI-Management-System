@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UMS.Master" AutoEventWireup="true" CodeBehind="dept-ministry-add.aspx.cs" Inherits="Template.ministry_dept_add" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UMS.Master" AutoEventWireup="true" CodeBehind="group-user-add.aspx.cs" Inherits="Template.group_user_add" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <!-- Maan Contents Template -->
@@ -6,6 +6,8 @@
     <script type="text/javascript" src="contents/js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="contents/js/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="contents/js/main.js"></script>
+    <script type="text/javascript" src="contents/js/treeviewcheckbox-style.js"></script>
+    <script type="text/javascript" src="contents/js/treeview-check-uncheck.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Content Wrapper. Contains page content -->
@@ -22,8 +24,10 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="home.aspx">Home</a></li>
-                            <li class="breadcrumb-item"><asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></li>
-                            <li class="breadcrumb-item active"><asp:Label ID="subItemBreadcrumb" runat="server"></asp:Label></li>
+                            <li class="breadcrumb-item">
+                                <asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></li>
+                            <li class="breadcrumb-item active">
+                                <asp:Label ID="subItemBreadcrumb" runat="server"></asp:Label></li>
                         </ol>
                     </div>
                 </div>
@@ -71,16 +75,47 @@
                                         ErrorMessage="Must be alphanumeric." ControlToValidate="txtDescription" ValidationExpression="^[a-zA-Z0-9\s.,\-()]*$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="txtFirstName">Ministry</label>
+                            <div class="form-group row align-items-baseline">
+                                <label for="txtFirstName">User List</label>
                                 <div>
-                                    <asp:DropDownList ID="ddMinistry" runat="server" CssClass="custom-select"></asp:DropDownList>
-                                </div>
-                                <div>
-                                    <asp:RequiredFieldValidator InitialValue="0" ID="RequiredFieldValidator3" runat="server" ValidationGroup="codeDescValidation"
-                                        ErrorMessage="Required field." ControlToValidate="ddMinistry" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    <asp:Label ID="lblUserList" runat="server" Text=""></asp:Label>
                                 </div>
                             </div>
+                            <hr />
+
+                            <div class="form-group row justify-content-center">
+                                <div class="col-md-10">
+                                    <nav>
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active" id="nav-backend-tab" data-toggle="tab" href="#backend-tab" role="tab" aria-controls="backend-tab" aria-selected="false">Backend</a>
+                                            <a class="nav-item nav-link" id="nav-frontend-tab" data-toggle="tab" href="#frontend-tab" role="tab" aria-controls="frontend-tab" aria-selected="true">Frontend</a>
+                                            <a class="nav-item nav-link" id="nav-reports-tab" data-toggle="tab" href="#reports-tab" role="tab" aria-controls="reports-tab" aria-selected="false">Reports</a>
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content card-body" id="nav-tab-content">
+                                        <div id="backend-tab" class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-backend-tab">
+                                            <div class="los-tree-view">
+                                                <asp:TreeView ID="tvAccessRightsBackend" runat="server" onclick="OnTreeClick(event)" ImageSet="Custom" CollapseImageUrl="contents/images/caret-down.png" ExpandImageUrl="contents/images/caret-right.png" ShowCheckBoxes="All" ForeColor="Black" NodeIndent="30">
+                                                </asp:TreeView>
+                                            </div>
+                                        </div>
+                                        <div id="frontend-tab" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-frontend-tab">
+                                            <div class="los-tree-view">
+                                                <asp:TreeView ID="tvAccessRightsFrontend" runat="server" onclick="OnTreeClick(event)" ImageSet="Custom" CollapseImageUrl="contents/images/caret-down.png" ExpandImageUrl="contents/images/caret-right.png" ShowCheckBoxes="All" ForeColor="Black" NodeIndent="30">
+                                                </asp:TreeView>
+                                            </div>
+                                        </div>
+                                        <div id="reports-tab" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-reports-tab">
+                                            <div class="los-tree-view">
+                                                <asp:TreeView ID="tvAccessRightsReports" runat="server" onclick="OnTreeClick(event)" ImageSet="Custom" CollapseImageUrl="contents/images/caret-down.png" ExpandImageUrl="contents/images/caret-right.png" ShowCheckBoxes="All" ForeColor="Black" NodeIndent="30">
+                                                </asp:TreeView>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                         <!-- /.card-body -->
                     </div>

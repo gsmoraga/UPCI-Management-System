@@ -40,7 +40,7 @@
                         <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
                             <h3 class="text-dark">General Information</h3>
                             <div class="row">
-                                <div class="col-12 col-sm-12">
+                                <div class="col-12 col-sm-4">
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
                                             <span class="info-box-text text-center text-muted">Member ID</span>

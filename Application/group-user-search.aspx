@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UMS.Master" AutoEventWireup="true" CodeBehind="dept-ministry-search.aspx.cs" Inherits="Template.minsitry_dept_search" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UMS.Master" AutoEventWireup="true" CodeBehind="group-user-search.aspx.cs" Inherits="Template.user_group_search" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" type="text/css" href="contents/css/gridview-pager.css" />
@@ -30,7 +30,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="home.aspx">Home</a></li>
-                            <li class="breadcrumb-item active"><asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></li>
+                            <li class="breadcrumb-item active">
+                                <asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></li>
                         </ol>
                     </div>
                 </div>
@@ -73,7 +74,7 @@
                                             <asp:GridView ID="gvMaintenance" runat="server" AllowPaging="True" CssClass="table table-bordered table-striped dataTable dtr-inline"
                                                 GridLines="None" CellPadding="4" PageSize="10" ForeColor="#333333" AllowSorting="true"
                                                 OnPageIndexChanging="gvMaintenance_PageIndexChanging" OnRowDataBound="gvMaintenance_RowDataBound"
-                                                 OnSorting="gvMaintenance_Sorting" OnRowCreated="gvMaintenance_OnRowCreated" PagerSettings-Mode="NumericFirstLast"
+                                                OnSorting="gvMaintenance_Sorting" OnRowCreated="gvMaintenance_OnRowCreated" PagerSettings-Mode="NumericFirstLast"
                                                 PagerSettings-FirstPageText="First" PagerSettings-LastPageText="Last">
                                                 <AlternatingRowStyle BackColor="White" />
                                                 <EditRowStyle BackColor="#0A9D4E" />
@@ -104,15 +105,15 @@
                                             <div id="divPager" runat="server" class="form-inline mb-3" visible="false">
                                                 <asp:LinkButton ID="lbFirstPage" runat="server" ToolTip="First" OnClick="lbFirstPage_Click" Visible="false"><i class="fas fa-angle-double-left text-dark" style="text-decoration:none"></i></asp:LinkButton>
                                                 &nbsp; Page&nbsp;
-                                                <asp:DropDownList ID="ddPageNumber" runat="server" CssClass="custom-select" OnSelectedIndexChanged="ddPageNumber_SelectedIndexChanged"
-                                                    AutoPostBack="true">
-                                                </asp:DropDownList>
+                                        <asp:DropDownList ID="ddPageNumber" runat="server" CssClass="custom-select" OnSelectedIndexChanged="ddPageNumber_SelectedIndexChanged"
+                                            AutoPostBack="true">
+                                        </asp:DropDownList>
                                                 &nbsp; of&nbsp;
-                                                <asp:Label ID="lblTotalPageCount" runat="server" />
+                                        <asp:Label ID="lblTotalPageCount" runat="server" />
                                                 &nbsp;&nbsp;&nbsp;
-                                                <asp:LinkButton ID="lbPreviousPage" runat="server" ToolTip="Previous" OnClick="lbPreviousPage_Click"><i class="fas fa-angle-left text-dark" style="text-decoration:none"></i></asp:LinkButton>
-                                                 &emsp;
-                                                <asp:LinkButton ID="lbNextPage" runat="server" ToolTip="Next" OnClick="lbNextPage_Click"><i class="fas fa-angle-right  text-dark" style="text-decoration:none"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="lbPreviousPage" runat="server" ToolTip="Previous" OnClick="lbPreviousPage_Click"><i class="fas fa-angle-left text-dark" style="text-decoration:none"></i></asp:LinkButton>
+                                                &emsp;
+                                        <asp:LinkButton ID="lbNextPage" runat="server" ToolTip="Next" OnClick="lbNextPage_Click"><i class="fas fa-angle-right  text-dark" style="text-decoration:none"></i></asp:LinkButton>
                                                 <asp:LinkButton ID="lbLastPage" runat="server" ToolTip="Last" OnClick="lbLastPage_Click" Visible="false"><i class="fas fa-angle-double-right text-dark" style="text-decoration:none"></i></asp:LinkButton>
                                                 &emsp;
                                             </div>

@@ -11,7 +11,7 @@ namespace Template
 {
 
 
-    public partial class minsitry_dept_search
+    public partial class user_view
     {
 
         /// <summary>
@@ -33,174 +33,120 @@ namespace Template
         protected global::System.Web.UI.WebControls.Label mainBreadcrumb;
 
         /// <summary>
-        /// cardTitle control.
+        /// subItemBreadcrumb control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label cardTitle;
+        protected global::System.Web.UI.WebControls.Label subItemBreadcrumb;
 
         /// <summary>
-        /// pnlSearch control.
+        /// lblUserID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSearch;
+        protected global::System.Web.UI.WebControls.Label lblUserID;
 
         /// <summary>
-        /// divExport control.
+        /// lblUserGroup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divExport;
+        protected global::System.Web.UI.WebControls.Label lblUserGroup;
 
         /// <summary>
-        /// lbExportExcel control.
+        /// lblFirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbExportExcel;
+        protected global::System.Web.UI.WebControls.Label lblFirstName;
 
         /// <summary>
-        /// lbExportPdf control.
+        /// lblMiddleName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbExportPdf;
+        protected global::System.Web.UI.WebControls.Label lblMiddleName;
 
         /// <summary>
-        /// divSearch control.
+        /// lblLastName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSearch;
+        protected global::System.Web.UI.WebControls.Label lblLastName;
 
         /// <summary>
-        /// lbAdd control.
+        /// lblEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbAdd;
+        protected global::System.Web.UI.WebControls.Label lblEmail;
 
         /// <summary>
-        /// txtCode control.
+        /// lblMobileNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCode;
+        protected global::System.Web.UI.WebControls.Label lblMobileNumber;
 
         /// <summary>
-        /// txtDescription control.
+        /// lblMinistry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescription;
+        protected global::System.Web.UI.WebControls.Label lblMinistry;
 
         /// <summary>
-        /// lbSearch control.
+        /// lblMinistryDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbSearch;
+        protected global::System.Web.UI.WebControls.Label lblMinistryDepartment;
 
         /// <summary>
-        /// lbRefresh control.
+        /// lblProfileExpirationDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbRefresh;
+        protected global::System.Web.UI.WebControls.Label lblProfileExpirationDate;
 
         /// <summary>
-        /// gvMaintenance control.
+        /// lblStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvMaintenance;
+        protected global::System.Web.UI.WebControls.Label lblStatus;
 
         /// <summary>
-        /// divPager control.
+        /// btnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPager;
-
-        /// <summary>
-        /// lbFirstPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbFirstPage;
-
-        /// <summary>
-        /// ddPageNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddPageNumber;
-
-        /// <summary>
-        /// lblTotalPageCount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalPageCount;
-
-        /// <summary>
-        /// lbPreviousPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbPreviousPage;
-
-        /// <summary>
-        /// lbNextPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbNextPage;
-
-        /// <summary>
-        /// lbLastPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbLastPage;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
     }
 }

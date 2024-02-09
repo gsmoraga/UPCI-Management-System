@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="contents/AdminLTE/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="contents/AdminLTE/plugins/select2/css/select2.min.css">
-
+    <link rel="icon" type="image/x-icon" href="contents/images/upci-favicon.png">
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
@@ -121,24 +121,15 @@
                 <!-- Brand Logo -->
                 <a href="index3.html" class="brand-link">
                     <img src="contents/images/upci-logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                    <span class="brand-text font-weight-light">UPCI</span>
+                    <span class="brand-text font-weight-bold">UPCI</span>
                 </a>
 
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar user panel (optional) -->
-                    <!-- SidebarSearch Form -->
-                    <div class="form-inline">
-                        <div class="input-group" data-widget="sidebar-search">
-                            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-sidebar">
-                                    <i class="fas fa-search fa-fw"></i>
-                                </button>
-                            </div>
-                        </div>
+                    <div>
+                        <br />
                     </div>
-
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -178,70 +169,39 @@
                                     </li>
                                     <!-- Ministry-->
                                     <li id="menuMinistry" runat="server" class="nav-item" visible="false">
-                                        <asp:LinkButton ID="lbMinistrySearch" runat="server" CssClass="nav-link" OnClick="lbMinistrySearch_Click" Visible="false">&emsp;Ministry</asp:LinkButton>
+                                        <asp:LinkButton ID="lbMinistrySearch" runat="server" CssClass="nav-link" OnClick="lbMinistrySearch_Click" Visible="false">&emsp;Manage Ministry</asp:LinkButton>
                                     </li>
                                     <!-- Ministry Department -->
                                     <li id="menuMinistryDepartment" runat="server" class="nav-item" visible="false">
-                                        <asp:LinkButton ID="lbMinistryDepartmentSearch" runat="server" CssClass="nav-link" OnClick="lbMinistryDepartmentSearch_Click" Visible="false">&emsp;Ministry Department</asp:LinkButton>
+                                        <asp:LinkButton ID="lbMinistryDepartmentSearch" runat="server" CssClass="nav-link" OnClick="lbMinistryDepartmentSearch_Click" Visible="false">&emsp;Manage Department</asp:LinkButton>
                                     </li>
                                     <!-- PEPSOL -->
                                     <li id="menuPepsol" runat="server" class="nav-item" visible="false">
-                                        <asp:LinkButton ID="lbPepsolMaintenance" runat="server" CssClass="nav-link" OnClick="lbPepsolMaintenance_Click" Visible="false">&emsp;PEPSOL</asp:LinkButton>
+                                        <asp:LinkButton ID="lbPepsolMaintenance" runat="server" CssClass="nav-link" OnClick="lbPepsolMaintenance_Click" Visible="false">&emsp;Manage PEPSOL</asp:LinkButton>
                                     </li>
                                     <!-- User Management -->
                                     <li id="menuUserManagement" runat="server" class="nav-item" visible="false">
-                                        <a href="#" class="nav-link">
-                                            &emsp;
+                                        <a href="#" class="nav-link">&emsp;
                                             <p>
                                                 User Management<i class="right fas fa-angle-left"></i>
                                             </p>
                                         </a>
+                                        <!-- User -->
                                         <ul class="nav nav-treeview">
-                                            <!-- User -->
                                             <li id="menuUser" runat="server" class="nav-item" visible="false">
-                                                <a href="#" class="nav-link">
-                                                    &emsp;&emsp;
-                                                    <p>
-                                                        User<i class="right fas fa-angle-left"></i>
-                                                    </p>
-                                                </a>
-                                                <ul class="nav nav-treeview">
-                                                    <li class="nav-item">
-                                                        <asp:LinkButton ID="lbUserAdd" runat="server" CssClass="nav-link" Visible="false">&emsp;&emsp;&emsp;Add</asp:LinkButton>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <asp:LinkButton ID="lbUserSearch" runat="server" CssClass="nav-link" Visible="false">&emsp;&emsp;&emsp;Search</asp:LinkButton>
-                                                    </li>
-                                                </ul>
+                                                <asp:LinkButton ID="lbUserSearch" runat="server" CssClass="nav-link" OnClick="lbUserSearch_Click" Visible="false">&emsp;&emsp;Manage User</asp:LinkButton>
                                             </li>
-
                                             <!-- User Group -->
                                             <li id="menuUserGroup" runat="server" class="nav-item" visible="false">
-                                                <a href="#" class="nav-link">
-                                                    &emsp;&emsp;
-                                                    <p>
-                                                        User Group<i class="right fas fa-angle-left"></i>
-                                                    </p>
-                                                </a>
-                                                <ul class="nav nav-treeview">
-                                                    <li class="nav-item">
-                                                        <asp:LinkButton ID="lbUserGroupAdd" runat="server" CssClass="nav-link" Visible="false">&emsp;&emsp;&emsp;Add</asp:LinkButton>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <asp:LinkButton ID="lbUserGroupSearch" runat="server" CssClass="nav-link" Visible="false">&emsp;&emsp;&emsp;Search</asp:LinkButton>
-                                                    </li>
-
-                                                </ul>
+                                                <asp:LinkButton ID="lbUserGroupSearch" runat="server" CssClass="nav-link" OnClick="lbUserGroupSearch_Click" Visible="false">&emsp;&emsp;Manage User Group</asp:LinkButton>
                                             </li>
-
 
                                         </ul>
                                     </li>
 
                                     <!-- User Security -->
                                     <li id="menuUserSecurity" runat="server" class="nav-item" visible="false">
-                                        <a href="#" class="nav-link">
-                                            &emsp;
+                                        <a href="#" class="nav-link">&emsp;
                                             <p>
                                                 User Security<i class="right fas fa-angle-left"></i>
                                             </p>
@@ -290,11 +250,7 @@
 
         </div>
     </form>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+
     <footer class="main-footer">
 
         <strong>Copyright &copy; <span id="year"></span><a href="#">Universal Pentecostal Church Inc</a>.</strong>

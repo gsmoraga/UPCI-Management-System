@@ -11,7 +11,7 @@ namespace Template
 {
 
 
-    public partial class minsitry_dept_search
+    public partial class user_group_search
     {
 
         /// <summary>

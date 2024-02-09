@@ -280,7 +280,7 @@ namespace Template
                                                     _BLL.AppendDeletedItem(ddDepartment, VG.c_ministry_department, Maintenance.department);
                                                 }
 
-                                                txtEmployeeNumber.Text = Maintenance.member_number;
+                                                txtEmployeeNumber.Text = Maintenance.member_id;
                                                 txtUserId.Text = Maintenance.user_id;
                                                 txtFirstName.Text = Maintenance.first_name;
                                                 txtMiddleName.Text = Maintenance.middle_name;
@@ -454,7 +454,7 @@ namespace Template
                                                     _BLL.AppendDeletedItem(ddDepartment, VG.c_ministry_department, Maintenance.department);
                                                 }
 
-                                                txtEmployeeNumber.Text = Maintenance.member_number;
+                                                txtEmployeeNumber.Text = Maintenance.member_id;
                                                 txtUserId.Text = Maintenance.user_id;
                                                 txtFirstName.Text = Maintenance.first_name;
                                                 txtMiddleName.Text = Maintenance.middle_name;
@@ -647,25 +647,25 @@ namespace Template
             {
                 if (Maintenance.mode == "Edit")
                 {
-                    if (_BLL.EditUser(txtEmployeeNumber.Text, txtUserId.Text, txtFirstName.Text, txtMiddleName.Text, txtLastName.Text, ddUserGroup.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, txtProfileExpirationUser.Text, txtEmail.Text, txtMobileNumber.Text, ddStatus.SelectedValue) == false)
-                    {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to update the user information.', 'error');", true);
-                    }
-                    else
-                    {
-                        if (_BLL.SetUserStatus(txtUserId.Text, ddStatus.SelectedValue) == false)
-                        {
-                        }
+                    //if (_BLL.EditUser(txtEmployeeNumber.Text, txtUserId.Text, txtFirstName.Text, txtMiddleName.Text, txtLastName.Text, ddUserGroup.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, txtProfileExpirationUser.Text, txtEmail.Text, txtMobileNumber.Text, ddStatus.SelectedValue) == false)
+                    //{
+                    //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to update the user information.', 'error');", true);
+                    //}
+                    //else
+                    //{
+                    //    if (_BLL.SetUserStatus(txtUserId.Text, ddStatus.SelectedValue) == false)
+                    //    {
+                    //    }
 
-                        _BLL.RemoveFromCache("Filter" + VG.c_user + "&");
-                        //HttpContext.Current.Cache.Remove(("GetUser" + txtUserId.Text).ToLower());
+                    //    _BLL.RemoveFromCache("Filter" + VG.c_user + "&");
+                    //    //HttpContext.Current.Cache.Remove(("GetUser" + txtUserId.Text).ToLower());
 
-                        string transactionReferenceNumber = "";
-                        if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, Maintenance.mode, "User ID: " + txtUserId.Text, Request.UserHostAddress.ToString()))
-                            transactionReferenceNumber = "EPS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
+                    //    string transactionReferenceNumber = "";
+                    //    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, Maintenance.mode, "User ID: " + txtUserId.Text, Request.UserHostAddress.ToString()))
+                    //        transactionReferenceNumber = "EPS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
 
-                        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('User information has been updated.','" + transactionReferenceNumber + "');", true);
-                    }
+                    //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('User information has been updated.','" + transactionReferenceNumber + "');", true);
+                    //}
                 }
                 else if (Maintenance.mode == "Add")
                 {
@@ -677,36 +677,36 @@ namespace Template
                     {
                         //HttpContext.Current.Cache.Remove(("GetUser" + txtUserId.Text).ToLower());
 
-                        if (_BLL.AddUser(txtEmployeeNumber.Text, txtUserId.Text, txtFirstName.Text, txtMiddleName.Text, txtLastName.Text, ddUserGroup.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, txtProfileExpirationUser.Text, txtEmail.Text, txtMobileNumber.Text, ddStatus.SelectedValue, Employee.user_id) == false)
-                        {
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to add the user.', 'error');", true);
-                        }
-                        else
-                        {
-                            _BLL.RemoveFromCache("Filter5&");
+                        //if (_BLL.AddUser(txtEmployeeNumber.Text, txtUserId.Text, txtFirstName.Text, txtMiddleName.Text, txtLastName.Text, ddUserGroup.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, txtProfileExpirationUser.Text, txtEmail.Text, txtMobileNumber.Text, ddStatus.SelectedValue, Employee.user_id) == false)
+                        //{
+                        //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to add the user.', 'error');", true);
+                        //}
+                        //else
+                        //{
+                        //    _BLL.RemoveFromCache("Filter5&");
 
-                            string transactionReferenceNumber = "";
-                            if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, Maintenance.mode, "User ID: " + txtUserId.Text, Request.UserHostAddress.ToString()))
-                                transactionReferenceNumber = "EPS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
+                        //    string transactionReferenceNumber = "";
+                        //    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, Maintenance.mode, "User ID: " + txtUserId.Text, Request.UserHostAddress.ToString()))
+                        //        transactionReferenceNumber = "EPS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
 
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('User has been added and an email notification has been sent to their email address.','" + transactionReferenceNumber + "');", true);
+                        //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('User has been added and an email notification has been sent to their email address.','" + transactionReferenceNumber + "');", true);
 
-                            if (_BLL.SendEmailNotificationUser(txtUserId.Text, "has been created") == false)
-                            {
-                            }
+                        //    if (_BLL.SendEmailNotificationUser(txtUserId.Text, "has been created") == false)
+                        //    {
+                        //    }
 
-                            txtUserId.Text = "";
-                            txtEmployeeNumber.Text = "";
-                            txtFirstName.Text = "";
-                            txtMiddleName.Text = "";
-                            txtLastName.Text = "";
-                            ddUserGroup.SelectedValue = "0";
-                            ddDepartment.SelectedValue = "0";
-                            ddBranch.SelectedValue = "0";
-                            txtProfileExpirationUser.Text = "";
-                            txtEmail.Text = "";
-                            txtMobileNumber.Text = "";
-                        }
+                        //    txtUserId.Text = "";
+                        //    txtEmployeeNumber.Text = "";
+                        //    txtFirstName.Text = "";
+                        //    txtMiddleName.Text = "";
+                        //    txtLastName.Text = "";
+                        //    ddUserGroup.SelectedValue = "0";
+                        //    ddDepartment.SelectedValue = "0";
+                        //    ddBranch.SelectedValue = "0";
+                        //    txtProfileExpirationUser.Text = "";
+                        //    txtEmail.Text = "";
+                        //    txtMobileNumber.Text = "";
+                        //}
                     }
                 }
             }

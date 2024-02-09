@@ -11,7 +11,7 @@ namespace Template
 {
 
 
-    public partial class minsitry_dept_search
+    public partial class user_search
     {
 
         /// <summary>
@@ -96,22 +96,22 @@ namespace Template
         protected global::System.Web.UI.WebControls.LinkButton lbAdd;
 
         /// <summary>
-        /// txtCode control.
+        /// txtUserID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCode;
+        protected global::System.Web.UI.WebControls.TextBox txtUserID;
 
         /// <summary>
-        /// txtDescription control.
+        /// txtName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescription;
+        protected global::System.Web.UI.WebControls.TextBox txtName;
 
         /// <summary>
         /// lbSearch control.

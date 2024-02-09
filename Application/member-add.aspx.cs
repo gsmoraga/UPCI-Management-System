@@ -54,7 +54,7 @@ namespace Template
 
                                 divCard.Visible = true;
                             }
-                            
+
                         }
 
                     }
@@ -96,7 +96,7 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
-                
+
                 if (_BLL.AddMember(txtFirstName.Text.Trim(), txtMiddleName.Text.Trim(), txtLastName.Text.Trim(), ddGender.SelectedValue, txtBirthday.Text, txtEmail.Text.Trim()
                     , txtMobileNumber.Text.Trim(), ddMinistry.SelectedValue, ddMinistryDepartment.SelectedValue, txtDateFirstAttend.Text,
                     ddCellGroup.Text, ddBaptismalStatus.SelectedValue, ddPepsol.SelectedValue, ddStatus.SelectedValue, Employee.user_id) == false)
@@ -119,7 +119,11 @@ namespace Template
 
         protected void ddMinistry_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _BLL.GetMinistryDepartmentDropdown(ddMinistryDepartment, "--Select--", ddMinistry.SelectedValue);
+            if (_BLL.SessionIsActive(this))
+            {
+                _BLL.GetMinistryDepartmentDropdown(ddMinistryDepartment, "--Select--", ddMinistry.SelectedValue);
+            }
+
         }
     }
 }

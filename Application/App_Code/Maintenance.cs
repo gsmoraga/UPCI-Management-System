@@ -175,6 +175,20 @@ public class Maintenance
                 HttpContext.Current.Session["MaintenanceGroupCode"] = value;
         }
     }
+    public static string ministry_description
+    {
+        get
+        {
+            if (HttpContext.Current.Session != null)
+                return Convert.ToString(HttpContext.Current.Session["MaintenanceMinistryDesc"]);
+            else return string.Empty;
+        }
+        set
+        {
+            if (HttpContext.Current.Session != null)
+                HttpContext.Current.Session["MaintenanceMinistryDesc"] = value;
+        }
+    }
     public static string ministry_code
     {
         get
@@ -190,18 +204,32 @@ public class Maintenance
         }
     }
 
-    public static string ministry_description
+    public static string ministry_dept_desc
     {
         get
         {
             if (HttpContext.Current.Session != null)
-                return Convert.ToString(HttpContext.Current.Session["MaintenanceMinistryDesc"]);
+                return Convert.ToString(HttpContext.Current.Session["MaintenanceMinistryDeptDesc"]);
             else return string.Empty;
         }
         set
         {
             if (HttpContext.Current.Session != null)
-                HttpContext.Current.Session["MaintenanceMinistryDesc"] = value;
+                HttpContext.Current.Session["MaintenanceMinistryDeptDesc"] = value;
+        }
+    }
+    public static string ministry_dept_code
+    {
+        get
+        {
+            if (HttpContext.Current.Session != null)
+                return Convert.ToString(HttpContext.Current.Session["MaintenanceMinistryDeptCode"]);
+            else return string.Empty;
+        }
+        set
+        {
+            if (HttpContext.Current.Session != null)
+                HttpContext.Current.Session["MaintenanceMinistryDeptCode"] = value;
         }
     }
     public static string content_code
@@ -308,7 +336,7 @@ public class Maintenance
     }
 
     /*User*/
-    public static string member_number
+    public static string member_id
     {
         get
         {
@@ -376,6 +404,20 @@ public class Maintenance
         {
             if (HttpContext.Current.Session != null)
                 HttpContext.Current.Session["MaintenanceUserGroup"] = value;
+        }
+    }
+    public static string user_group_desc
+    {
+        get
+        {
+            if (HttpContext.Current.Session != null)
+                return Convert.ToString(HttpContext.Current.Session["MaintenanceUserGroupDesc"]);
+            else return string.Empty;
+        }
+        set
+        {
+            if (HttpContext.Current.Session != null)
+                HttpContext.Current.Session["MaintenanceUserGroupDesc"] = value;
         }
     }
     public static string department
@@ -460,6 +502,21 @@ public class Maintenance
         {
             if (HttpContext.Current.Session != null)
                 HttpContext.Current.Session["MaintenanceStatus"] = value;
+        }
+    }
+
+    public static string status_description
+    {
+        get
+        {
+            if (HttpContext.Current.Session != null)
+                return Convert.ToString(HttpContext.Current.Session["MaintenanceStatusDesc"]);
+            else return string.Empty;
+        }
+        set
+        {
+            if (HttpContext.Current.Session != null)
+                HttpContext.Current.Session["MaintenanceStatusDesc"] = value;
         }
     }
     public static string user_list

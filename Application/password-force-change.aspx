@@ -36,7 +36,7 @@
 </head>
 <body>
     <div class="text-center mb-3">
-        <img src="contents/images/UCPB Logo.png" alt="Loans Origination System" />
+        <img src="contents/images/upci-logo.png" alt="UPCI Management System" />
     </div>
     <form id="Form1" runat="server">
         <div class="row justify-content-center">

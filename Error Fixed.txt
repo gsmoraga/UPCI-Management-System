@@ -1,0 +1,5 @@
+Dropdownlist always returns 0:
+https://stackoverflow.com/questions/35769178/selectedindex-is-always-0-in-dropdownlistasp-net-c
+and also if Dropdown has selectedindexchanged event\
+
+call selectedindexchanged instead of calling LoadDropdown methods

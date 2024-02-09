@@ -195,15 +195,6 @@ namespace Template
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuUser;
 
         /// <summary>
-        /// lbUserAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUserAdd;
-
-        /// <summary>
         /// lbUserSearch control.
         /// </summary>
         /// <remarks>
@@ -220,15 +211,6 @@ namespace Template
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuUserGroup;
-
-        /// <summary>
-        /// lbUserGroupAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbUserGroupAdd;
 
         /// <summary>
         /// lbUserGroupSearch control.

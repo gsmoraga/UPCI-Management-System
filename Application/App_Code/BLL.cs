@@ -42,163 +42,6 @@ public class BLL
         }
     }
 
-    /*****MAINTENANCE FUNCTIONS*****/
-
-    #region Contents
-    /**
-    * Filters the data table of maintenance type that match the filter string
-    * 
-    * @since version 1.0 
-    * @param string value - unique code identifier
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean GetContentType(string value)
-    {
-        DataTable dt = _DAL.GetContentType(value);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            return false;
-        }
-        else
-        {
-            Maintenance.content_description = Convert.ToString(dt.Rows[0]["description"]);
-            Maintenance.content_type = Convert.ToString(dt.Rows[0]["content_type"]);
-
-            return true;
-        }
-    }
-
-    /**
-    * Gets the list of entries in the database and binds it to a dropdown
-    * 
-    * @since version 1.0 
-    * @param ListBox box - list box where the list will be binded
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean GetBackendListBox(ListBox box)
-    {
-        try
-        {
-            DataTable dt = _DAL.FilterContents("", "0");
-            box.DataSource = dt;
-            box.DataValueField = "code";
-            box.DataTextField = "description";
-            box.DataBind();
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    /**
-    * Gets the list of entries in the database and binds it to a dropdown
-    * 
-    * @since version 1.0 
-    * @param ListBox box - list box where the list will be binded
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean GetFrontendListBox(ListBox box)
-    {
-        try
-        {
-            DataTable dt = _DAL.FilterContents("", "1");
-            box.DataSource = dt;
-            box.DataValueField = "code";
-            box.DataTextField = "description";
-            box.DataBind();
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    #endregion
-
-    #region Application Parameters
-    /**
-    * Edits the application parameters with the given values
-    * 
-    * @since version 1.0 
-    * @param string auditLogPurgeDays - number of days the audit logs will be kept before being purged from the system
-	* @param string retentionDaysSuccess - number of days that successful transactions will be retained before being automatically purged from the system
-	* @param string retentionDaysPending - number of days that pending transactions will be retained before being automatically purged from the system
-	* @param string churchEmailAddress - email address of the church that will be part of the email body of transaction notifications
-	* @param string churchHotline - phone numbers of the church that will be part of the email body of transaction notifications
-    * @param string churchName - name of the church that will be part of the email body of transaction notifications
-	* @param string profileExpirationDays - number of days from the current date that will appear as the default date for user Profile Expiration Date
-	* @param string ceasPassingScore - passing Score for CEAS
-	* @param string emailEngineSenderAddress - sender email address that will appear when receiving an email from the church
-	* @param string maxAllowedMobileDevices - maximum number of mobile devices to be enrolled in mobile application
-	* @param string profileExpirationWarningDays - number of days from the password expiry date before the user’s profile will be expired
-	* @param string passwordExpirationWarningDays - number of days from the password expiry date before the client will be sent a password expiry reminder
-	* @param string reportHeader - header for the reports
-	* @param string allowedSpecialCharacters - list of special characters allowed in the application
-	* @param string restrictedUsernameSpecialCharacters - list of characters that will not be accepted when validating user names or user ID
-	* @param string taskSummaryPurgeDays - date range for purging task summary. All data from the current date until the number of days specified will be saved and the rest will be purged
-	* @param string maxExtractableRecordCount - maximum number of record count of data table to be downloaded via pdf and xls
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean EditApplicationParameters(string websiteUrl, string auditLogPurgeDays, string retentionDaysSuccess, string retentionDaysPending, string churchEmailAddress,
-                                             string churchHotline, string churchName, string profileExpirationDays, string ceasPassingScore, string emailEngineSenderAddress,
-                                             string maxAllowedMobileDevices, string profileExpirationWarningDays, string passwordExpirationWarningDays, string reportHeader,
-                                             string allowedSpecialCharacters, string restrictedUsernameSpecialCharacters, string taskSummaryPurgeDays, string maxExtractableRecordCount,
-                                             string workHoursStartTime, string workHoursEndTime, string lunchHourStartTime, string lunchHourEndTime)
-    {
-        if (_DAL.EditApplicationParameters(websiteUrl, auditLogPurgeDays, retentionDaysSuccess, retentionDaysPending, churchEmailAddress,
-                                           churchHotline, churchName, profileExpirationDays, ceasPassingScore, emailEngineSenderAddress,
-                                           maxAllowedMobileDevices, profileExpirationWarningDays, passwordExpirationWarningDays, reportHeader,
-                                           allowedSpecialCharacters, restrictedUsernameSpecialCharacters, taskSummaryPurgeDays, maxExtractableRecordCount,
-                                           workHoursStartTime, workHoursEndTime, lunchHourStartTime, lunchHourEndTime) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    /**
-    * Filters the data table of application parameters
-    * 
-    * @since version 1.0 
-    * @param 
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean GetApplicationParameters()
-    {
-        DataTable dt = _DAL.GetApplicationParameters();
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            return false;
-        }
-        else
-        {
-            Maintenance.website_url = Convert.ToString(dt.Rows[0]["website_url"]);
-            Maintenance.audit_log_purge_days = Convert.ToString(dt.Rows[0]["audit_log_purge_days"]);
-            Maintenance.bank_email_address = Convert.ToString(dt.Rows[0]["church_email_address"]);
-            Maintenance.bank_hotline = Convert.ToString(dt.Rows[0]["church_hotline"]);
-            Maintenance.bank_name = Convert.ToString(dt.Rows[0]["church_name"]);
-            Maintenance.profile_expiration_days = Convert.ToString(dt.Rows[0]["profile_expiration_days"]);
-            Maintenance.email_engine_sender_address = Convert.ToString(dt.Rows[0]["email_engine_sender_address"]);
-            Maintenance.max_allowed_mobile_devices = Convert.ToString(dt.Rows[0]["max_allowed_mobile_devices"]);
-            Maintenance.profile_expiration_warning_days = Convert.ToString(dt.Rows[0]["profile_expiration_warning_days"]);
-            Maintenance.password_expiration_warning_days = Convert.ToString(dt.Rows[0]["password_expiration_warning_days"]);
-            Maintenance.report_header = Convert.ToString(dt.Rows[0]["report_header"]);
-            Maintenance.allowed_special_characters_application = Convert.ToString(dt.Rows[0]["allowed_special_characters"]);
-            Maintenance.restricted_username_special_characters = Convert.ToString(dt.Rows[0]["restricted_username_special_characters"]);
-            Maintenance.task_summary_purge_days = Convert.ToString(dt.Rows[0]["task_summary_purge_days"]);
-            Maintenance.max_extractable_record_count = Convert.ToString(dt.Rows[0]["max_extractable_record_count"]);
-
-            return true;
-        }
-    }
-
-    #endregion
-
     #region Branch
     /**
     * Adds a branch entry with the given details to the database
@@ -635,6 +478,273 @@ public class BLL
     }
     #endregion
 
+
+    #region UPCI
+
+    #region Contents
+    /**
+    * Filters the data table of maintenance type that match the filter string
+    * 
+    * @since version 1.0 
+    * @param string value - unique code identifier
+    * @return Boolean true if successful, false otherwise
+    */
+    public Boolean GetContentType(string value)
+    {
+        DataTable dt = _DAL.GetContentType(value);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            return false;
+        }
+        else
+        {
+            Maintenance.content_description = Convert.ToString(dt.Rows[0]["description"]);
+            Maintenance.content_type = Convert.ToString(dt.Rows[0]["content_type"]);
+
+            return true;
+        }
+    }
+
+    /**
+    * Gets the list of entries in the database and binds it to a dropdown
+    * 
+    * @since version 1.0 
+    * @param ListBox box - list box where the list will be binded
+    * @return Boolean true if successful, false otherwise
+    */
+    public Boolean GetBackendListBox(ListBox box)
+    {
+        try
+        {
+            DataTable dt = _DAL.FilterContents("", "0");
+            box.DataSource = dt;
+            box.DataValueField = "code";
+            box.DataTextField = "description";
+            box.DataBind();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /**
+    * Gets the list of entries in the database and binds it to a dropdown
+    * 
+    * @since version 1.0 
+    * @param ListBox box - list box where the list will be binded
+    * @return Boolean true if successful, false otherwise
+    */
+    public Boolean GetFrontendListBox(ListBox box)
+    {
+        try
+        {
+            DataTable dt = _DAL.FilterContents("", "1");
+            box.DataSource = dt;
+            box.DataValueField = "code";
+            box.DataTextField = "description";
+            box.DataBind();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    #endregion
+
+    #region Member
+    public Boolean GetMinistryDropdown(DropDownList dd, string item)
+    {
+        try
+        {
+            DataTable dt = _DAL.GetMinistryDropdown();
+            dd.DataSource = dt;
+            dd.DataValueField = "code";
+            dd.DataTextField = "description";
+            dd.DataBind();
+            dd.Items.Insert(0, new ListItem(item, "0"));
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public Boolean AddMember(string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment
+        , string dateFirstAttend, string cell, string baptismal, string pepsol, string membershipStatus, string createdBy)
+    {
+        if (_DAL.AddMember(firstName, middleName, lastName, gender, birthdate, email, mobileNumber, ministry, ministryDepartment, dateFirstAttend, cell, baptismal, pepsol, membershipStatus, createdBy) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+    public Boolean EditMember(string memberId, string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment
+        , string dateFirstAttend, string cell, string baptismal, string pepsol, string membershipStatus)
+    {
+        if (_DAL.EditMember(memberId, firstName, middleName, lastName, gender, birthdate, email, mobileNumber, ministry, ministryDepartment, dateFirstAttend, cell, baptismal, pepsol, membershipStatus) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+    /**
+    * Filters the data table of users that match the filter string
+    * 
+    * @since version 1.0 
+    * @param GridView pObj - grid view where the data table will be binded to
+    * @param string code - code to search
+    * @param string description - description to search
+    * @param string userId - user ID of the current user
+    * @return Boolean true if successful, false otherwise
+    */
+    public Boolean FilterMembers(GridView pObj, string name)
+    {
+        DataTable dt = _DAL.FilterMember(name);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            pObj.DataSource = null;
+            pObj.DataBind();
+            return false;
+        }
+        else
+        {
+            pObj.DataSource = dt;
+            pObj.DataBind();
+
+            return true;
+        }
+    }
+
+    public Boolean GetMemberDeatils(string value)
+    {
+        DataTable dt = _DAL.GetMemberDetails(value);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            return false;
+        }
+        else
+        {
+            Member.member_id = Convert.ToString(dt.Rows[0]["Member ID"]);
+            Member.first_name = Convert.ToString(dt.Rows[0]["first_name"]);
+            Member.middle_name = Convert.ToString(dt.Rows[0]["middle_name"]);
+            Member.last_name = Convert.ToString(dt.Rows[0]["last_name"]);
+            Member.email = Convert.ToString(dt.Rows[0]["Email"]);
+            Member.gender = Convert.ToString(dt.Rows[0]["gender_desc"]);
+            Member.birthday = Convert.ToString(dt.Rows[0]["Birthday"]);
+            Member.mobile_number = Convert.ToString(dt.Rows[0]["Mobile Number"]);
+
+            Member.ministry = Convert.ToString(dt.Rows[0]["ministry_desc"]);
+            Member.ministry_department = Convert.ToString(dt.Rows[0]["ministry_dept"]);
+            Member.cell_status = Convert.ToString(dt.Rows[0]["cell_desc"]);
+            Member.baptismal_status = Convert.ToString(dt.Rows[0]["baptismal_desc"]);
+            Member.pepsol_level = Convert.ToString(dt.Rows[0]["pepsol_desc"]);
+            Member.membership_status = Convert.ToString(dt.Rows[0]["status_desc"]);
+
+            Member.gender_code = Convert.ToString(dt.Rows[0]["gender"]);
+            Member.ministry_code = Convert.ToString(dt.Rows[0]["ministry"]);
+            Member.ministry_dept_code = Convert.ToString(dt.Rows[0]["ministry_department"]);
+            Member.cell_status_code = Convert.ToString(dt.Rows[0]["cell"]);
+            Member.baptismal_status_code = Convert.ToString(dt.Rows[0]["baptismal"]);
+            Member.pepsol_level_code = Convert.ToString(dt.Rows[0]["pepsol"]);
+            Member.membership_status_code = Convert.ToString(dt.Rows[0]["membership_status"]);
+            return true;
+        }
+    }
+    #endregion
+
+    /*****MAINTENANCE FUNCTIONS*****/
+    #region Maintenance
+
+    #region Application Administration
+
+    #region Application Parameters
+    /**
+    * Edits the application parameters with the given values
+    * 
+    * @since version 1.0 
+    * @param string auditLogPurgeDays - number of days the audit logs will be kept before being purged from the system
+	* @param string retentionDaysSuccess - number of days that successful transactions will be retained before being automatically purged from the system
+	* @param string retentionDaysPending - number of days that pending transactions will be retained before being automatically purged from the system
+	* @param string churchEmailAddress - email address of the church that will be part of the email body of transaction notifications
+	* @param string churchHotline - phone numbers of the church that will be part of the email body of transaction notifications
+    * @param string churchName - name of the church that will be part of the email body of transaction notifications
+	* @param string profileExpirationDays - number of days from the current date that will appear as the default date for user Profile Expiration Date
+	* @param string ceasPassingScore - passing Score for CEAS
+	* @param string emailEngineSenderAddress - sender email address that will appear when receiving an email from the church
+	* @param string maxAllowedMobileDevices - maximum number of mobile devices to be enrolled in mobile application
+	* @param string profileExpirationWarningDays - number of days from the password expiry date before the user’s profile will be expired
+	* @param string passwordExpirationWarningDays - number of days from the password expiry date before the client will be sent a password expiry reminder
+	* @param string reportHeader - header for the reports
+	* @param string allowedSpecialCharacters - list of special characters allowed in the application
+	* @param string restrictedUsernameSpecialCharacters - list of characters that will not be accepted when validating user names or user ID
+	* @param string taskSummaryPurgeDays - date range for purging task summary. All data from the current date until the number of days specified will be saved and the rest will be purged
+	* @param string maxExtractableRecordCount - maximum number of record count of data table to be downloaded via pdf and xls
+    * @return Boolean true if successful, false otherwise
+    */
+    public Boolean EditApplicationParameters(string websiteUrl, string auditLogPurgeDays, string retentionDaysSuccess, string retentionDaysPending, string churchEmailAddress,
+                                             string churchHotline, string churchName, string profileExpirationDays, string ceasPassingScore, string emailEngineSenderAddress,
+                                             string maxAllowedMobileDevices, string profileExpirationWarningDays, string passwordExpirationWarningDays, string reportHeader,
+                                             string allowedSpecialCharacters, string restrictedUsernameSpecialCharacters, string taskSummaryPurgeDays, string maxExtractableRecordCount,
+                                             string workHoursStartTime, string workHoursEndTime, string lunchHourStartTime, string lunchHourEndTime)
+    {
+        if (_DAL.EditApplicationParameters(websiteUrl, auditLogPurgeDays, retentionDaysSuccess, retentionDaysPending, churchEmailAddress,
+                                           churchHotline, churchName, profileExpirationDays, ceasPassingScore, emailEngineSenderAddress,
+                                           maxAllowedMobileDevices, profileExpirationWarningDays, passwordExpirationWarningDays, reportHeader,
+                                           allowedSpecialCharacters, restrictedUsernameSpecialCharacters, taskSummaryPurgeDays, maxExtractableRecordCount,
+                                           workHoursStartTime, workHoursEndTime, lunchHourStartTime, lunchHourEndTime) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    /**
+    * Filters the data table of application parameters
+    * 
+    * @since version 1.0 
+    * @param 
+    * @return Boolean true if successful, false otherwise
+    */
+    public Boolean GetApplicationParameters()
+    {
+        DataTable dt = _DAL.GetApplicationParameters();
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            return false;
+        }
+        else
+        {
+            Maintenance.website_url = Convert.ToString(dt.Rows[0]["website_url"]);
+            Maintenance.audit_log_purge_days = Convert.ToString(dt.Rows[0]["audit_log_purge_days"]);
+            Maintenance.bank_email_address = Convert.ToString(dt.Rows[0]["church_email_address"]);
+            Maintenance.bank_hotline = Convert.ToString(dt.Rows[0]["church_hotline"]);
+            Maintenance.bank_name = Convert.ToString(dt.Rows[0]["church_name"]);
+            Maintenance.profile_expiration_days = Convert.ToString(dt.Rows[0]["profile_expiration_days"]);
+            Maintenance.email_engine_sender_address = Convert.ToString(dt.Rows[0]["email_engine_sender_address"]);
+            Maintenance.max_allowed_mobile_devices = Convert.ToString(dt.Rows[0]["max_allowed_mobile_devices"]);
+            Maintenance.profile_expiration_warning_days = Convert.ToString(dt.Rows[0]["profile_expiration_warning_days"]);
+            Maintenance.password_expiration_warning_days = Convert.ToString(dt.Rows[0]["password_expiration_warning_days"]);
+            Maintenance.report_header = Convert.ToString(dt.Rows[0]["report_header"]);
+            Maintenance.allowed_special_characters_application = Convert.ToString(dt.Rows[0]["allowed_special_characters"]);
+            Maintenance.restricted_username_special_characters = Convert.ToString(dt.Rows[0]["restricted_username_special_characters"]);
+            Maintenance.task_summary_purge_days = Convert.ToString(dt.Rows[0]["task_summary_purge_days"]);
+            Maintenance.max_extractable_record_count = Convert.ToString(dt.Rows[0]["max_extractable_record_count"]);
+
+            return true;
+        }
+    }
+
+    #endregion
+
     #region Security Parameters
     /**
     * Edits the security parameters with the given values
@@ -699,6 +809,203 @@ public class BLL
     }
     #endregion
 
+    #endregion
+
+    #region Ministry Department
+    public Boolean AddMinistryDepartment(string code, string ministryCode, string description, string createdBy)
+    {
+        if (_DAL.AddMinistryDepartment(code, ministryCode, description, createdBy) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    public Boolean EditMinistryDepartment(string code, string description, string ministryCode)
+    {
+        if (_DAL.EditMinistryDepartment(code, description, ministryCode) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    public Boolean DeleteMinistryDepartment(string code)
+    {
+        if (_DAL.DeleteMinistryDepartment(code) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+    public Boolean FilterMinistryDepartment(GridView pObj, string code, string description)
+    {
+        DataTable dt = _DAL.FilterMinistryDepartment(code, description);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            pObj.DataSource = null;
+            pObj.DataBind();
+            return false;
+        }
+        else
+        {
+            pObj.DataSource = dt;
+            pObj.DataBind();
+
+            return true;
+        }
+    }
+
+    public Boolean GetMinistryDepartmentDetails(string value)
+    {
+        DataTable dt = _DAL.GetMinistryDepartmentDetails(value);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            return false;
+        }
+        else
+        {
+            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
+            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
+            Maintenance.ministry_description = Convert.ToString(dt.Rows[0]["ministry_description"]);
+            Maintenance.ministry_code = Convert.ToString(dt.Rows[0]["ministry_code"]);
+
+            return true;
+        }
+    }
+
+    #endregion
+
+    #region Ministry
+    public Boolean DeleteMinistry(string code)
+    {
+        if (_DAL.DeleteMinistry(code) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+    public Boolean EditMinistry(string code, string description)
+    {
+        if (_DAL.EditMinistry(code, description) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+    public Boolean AddMinistry(string code, string description, string createdBy)
+    {
+        if (_DAL.AddMinistry(code, description, createdBy) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    public Boolean FilterMinistry(GridView pObj, string code, string description)
+    {
+        DataTable dt = _DAL.FilterMinistry(code, description);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            pObj.DataSource = null;
+            pObj.DataBind();
+            return false;
+        }
+        else
+        {
+            pObj.DataSource = dt;
+            pObj.DataBind();
+
+            return true;
+        }
+    }
+
+    public Boolean GetMinistryDetails(string value)
+    {
+        DataTable dt = _DAL.GetMinistryDetails(value);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            return false;
+        }
+        else
+        {
+            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
+            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
+
+            return true;
+        }
+    }
+    #endregion
+
+    #region Pepsol
+    public Boolean AddPepsol(string code, string description, string createdBy)
+    {
+        if (_DAL.AddPepsol(code, description, createdBy) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    public Boolean EditPepsol(string code, string description)
+    {
+        if (_DAL.EditPepsol(code, description) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    public Boolean DeletePepsol(string code)
+    {
+        if (_DAL.DeletePepsol(code) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+    public Boolean FilterPepsol(GridView pObj, string code, string description)
+    {
+        DataTable dt = _DAL.FilterPepsol(code, description);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            pObj.DataSource = null;
+            pObj.DataBind();
+            return false;
+        }
+        else
+        {
+            pObj.DataSource = dt;
+            pObj.DataBind();
+
+            return true;
+        }
+    }
+
+    public Boolean GetPepsolDetails(string value)
+    {
+        DataTable dt = _DAL.GetPepsolDetails(value);
+
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            return false;
+        }
+        else
+        {
+            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
+            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
+
+            return true;
+        }
+    }
+
+    #endregion
+
     #region User
     /**
     * Adds a user with the given details to the database
@@ -719,9 +1026,9 @@ public class BLL
     * @param string created_by - name of the employee who added the user
     * @return Boolean true if successful, false otherwise
     */
-    public Boolean AddUser(string employeeNumber, string userID, string firstName, string middleName, string lastName, string userGroup, string department, string branch, string profileExpirationDate, string email, string mobileNumber, string status, string createdBy)
+    public Boolean AddUser(string memberID, string userID, string firstName, string middleName, string lastName, string userGroup, string ministry, string ministryDepartment, string profileExpirationDate, string email, string mobileNumber, string password, string status, string createdBy)
     {
-        if (_DAL.AddUser(employeeNumber, userID, firstName, middleName, lastName, userGroup, department, branch, profileExpirationDate, email, mobileNumber, status, createdBy) == false)
+        if (_DAL.AddUser(memberID, userID, firstName, middleName, lastName, userGroup, ministry, ministryDepartment, profileExpirationDate, email, mobileNumber, password, status, createdBy) == false)
         {
             return false;
         }
@@ -747,9 +1054,9 @@ public class BLL
     * @param string created_by - name of the employee who added the user
     * @return Boolean true if successful, false otherwise
     */
-    public Boolean EditUser(string employeeNumber, string userID, string firstName, string middleName, string lastName, string userGroup, string department, string branch, string profileExpirationDate, string email, string mobileNumber, string status)
+    public Boolean EditUser(string userID, string firstName, string middleName, string lastName, string userGroup, string department, string ministry, string profileExpirationDate, string email, string mobileNumber, string status)
     {
-        if (_DAL.EditUser(employeeNumber, userID, firstName, middleName, lastName, userGroup, department, branch, profileExpirationDate, email, mobileNumber, status) == false)
+        if (_DAL.EditUser(userID, firstName, middleName, lastName, userGroup, department, ministry, profileExpirationDate, email, mobileNumber, status) == false)
         {
             return false;
         }
@@ -782,9 +1089,9 @@ public class BLL
     * @param string userId - user ID of the current user
     * @return Boolean true if successful, false otherwise
     */
-    public Boolean FilterUser(GridView pObj, string code, string lastName, string firstName, string middleName, string userId, string userGroup, string division, string department, string branch, string status)
+    public Boolean FilterUser(GridView pObj, string userID, string fullName, string accessUserID)
     {
-        DataTable dt = _DAL.FilterUser(code, lastName, firstName, middleName, userId, userGroup, division, department, branch, status);
+        DataTable dt = _DAL.FilterUser(userID, fullName, accessUserID);
 
         if (dt == null || dt.Rows.Count < 1)
         {
@@ -829,7 +1136,32 @@ public class BLL
             return true;
         }
     }
+    public Boolean GetUserDetails(string value)
+    {
+        DataTable dt = _DAL.GetUserDetails(value);
 
+        if (dt == null || dt.Rows.Count < 1)
+        {
+            return false;
+        }
+        else
+        {
+            Maintenance.member_id = Convert.ToString(dt.Rows[0]["member_id"]);
+            Maintenance.user_id = Convert.ToString(dt.Rows[0]["user_id"]);
+            Maintenance.first_name = Convert.ToString(dt.Rows[0]["first_name"]);
+            Maintenance.middle_name = Convert.ToString(dt.Rows[0]["middle_name"]);
+            Maintenance.last_name = Convert.ToString(dt.Rows[0]["last_name"]);
+            Maintenance.user_group_desc = Convert.ToString(dt.Rows[0]["user_group_name"]);
+            Maintenance.ministry_description = Convert.ToString(dt.Rows[0]["ministry_desc"]);
+            Maintenance.ministry_dept_desc = Convert.ToString(dt.Rows[0]["department_desc"]);
+            Maintenance.email = Convert.ToString(dt.Rows[0]["email"]);
+            Maintenance.mobile_number = Convert.ToString(dt.Rows[0]["mobile_number"]);
+            Maintenance.status_description = Convert.ToString(dt.Rows[0]["status_desc"]);
+            Maintenance.profile_expiration_date = (DateTime)dt.Rows[0]["profile_expiration_date"];
+
+            return true;
+        }
+    }
     /**
     * Filters the data table row of the user that matches the given user ID
     * 
@@ -847,15 +1179,15 @@ public class BLL
         }
         else
         {
-            Maintenance.member_number = Convert.ToString(dt.Rows[0]["member_number"]);
+            Maintenance.member_id = Convert.ToString(dt.Rows[0]["member_id"]);
             Maintenance.user_id = Convert.ToString(dt.Rows[0]["user_id"]);
             Maintenance.first_name = Convert.ToString(dt.Rows[0]["first_name"]);
             Maintenance.middle_name = Convert.ToString(dt.Rows[0]["middle_name"]);
             Maintenance.last_name = Convert.ToString(dt.Rows[0]["last_name"]);
             Maintenance.user_group = Convert.ToString(dt.Rows[0]["user_group"]);
             Maintenance.access_rights = Convert.ToString(dt.Rows[0]["access_rights"]);
-            Maintenance.department = Convert.ToString(dt.Rows[0]["department"]);
-            Maintenance.branch = Convert.ToString(dt.Rows[0]["branch"]);
+            Maintenance.ministry_code = Convert.ToString(dt.Rows[0]["ministry"]);
+            Maintenance.ministry_dept_code = Convert.ToString(dt.Rows[0]["ministry_department"]);
             Maintenance.email = Convert.ToString(dt.Rows[0]["email"]);
             Maintenance.mobile_number = Convert.ToString(dt.Rows[0]["mobile_number"]);
             Maintenance.status = Convert.ToString(dt.Rows[0]["status"]);
@@ -882,7 +1214,7 @@ public class BLL
         }
         else
         {
-            Employee.member_number = Convert.ToString(dt.Rows[0]["member_number"]);
+            Employee.member_number = Convert.ToString(dt.Rows[0]["member_id"]);
             Employee.user_id = Convert.ToString(dt.Rows[0]["user_id"]);
             Employee.first_name = Convert.ToString(dt.Rows[0]["first_name"]);
             Employee.middle_name = Convert.ToString(dt.Rows[0]["middle_name"]);
@@ -890,8 +1222,8 @@ public class BLL
             Employee.user_group = Convert.ToString(dt.Rows[0]["user_group"]);
             Employee.user_group_name = Convert.ToString(dt.Rows[0]["user_group_name"]);
             Employee.access_rights = Convert.ToString(dt.Rows[0]["access_rights"]);
-            Employee.department = Convert.ToString(dt.Rows[0]["department"]);
-            Employee.branch = Convert.ToString(dt.Rows[0]["branch"]);
+            Employee.department = Convert.ToString(dt.Rows[0]["ministry_department"]);
+            //Employee.branch = Convert.ToString(dt.Rows[0]["branch"]);
             Employee.email = Convert.ToString(dt.Rows[0]["email"]);
             Employee.mobile_number = Convert.ToString(dt.Rows[0]["mobile_number"]);
             Employee.password = Convert.ToString(dt.Rows[0]["password"]);
@@ -1154,6 +1486,8 @@ public class BLL
 
     #endregion
 
+    #endregion
+
     /*****OTHER FUNCTIONS*****/
 
     #region Active Session
@@ -1343,6 +1677,62 @@ public class BLL
         }
     }
 
+    #endregion
+
+    #region Dropdowns
+    public Boolean GetMemberDropdown(DropDownList dd, string item)
+    {
+        try
+        {
+            DataTable dt = _DAL.GetMemberDropdown();
+            dd.DataSource = dt;
+            dd.DataValueField = "member_id";
+            dd.DataTextField = "name";
+            dd.DataBind();
+            dd.Items.Insert(0, new ListItem(item, "0"));
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public Boolean GetMinistryDepartmentDropdown(DropDownList dd, string item, string ministryCode)
+    {
+        try
+        {
+            DataTable dt = _DAL.GetMinistryDepartmentDropdown(ministryCode);
+            dd.DataSource = dt;
+            dd.DataValueField = "code";
+            dd.DataTextField = "description";
+            dd.DataBind();
+            dd.Items.Insert(0, new ListItem(item, "0"));
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public Boolean GetPepsolDropdown(DropDownList dd, string item)
+    {
+        try
+        {
+            DataTable dt = _DAL.GetPepsolDropdown();
+            dd.DataSource = dt;
+            dd.DataValueField = "code";
+            dd.DataTextField = "description";
+            dd.DataBind();
+            dd.Items.Insert(0, new ListItem(item, "0"));
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
     #endregion
 
     #region Email Notification
@@ -1691,345 +2081,6 @@ public class BLL
         }
     }
 
-    #endregion
-
-    #region UPCI
-
-    #region Member
-    public Boolean AddMember(string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment
-        , string dateFirstAttend, string cell, string baptismal, string pepsol, string membershipStatus, string createdBy)
-    {
-        if (_DAL.AddMember(firstName, middleName, lastName, gender, birthdate, email, mobileNumber, ministry, ministryDepartment, dateFirstAttend, cell, baptismal, pepsol, membershipStatus, createdBy) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-    public Boolean EditMember(string memberId, string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment
-        , string dateFirstAttend, string cell, string baptismal, string pepsol, string membershipStatus)
-    {
-        if (_DAL.EditMember(memberId, firstName, middleName, lastName, gender, birthdate, email, mobileNumber, ministry, ministryDepartment, dateFirstAttend, cell, baptismal, pepsol, membershipStatus) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-    /**
-    * Filters the data table of users that match the filter string
-    * 
-    * @since version 1.0 
-    * @param GridView pObj - grid view where the data table will be binded to
-    * @param string code - code to search
-    * @param string description - description to search
-    * @param string userId - user ID of the current user
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean FilterMembers(GridView pObj, string name)
-    {
-        DataTable dt = _DAL.FilterMember(name);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            pObj.DataSource = null;
-            pObj.DataBind();
-            return false;
-        }
-        else
-        {
-            pObj.DataSource = dt;
-            pObj.DataBind();
-
-            return true;
-        }
-    }
-
-    public Boolean GetMemberDeatils(string value)
-    {
-        DataTable dt = _DAL.GetMemberDetails(value);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            return false;
-        }
-        else
-        {
-            Member.member_id = Convert.ToString(dt.Rows[0]["Member ID"]);
-            Member.first_name = Convert.ToString(dt.Rows[0]["first_name"]);
-            Member.middle_name = Convert.ToString(dt.Rows[0]["middle_name"]);
-            Member.last_name = Convert.ToString(dt.Rows[0]["last_name"]);
-            Member.email = Convert.ToString(dt.Rows[0]["Email"]);
-            Member.gender = Convert.ToString(dt.Rows[0]["gender_desc"]);
-            Member.birthday = Convert.ToString(dt.Rows[0]["Birthday"]);
-            Member.mobile_number = Convert.ToString(dt.Rows[0]["Mobile Number"]);
-
-            Member.ministry = Convert.ToString(dt.Rows[0]["ministry_desc"]);
-            Member.ministry_department = Convert.ToString(dt.Rows[0]["ministry_dept"]);
-            Member.cell_status = Convert.ToString(dt.Rows[0]["cell_desc"]);
-            Member.baptismal_status = Convert.ToString(dt.Rows[0]["baptismal_desc"]);
-            Member.pepsol_level = Convert.ToString(dt.Rows[0]["pepsol_desc"]);
-            Member.membership_status = Convert.ToString(dt.Rows[0]["status_desc"]);
-
-            Member.gender_code = Convert.ToString(dt.Rows[0]["gender"]);
-            Member.ministry_code = Convert.ToString(dt.Rows[0]["ministry"]);
-            Member.ministry_dept_code = Convert.ToString(dt.Rows[0]["ministry_department"]);
-            Member.cell_status_code = Convert.ToString(dt.Rows[0]["cell"]);
-            Member.baptismal_status_code = Convert.ToString(dt.Rows[0]["baptismal"]);
-            Member.pepsol_level_code = Convert.ToString(dt.Rows[0]["pepsol"]);
-            Member.membership_status_code = Convert.ToString(dt.Rows[0]["membership_status"]);
-            return true;
-        }
-    }
-    #endregion
-
-    #region Ministry Department
-    public Boolean AddMinistryDepartment(string code, string ministryCode, string description, string createdBy)
-    {
-        if (_DAL.AddMinistryDepartment(code, ministryCode, description, createdBy) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    public Boolean EditMinistryDepartment(string code, string description, string ministryCode)
-    {
-        if (_DAL.EditMinistryDepartment(code, description, ministryCode) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    public Boolean DeleteMinistryDepartment(string code)
-    {
-        if (_DAL.DeleteMinistryDepartment(code) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-    public Boolean FilterMinistryDepartment(GridView pObj, string code, string description)
-    {
-        DataTable dt = _DAL.FilterMinistryDepartment(code, description);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            pObj.DataSource = null;
-            pObj.DataBind();
-            return false;
-        }
-        else
-        {
-            pObj.DataSource = dt;
-            pObj.DataBind();
-
-            return true;
-        }
-    }
-
-    public Boolean GetMinistryDepartmentDetails(string value)
-    {
-        DataTable dt = _DAL.GetMinistryDepartmentDetails(value);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            return false;
-        }
-        else
-        {
-            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
-            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
-            Maintenance.ministry_description = Convert.ToString(dt.Rows[0]["ministry_desc"]);
-            Maintenance.ministry_code = Convert.ToString(dt.Rows[0]["ministry_code"]);
-
-            return true;
-        }
-    }
-
-    #endregion
-
-    #region Ministry
-    public Boolean DeleteMinistry(string code)
-    {
-        if (_DAL.DeleteMinistry(code) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-    public Boolean EditMinistry(string code, string description)
-    {
-        if (_DAL.EditMinistry(code, description) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-    public Boolean AddMinistry(string code, string description, string createdBy)
-    {
-        if (_DAL.AddMinistry(code, description, createdBy) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    public Boolean FilterMinistry(GridView pObj, string code, string description)
-    {
-        DataTable dt = _DAL.FilterMinistry(code, description);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            pObj.DataSource = null;
-            pObj.DataBind();
-            return false;
-        }
-        else
-        {
-            pObj.DataSource = dt;
-            pObj.DataBind();
-
-            return true;
-        }
-    }
-
-    public Boolean GetMinistryDetails(string value)
-    {
-        DataTable dt = _DAL.GetMinistryDetails(value);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            return false;
-        }
-        else
-        {
-            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
-            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
-
-            return true;
-        }
-    }
-    #endregion
-
-    #region Pepsol
-    public Boolean AddPepsol(string code, string description, string createdBy)
-    {
-        if (_DAL.AddPepsol(code, description, createdBy) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    public Boolean EditPepsol(string code, string description)
-    {
-        if (_DAL.EditPepsol(code, description) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    public Boolean DeletePepsol(string code)
-    {
-        if (_DAL.DeletePepsol(code) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-    public Boolean FilterPepsol(GridView pObj, string code, string description)
-    {
-        DataTable dt = _DAL.FilterPepsol(code, description);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            pObj.DataSource = null;
-            pObj.DataBind();
-            return false;
-        }
-        else
-        {
-            pObj.DataSource = dt;
-            pObj.DataBind();
-
-            return true;
-        }
-    }
-
-    public Boolean GetPepsolDetails(string value)
-    {
-        DataTable dt = _DAL.GetPepsolDetails(value);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            return false;
-        }
-        else
-        {
-            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
-            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
-
-            return true;
-        }
-    }
-
-    #endregion
-
-    #region Dropdowns
-    public Boolean GetMinistryDropdown(DropDownList dd, string item)
-    {
-        try
-        {
-            DataTable dt = _DAL.GetMinistryDropdown();
-            dd.DataSource = dt;
-            dd.DataValueField = "code";
-            dd.DataTextField = "description";
-            dd.DataBind();
-            dd.Items.Insert(0, new ListItem(item, "0"));
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    public Boolean GetMinistryDepartmentDropdown(DropDownList dd, string item, string ministryCode)
-    {
-        try
-        {
-            DataTable dt = _DAL.GetMinistryDepartmentDropdown(ministryCode);
-            dd.DataSource = dt;
-            dd.DataValueField = "code";
-            dd.DataTextField = "description";
-            dd.DataBind();
-            dd.Items.Insert(0, new ListItem(item, "0"));
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    public Boolean GetPepsolDropdown(DropDownList dd, string item)
-    {
-        try
-        {
-            DataTable dt = _DAL.GetPepsolDropdown();
-            dd.DataSource = dt;
-            dd.DataValueField = "code";
-            dd.DataTextField = "description";
-            dd.DataBind();
-            dd.Items.Insert(0, new ListItem(item, "0"));
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
     #endregion
 
     #endregion

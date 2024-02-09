@@ -62,7 +62,7 @@ namespace Template
         protected void LoadMenu()
         {
             string accessRights = Employee.access_rights;
-
+            
             Regex r = new Regex("&m[0-9]", RegexOptions.IgnoreCase);
             if (r.Match(accessRights).Success)
             {
@@ -80,8 +80,7 @@ namespace Template
                 }
 
                 if (accessRights.Contains(VG.ar_user_group) ||
-                    accessRights.Contains(VG.ar_user) ||
-                    accessRights.Contains(VG.ar_pepsol))
+                    accessRights.Contains(VG.ar_user))
                 {
                     menuUserManagement.Visible = true;
 
@@ -89,19 +88,16 @@ namespace Template
                     {
                         menuUserGroup.Visible = true;
 
-                        if (accessRights.Contains("&m4a,"))
-                            lbUserGroupAdd.Visible = true;
-                        if (accessRights.Contains("&m4d,") || accessRights.Contains("&m4e,") || accessRights.Contains("&m4v,"))
+                        if (accessRights.Contains("&m4d,") || accessRights.Contains("&m4e,"))
                             lbUserGroupSearch.Visible = true;
                     }
 
                     if (accessRights.Contains(VG.ar_user))
                     {
+                        
                         menuUser.Visible = true;
-
-                        if (accessRights.Contains("&m5a,"))
-                            lbUserAdd.Visible = true;
-                        if (accessRights.Contains("&m5d,") || accessRights.Contains("&m5e,") || accessRights.Contains("&m5v,"))
+                        
+                        if (accessRights.Contains("&m5d,") || accessRights.Contains("&m5e,"))
                             lbUserSearch.Visible = true;
                     }
 
@@ -241,6 +237,27 @@ namespace Template
             Response.Redirect("pepsol-search.aspx", false);
         }
         #endregion
+
+        #region User
+        protected void lbUserSearch_Click(object sender, EventArgs e)
+        {
+            Maintenance.content_code = VG.c_user;
+
+            ResetMaintenanceFilters();
+            Response.Redirect("user-search.aspx", false);
+        }
+        #endregion
+
+        #region User Group
+        protected void lbUserGroupSearch_Click(object sender, EventArgs e)
+        {
+            Maintenance.content_code = VG.c_user_group;
+
+            ResetMaintenanceFilters();
+            Response.Redirect("group-user-search.aspx", false);
+        }
+        #endregion
+
         public void ResetMaintenanceFilters()
         {
             Maintenance.code_filter = "";
@@ -248,6 +265,6 @@ namespace Template
             Maintenance.page_index = 0; ;
         }
 
-
+        
     }
 }

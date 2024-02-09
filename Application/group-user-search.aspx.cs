@@ -1,22 +1,23 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.pdf;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
 using iTextSharp.tool.xml;
-using OfficeOpenXml;
 using OfficeOpenXml.Table;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static System.Net.Mime.MediaTypeNames;
+using System.Text.RegularExpressions;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
+using System.Net.NetworkInformation;
 
 namespace Template
 {
-    public partial class manage_members : System.Web.UI.Page
+    public partial class user_group_search : System.Web.UI.Page
     {
         DAL _DAL = new DAL();
         private BLL _BLL = new BLL();
@@ -49,22 +50,28 @@ namespace Template
                             { }
                             else
                             {
-                                if (accessRights.Contains("&a" + Maintenance.content_code + "s,"))
+                                if (accessRights.Contains("&m" + Maintenance.content_code + "d,") || accessRights.Contains("&m" + Maintenance.content_code + "e,"))
                                 {
                                     divSearch.Visible = true;
                                     lbSearch.Visible = true;
                                     divExport.Visible = true;
                                 }
-
-                                if (accessRights.Contains("&a" + Maintenance.content_code + "a,"))
+                                if (accessRights.Contains("&m" + Maintenance.content_code + "a,"))
                                 {
                                     lbAdd.Visible = true;
                                 }
+
+                                #region Titles
+                                contentHeader.Text = "Manage " + Maintenance.content_description;
+                                mainBreadcrumb.Text = "Manage " + Maintenance.content_description;
+                                //subItemBreadcrumb.Text = Maintenance.mode;
+                                cardTitle.Text = Maintenance.content_description + " List";
+                                #endregion
                             }
                         }
 
                         gvMaintenance.PagerSettings.Visible = false; //hide Gridview Pager 
-                        LoadMaintenanceData("");
+                        LoadMaintenanceData("", "");
 
                         _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "", Request.UserHostAddress.ToString());
                     }
@@ -72,35 +79,31 @@ namespace Template
             }
         }
 
-
         #region Search
-        protected void LoadMaintenanceData(string name)
+        protected void LoadMaintenanceData(string code, string description)
         {
             Boolean result = false;
-            result = _BLL.FilterMembers(gvMaintenance, name);
+            result = _BLL.FilterUserGroup(gvMaintenance, code, description, Employee.user_group);
 
             if (result == false)
             {
-                //gvCheckBox.Visible = false;
-                //lbDeleteSelected.Visible = false;
-                divPager.Visible = true;
-                divExport.Visible = false;
+                divPager.Visible = false;
             }
             else
             {
-                //gvCheckBox.Visible = true;
-                //lbDeleteSelected.Visible = true;
-                divPager.Visible = true;
                 divExport.Visible = true;
+                divPager.Visible = true;
                 PopulatePager(gvMaintenance.PageCount);
             }
+
+
         }
 
         protected void lbSearch_Click(object sender, EventArgs e)
         {
             if (_BLL.SessionIsActive(this))
             {
-                LoadMaintenanceData(txtDescription.Text);
+                LoadMaintenanceData(txtCode.Text, txtDescription.Text);
             }
 
         }
@@ -109,8 +112,9 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
+                txtCode.Text = "";
                 txtDescription.Text = "";
-                LoadMaintenanceData(txtDescription.Text);
+                LoadMaintenanceData(txtCode.Text, txtDescription.Text);
             }
         }
         #endregion
@@ -122,11 +126,12 @@ namespace Template
             {
                 LinkButton lbView = (LinkButton)sender;
                 Maintenance.entry_code = lbView.CommandArgument;
+                Maintenance.content_code = VG.c_user_group;
                 Maintenance.mode = "View";
 
                 _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString());
 
-                Response.Redirect("member-view.aspx", false);
+                Response.Redirect("group-user-view.aspx", false);
             }
         }
 
@@ -136,17 +141,67 @@ namespace Template
             {
                 LinkButton lbEdit = (LinkButton)sender;
                 Maintenance.entry_code = lbEdit.CommandArgument;
+                Maintenance.content_code = VG.c_user_group;
                 Maintenance.mode = "Edit";
 
-                Response.Redirect("member-edit.aspx", false);
+                Response.Redirect("group-user-edit.aspx", false);
             }
         }
+
         protected void lbAdd_Click(object sender, EventArgs e)
         {
             if (_BLL.SessionIsActive(this))
             {
+                Maintenance.content_code = VG.c_user_group;
                 Maintenance.mode = "Add";
-                Response.Redirect("member-add.aspx", false);
+                Response.Redirect("group-user-add.aspx", false);
+            }
+        }
+
+        protected void lbDelete_Click(object sender, EventArgs e)
+        {
+            if (_BLL.SessionIsActive(this))
+            {
+                LinkButton lbDelete = (LinkButton)sender;
+                string code = lbDelete.CommandArgument;
+                Boolean result = false;
+
+                string userList = "";
+
+                foreach (GridViewRow r in gvMaintenance.Rows)
+                {
+                    if (r.Cells[0].Text.Equals(code))
+                    {
+                        userList = r.Cells[2].Text;
+                        break;
+                    }
+                }
+
+                if (userList.Length > 0 && !userList.Equals("&nbsp;"))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to delete the user group because it is still being used by the following users: " + userList + "', 'error');", true);
+                    return;
+                }
+                else
+                {
+                    result = _BLL.DeleteUserGroup(code);
+                }
+
+                if (result == false)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to delete the entry.', 'error');", true);
+                }
+                else
+                {
+
+                    string transactionReferenceNumber = "";
+                    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Delete", "Code: " + code, Request.UserHostAddress.ToString()))
+                        transactionReferenceNumber = "UPCI-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmm") + "-" + DateTime.Now.ToString("ssff");
+
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Entry has been deleted.','" + transactionReferenceNumber + "');", true);
+                    LoadMaintenanceData("","");
+                }
+
             }
         }
         #endregion
@@ -177,16 +232,16 @@ namespace Template
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                if (accessRights.Contains("&a" + Maintenance.content_code + "e,"))
+                if (accessRights.Contains("&m" + Maintenance.content_code + "d,"))
                 {
                     LinkButton lb = (LinkButton)e.Row.FindControl("lbEdit");
                     lb.Visible = true;
                 }
-                //if (accessRights.Contains("&m" + Maintenance.content_code + "d,"))
-                //{
-                //    LinkButton lb = (LinkButton)e.Row.FindControl("lbDelete");
-                //    lb.Visible = true;
-                //}
+                if (accessRights.Contains("&m" + Maintenance.content_code + "d,"))
+                {
+                    LinkButton lb = (LinkButton)e.Row.FindControl("lbDelete");
+                    lb.Visible = true;
+                }
 
                 System.Data.DataView dv = (e.Row.DataItem as System.Data.DataRowView).DataView;
                 ViewState["Sorting"] = dv.ToTable();
@@ -604,6 +659,5 @@ namespace Template
         }
 
         #endregion
-
     }
 }

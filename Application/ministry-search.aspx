@@ -90,9 +90,9 @@
                                                                 Text="" OnClick="lbView_Click" class="mr-2"><i class="fa fa-eye text-dark" style="text-decoration:none"></i></asp:LinkButton>
                                                             <asp:LinkButton ID="lbEdit" runat="server" CommandArgument='<%# Eval("Code")%>' ToolTip="Edit"
                                                                 Text="" OnClick="lbEdit_Click" Visible="false" class="mr-2"><i class="fas fa-edit text-primary" style="text-decoration:none"></i></asp:LinkButton>
-                                                            <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%# Eval("Code")%>'
+                                                            <%--<asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%# Eval("Code")%>'
                                                                 ToolTip="Delete" OnClientClick="return deleteAlert(this);" Text="" OnClick="lbDelete_Click"
-                                                                Visible="false" class="mr-2"><i class="bi bi-trash-fill text-danger" style="text-decoration:none"></i></asp:LinkButton>
+                                                                Visible="false" class="mr-2"><i class="bi bi-trash-fill text-danger" style="text-decoration:none"></i></asp:LinkButton>--%>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                 </Columns>

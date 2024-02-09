@@ -150,7 +150,7 @@ namespace Template
                 }
                 else
                 {
-                    result = _BLL.FilterUser(gvMaintenance, code, txtLastName.Text, txtFirstName.Text, txtMiddleName.Text, Employee.user_id, ddUserGroup.SelectedValue, ddDivision.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, ddStatus.SelectedValue);
+                    //result = _BLL.FilterUser(gvMaintenance, code, txtLastName.Text, txtFirstName.Text, txtMiddleName.Text, Employee.user_id, ddUserGroup.SelectedValue, ddDivision.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, ddStatus.SelectedValue);
                 }
             }
             else if (contentCode == VG.c_active_session)

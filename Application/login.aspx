@@ -29,20 +29,16 @@
     <form id="Form1" class="form-signin" action="" runat="server">
         <div class="login-box">
             <!-- /.login-logo -->
-            <div class="text-center">
-                <img class="animation__shake" src="contents/images/upci.png" height="60" width="60">
-            </div>
+            
             
             <div class="card card-outline card-primary">
                 <div class="card-header text-center">
-                    <a class="h1"><b>UPCI</b><br />
-                        <h5>Management System</h5>
-                    </a>
+                    <img alt="" src="contents/images/ums-logo.png" height="120" width="340" />
                 </div>
                 <div class="card-body">
                     <p class="login-box-msg">Sign in to start your session</p>
 
-                    <form action="../../index3.html" method="post">
+                    <form  action="../../index3.html" method="post">
                         <div class="input-group mb-3">
                             <asp:TextBox ID="txtUserId" runat="server" class="form-control" placeholder="User ID"
                                 autocomplete="off" MaxLength="50" autofocus></asp:TextBox>

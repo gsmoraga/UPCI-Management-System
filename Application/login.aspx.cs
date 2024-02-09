@@ -27,8 +27,8 @@ namespace Template
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 if (_BLL.GetCurrentUserDetails(txtUserId.Text) == false)
                 {
                     lblError.Text = "Invalid user ID and/or password.";
@@ -153,12 +153,12 @@ namespace Template
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                _BLL.AddExceptionLogEntry(ex);
-                Session.Clear();
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    _BLL.AddExceptionLogEntry(ex);
+            //    Session.Clear();
+            //}
         }
 
         protected void lbActiveSessionModal_Click(object sender, EventArgs e)
