@@ -33,6 +33,14 @@ namespace Template
                     //    lblName.Text = Employee.first_name.Substring(0, 1) + ". " + Employee.last_name;
                     //else
                     //    lblName.Text = "[first_name]. [last_name]";
+                    if (Employee.first_name.Length > 0)
+                    {
+                        lblName.Text = "Hi, " + Employee.first_name + " " + Employee.last_name;
+                    }
+                    else
+                    {
+                        lblName.Text = "[first_name] [last_name]";
+                    }
 
                     if (Employee.first_name.Length > 0)
                     {
@@ -55,6 +63,8 @@ namespace Template
                     #endregion
 
                     LoadMenu();
+                    _BLL.GetApplicationParameters();
+                    lblChurchName.Text = Maintenance.church_name;
                 }
             }
         }
@@ -62,7 +72,7 @@ namespace Template
         protected void LoadMenu()
         {
             string accessRights = Employee.access_rights;
-            
+
             Regex r = new Regex("&m[0-9]", RegexOptions.IgnoreCase);
             if (r.Match(accessRights).Success)
             {
@@ -94,9 +104,9 @@ namespace Template
 
                     if (accessRights.Contains(VG.ar_user))
                     {
-                        
+
                         menuUser.Visible = true;
-                        
+
                         if (accessRights.Contains("&m5d,") || accessRights.Contains("&m5e,"))
                             lbUserSearch.Visible = true;
                     }
@@ -144,6 +154,12 @@ namespace Template
 
                     if (accessRights.Contains("&m7s,") || accessRights.Contains("&m7e,") || accessRights.Contains("&m7d,"))
                         lbPepsolMaintenance.Visible = true;
+                }
+
+                if (accessRights.Contains("&r"))
+                {
+                    liReports.Visible = true;
+                    lbReports.Visible = true;
                 }
             }
         }
@@ -258,6 +274,48 @@ namespace Template
         }
         #endregion
 
+        #region User Security
+        protected void lbUnlockUser_Click(object sender, EventArgs e)
+        {
+            Maintenance.content_code = VG.c_user;
+            Maintenance.bank_user_security = true;
+            Maintenance.bank_user_security_mode = "Unlock";
+
+            ResetMaintenanceFilters();
+
+            Response.Redirect("security-user-search.aspx", false);
+        }
+        protected void lbResetPassword_Click(object sender, EventArgs e)
+        {
+            Maintenance.content_code = VG.c_user;
+            Maintenance.bank_user_security = true;
+            Maintenance.bank_user_security_mode = "Reset";
+
+            ResetMaintenanceFilters();
+
+            Response.Redirect("security-user-search.aspx", false);
+        }
+
+        protected void lbActiveSessions_Click(object sender, EventArgs e)
+        {
+            Maintenance.content_code = VG.c_active_session;
+            Maintenance.bank_user_security = true;
+            Maintenance.bank_user_security_mode = "Session";
+
+            ResetMaintenanceFilters();
+
+            Response.Redirect("security-session-search.aspx", false);
+        }
+
+        #endregion
+
+        #region Reports
+        protected void lbReports_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("report.aspx", false);
+        }
+        #endregion
+
         public void ResetMaintenanceFilters()
         {
             Maintenance.code_filter = "";
@@ -265,6 +323,6 @@ namespace Template
             Maintenance.page_index = 0; ;
         }
 
-        
+
     }
 }

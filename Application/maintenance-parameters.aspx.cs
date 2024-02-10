@@ -70,9 +70,9 @@ namespace Template
                                     txtAuditLogPurge.Text = Maintenance.audit_log_purge_days;
                                     txtRetentionSuccess.Text = Maintenance.retention_days_success;
                                     txtRetentionPending.Text = Maintenance.retention_days_pending;
-                                    txtBankEmail.Text = Maintenance.bank_email_address;
-                                    txtBankHotline.Text = Maintenance.bank_hotline;
-                                    txtBankName.Text = Maintenance.bank_name;
+                                    txtBankEmail.Text = Maintenance.church_email_address;
+                                    txtBankHotline.Text = Maintenance.church_hotline;
+                                    txtBankName.Text = Maintenance.church_name;
                                     txtProfileExpiration.Text = Maintenance.profile_expiration_days;
                                     txtCeasPassingScore.Text = Maintenance.ceas_passing_score;
                                     txtEmailEngineSender.Text = Maintenance.email_engine_sender_address;
@@ -125,12 +125,12 @@ namespace Template
                                         {
                                             lblCode.InnerText = "Department Code";
                                             lblCode2.InnerText = "Division";
-                                            _BLL.GetDivisionDropDown(ddCode, "--Select--");
+                                            //_BLL.GetDivisionDropDown(ddCode, "--Select--");
                                             rowCode2.Visible = true;
                                         }
                                         else if (Maintenance.content_code == VG.c_pepsol)
                                         {
-                                            _BLL.GetRegionDropdown(ddRegion, "--Select--");
+                                            //_BLL.GetRegionDropdown(ddRegion, "--Select--");
                                             rowEmail.Visible = true;
                                             rowRegion.Visible = true;
                                         }
@@ -160,8 +160,8 @@ namespace Template
                                             lbUser.Text = Maintenance.mode;
                                             hUser.InnerText = Maintenance.mode + " " + Maintenance.content_description;
                                             _BLL.GetUserGroupDropDown(ddUserGroup, "--Select--");
-                                            _BLL.GetBranchDropDown(ddBranch, "--Select--");
-                                            _BLL.GetDepartmentDropDown(ddDepartment, "--Select--");
+                                            //_BLL.GetBranchDropDown(ddBranch, "--Select--");
+                                            //_BLL.GetDepartmentDropDown(ddDepartment, "--Select--");
                                             divStatus.Visible = false;
 
                                             _BLL.GetApplicationParameters();
@@ -195,16 +195,16 @@ namespace Template
 
                                             lblCode.InnerText = "Department Code";
                                             lblCode2.InnerText = "Division";
-                                            _BLL.GetDivisionDropDown(ddCode, "--Select--");
+                                            //_BLL.GetDivisionDropDown(ddCode, "--Select--");
                                             rowCode2.Visible = true;
 
-                                            if (_BLL.GetDepartment(Maintenance.entry_code) == false)
-                                            {
-                                            }
-                                            else
-                                            {
-                                                ddCode.SelectedValue = Maintenance.ministry_code;
-                                            }
+                                            //if (_BLL.GetDepartment(Maintenance.entry_code) == false)
+                                            //{
+                                            //}
+                                            //else
+                                            //{
+                                            //    ddCode.SelectedValue = Maintenance.ministry_code;
+                                            //}
                                         }
                                         #endregion
 
@@ -214,28 +214,28 @@ namespace Template
                                             
                                             rowEmail.Visible = true;
                                             //8/16/2023 Additional for Region
-                                            _BLL.GetRegionDropdown(ddRegion, "--Select--");
+                                            //_BLL.GetRegionDropdown(ddRegion, "--Select--");
                                             rowRegion.Visible = true;
 
 
-                                            if (_BLL.GetBranch(Maintenance.entry_code) == false)
-                                            {
-                                            }
-                                            else
-                                            {
-                                                txtCodeDescEmail.Text = Maintenance.branch_email;
-                                                //8/16/2023 Additional for Region
-                                                ddRegion.SelectedValue = Maintenance.region;
-                                            }
+                                            //if (_BLL.GetBranch(Maintenance.entry_code) == false)
+                                            //{
+                                            //}
+                                            //else
+                                            //{
+                                            //    txtCodeDescEmail.Text = Maintenance.branch_email;
+                                            //    //8/16/2023 Additional for Region
+                                            //    ddRegion.SelectedValue = Maintenance.region;
+                                            //}
                                         }
                                         #endregion
 
                                         #region Division
                                         else if (Maintenance.content_code == VG.c_ministry)
                                         {
-                                            if (_BLL.GetDivision(Maintenance.entry_code) == false)
-                                            {
-                                            }
+                                            //if (_BLL.GetDivision(Maintenance.entry_code) == false)
+                                            //{
+                                            //}
                                         }
                                         #endregion
 
@@ -254,8 +254,8 @@ namespace Template
                                             txtUserId.Attributes.Add("class", "form-control-plaintext");
                                             hUser.InnerText = Maintenance.mode + " " + Maintenance.content_description;
                                             _BLL.GetUserGroupDropDown(ddUserGroup, "--Select--");
-                                            _BLL.GetBranchDropDown(ddBranch, "--Select--");
-                                            _BLL.GetDepartmentDropDown(ddDepartment, "--Select--");
+                                            //_BLL.GetBranchDropDown(ddBranch, "--Select--");
+                                            //_BLL.GetDepartmentDropDown(ddDepartment, "--Select--");
                                             divStatus.Visible = true;
                                             userCard.Visible = true;
 
@@ -353,24 +353,24 @@ namespace Template
                                         {
                                             lblCode.InnerText = "Department Code";
                                             lblCode2.InnerText = "Division";
-                                            _BLL.GetDivisionDropDown(ddCode, "--Select--");
+                                            //_BLL.GetDivisionDropDown(ddCode, "--Select--");
                                             rowCode2.Visible = true;
 
-                                            if (_BLL.GetDepartment(Maintenance.entry_code) == false)
-                                            {
-                                            }
-                                            else
-                                            {
-                                                ddCode.SelectedValue = Maintenance.ministry_code;
-                                                lblDdCode.Text = ddCode.SelectedItem.Text;
-                                                lblDdCode.Visible = true;
-                                            }
+                                            //if (_BLL.GetDepartment(Maintenance.entry_code) == false)
+                                            //{
+                                            //}
+                                            //else
+                                            //{
+                                            //    ddCode.SelectedValue = Maintenance.ministry_code;
+                                            //    lblDdCode.Text = ddCode.SelectedItem.Text;
+                                            //    lblDdCode.Visible = true;
+                                            //}
                                         }
                                         else if (Maintenance.content_code == VG.c_pepsol)
                                         {
-                                            if (_BLL.GetBranch(Maintenance.entry_code) == false)
-                                            {
-                                            }
+                                            //if (_BLL.GetBranch(Maintenance.entry_code) == false)
+                                            //{
+                                            //}
                                             txtCodeDescEmail.Text = Maintenance.branch_email;
                                             txtCodeDescEmail.ReadOnly = true;
                                             txtCodeDescEmail.Attributes.Add("class", "form-control-plaintext");
@@ -385,9 +385,9 @@ namespace Template
                                         }
                                         else if (Maintenance.content_code == VG.c_ministry)
                                         {
-                                            if (_BLL.GetDivision(Maintenance.entry_code) == false)
-                                            {
-                                            }
+                                            //if (_BLL.GetDivision(Maintenance.entry_code) == false)
+                                            //{
+                                            //}
                                         }
 
                                         txtCode.Text = Maintenance.code;
@@ -429,8 +429,8 @@ namespace Template
                                             divStatus.Visible = true;
                                             lbUser.Visible = false;
                                             _BLL.GetUserGroupDropDown(ddUserGroup, "--Select--");
-                                            _BLL.GetBranchDropDown(ddBranch, "--Select--");
-                                            _BLL.GetDepartmentDropDown(ddDepartment, "--Select--");
+                                            //_BLL.GetBranchDropDown(ddBranch, "--Select--");
+                                            //_BLL.GetDepartmentDropDown(ddDepartment, "--Select--");
                                             userCard.Visible = true;
 
                                             if (_BLL.GetUser(Maintenance.entry_code) == false)
@@ -545,18 +545,18 @@ namespace Template
                 {
                     if (Maintenance.content_code == VG.c_ministry_department)
                     {
-                        result = _BLL.EditDepartment(Maintenance.entry_code, txtDescription.Text, ddCode.SelectedValue);
+                        //result = _BLL.EditDepartment(Maintenance.entry_code, txtDescription.Text, ddCode.SelectedValue);
                         cacheKey = "GetDepartment" + Maintenance.entry_code;
                     }
                     else if (Maintenance.content_code == VG.c_pepsol)
                     {
                         //8/16/2023 Additional Parameter for Region
-                        result = _BLL.EditBranch(Maintenance.entry_code, txtDescription.Text, txtCodeDescEmail.Text, ddRegion.SelectedValue);
+                        //result = _BLL.EditBranch(Maintenance.entry_code, txtDescription.Text, txtCodeDescEmail.Text, ddRegion.SelectedValue);
                         cacheKey = "GetBranch" + Maintenance.entry_code;
                     }
                     else if (Maintenance.content_code == VG.c_ministry)
                     {
-                        result = _BLL.EditDivision(Maintenance.entry_code, txtDescription.Text);
+                        //result = _BLL.EditDivision(Maintenance.entry_code, txtDescription.Text);
                         cacheKey = "GetDivision" + Maintenance.entry_code;
                     }
 
@@ -585,50 +585,50 @@ namespace Template
 
                 else if (Maintenance.mode == "Add")
                 {
-                    if (IfExisting(Maintenance.content_code, txtCode.Text))
-                    {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Code is already in use.', '', 'error');", true);
-                    }
-                    else
-                    {
-                        if (Maintenance.content_code == VG.c_ministry_department)
-                        {
-                            result = _BLL.AddDepartment(txtCode.Text, txtDescription.Text, ddCode.SelectedValue);
-                            cacheKey = "GetDepartment" + txtCode.Text;
-                        }
-                        else if (Maintenance.content_code == VG.c_pepsol)
-                        {
-                            result = _BLL.AddBranch(txtCode.Text, txtDescription.Text,ddRegion.SelectedValue,txtCodeDescEmail.Text);
-                            cacheKey = "GetBranch" + txtCode.Text;
-                        }
-                        else if (Maintenance.content_code == VG.c_ministry)
-                        {
-                            result = _BLL.AddDivision(txtCode.Text, txtDescription.Text);
-                            cacheKey = "GetDivision" + txtCode.Text;
-                        }
+                    //if (IfExisting(Maintenance.content_code, txtCode.Text))
+                    //{
+                    //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Code is already in use.', '', 'error');", true);
+                    //}
+                    //else
+                    //{
+                    //    if (Maintenance.content_code == VG.c_ministry_department)
+                    //    {
+                    //        //result = _BLL.AddDepartment(txtCode.Text, txtDescription.Text, ddCode.SelectedValue);
+                    //        cacheKey = "GetDepartment" + txtCode.Text;
+                    //    }
+                    //    else if (Maintenance.content_code == VG.c_pepsol)
+                    //    {
+                    //        //result = _BLL.AddBranch(txtCode.Text, txtDescription.Text,ddRegion.SelectedValue,txtCodeDescEmail.Text);
+                    //        cacheKey = "GetBranch" + txtCode.Text;
+                    //    }
+                    //    else if (Maintenance.content_code == VG.c_ministry)
+                    //    {
+                    //        //result = _BLL.AddDivision(txtCode.Text, txtDescription.Text);
+                    //        cacheKey = "GetDivision" + txtCode.Text;
+                    //    }
 
-                        if (result == false)
-                        {
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to add the entry.', 'error');", true);
-                        }
-                        else
-                        {
-                            _BLL.RemoveFromCache("Filter" + Maintenance.content_code + "&");
-                            HttpContext.Current.Cache.Remove(cacheKey.ToLower());
+                    //    if (result == false)
+                    //    {
+                    //        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to add the entry.', 'error');", true);
+                    //    }
+                    //    else
+                    //    {
+                    //        _BLL.RemoveFromCache("Filter" + Maintenance.content_code + "&");
+                    //        HttpContext.Current.Cache.Remove(cacheKey.ToLower());
 
-                            string transactionReferenceNumber = "";
-                            if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, Maintenance.mode, "Code: " + txtCode.Text, Request.UserHostAddress.ToString()))
-                                transactionReferenceNumber = "EPS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
+                    //        string transactionReferenceNumber = "";
+                    //        if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, Maintenance.mode, "Code: " + txtCode.Text, Request.UserHostAddress.ToString()))
+                    //            transactionReferenceNumber = "EPS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
 
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Entry has been added.','" + transactionReferenceNumber + "');", true);
+                    //        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Entry has been added.','" + transactionReferenceNumber + "');", true);
 
-                            txtCode.Text = "";
-                            txtDescription.Text = "";
-                            txtEmail.Text = "";
-                            ddRegion.SelectedValue = "0";
-                            ddCode.SelectedValue = "0";
-                        }
-                    }
+                    //        txtCode.Text = "";
+                    //        txtDescription.Text = "";
+                    //        txtEmail.Text = "";
+                    //        ddRegion.SelectedValue = "0";
+                    //        ddCode.SelectedValue = "0";
+                    //    }
+                    //}
                 }
                 #endregion
             }
@@ -669,45 +669,45 @@ namespace Template
                 }
                 else if (Maintenance.mode == "Add")
                 {
-                    if (IfExisting(Maintenance.content_code, txtUserId.Text))
-                    {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('User ID is already in use.', '', 'error');", true);
-                    }
-                    else
-                    {
-                        //HttpContext.Current.Cache.Remove(("GetUser" + txtUserId.Text).ToLower());
+                    //if (IfExisting(Maintenance.content_code, txtUserId.Text))
+                    //{
+                    //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('User ID is already in use.', '', 'error');", true);
+                    //}
+                    //else
+                    //{
+                    //    //HttpContext.Current.Cache.Remove(("GetUser" + txtUserId.Text).ToLower());
 
-                        //if (_BLL.AddUser(txtEmployeeNumber.Text, txtUserId.Text, txtFirstName.Text, txtMiddleName.Text, txtLastName.Text, ddUserGroup.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, txtProfileExpirationUser.Text, txtEmail.Text, txtMobileNumber.Text, ddStatus.SelectedValue, Employee.user_id) == false)
-                        //{
-                        //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to add the user.', 'error');", true);
-                        //}
-                        //else
-                        //{
-                        //    _BLL.RemoveFromCache("Filter5&");
+                    //    //if (_BLL.AddUser(txtEmployeeNumber.Text, txtUserId.Text, txtFirstName.Text, txtMiddleName.Text, txtLastName.Text, ddUserGroup.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, txtProfileExpirationUser.Text, txtEmail.Text, txtMobileNumber.Text, ddStatus.SelectedValue, Employee.user_id) == false)
+                    //    //{
+                    //    //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to add the user.', 'error');", true);
+                    //    //}
+                    //    //else
+                    //    //{
+                    //    //    _BLL.RemoveFromCache("Filter5&");
 
-                        //    string transactionReferenceNumber = "";
-                        //    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, Maintenance.mode, "User ID: " + txtUserId.Text, Request.UserHostAddress.ToString()))
-                        //        transactionReferenceNumber = "EPS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
+                    //    //    string transactionReferenceNumber = "";
+                    //    //    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, Maintenance.mode, "User ID: " + txtUserId.Text, Request.UserHostAddress.ToString()))
+                    //    //        transactionReferenceNumber = "EPS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
 
-                        //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('User has been added and an email notification has been sent to their email address.','" + transactionReferenceNumber + "');", true);
+                    //    //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('User has been added and an email notification has been sent to their email address.','" + transactionReferenceNumber + "');", true);
 
-                        //    if (_BLL.SendEmailNotificationUser(txtUserId.Text, "has been created") == false)
-                        //    {
-                        //    }
+                    //    //    if (_BLL.SendEmailNotificationUser(txtUserId.Text, "has been created") == false)
+                    //    //    {
+                    //    //    }
 
-                        //    txtUserId.Text = "";
-                        //    txtEmployeeNumber.Text = "";
-                        //    txtFirstName.Text = "";
-                        //    txtMiddleName.Text = "";
-                        //    txtLastName.Text = "";
-                        //    ddUserGroup.SelectedValue = "0";
-                        //    ddDepartment.SelectedValue = "0";
-                        //    ddBranch.SelectedValue = "0";
-                        //    txtProfileExpirationUser.Text = "";
-                        //    txtEmail.Text = "";
-                        //    txtMobileNumber.Text = "";
-                        //}
-                    }
+                    //    //    txtUserId.Text = "";
+                    //    //    txtEmployeeNumber.Text = "";
+                    //    //    txtFirstName.Text = "";
+                    //    //    txtMiddleName.Text = "";
+                    //    //    txtLastName.Text = "";
+                    //    //    ddUserGroup.SelectedValue = "0";
+                    //    //    ddDepartment.SelectedValue = "0";
+                    //    //    ddBranch.SelectedValue = "0";
+                    //    //    txtProfileExpirationUser.Text = "";
+                    //    //    txtEmail.Text = "";
+                    //    //    txtMobileNumber.Text = "";
+                    //    //}
+                    //}
                 }
             }
         }
@@ -846,30 +846,30 @@ namespace Template
                     }
                     else if (Maintenance.mode == "Add")
                     {
-                        if (IfExisting(Maintenance.content_code, txtCodeUG.Text))
-                        {
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Code is already in use.', '', 'error');", true);
-                        }
-                        else
-                        {
-                            HttpContext.Current.Cache.Remove(("GetUserGroup" + txtCodeUG.Text).ToLower());
-                            HttpContext.Current.Cache.Remove(("AccessRights" + txtCodeUG.Text).ToLower());
+                        //if (IfExisting(Maintenance.content_code, txtCodeUG.Text))
+                        //{
+                        //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Code is already in use.', '', 'error');", true);
+                        //}
+                        //else
+                        //{
+                        //    HttpContext.Current.Cache.Remove(("GetUserGroup" + txtCodeUG.Text).ToLower());
+                        //    HttpContext.Current.Cache.Remove(("AccessRights" + txtCodeUG.Text).ToLower());
 
-                            if (_BLL.AddUserGroup(txtCodeUG.Text, txtDescriptionUG.Text, Employee.user_id, accessRights) == false)
-                            {
-                                ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to add the user group.', 'error');", true);
-                            }
-                            else
-                            {
-                                _BLL.RemoveFromCache("Filter" + VG.c_user_group + "&");
+                        //    if (_BLL.AddUserGroup(txtCodeUG.Text, txtDescriptionUG.Text, Employee.user_id, accessRights) == false)
+                        //    {
+                        //        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to add the user group.', 'error');", true);
+                        //    }
+                        //    else
+                        //    {
+                        //        _BLL.RemoveFromCache("Filter" + VG.c_user_group + "&");
 
-                                string transactionReferenceNumber = "";
-                                if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Add", "Code: " + txtCodeUG.Text, Request.UserHostAddress.ToString()))
-                                    transactionReferenceNumber = "EPS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
+                        //        string transactionReferenceNumber = "";
+                        //        if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Add", "Code: " + txtCodeUG.Text, Request.UserHostAddress.ToString()))
+                        //            transactionReferenceNumber = "EPS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
 
-                                ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('User group has been added.','" + transactionReferenceNumber + "');", true);
-                            }
-                        }
+                        //        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('User group has been added.','" + transactionReferenceNumber + "');", true);
+                        //    }
+                        //}
                     }
                 }
                 else
@@ -1052,29 +1052,34 @@ namespace Template
         * @param string code - unique code identifier
         * @return Boolean true if successful, false otherwise
         */
-        public Boolean IfExisting(string contentCode, string code)
-        {
-            if (Maintenance.content_code == VG.c_ministry_department)
-            {
-                return _BLL.GetDepartment(code);
-            }
-            else if (Maintenance.content_code == VG.c_user_group)
-            {
-                return _BLL.GetUserGroup(code);
-            }
-            else if (Maintenance.content_code == VG.c_user)
-            {
-                return _BLL.GetUser(code);
-            }
-            else if (Maintenance.content_code == VG.c_pepsol)
-            {
-                return _BLL.GetBranch(code);
-            }
-            else if (Maintenance.content_code == VG.c_ministry)
-            {
-                return _BLL.GetDivision(code);
-            }
-            else return false;
-        }
+        //public Boolean IfExisting(string contentCode, string code)
+        //{
+        //    if (Maintenance.content_code == VG.c_ministry_department)
+        //    {
+        //        //return _BLL.GetDepartment(code);
+        //    }
+        //    else if (Maintenance.content_code == VG.c_user_group)
+        //    {
+        //        return _BLL.GetUserGroup(code);
+        //    }
+        //    else if (Maintenance.content_code == VG.c_user)
+        //    {
+        //        return _BLL.GetUser(code);
+        //    }
+        //    else if (Maintenance.content_code == VG.c_pepsol)
+        //    {
+        //        //return _BLL.GetBranch(code);
+        //    }
+        //    else if (Maintenance.content_code == VG.c_ministry)
+        //    {
+        //        //return _BLL.GetDivision(code);
+        //    }
+        //    else 
+        //    {
+        //        return false;
+        //    }
+            
+
+        //}
     }
 }

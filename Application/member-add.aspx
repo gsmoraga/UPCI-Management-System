@@ -16,13 +16,16 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1><asp:Label ID="contentHeader" runat="server"></asp:Label></h1>
+                        <h1>
+                            <asp:Label ID="contentHeader" runat="server"></asp:Label></h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="home.aspx">Home</a></li>
-                            <li class="breadcrumb-item"><asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></li>
-                            <li class="breadcrumb-item active"><asp:Label ID="subItemBreadcrumb" runat="server"></asp:Label></li>
+                            <li class="breadcrumb-item">
+                                <asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></li>
+                            <li class="breadcrumb-item active">
+                                <asp:Label ID="subItemBreadcrumb" runat="server"></asp:Label></li>
                         </ol>
                     </div>
                 </div>
@@ -44,47 +47,55 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="txtFirstName">First Name</label>
-                                <asp:TextBox ID="txtFirstName" CssClass="form-control" runat="server" MaxLength="50" AutoComplete="false"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="reqFirstName" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Required field." ControlToValidate="txtFirstName" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="revFirstName" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Only alphabetic charactes, periods, and hypens are allowed." ControlToValidate="txtFirstName" ValidationExpression="[ña-zA-Z.\s-]+$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <div>
+                                        <label for="txtFirstName">First Name</label>
+                                        <asp:TextBox ID="txtFirstName" CssClass="form-control" runat="server" MaxLength="50" autocomplete="false"></asp:TextBox>
+                                    </div>
+                                    <div>
+                                        <asp:RequiredFieldValidator ID="reqFirstName" runat="server" ValidationGroup="memberValidation"
+                                            ErrorMessage="Required field." ControlToValidate="txtFirstName" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revFirstName" runat="server" ValidationGroup="memberValidation"
+                                            ErrorMessage="Only alphabetic charactes, periods, and hypens are allowed." ControlToValidate="txtFirstName" ValidationExpression="[ña-zA-Z.\s-]+$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="txtMiddleName">Middle Name</label>
+                                    <asp:TextBox ID="txtMiddleName" CssClass="form-control" MaxLength="50" runat="server" AutoComplete="off"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="reqMiddleName" runat="server" ValidationGroup="memberValidation"
+                                        ErrorMessage="Required field." ControlToValidate="txtMiddleName" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="revMiddleName" runat="server" ValidationGroup="memberValidation"
+                                        ErrorMessage="Only alphabetic charactes, periods, and hypens are allowed." ControlToValidate="txtMiddleName" ValidationExpression="[ña-zA-Z.\s-]+$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="txtLastName">Last Name</label>
+                                    <asp:TextBox ID="txtLastName" CssClass="form-control" MaxLength="50" runat="server" AutoComplete="off"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="reqLastName" runat="server" ValidationGroup="memberValidation"
+                                        ErrorMessage="Required field." ControlToValidate="txtLastName" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="revLastName" runat="server" ValidationGroup="memberValidation"
+                                        ErrorMessage="Only alphabetic charactes, periods, and hypens are allowed." ControlToValidate="txtLastName" ValidationExpression="[ña-zA-Z.\s-]+$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="txtMiddleName">Middle Name</label>
-                                <asp:TextBox ID="txtMiddleName" CssClass="form-control" MaxLength="50" runat="server" AutoComplete="false"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="reqMiddleName" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Required field." ControlToValidate="txtMiddleName" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="revMiddleName" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Only alphabetic charactes, periods, and hypens are allowed." ControlToValidate="txtMiddleName" ValidationExpression="[ña-zA-Z.\s-]+$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtLastName">Last Name</label>
-                                <asp:TextBox ID="txtLastName" CssClass="form-control" MaxLength="50" runat="server" AutoComplete="false"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="reqLastName" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Required field." ControlToValidate="txtLastName" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="revLastName" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Only alphabetic charactes, periods, and hypens are allowed." ControlToValidate="txtLastName" ValidationExpression="[ña-zA-Z.\s-]+$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputStatus">Gender</label>
-                                <asp:DropDownList ID="ddGender" CssClass="form-control custom-select" runat="server">
-                                    <asp:ListItem Value="0">--Select--</asp:ListItem>
-                                    <asp:ListItem Value="F">Female</asp:ListItem>
-                                    <asp:ListItem Value="M">Male</asp:ListItem>
-                                </asp:DropDownList>
-                                <asp:RequiredFieldValidator InitialValue="0" ID="reqGender" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Required field." ControlToValidate="ddGender" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtBirthday">Birthday</label>
-                                <asp:TextBox ID="txtBirthday" CssClass="form-control datepicker" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="reqBirthdate" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Required field." ControlToValidate="txtBirthday" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="revBirthdate" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Must be of the format MM/DD/YYYY." ControlToValidate="txtBirthday" ValidationExpression="^\d{2}\/\d{2}\/\d{4}$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputStatus">Gender</label>
+                                    <asp:DropDownList ID="ddGender" CssClass="form-control custom-select" runat="server">
+                                        <asp:ListItem Value="0">--Select--</asp:ListItem>
+                                        <asp:ListItem Value="F">Female</asp:ListItem>
+                                        <asp:ListItem Value="M">Male</asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator InitialValue="0" ID="reqGender" runat="server" ValidationGroup="memberValidation"
+                                        ErrorMessage="Required field." ControlToValidate="ddGender" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="txtBirthday">Birthday</label>
+                                    <asp:TextBox ID="txtBirthday" CssClass="form-control datepicker" runat="server" AutoComplete="off"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="reqBirthdate" runat="server" ValidationGroup="memberValidation"
+                                        ErrorMessage="Required field." ControlToValidate="txtBirthday" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="revBirthdate" runat="server" ValidationGroup="memberValidation"
+                                        ErrorMessage="Must be of the format MM/DD/YYYY." ControlToValidate="txtBirthday" ValidationExpression="^\d{2}\/\d{2}\/\d{4}$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputProjectLeader">Email</label>
@@ -104,7 +115,7 @@
                     <!-- /.card -->
                 </div>
                 <div class="col-md-6">
-                    <div class="card card-secondary">
+                    <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Church Information</h3>
 
@@ -115,19 +126,46 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="ddMinistry">Ministry</label>
-                                <asp:DropDownList ID="ddMinistry" CssClass="form-control custom-select" OnSelectedIndexChanged="ddMinistry_SelectedIndexChanged" runat="server" AutoPostBack="true">
-                                </asp:DropDownList>
-                               <%-- <asp:RequiredFieldValidator InitialValue="0" ID="reqMinistry" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Required field." ControlToValidate="ddMinistry" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="ddMinistry">Ministry</label>
+                                    <asp:DropDownList ID="ddMinistry" CssClass="form-control custom-select" OnSelectedIndexChanged="ddMinistry_SelectedIndexChanged" runat="server" AutoPostBack="true">
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="ddMinistryDepartment">Ministry Department</label>
+                                    <asp:DropDownList ID="ddMinistryDepartment" CssClass="form-control custom-select" runat="server">
+                                    </asp:DropDownList>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="ddMinistryDepartment">Ministry Department</label>
-                                <asp:DropDownList ID="ddMinistryDepartment" CssClass="form-control custom-select" runat="server">
-                                </asp:DropDownList>
-                                <%--<asp:RequiredFieldValidator InitialValue="0" ID="reqMinistryDepartment" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Required field." ControlToValidate="ddMinistryDepartment" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="ddCellGroup">Cell Status</label>
+                                    <asp:DropDownList ID="ddCellGroup" CssClass="form-control custom-select" runat="server">
+                                        <asp:ListItem Value="0">--Select--</asp:ListItem>
+                                        <asp:ListItem Value="Y">Yes</asp:ListItem>
+                                        <asp:ListItem Value="N">No</asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator InitialValue="0" ID="rfvCellGroup" runat="server" ValidationGroup="memberValidation"
+                                        ErrorMessage="Required field." ControlToValidate="ddCellGroup" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="ddBaptismalStatus">Baptismal Status</label>
+                                    <asp:DropDownList ID="ddBaptismalStatus" CssClass="form-control custom-select" runat="server">
+                                        <asp:ListItem Value="0">--Select--</asp:ListItem>
+                                        <asp:ListItem Value="Y">Yes</asp:ListItem>
+                                        <asp:ListItem Value="N">No</asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator InitialValue="0" ID="rfvBaptismalStatus" runat="server" ValidationGroup="memberValidation"
+                                        ErrorMessage="Required field." ControlToValidate="ddBaptismalStatus" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="ddPepsol">PEPSOL Level</label>
+                                    <asp:DropDownList ID="ddPepsol" CssClass="form-control custom-select" runat="server">
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator InitialValue="0" ID="rfvPepsol" runat="server" ValidationGroup="memberValidation"
+                                        ErrorMessage="Required field." ControlToValidate="ddPepsol" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtDateFirstAttend">Date First Attend</label>
@@ -135,36 +173,8 @@
                                 <asp:RegularExpressionValidator ID="revDatedFirstAttend" runat="server" ValidationGroup="memberValidation"
                                     ErrorMessage="Must be of the format MM/DD/YYYY." ControlToValidate="txtDateFirstAttend" ValidationExpression="^\d{2}\/\d{2}\/\d{4}$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
                             </div>
-
                             <div class="form-group">
-                                <label for="ddCellGroup">Cell Status</label>
-                                <asp:DropDownList ID="ddCellGroup" CssClass="form-control custom-select" runat="server">
-                                    <asp:ListItem Value="0">--Select--</asp:ListItem>
-                                    <asp:ListItem Value="Y">Yes</asp:ListItem>
-                                    <asp:ListItem Value="N">No</asp:ListItem>
-                                </asp:DropDownList>
-                                <asp:RequiredFieldValidator InitialValue="0" ID="rfvCellGroup" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Required field." ControlToValidate="ddCellGroup" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                            </div>
-                            <div class="form-group">
-                                <label for="ddBaptismalStatus">Baptismal Status</label>
-                                <asp:DropDownList ID="ddBaptismalStatus" CssClass="form-control custom-select" runat="server">
-                                    <asp:ListItem Value="0">--Select--</asp:ListItem>
-                                    <asp:ListItem Value="Y">Yes</asp:ListItem>
-                                    <asp:ListItem Value="N">No</asp:ListItem>
-                                </asp:DropDownList>
-                                <asp:RequiredFieldValidator InitialValue="0" ID="rfvBaptismalStatus" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Required field." ControlToValidate="ddBaptismalStatus" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                            </div>
-                            <div class="form-group">
-                                <label for="ddPepsol">PEPSOL Level</label>
-                                <asp:DropDownList ID="ddPepsol" CssClass="form-control custom-select" runat="server">
-                                </asp:DropDownList>
-                                <asp:RequiredFieldValidator InitialValue="0" ID="rfvPepsol" runat="server" ValidationGroup="memberValidation"
-                                    ErrorMessage="Required field." ControlToValidate="ddPepsol" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                            </div>
-                            <div class="form-group">
-                                <label for="ddStatus">Membership Status</label>
+                                <label for="ddStatus">Status</label>
                                 <asp:DropDownList ID="ddStatus" CssClass="form-control custom-select" runat="server">
                                     <asp:ListItem Value="1">Active</asp:ListItem>
                                     <asp:ListItem Value="0">Inactive</asp:ListItem>
@@ -182,7 +192,7 @@
                 <div class="col-12">
                     <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" OnClick="btnCancel_Click">Cancel</asp:LinkButton>
                     <asp:LinkButton ID="btnSubmit" runat="server" CssClass="btn btn-success float-right" OnClick="btnSubmit_Click"
-                        OnClientClick="if(Page_ClientValidate('memberValidation')) { if(this.value === 'Please wait...') { return false; } else { this.value = 'Please wait...'; }}" CausesValidation="true" ValidationGroup="memberValidation">Add Ministry</asp:LinkButton>
+                        OnClientClick="if(Page_ClientValidate('memberValidation')) { if(this.value === 'Please wait...') { return false; } else { this.value = 'Please wait...'; }}" CausesValidation="true" ValidationGroup="memberValidation">Add</asp:LinkButton>
                 </div>
             </div>
         </section>

@@ -63,12 +63,12 @@
                         <div class="mb-3">
                             <asp:Label runat="server" ID="lblError" ForeColor="Red">&nbsp;</asp:Label>
                         </div>
-                        <div class="col-12">
+                        <%--<div class="col-12">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" onclick="showPassword()" />
                                 <label class="form-check-label" for="rememberMe">Show Password</label>
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="row">
                             <!-- /.col -->
                             <div class="col-12">
@@ -94,7 +94,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="activeSessionModalTitle">Active Session Alert</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
                         You have an existing active session on another device. Would you like to log out

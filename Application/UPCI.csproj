@@ -77,6 +77,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="contents\images\ums-logo.png" />
     <Content Include="dept-ministry-edit.aspx" />
     <Content Include="dept-ministry-view.aspx" />
     <Content Include="group-user-add.aspx" />
@@ -2723,7 +2724,9 @@
     <Content Include="pepsol-edit.aspx" />
     <Content Include="pepsol-search.aspx" />
     <Content Include="pepsol-view.aspx" />
-    <Content Include="search_age_group.aspx" />
+    <Content Include="report.aspx" />
+    <Content Include="security-session-search.aspx" />
+    <Content Include="security-user-search.aspx" />
     <Content Include="user-add.aspx" />
     <Content Include="user-edit.aspx" />
     <Content Include="group-user-search.aspx" />
@@ -2979,6 +2982,27 @@
     <Compile Include="pepsol-view.aspx.designer.cs">
       <DependentUpon>pepsol-view.aspx</DependentUpon>
     </Compile>
+    <Compile Include="report.aspx.cs">
+      <DependentUpon>report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report.aspx.designer.cs">
+      <DependentUpon>report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="security-session-search.aspx.cs">
+      <DependentUpon>security-session-search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="security-session-search.aspx.designer.cs">
+      <DependentUpon>security-session-search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="security-user-search.aspx.cs">
+      <DependentUpon>security-user-search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="security-user-search.aspx.designer.cs">
+      <DependentUpon>security-user-search.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UMS.Master.cs">
       <DependentUpon>UMS.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2994,13 +3018,6 @@
     </Compile>
     <Compile Include="App_Code\VG.cs" />
     <Compile Include="App_Code\Validation.cs" />
-    <Compile Include="search_age_group.aspx.cs">
-      <DependentUpon>search_age_group.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="search_age_group.aspx.designer.cs">
-      <DependentUpon>search_age_group.aspx</DependentUpon>
-    </Compile>
     <Compile Include="user-add.aspx.cs">
       <DependentUpon>user-add.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

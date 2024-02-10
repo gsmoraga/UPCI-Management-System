@@ -13,10 +13,11 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
+using System.Net.NetworkInformation;
 
 namespace Template
 {
-    public partial class pepsol_search : System.Web.UI.Page
+    public partial class security_unlock_user : System.Web.UI.Page
     {
         DAL _DAL = new DAL();
         private BLL _BLL = new BLL();
@@ -49,16 +50,31 @@ namespace Template
                             { }
                             else
                             {
-                                if (accessRights.Contains("&m3d,") || accessRights.Contains("&m3e,"))
+                                if (accessRights.Contains("&m" + Maintenance.content_code + "u,") || accessRights.Contains("&m" + Maintenance.content_code + "r,"))
                                 {
                                     divSearch.Visible = true;
                                     lbSearch.Visible = true;
                                     divExport.Visible = true;
                                 }
-                                if (accessRights.Contains("&m3a,"))
+
+
+                                #region Titles
+                                if (Maintenance.bank_user_security_mode == "Reset")
                                 {
-                                    lbAdd.Visible = true;
+                                    contentHeader.Text = Maintenance.bank_user_security_mode + " " + Maintenance.content_description +" Password";
+                                    mainBreadcrumb.Text = Maintenance.bank_user_security_mode + " " + Maintenance.content_description +" Password";
+                                    //subItemBreadcrumb.Text = Maintenance.mode;
+                                    cardTitle.Text = Maintenance.content_description + " List";
                                 }
+                                else
+                                {
+                                    contentHeader.Text = Maintenance.bank_user_security_mode + " " + Maintenance.content_description;
+                                    mainBreadcrumb.Text = Maintenance.bank_user_security_mode + " " + Maintenance.content_description;
+                                    //subItemBreadcrumb.Text = Maintenance.mode;
+                                    cardTitle.Text = Maintenance.content_description + " List";
+                                }
+
+                                #endregion
                             }
                         }
 
@@ -75,15 +91,18 @@ namespace Template
         protected void LoadMaintenanceData(string code, string description)
         {
             Boolean result = false;
-            result = _BLL.FilterPepsol(gvMaintenance, code, description);
+            result = result = _BLL.FilterLockedUser(gvMaintenance, code, description, Employee.user_id);
 
             if (result == false)
             {
-                divExport.Visible = false;
-                divPager.Visible = false;
+                //divExport.Visible = false;
+                //divPager.Visible = false;
+                divSearch.Visible = true;
+                divExport.Visible = true;
             }
             else
             {
+                
                 divExport.Visible = true;
                 divPager.Visible = true;
                 PopulatePager(gvMaintenance.PageCount);
@@ -113,65 +132,68 @@ namespace Template
         #endregion
 
         #region Action Buttons
-        protected void lbView_Click(object sender, EventArgs e)
+        protected void lbUnlock_Click(object sender, EventArgs e)
         {
             if (_BLL.SessionIsActive(this))
             {
-                LinkButton lbView = (LinkButton)sender;
-                Maintenance.entry_code = lbView.CommandArgument;
-                Maintenance.mode = VG.m_view;
+                LinkButton lbUnlock = (LinkButton)sender;
+                string userId = lbUnlock.CommandArgument;
 
-                _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString());
-
-                Response.Redirect("pepsol-view.aspx", false);
-            }
-        }
-
-        protected void lbEdit_Click(object sender, EventArgs e)
-        {
-            if (_BLL.SessionIsActive(this))
-            {
-                LinkButton lbEdit = (LinkButton)sender;
-                Maintenance.entry_code = lbEdit.CommandArgument;
-                Maintenance.mode = VG.m_edit;
-
-                Response.Redirect("pepsol-edit.aspx", false);
-            }
-        }
-
-        protected void lbAdd_Click(object sender, EventArgs e)
-        {
-            if (_BLL.SessionIsActive(this))
-            {
-                Maintenance.content_code = VG.c_pepsol;
-                Maintenance.mode = VG.m_add;
-                Response.Redirect("pepsol-add.aspx", false);
-            }
-        }
-
-        protected void lbDelete_Click(object sender, EventArgs e)
-        {
-            if (_BLL.SessionIsActive(this))
-            {
-                LinkButton lbDelete = (LinkButton)sender;
-                string code = lbDelete.CommandArgument;
-                Boolean result = false;
-
-                result = _BLL.DeletePepsol(code);
-
-                if (result == false)
+                if (_BLL.SetUserStatus(userId, VG.s_active) == false)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to delete the entry.', 'error');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to unlock the user.', 'error');", true);
+                }
+                else
+                {
+                    //HttpContext.Current.Cache.Remove(("GetUser" + txtUserId.Text).ToLower());
+
+                    //_BLL.FilterLockedUser(gvMaintenance, txtCode.Text, txtLastName.Text, txtFirstName.Text, txtMiddleName.Text, Employee.user_id, ddUserGroup.SelectedValue, ddDivision.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, ddStatus.SelectedValue);
+
+                    string transactionReferenceNumber = "";
+                    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Edit", "Code: " + userId, Request.UserHostAddress.ToString()))
+                        transactionReferenceNumber = "UPCI-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmm") + "-" + DateTime.Now.ToString("ssff");
+
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('User has been unlocked.','" + transactionReferenceNumber + "');", true);
+
+                    LoadMaintenanceData("", "");
+                    //if (_BLL.SendEmailNotificationUser(userId, "has been unlocked") == false)
+                    //{
+                    //}
+                }
+            }
+        }
+
+        protected void lbResetPassword_Click(object sender, EventArgs e)
+        {
+            if (_BLL.SessionIsActive(this))
+            {
+                LinkButton lbResetPassword = (LinkButton)sender;
+                string userId = lbResetPassword.CommandArgument;
+                GenerateRandomStrings();
+                if (_BLL.ResetPassword(userId, Convert.ToString(ViewState["randomStrings"])) == false)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to reset the password.', 'error');", true);
                 }
                 else
                 {
 
+                    //HttpContext.Current.Cache.Remove(("GetUser" + txtUserId.Text).ToLower());
                     string transactionReferenceNumber = "";
-                    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Delete", "Code: " + code, Request.UserHostAddress.ToString()))
+                    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Edit", "Reset password, User ID: " + userId, Request.UserHostAddress.ToString()))
                         transactionReferenceNumber = "UPCI-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmm") + "-" + DateTime.Now.ToString("ssff");
 
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Data has been deleted.','" + transactionReferenceNumber + "');", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Password has been reset and an email notification has been sent to the user.','" + transactionReferenceNumber + "');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Password has been reset.<br/> NOTE: Copy your password below.','Password: " + Convert.ToString(ViewState["randomStrings"]) + "','success');", true);
+
                     LoadMaintenanceData("", "");
+                    //if (_BLL.SendEmailNotificationUser(userId, "password has been reset") == false)
+                    //{
+                    //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to send email notification. Please try again.', 'error');", true);
+                    //}
+                    //else
+                    //{
+
+                    //}
                 }
             }
         }
@@ -203,14 +225,14 @@ namespace Template
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                if (accessRights.Contains("&m" + Maintenance.content_code + "d,"))
+                if (Maintenance.bank_user_security_mode == "Unlock")
                 {
-                    LinkButton lb = (LinkButton)e.Row.FindControl("lbEdit");
+                    LinkButton lb = (LinkButton)e.Row.FindControl("lbUnlock");
                     lb.Visible = true;
                 }
-                if (accessRights.Contains("&m" + Maintenance.content_code + "d,"))
+                else if (Maintenance.bank_user_security_mode == "Reset")
                 {
-                    LinkButton lb = (LinkButton)e.Row.FindControl("lbDelete");
+                    LinkButton lb = (LinkButton)e.Row.FindControl("lbResetPassword");
                     lb.Visible = true;
                 }
 
@@ -629,6 +651,32 @@ namespace Template
             row.Cells.AddRange(columns.ToArray());
         }
 
+
         #endregion
+
+        protected void GenerateRandomStrings()
+        {
+            Random res = new Random();
+
+            // String that contain both alphabets and numbers 
+            String str = "abcdefghijklmnopqrstuvwxyz0123456789";
+            int stringlen = Convert.ToInt16(Maintenance.min_password_length);
+
+            // Initializing the empty string 
+            String randomstring = "";
+
+            for (int i = 0; i < stringlen; i++)
+            {
+
+                // Selecting a index randomly 
+                int x = res.Next(str.Length);
+
+                // Appending the character at the  
+                // index to the random alphanumeric string. 
+                randomstring = randomstring + str[x];
+            }
+
+            ViewState["randomStrings"] = randomstring;
+        }
     }
 }

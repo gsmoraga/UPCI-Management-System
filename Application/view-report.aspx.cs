@@ -133,7 +133,7 @@ namespace Template
             else
             {
                 HideOtherReports();
-                ClearValues();
+
             }
 
 
@@ -145,10 +145,7 @@ namespace Template
             userCard.Visible = false;
             userGroupCard.Visible = false;
             userGroupAccessMatrixCard.Visible = false;
-            divReportTransactions.Visible = false;
-            divReportPerCustomer.Visible = false;
-            divReportSurveyNationwide.Visible = false;
-            divReportSurveyPerBranch.Visible = false;
+
         }
         /**
         * Generates the audit log report based on the inputted filters
@@ -1183,34 +1180,8 @@ namespace Template
 
         }
 
-        void ClearValues()
-        {
-            //Branch
-            ddBranch.SelectedIndex = -1;
-            ddServicesPerBranch.SelectedIndex = -1;
-            txtPerBranchEndDate.Text = "";
-            txtPerBranchStartDate.Text = "";
+        
 
-            //Nationwide
-            txtStartDate.Text = "";
-            txtEndDate.Text = "";
-    
-            ddServices.SelectedIndex = -1;
-
-            //Transactions
-            ddTransactionsBranch.SelectedIndex = -1;
-            ddTransactionsBranch.SelectedIndex = -1;
-            txtYearDate.Text = "";
-
-            //Customer
-
-
-        }
-
-        protected void ddCustomerServiceType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //DataTable dtServices = _DAL.dtServiceAvailed("", "", ddCustomerServiceType.SelectedValue, "", "GET");
-            //LoadDropdownValues(ddCustomerService, dtServices, "code", "description", true);
-        }
+        
     }
 }

@@ -314,7 +314,37 @@
     }
     #endregion
 
+    #region mode
+    public static string m_add
+    {
+        get { return "Add"; }
+        set { m_add = value; }
+    }
 
+    public static string m_search
+    {
+        get { return "Search"; }
+        set { m_search = value; }
+    }
+
+    public static string m_view
+    {
+        get { return "View"; }
+        set { m_view = value; }
+    }
+
+    public static string m_edit
+    {
+        get { return "Edit"; }
+        set { m_edit = value; }
+    }
+
+    public static string m_delete
+    {
+        get { return "Delete"; }
+        set { m_delete = value; }
+    }
+    #endregion
 
 
 

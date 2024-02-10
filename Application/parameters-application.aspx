@@ -10,14 +10,16 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Application Parameters
+                        <h1><asp:Label ID="contentHeader" runat="server"></asp:Label>
                         </h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item">Maintenance</li>
-                            <li class="breadcrumb-item active">Application Parameters</li>
+                            <li class="breadcrumb-item"><a href="home.aspx">Home</a></li>
+                            <li class="breadcrumb-item">
+                                <asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></li>
+                            <li class="breadcrumb-item active">
+                                <asp:Label ID="subItemBreadcrumb" runat="server"></asp:Label></li>
                         </ol>
                     </div>
                 </div>
@@ -27,11 +29,11 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="row">
-                <div class="col-md-12">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Application Parameters
+                            <h3 class="card-title"><asp:label ID="cardTitle" runat="server"></asp:label>
                             </h3>
 
                             <div class="card-tools">
@@ -156,7 +158,7 @@
                                 <div>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator24" runat="server" ValidationGroup="applicationParametersValidation"
                                         ErrorMessage="Required field." ControlToValidate="txtChurchName" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator26" runat="server" ValidationGroup="applicationParametersValidation"
+                                    <asp:RegularExpressionValidator ID="revChurchName" runat="server" ValidationGroup="applicationParametersValidation"
                                         ErrorMessage="Must be alphanumeric." ControlToValidate="txtChurchName" ValidationExpression="^[a-zA-Z0-9\s]*$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
@@ -258,7 +260,7 @@
                                 <div>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator31" runat="server" ValidationGroup="applicationParametersValidation"
                                         ErrorMessage="Required field." ControlToValidate="txtReportHeader" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator33" runat="server" ValidationGroup="applicationParametersValidation"
+                                    <asp:RegularExpressionValidator ID="revReportHeader" runat="server" ValidationGroup="applicationParametersValidation"
                                         ErrorMessage="Must be alphanumeric." ControlToValidate="txtReportHeader" ValidationExpression="^[a-zA-Z0-9\s-]*$" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
@@ -335,12 +337,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
+                <div class="col-10">
                     <asp:LinkButton runat="server" class="btn btn-success float-right" ID="lbSaveApplicationParameters" OnClick="lbSaveApplicationParameters_Click" Text="Save Changes"
                         OnClientClick="if(Page_ClientValidate('applicationParametersValidation')) { if(this.value === 'Please wait...') { return false; } else { this.value = 'Please wait...'; }}"
                         CausesValidation="true" ValidationGroup="applicationParametersValidation"></asp:LinkButton>
                 </div>
             </div>
+            <br />
         </section>
         <!-- /.content -->
     </div>

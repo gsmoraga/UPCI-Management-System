@@ -42,15 +42,17 @@ namespace Template
                             else
                             {
                                 #region Titles
-                                contentHeader.Text = Maintenance.content_description + " Maintenance";
+                                contentHeader.Text = Maintenance.content_description;
                                 mainBreadcrumb.Text = Maintenance.content_description;
                                 subItemBreadcrumb.Text = Maintenance.mode;
                                 //cardTitle.Text = Maintenance.mode + " " + Maintenance.content_description;
                                 #endregion
 
+                                #region Dropdowns
                                 _BLL.GetMinistryDropdown(ddMinistry, "--Select--");
                                 _BLL.GetMinistryDepartmentDropdown(ddMinistryDepartment, "--Select--", ddMinistry.SelectedValue);
                                 _BLL.GetPepsolDropdown(ddPepsol, "--Select--");
+                                #endregion
 
                                 divCard.Visible = true;
                             }
@@ -82,6 +84,7 @@ namespace Template
             ddPepsol.SelectedIndex = 0;
         }
 
+
         #endregion
 
         #region LinkButtons
@@ -89,17 +92,17 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
-                Response.Redirect("members-search.aspx", false);
+                Response.Redirect("member-search.aspx", false);
             }
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (_BLL.SessionIsActive(this))
             {
-
-                if (_BLL.AddMember(txtFirstName.Text.Trim(), txtMiddleName.Text.Trim(), txtLastName.Text.Trim(), ddGender.SelectedValue, txtBirthday.Text, txtEmail.Text.Trim()
-                    , txtMobileNumber.Text.Trim(), ddMinistry.SelectedValue, ddMinistryDepartment.SelectedValue, txtDateFirstAttend.Text,
-                    ddCellGroup.Text, ddBaptismalStatus.SelectedValue, ddPepsol.SelectedValue, ddStatus.SelectedValue, Employee.user_id) == false)
+                SetMemberStatus();
+                if (_BLL.AddMember(txtFirstName.Text.Trim(), txtMiddleName.Text.Trim(), txtLastName.Text.Trim(), ddGender.SelectedValue, txtBirthday.Text,txtEmail.Text.Trim()
+                    , txtMobileNumber.Text.Trim(), ddMinistry.SelectedValue, ddMinistryDepartment.SelectedValue,
+                    ddCellGroup.Text, ddBaptismalStatus.SelectedValue, ddPepsol.SelectedValue,Convert.ToString(ViewState["MemberStatus"]), txtDateFirstAttend.Text, ddStatus.SelectedValue, Employee.user_id) == false)
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!','Unable to add the user.','error');", true);
                 }
@@ -122,8 +125,24 @@ namespace Template
             if (_BLL.SessionIsActive(this))
             {
                 _BLL.GetMinistryDepartmentDropdown(ddMinistryDepartment, "--Select--", ddMinistry.SelectedValue);
+
+                SetMemberStatus();
+
+
             }
 
+        }
+
+        protected void SetMemberStatus()
+        {
+            if (ddMinistry.SelectedValue == "0")
+            {
+                ViewState["MemberStatus"] = "1";
+            }
+            else
+            {
+                ViewState["MemberStatus"] = "2";
+            }
         }
     }
 }

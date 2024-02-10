@@ -59,6 +59,13 @@ namespace Template
                                 {
                                     lbAdd.Visible = true;
                                 }
+
+                                #region Titles
+                                contentHeader.Text = "Manage " + Maintenance.content_description;
+                                mainBreadcrumb.Text = "Manage " + Maintenance.content_description;
+                                //subItemBreadcrumb.Text = Maintenance.mode;
+                                cardTitle.Text = Maintenance.content_description + " List";
+                                #endregion
                             }
                         }
 

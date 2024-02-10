@@ -53,7 +53,7 @@ namespace Template
 
                                 if (Maintenance.content_code == VG.c_ministry_department)
                                 {
-                                    _BLL.GetDivisionDropDown(ddDivision, "All");
+                                    //_BLL.GetDivisionDropDown(ddDivision, "All");
                                     divDivision.Visible = true;
                                 }
                                 else if (Maintenance.content_code == VG.c_user)
@@ -66,13 +66,13 @@ namespace Template
                                     _BLL.GetUserGroupDropDown(ddUserGroup, "All");
                                     divUserGroup.Visible = true;
 
-                                    _BLL.GetDivisionDropDown(ddDivision, "All");
+                                    //_BLL.GetDivisionDropDown(ddDivision, "All");
                                     divDivision.Visible = true;
 
-                                    _BLL.GetDepartmentDropDown(ddDepartment, "All");
+                                    //_BLL.GetDepartmentDropDown(ddDepartment, "All");
                                     divDepartment.Visible = true;
 
-                                    _BLL.GetBranchDropDown(ddBranch, "All");
+                                    //_BLL.GetBranchDropDown(ddBranch, "All");
                                     divBranch.Visible = true;
 
                                     divStatus.Visible = true;
@@ -136,7 +136,7 @@ namespace Template
 
             if (contentCode == VG.c_ministry_department)
             {
-                result = _BLL.FilterDepartment(gvMaintenance, code, description, ddDivision.SelectedValue);
+                //result = _BLL.FilterDepartment(gvMaintenance, code, description, ddDivision.SelectedValue);
             }
             else if (contentCode == VG.c_user_group)
             {
@@ -146,7 +146,7 @@ namespace Template
             {
                 if (Maintenance.bank_user_security && Maintenance.bank_user_security_mode == "Unlock")
                 {
-                    result = _BLL.FilterLockedUser(gvMaintenance, code, txtLastName.Text, txtFirstName.Text, txtMiddleName.Text, Employee.user_id, ddUserGroup.SelectedValue, ddDivision.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, ddStatus.SelectedValue);
+                    //result = _BLL.FilterLockedUser(gvMaintenance, code, txtLastName.Text, txtFirstName.Text, txtMiddleName.Text, Employee.user_id, ddUserGroup.SelectedValue, ddDivision.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, ddStatus.SelectedValue);
                 }
                 else
                 {
@@ -159,11 +159,11 @@ namespace Template
             }
             else if (contentCode == VG.c_pepsol)
             {
-                result = _BLL.FilterBranch(gvMaintenance, code, description);
+                //result = _BLL.FilterBranch(gvMaintenance, code, description);
             }
             else if (contentCode == VG.c_ministry)
             {
-                result = _BLL.FilterDivision(gvMaintenance, code, description);
+                //result = _BLL.FilterDivision(gvMaintenance, code, description);
             }
 
             if (result == false)
@@ -388,7 +388,7 @@ namespace Template
 
                 if (Maintenance.content_code == VG.c_ministry_department)
                 {
-                    result = _BLL.DeleteDepartment(code);
+                    //result = _BLL.DeleteDepartment(code);
                 }
                 else if (Maintenance.content_code == VG.c_user_group)
                 {
@@ -423,11 +423,11 @@ namespace Template
                 }
                 else if (Maintenance.content_code == VG.c_pepsol)
                 {
-                    result = _BLL.DeleteBranch(code);
+                    //result = _BLL.DeleteBranch(code);
                 }
                 else if (Maintenance.content_code == VG.c_ministry)
                 {
-                    result = _BLL.DeleteDivision(code);
+                    //result = _BLL.DeleteDivision(code);
                 }
 
                 if (result == false)
@@ -513,7 +513,7 @@ namespace Template
                 {
                     //HttpContext.Current.Cache.Remove(("GetUser" + txtUserId.Text).ToLower());
 
-                    _BLL.FilterLockedUser(gvMaintenance, txtCode.Text, txtLastName.Text, txtFirstName.Text, txtMiddleName.Text, Employee.user_id, ddUserGroup.SelectedValue, ddDivision.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, ddStatus.SelectedValue);
+                    //_BLL.FilterLockedUser(gvMaintenance, txtCode.Text, txtLastName.Text, txtFirstName.Text, txtMiddleName.Text, Employee.user_id, ddUserGroup.SelectedValue, ddDivision.SelectedValue, ddDepartment.SelectedValue, ddBranch.SelectedValue, ddStatus.SelectedValue);
 
                     string transactionReferenceNumber = "";
                     if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Edit", "Code: " + userId, Request.UserHostAddress.ToString()))
@@ -542,27 +542,27 @@ namespace Template
                 LinkButton lbResetPassword = (LinkButton)sender;
                 string userId = lbResetPassword.CommandArgument;
 
-                if (_BLL.ResetPassword(userId) == false)
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to reset the password.', 'error');", true);
-                }
-                else
-                {
-                    //HttpContext.Current.Cache.Remove(("GetUser" + txtUserId.Text).ToLower());
+                //if (_BLL.ResetPassword(userId) == false)
+                //{
+                //    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to reset the password.', 'error');", true);
+                //}
+                //else
+                //{
+                //    //HttpContext.Current.Cache.Remove(("GetUser" + txtUserId.Text).ToLower());
 
-                    if (_BLL.SendEmailNotificationUser(userId, "password has been reset") == false)
-                    {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to send email notification. Please try again.', 'error');", true);
-                    }
-                    else
-                    {
-                        string transactionReferenceNumber = "";
-                        if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Edit", "Reset password, User ID: " + userId, Request.UserHostAddress.ToString()))
-                            transactionReferenceNumber = "CLICKS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
+                //    if (_BLL.SendEmailNotificationUser(userId, "password has been reset") == false)
+                //    {
+                //        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to send email notification. Please try again.', 'error');", true);
+                //    }
+                //    else
+                //    {
+                //        string transactionReferenceNumber = "";
+                //        if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Edit", "Reset password, User ID: " + userId, Request.UserHostAddress.ToString()))
+                //            transactionReferenceNumber = "CLICKS-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmmss") + "-" + Maintenance.sequence_number;
 
-                        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Password has been reset and an email notification has been sent to the user.','" + transactionReferenceNumber + "');", true);
-                    }
-                }
+                //        ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Password has been reset and an email notification has been sent to the user.','" + transactionReferenceNumber + "');", true);
+                //    }
+                //}
             }
         }
 
@@ -867,7 +867,7 @@ namespace Template
 
                                 if (Maintenance.content_code == VG.c_ministry_department)
                                 {
-                                    _BLL.DeleteDepartment(gvMaintenance.Rows[i].Cells[0].Text);
+                                    //_BLL.DeleteDepartment(gvMaintenance.Rows[i].Cells[0].Text);
                                 }
                                 else if (Maintenance.content_code == VG.c_user_group)
                                 {
@@ -902,11 +902,11 @@ namespace Template
                                 }
                                 else if (Maintenance.content_code == VG.c_pepsol)
                                 {
-                                    _BLL.DeleteBranch(gvMaintenance.Rows[i].Cells[0].Text);
+                                    //_BLL.DeleteBranch(gvMaintenance.Rows[i].Cells[0].Text);
                                 }
                                 else if (Maintenance.content_code == VG.c_ministry)
                                 {
-                                    _BLL.DeleteDivision(gvMaintenance.Rows[i].Cells[0].Text);
+                                    //_BLL.DeleteDivision(gvMaintenance.Rows[i].Cells[0].Text);
                                 }
                             }
                         }

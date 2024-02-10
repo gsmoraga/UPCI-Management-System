@@ -38,7 +38,7 @@ namespace Template
                         else
                         {
                             if (_BLL.GetContentType(Maintenance.content_code) == false)
-                            {}
+                            { }
                             else
                             {
                                 _BLL.GetMinistryDropdown(ddMinistry, "--Select--");
@@ -56,7 +56,7 @@ namespace Template
         protected void LoadEditDetails(string memberId)
         {
             if (_BLL.GetMemberDeatils(Maintenance.entry_code) == false)
-            {}
+            { }
             else
             {
                 txtFirstName.Text = Member.first_name;
@@ -73,11 +73,15 @@ namespace Template
                 ddBaptismalStatus.SelectedValue = Member.baptismal_status_code;
                 ddPepsol.SelectedValue = Member.pepsol_level_code;
             }
-            
+
         }
         protected void ddMinistry_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _BLL.GetMinistryDepartmentDropdown(ddMinistryDepartment, "--Select--", ddMinistry.SelectedValue);
+            if (_BLL.SessionIsActive(this))
+            {
+                _BLL.GetMinistryDepartmentDropdown(ddMinistryDepartment, "--Select--", ddMinistry.SelectedValue);
+                SetMemberStatus();
+            }
         }
 
         #region Link Buttons
@@ -94,9 +98,12 @@ namespace Template
             if (_BLL.SessionIsActive(this))
             {
                 Boolean result = false;
-                result = _BLL.EditMember(Maintenance.entry_code,txtFirstName.Text.Trim(), txtMiddleName.Text.Trim(), txtLastName.Text.Trim(), ddGender.SelectedValue, txtBirthday.Text, txtEmail.Text.Trim()
-                    , txtMobileNumber.Text.Trim(), ddMinistry.SelectedValue, ddMinistryDepartment.SelectedValue, txtDateFirstAttend.Text,
-                    ddCellGroup.Text, ddBaptismalStatus.SelectedValue, ddPepsol.SelectedValue, ddStatus.SelectedValue);
+
+                SetMemberStatus();
+
+                result = _BLL.EditMember(Maintenance.entry_code, txtFirstName.Text.Trim(), txtMiddleName.Text.Trim(), txtLastName.Text.Trim(), ddGender.SelectedValue, txtBirthday.Text, txtEmail.Text.Trim()
+                    , txtMobileNumber.Text.Trim(), ddMinistry.SelectedValue, ddMinistryDepartment.SelectedValue,
+                    ddCellGroup.Text, ddBaptismalStatus.SelectedValue, ddPepsol.SelectedValue, Convert.ToString(ViewState["MemberStatus"]), txtDateFirstAttend.Text, ddStatus.SelectedValue);
 
                 if (result == false)
                 {
@@ -105,19 +112,29 @@ namespace Template
                 else
                 {
                     if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, Maintenance.mode, "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString()) == false)
-                    {}
+                    { }
                     else
                     {
-                        
+
                         string transactionReferenceNumber = "UPCI-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmm") + "-" + DateTime.Now.ToString("ssff");
                         ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Entry has been updated.','" + transactionReferenceNumber + "');", true);
                     }
-                    
+
                 }
             }
         }
         #endregion
 
-        
+        protected void SetMemberStatus()
+        {
+            if (ddMinistry.SelectedValue == "0")
+            {
+                ViewState["MemberStatus"] = "1";
+            }
+            else
+            {
+                ViewState["MemberStatus"] = "2";
+            }
+        }
     }
 }

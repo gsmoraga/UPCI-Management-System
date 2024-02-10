@@ -41,17 +41,15 @@ namespace Template
                             }
                             else
                             {
-                                txtMinPasswordLength.Text = Maintenance.min_password_length;
-                                txtPasswordExpiration.Text = Maintenance.password_expiration_days;
-                                txtAllowedRepeatingCharacters.Text = Maintenance.max_length_repeating_characters;
-                                txtAllowedSequentialCharacters.Text = Maintenance.max_length_sequential_characters;
-                                txtCumulativeInvalidPassword.Text = Maintenance.max_cumulative_invalid_password_tries;
-                                txtInvalidPasswordTries.Text = Maintenance.max_invalid_password_tries;
-                                Session["InvalidPasswordTries"] = Maintenance.max_invalid_password_tries;
-                                txtRecentPasswordsNotAllowed.Text = Maintenance.max_restricted_recent_passwords;
-                                txtSpecialCharactersAllowedSP.Text = Maintenance.allowed_special_characters_password;
-                                ddPasswordType.SelectedValue = Maintenance.password_type;
-                                txtMobileActivation.Text = Maintenance.mobile_activation_minutes;
+
+                                LoadSecurityParameters();
+
+                                #region Titles
+                                contentHeader.Text = Maintenance.content_description + " Maintenance";
+                                mainBreadcrumb.Text = Maintenance.content_description;
+                                //subItemBreadcrumb.Text = Maintenance.mode;
+                                cardTitle.Text = Maintenance.content_description;
+                                #endregion
                             }
                         }
                     }
@@ -85,6 +83,26 @@ namespace Template
 
                     ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Security Parameters have been updated.','" + transactionReferenceNumber + "');", true);
                 }
+            }
+        }
+
+        protected void LoadSecurityParameters()
+        {
+            if (Maintenance.content_code == VG.c_security_parameters)
+            {
+                #region Load Security Parameters
+                txtMinPasswordLength.Text = Maintenance.min_password_length;
+                txtPasswordExpiration.Text = Maintenance.password_expiration_days;
+                txtAllowedRepeatingCharacters.Text = Maintenance.max_length_repeating_characters;
+                txtAllowedSequentialCharacters.Text = Maintenance.max_length_sequential_characters;
+                txtCumulativeInvalidPassword.Text = Maintenance.max_cumulative_invalid_password_tries;
+                txtInvalidPasswordTries.Text = Maintenance.max_invalid_password_tries;
+                Session["InvalidPasswordTries"] = Maintenance.max_invalid_password_tries;
+                txtRecentPasswordsNotAllowed.Text = Maintenance.max_restricted_recent_passwords;
+                txtSpecialCharactersAllowedSP.Text = Maintenance.allowed_special_characters_password;
+                ddPasswordType.SelectedValue = Maintenance.password_type;
+                txtMobileActivation.Text = Maintenance.mobile_activation_minutes;
+                #endregion
             }
         }
     }

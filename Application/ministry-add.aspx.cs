@@ -38,7 +38,18 @@ namespace Template
                         }
                         else
                         {
-                            cardMaintenance.Visible = true;
+                            if (_BLL.GetContentType(Maintenance.content_code) == false)
+                            { }
+                            else
+                            {
+                                #region Titles
+                                contentHeader.Text = Maintenance.content_description;
+                                mainBreadcrumb.Text = Maintenance.content_description;
+                                subItemBreadcrumb.Text = Maintenance.mode;
+                                cardTitle.Text = Maintenance.mode + " " + Maintenance.content_description;
+                                #endregion
+                                cardMaintenance.Visible = true;
+                            }
                         }
                     }
                 }

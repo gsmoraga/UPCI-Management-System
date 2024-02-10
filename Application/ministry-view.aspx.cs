@@ -36,7 +36,19 @@ namespace Template
                         }
                         else
                         {
-                            LoadMinistryDetails(Maintenance.entry_code);
+                            if (_BLL.GetContentType(Maintenance.content_code) == false)
+                            { }
+                            else
+                            {
+                                LoadMinistryDetails(Maintenance.entry_code);
+                                #region Titles
+                                contentHeader.Text = Maintenance.content_description + " Maintenance";
+                                mainBreadcrumb.Text = Maintenance.content_description;
+                                subItemBreadcrumb.Text = Maintenance.mode;
+                                cardTitle.Text = Maintenance.mode + " " + Maintenance.content_description;
+                                #endregion
+                            }
+
                         }
                     }
                 }
@@ -50,7 +62,7 @@ namespace Template
             else
             {
                 lblCode.Text = Maintenance.code;
-                lblDescription.Text = Maintenance.description; 
+                lblDescription.Text = Maintenance.description;
             }
         }
         protected void btnCancel_Click(object sender, EventArgs e)

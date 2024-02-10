@@ -42,442 +42,6 @@ public class BLL
         }
     }
 
-    #region Branch
-    /**
-    * Adds a branch entry with the given details to the database
-    * 
-    * @since version 1.0 
-    * @param string branchCode - unique code to identify the branch entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean AddBranch(string branchCode, string description, string region, string email)
-    {
-        if (_DAL.AddBranch(branchCode, description, region, email) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    /**
-    * Edits the branch entry that matches the code with the given description
-    * 
-    * @since version 1.0 
-    * @param string branchCode - unique code to identify the branch entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean EditBranch(string branchCode, string description, string email, string region_code)
-    {
-        //8/16/2023 Additional Parameter for Region
-        if (_DAL.EditBranch(branchCode, description, email, region_code) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    /**
-    * Deletes the branch entry that matches the given code
-    * 
-    * @since version 1.0 
-    * @param string branchCode - unique code to identify the branch entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean DeleteBranch(string branchCode)
-    {
-        if (_DAL.DeleteBranch(branchCode) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    /**
-    * Filters the data table of branches that match the filter string
-    * 
-    * @since version 1.0 
-    * @param GridView pObj - grid view where the data table will be binded to
-    * @param string code - code to search
-    * @param string description - description to search
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean FilterBranch(GridView pObj, string code, string description)
-    {
-        DataTable dt = _DAL.FilterBranch(code, description);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            pObj.DataSource = null;
-            pObj.DataBind();
-            return false;
-        }
-        else
-        {
-            pObj.DataSource = dt;
-            pObj.DataBind();
-
-            return true;
-        }
-    }
-
-    /**
-    * Assigns the values of the row that matches the search string to the corresponding fields of the Maintenance Class
-    * 
-    * @since version 1.0 
-    * @param string value - unique code identifier
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean GetBranch(string value)
-    {
-        DataTable dt = _DAL.GetBranch(value);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            return false;
-        }
-        else
-        {
-            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
-            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
-            Maintenance.branch_email = Convert.ToString(dt.Rows[0]["email"]);
-            //8-15-2023
-            Maintenance.region = Convert.ToString(dt.Rows[0]["region_code"]);
-            Maintenance.region_name = Convert.ToString(dt.Rows[0]["desc_region"]);
-            return true;
-        }
-    }
-
-    /**
-    * Gets the list of entries in the database and binds it to a dropdown
-    * 
-    * @since version 1.0 
-    * @param DropDownList dd - dropdown where the list will be binded
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean GetBranchDropDown(DropDownList dd, string item)
-    {
-        try
-        {
-            DataTable dt = _DAL.FilterBranch("", "");
-            dd.DataSource = dt;
-            dd.DataValueField = "code";
-            dd.DataTextField = "description";
-            dd.DataBind();
-            dd.Items.Insert(0, new ListItem(item, "0"));
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    /**
-    * Gets the list of entries in the database and binds it to a dropdown
-    * 
-    * @since version 1.0 
-    * @param DropDownList dd - dropdown where the list will be binded
-    * @param item - determines the default dropdown item to be added
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean GetBranchListBox(ListBox box)
-    {
-        try
-        {
-            DataTable dt = _DAL.FilterBranch("", "");
-            box.DataSource = dt;
-            box.DataValueField = "code";
-            box.DataTextField = "description";
-            box.DataBind();
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    #endregion
-
-    #region Department
-    /**
-    * Adds a department entry with the given details to the database
-    * 
-    * @since version 1.0 
-    * @param string departmentCode - unique code to identify the department entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean AddDepartment(string departmentCode, string description, string divisionCode)
-    {
-        if (_DAL.AddDepartment(departmentCode, description, divisionCode) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    /**
-    * Edits the department entry that matches the code with the given description
-    * 
-    * @since version 1.0 
-    * @param string departmentCode - unique code to identify the department entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean EditDepartment(string departmentCode, string description, string divisionCode)
-    {
-        if (_DAL.EditDepartment(departmentCode, description, divisionCode) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    /**
-    * Deletes the department entry that matches the given code
-    * 
-    * @since version 1.0 
-    * @param string departmentCode - unique code to identify the department entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean DeleteDepartment(string departmentCode)
-    {
-        if (_DAL.DeleteDepartment(departmentCode) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    /**
-    * Filters the data table of departments that match the filter string
-    * 
-    * @since version 1.0 
-    * @param GridView pObj - grid view where the data table will be binded to
-    * @param string code - code to search
-    * @param string description - description to search
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean FilterDepartment(GridView pObj, string code, string description, string division)
-    {
-        DataTable dt = _DAL.FilterDepartment(code, description, division);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            pObj.DataSource = null;
-            pObj.DataBind();
-            return false;
-        }
-        else
-        {
-            pObj.DataSource = dt;
-            pObj.DataBind();
-
-            return true;
-        }
-    }
-
-    /**
-    * Assigns the values of the row that matches the search string to the corresponding fields of the Maintenance Class
-    * 
-    * @since version 1.0 
-    * @param string value - unique code identifier
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean GetDepartment(string value)
-    {
-        DataTable dt = _DAL.GetDepartment(value);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            return false;
-        }
-        else
-        {
-            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
-            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
-            Maintenance.ministry_code = Convert.ToString(dt.Rows[0]["ministry_code"]);
-
-            return true;
-        }
-    }
-
-    /**
-    * Gets the list of entries in the database and binds it to a dropdown
-    * 
-    * @since version 1.0 
-    * @param DropDownList dd - dropdown where the list will be binded
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean GetDepartmentDropDown(DropDownList dd, string item)
-    {
-        try
-        {
-            DataTable dt = _DAL.FilterDepartment("", "", "0");
-            dd.DataSource = dt;
-            dd.DataValueField = "code";
-            dd.DataTextField = "description";
-            dd.DataBind();
-            dd.Items.Insert(0, new ListItem(item, "0"));
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-    #endregion
-
-    #region Division
-    /**
-    * Adds a division entry with the given details to the database
-    * 
-    * @since version 1.0 
-    * @param string divisionCode - unique code to identify the division entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean AddDivision(string divisionCode, string description)
-    {
-        if (_DAL.AddDivision(divisionCode, description) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    /**
-    * Edits the division entry that matches the code with the given description
-    * 
-    * @since version 1.0 
-    * @param string divisionCode - unique code to identify the division entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean EditDivision(string divisionCode, string description)
-    {
-        if (_DAL.EditDivision(divisionCode, description) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    /**
-    * Deletes the division entry that matches the given code
-    * 
-    * @since version 1.0 
-    * @param string divisionCode - unique code to identify the division entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean DeleteDivision(string divisionCode)
-    {
-        if (_DAL.DeleteDivision(divisionCode) == false)
-        {
-            return false;
-        }
-        else return true;
-    }
-
-    /**
-    * Filters the data table of divisions that match the filter string
-    * 
-    * @since version 1.0 
-    * @param GridView pObj - grid view where the data table will be binded to
-    * @param string code - code to search
-    * @param string description - description to search
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean FilterDivision(GridView pObj, string code, string description)
-    {
-        DataTable dt = _DAL.FilterDivision(code, description);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            pObj.DataSource = null;
-            pObj.DataBind();
-            return false;
-        }
-        else
-        {
-            pObj.DataSource = dt;
-            pObj.DataBind();
-
-            return true;
-        }
-    }
-
-    /**
-    * Assigns the values of the row that matches the search string to the corresponding fields of the Maintenance Class
-    * 
-    * @since version 1.0 
-    * @param string value - unique code identifier
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean GetDivision(string value)
-    {
-        DataTable dt = _DAL.GetDivision(value);
-
-        if (dt == null || dt.Rows.Count < 1)
-        {
-            return false;
-        }
-        else
-        {
-            Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
-            Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
-
-            return true;
-        }
-    }
-
-    /**
-    * Gets the list of entries in the database and binds it to a dropdown
-    * 
-    * @since version 1.0 
-    * @param DropDownList dd - dropdown where the list will be binded
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean GetDivisionDropDown(DropDownList dd, string item)
-    {
-        try
-        {
-            DataTable dt = _DAL.FilterDivision("", "");
-            dd.DataSource = dt;
-            dd.DataValueField = "code";
-            dd.DataTextField = "description";
-            dd.DataBind();
-            dd.Items.Insert(0, new ListItem(item, "0"));
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    public Boolean GetRegionDropdown(DropDownList dd, string item)
-    {
-        try
-        {
-            DataTable dt = _DAL.GetRegion();
-            dd.DataSource = dt;
-            dd.DataValueField = "code";
-            dd.DataTextField = "description";
-            dd.DataBind();
-            dd.Items.Insert(0, new ListItem(item, "0"));
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-    #endregion
-
 
     #region UPCI
 
@@ -576,18 +140,18 @@ public class BLL
     }
 
     public Boolean AddMember(string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment
-        , string dateFirstAttend, string cell, string baptismal, string pepsol, string membershipStatus, string createdBy)
+         ,string cell, string baptismal, string pepsol, string memberStatus, string dateFirstAttend,string Status, string createdBy)
     {
-        if (_DAL.AddMember(firstName, middleName, lastName, gender, birthdate, email, mobileNumber, ministry, ministryDepartment, dateFirstAttend, cell, baptismal, pepsol, membershipStatus, createdBy) == false)
+        if (_DAL.AddMember(firstName, middleName, lastName, gender, birthdate, email, mobileNumber, ministry, ministryDepartment, cell, baptismal, pepsol, memberStatus, dateFirstAttend,Status, createdBy) == false)
         {
             return false;
         }
         else return true;
     }
     public Boolean EditMember(string memberId, string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment
-        , string dateFirstAttend, string cell, string baptismal, string pepsol, string membershipStatus)
+        ,string cell, string baptismal, string pepsol,string memberStatus, string dateFirstAttend, string status)
     {
-        if (_DAL.EditMember(memberId, firstName, middleName, lastName, gender, birthdate, email, mobileNumber, ministry, ministryDepartment, dateFirstAttend, cell, baptismal, pepsol, membershipStatus) == false)
+        if (_DAL.EditMember(memberId, firstName, middleName, lastName, gender, birthdate, email, mobileNumber, ministry, ministryDepartment, cell, baptismal, pepsol, memberStatus, dateFirstAttend, status) == false)
         {
             return false;
         }
@@ -654,10 +218,19 @@ public class BLL
             Member.cell_status_code = Convert.ToString(dt.Rows[0]["cell"]);
             Member.baptismal_status_code = Convert.ToString(dt.Rows[0]["baptismal"]);
             Member.pepsol_level_code = Convert.ToString(dt.Rows[0]["pepsol"]);
-            Member.membership_status_code = Convert.ToString(dt.Rows[0]["membership_status"]);
+            Member.membership_status_code = Convert.ToString(dt.Rows[0]["status"]);
             return true;
         }
     }
+    public Boolean SaveMemberAddress(string memberId, string street, string barangay, string city)
+    {
+        if (_DAL.SaveMemberAddress(memberId, street, barangay, city) == false)
+        {
+            return false;
+        }
+        else return true;
+    }
+
     #endregion
 
     /*****MAINTENANCE FUNCTIONS*****/
@@ -725,9 +298,9 @@ public class BLL
         {
             Maintenance.website_url = Convert.ToString(dt.Rows[0]["website_url"]);
             Maintenance.audit_log_purge_days = Convert.ToString(dt.Rows[0]["audit_log_purge_days"]);
-            Maintenance.bank_email_address = Convert.ToString(dt.Rows[0]["church_email_address"]);
-            Maintenance.bank_hotline = Convert.ToString(dt.Rows[0]["church_hotline"]);
-            Maintenance.bank_name = Convert.ToString(dt.Rows[0]["church_name"]);
+            Maintenance.church_email_address = Convert.ToString(dt.Rows[0]["church_email_address"]);
+            Maintenance.church_hotline = Convert.ToString(dt.Rows[0]["church_hotline"]);
+            Maintenance.church_name = Convert.ToString(dt.Rows[0]["church_name"]);
             Maintenance.profile_expiration_days = Convert.ToString(dt.Rows[0]["profile_expiration_days"]);
             Maintenance.email_engine_sender_address = Convert.ToString(dt.Rows[0]["email_engine_sender_address"]);
             Maintenance.max_allowed_mobile_devices = Convert.ToString(dt.Rows[0]["max_allowed_mobile_devices"]);
@@ -869,7 +442,7 @@ public class BLL
         {
             Maintenance.code = Convert.ToString(dt.Rows[0]["code"]);
             Maintenance.description = Convert.ToString(dt.Rows[0]["description"]);
-            Maintenance.ministry_description = Convert.ToString(dt.Rows[0]["ministry_description"]);
+            Maintenance.ministry_description = Convert.ToString(dt.Rows[0]["ministry_desc"]);
             Maintenance.ministry_code = Convert.ToString(dt.Rows[0]["ministry_code"]);
 
             return true;
@@ -1118,9 +691,9 @@ public class BLL
     * @param string userId - user ID of the current user
     * @return Boolean true if successful, false otherwise
     */
-    public Boolean FilterLockedUser(GridView pObj, string code, string lastName, string firstName, string middleName, string userId, string userGroup, string division, string department, string branch, string status)
+    public Boolean FilterLockedUser(GridView pObj, string code, string fullName, string userId)
     {
-        DataTable dt = _DAL.FilterLockedUser(code, lastName, firstName, middleName, userId, userGroup, division, department, branch, status);
+        DataTable dt = _DAL.FilterLockedUser(code, fullName, userId);
 
         if (dt == null || dt.Rows.Count < 1)
         {
@@ -1627,7 +1200,7 @@ public class BLL
 
             if (maintenanceType == "3")
             {
-                dt = _DAL.GetDepartment(code);
+                //dt = _DAL.GetDepartment(code);
             }
             else if (maintenanceType == "4")
             {
@@ -1635,11 +1208,11 @@ public class BLL
             }
             else if (maintenanceType == "7")
             {
-                dt = _DAL.GetBranch(code);
+                //dt = _DAL.GetBranch(code);
             }
             else if (maintenanceType == "8")
             {
-                dt = _DAL.GetDivision(code);
+                //dt = _DAL.GetDivision(code);
             }
 
             dd.Items.Add(new ListItem(Convert.ToString(dt.Rows[0]["description"]) + " (Deleted)", Convert.ToString(dt.Rows[0]["code"])));
@@ -1916,9 +1489,9 @@ public class BLL
     * @param string userId - unique identifier of the user
     * @return Boolean true if successful
     */
-    public Boolean ResetPassword(string userId)
+    public Boolean ResetPassword(string userId, string password)
     {
-        if (_DAL.ResetPassword(userId) == false)
+        if (_DAL.ResetPassword(userId, password) == false)
         {
             return false;
         }

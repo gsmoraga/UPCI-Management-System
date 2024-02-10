@@ -36,8 +36,8 @@
         </section>
         <!-- Main content -->
         <section class="content">
-            <div class="row">
-                <div class="col-md-12">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
                     <div class="card card-primary" id="cardMaintenance" runat="server">
                         <div class="card-header">
                             <h3 class="card-title">
@@ -122,8 +122,8 @@
                     <!-- /.card -->
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-8">
                     <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" OnClick="btnCancel_Click">Cancel</asp:LinkButton>
                     <asp:LinkButton ID="btnSubmit" runat="server" CssClass="btn btn-primary float-right" OnClick="btnSubmit_Click"
                         OnClientClick="if(Page_ClientValidate('codeDescValidation')) { if(this.value === 'Please wait...') { return false; } else { this.value = 'Please wait...'; }}" CausesValidation="true" ValidationGroup="codeDescValidation">Save</asp:LinkButton>
@@ -131,5 +131,6 @@
             </div>
         </section>
         <!-- /.content -->
+        <br />
     </div>
 </asp:Content>

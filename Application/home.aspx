@@ -36,105 +36,120 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <!-- Small boxes (Stat box) -->
+                <!-- Info Boxes -->
                 <div class="row">
-                    <div class="col-sm-3 col-2">
-                        <!-- small box -->
-                        <div class="small-box bg-warning">
-                            <div class="inner">
-                                <h3><asp:Label ID="lblYouth" runat="server"></asp:Label></h3>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
-                                <p>Youth</p>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Youth</span>
+                                <span class="info-box-number">
+                                    <asp:Label ID="lblYouth" runat="server"></asp:Label>
+                                </span>
                             </div>
-                            <%--<div class="icon">
-                                <i class="ion ion-bag"></i>
-                            </div>--%>
-                            <%--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--%>
+                            <!-- /.info-box-content -->
                         </div>
+                        <!-- /.info-box -->
                     </div>
-                    <!-- ./col -->
-                    <div class="col-sm-3 col-2">
-                        <!-- small box -->
-                        <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3><asp:Label ID="lblYoungAdults" runat="server"></asp:Label></h3>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
 
-                                <p>Young Adults</p>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Young Adults</span>
+                                <span class="info-box-number">
+                                    <asp:Label ID="lblYoungAdults" runat="server"></asp:Label>
+                                </span>
                             </div>
-                            <%--<div class="icon">
-                                <i class="ion ion-stats-bars"></i>
-                            </div>--%>
-                            <%--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--%>
+                            <!-- /.info-box-content -->
                         </div>
+                        <!-- /.info-box -->
                     </div>
-                    <!-- ./col -->
-                    <div class="col-sm-3 col-2">
-                        <!-- small box -->
-                        <div class="small-box bg-primary">
-                            <div class="inner">
-                                <h3><asp:Label ID="lblMens" runat="server"></asp:Label></h3>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-users"></i></span>
 
-                                <p>Mens</p>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Mens</span>
+                                <span class="info-box-number">
+                                    <asp:Label ID="lblMens" runat="server"></asp:Label>
+                                </span>
                             </div>
-                            <%--<div class="icon">
-                                <i class="ion ion-person-add"></i>
-                            </div>--%>
-                            <%--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--%>
+                            <!-- /.info-box-content -->
                         </div>
+                        <!-- /.info-box -->
                     </div>
-                    <!-- ./col -->
-                    <div class="col-sm-3 col-2">
-                        <!-- small box -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3><asp:Label ID="lblWomens" runat="server"></asp:Label></h3>
-                                <p>Womens</p>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Womens</span>
+                                <span class="info-box-number">
+                                    <asp:Label ID="lblWomens" runat="server"></asp:Label>
+                                </span>
                             </div>
-                            <%--<div class="icon">
-                                
-                            </div>--%>
-                            <%--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--%>
+                            <!-- /.info-box-content -->
                         </div>
+                        <!-- /.info-box -->
                     </div>
                 </div>
-
                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <%--<h5 class="card-title">Monthly Recap Report</h5>--%>
 
-                    <!-- Welcome Card -->
-                    <div class="col-lg-8">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p class="text-center">
+                                            <strong></strong>
+                                        </p>
                                         <h1 class="card-title">Welcome,<asp:Label runat="server" ID="lblName"></asp:Label></h1>
                                         <br />
                                         <br />
                                         <asp:Label ID="lblLatestLogInDate" runat="server"></asp:Label><br />
                                         <asp:Label ID="lblExpirationAlert" runat="server" Visible="false"></asp:Label>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p class="text-center">
+                                                    <strong>Recent Activity</strong>
+                                                </p>
+                                                <div class="activity">
+                                                    <div class="list-unstyled list-unstyled-border" style="max-height: 350px; overflow: scroll; overflow-x: hidden;">
+                                                        <asp:GridView ID="gvRecentActivity" runat="server" AllowPaging="False" CssClass="table"
+                                                            GridLines="None" ShowHeader="False" CellPadding="4" ForeColor="#333333" OnRowDataBound="gvRecentActivity_RowDataBound">
+                                                        </asp:GridView>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                    <!-- Recent Activity -->
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Recent Activity
-                                </h5>
-                                <div class="activity">
-                                    <div class="list-unstyled list-unstyled-border" style="max-height: 350px; overflow: scroll; overflow-x: hidden;">
-                                        <asp:GridView ID="gvRecentActivity" runat="server" AllowPaging="False" CssClass="table"
-                                            GridLines="None" ShowHeader="False" CellPadding="4" ForeColor="#333333" OnRowDataBound="gvRecentActivity_RowDataBound">
-                                        </asp:GridView>
                                     </div>
+                                    <!-- /.col -->
                                 </div>
+                                <!-- /.row -->
                             </div>
+                            <!-- ./card-body -->
                         </div>
+                        <!-- /.card -->
                     </div>
-
+                    <!-- /.col -->
                 </div>
+                <!-- /.row -->
+
 
 
             </div>

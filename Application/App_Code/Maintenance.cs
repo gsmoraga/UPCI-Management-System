@@ -591,7 +591,7 @@ public class Maintenance
                 HttpContext.Current.Session["RetentionDaysPending"] = value;
         }
     }
-    public static string bank_email_address
+    public static string church_email_address
     {
         get
         {
@@ -605,7 +605,7 @@ public class Maintenance
                 HttpContext.Current.Session["BankEmailAddress"] = value;
         }
     }
-    public static string bank_hotline
+    public static string church_hotline
     {
         get
         {
@@ -619,7 +619,7 @@ public class Maintenance
                 HttpContext.Current.Session["BankHotline"] = value;
         }
     }
-    public static string bank_name
+    public static string church_name
     {
         get
         {

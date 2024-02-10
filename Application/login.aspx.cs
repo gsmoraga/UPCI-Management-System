@@ -75,7 +75,7 @@ namespace Template
                             Employee.status = VG.s_disabled;
                             _BLL.SetUserStatus(Employee.user_id, VG.s_disabled);
                             _BLL.AddAuditLogEntry(Employee.user_id, VG.c_access, "View", "Account disabled due to accumulated invalid password attempts", Request.UserHostAddress.ToString());
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Your account has been disabled!', 'Your cumulative invalid password attempts have reached the maximum allowed number. Please contact IT Security (Loc. " + VG.usb_itsec_local + " or " + VG.usb_itsec_email + ") to unlock your account.', 'error');", true);
+                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Your account has been disabled!', 'Your cumulative invalid password attempts have reached the maximum allowed number. Please contact IT Personell (Loc. " + VG.usb_itsec_local + " or " + VG.usb_itsec_email + ") to unlock your account.', 'error');", true);
                         }
                         else if (Employee.remaining_password_attempts >= 1)
                         {
@@ -86,7 +86,7 @@ namespace Template
                             Employee.status = VG.s_disabled;
                             _BLL.SetUserStatus(Employee.user_id, VG.s_disabled);
                             _BLL.AddAuditLogEntry(Employee.user_id, VG.c_access, "View", "Account disabled due to exhausted password attempts", Request.UserHostAddress.ToString());
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Your account has been disabled!', 'Your invalid password attempts have reached the maximum allowed number. Please contact IT Security (Loc. " + VG.usb_itsec_local + " or " + VG.usb_itsec_email + ") to unlock your account.', 'error');", true);
+                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Your account has been disabled!', 'Your invalid password attempts have reached the maximum allowed number. Please contact IT Personell (Loc. " + VG.usb_itsec_local + " or " + VG.usb_itsec_email + ") to unlock your account.', 'error');", true);
                         }
 
                         return;

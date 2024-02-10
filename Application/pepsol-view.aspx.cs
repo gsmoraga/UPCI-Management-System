@@ -36,7 +36,20 @@ namespace Template
                         }
                         else
                         {
-                            LoadPepsolDetails(Maintenance.entry_code);
+                            if (_BLL.GetContentType(Maintenance.content_code) == false)
+                            { }
+                            else
+                            {
+                                #region Titles
+                                contentHeader.Text = Maintenance.content_description + " Maintenance";
+                                mainBreadcrumb.Text = Maintenance.content_description;
+                                subItemBreadcrumb.Text = Maintenance.mode;
+                                cardTitle.Text = Maintenance.mode + " " + Maintenance.content_description;
+                                #endregion
+
+                                LoadPepsolDetails(Maintenance.entry_code);
+                            }
+                            
                         }
                     }
                 }

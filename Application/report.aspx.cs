@@ -13,13 +13,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
+using System.Text;
 
 namespace Template
 {
-    public partial class pepsol_search : System.Web.UI.Page
+    public partial class report : System.Web.UI.Page
     {
         DAL _DAL = new DAL();
         private BLL _BLL = new BLL();
+        StringBuilder sb = new StringBuilder();
         char[] alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,56 +37,53 @@ namespace Template
                     if (_BLL.SessionIsActive(this))
                     {
                         string accessRights = Employee.access_rights;
-                        Regex r = new Regex("&m[0-9]", RegexOptions.IgnoreCase);
 
-                        if (!r.Match(accessRights).Success)
+                        if (!accessRights.Contains("&r"))
                         {
-                            _BLL.AddAccessLogEntry(VG.access_maintenance, Employee.user_id, "0", Request.UserHostAddress.ToString());
+                            _BLL.AddAccessLogEntry(VG.access_reports, Employee.user_id, "0", Request.UserHostAddress.ToString());
 
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "noAccessRedirect('logout.aspx');", true);
+                            ScriptManager.RegisterStartupScript(this, GetType(), "Script", "noAccessRedirect('../Logout.aspx');", true);
                         }
                         else
                         {
-                            if (_BLL.GetContentType(Maintenance.content_code) == false)
-                            { }
-                            else
-                            {
-                                if (accessRights.Contains("&m3d,") || accessRights.Contains("&m3e,"))
-                                {
-                                    divSearch.Visible = true;
-                                    lbSearch.Visible = true;
-                                    divExport.Visible = true;
-                                }
-                                if (accessRights.Contains("&m3a,"))
-                                {
-                                    lbAdd.Visible = true;
-                                }
-                            }
+                            sb.Clear();
+                            if (accessRights.Contains(VG.ar_r_audit_log))
+                                sb.Append(VG.ar_r_audit_log);
+                            if (accessRights.Contains(VG.ar_r_password_aging))
+                                sb.Append(VG.ar_r_password_aging);
+                            if (accessRights.Contains(VG.ar_r_user))
+                                sb.Append(VG.ar_r_user);
+                            if (accessRights.Contains(VG.ar_r_user_group))
+                                sb.Append(VG.ar_r_user_group);
+                            if (accessRights.Contains(VG.ar_r_user_group_access_matrix))
+                                sb.Append(VG.ar_r_user_group_access_matrix);
+
+
+
+                            _BLL.GetReportsDropDown(ddReport, Convert.ToString(sb));
                         }
 
-                        gvMaintenance.PagerSettings.Visible = false; //hide Gridview Pager 
-                        LoadMaintenanceData("", "");
+                        Employee.page_index = 0;
 
-                        _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "", Request.UserHostAddress.ToString());
+
                     }
                 }
             }
         }
-
         #region Search
         protected void LoadMaintenanceData(string code, string description)
         {
             Boolean result = false;
-            result = _BLL.FilterPepsol(gvMaintenance, code, description);
+            result = _BLL.FilterMinistryDepartment(gvMaintenance, code, description);
 
             if (result == false)
             {
-                divExport.Visible = false;
+                //divExport.Visible = false;
                 divPager.Visible = false;
             }
             else
             {
-                divExport.Visible = true;
+                //divExport.Visible = true;
                 divPager.Visible = true;
                 PopulatePager(gvMaintenance.PageCount);
             }
@@ -96,7 +95,7 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
-                LoadMaintenanceData(txtCode.Text, txtDescription.Text);
+                LoadMaintenanceData(txtMemberId.Text, txtName.Text);
             }
 
         }
@@ -105,74 +104,9 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
-                txtCode.Text = "";
-                txtDescription.Text = "";
-                LoadMaintenanceData(txtCode.Text, txtDescription.Text);
-            }
-        }
-        #endregion
-
-        #region Action Buttons
-        protected void lbView_Click(object sender, EventArgs e)
-        {
-            if (_BLL.SessionIsActive(this))
-            {
-                LinkButton lbView = (LinkButton)sender;
-                Maintenance.entry_code = lbView.CommandArgument;
-                Maintenance.mode = VG.m_view;
-
-                _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString());
-
-                Response.Redirect("pepsol-view.aspx", false);
-            }
-        }
-
-        protected void lbEdit_Click(object sender, EventArgs e)
-        {
-            if (_BLL.SessionIsActive(this))
-            {
-                LinkButton lbEdit = (LinkButton)sender;
-                Maintenance.entry_code = lbEdit.CommandArgument;
-                Maintenance.mode = VG.m_edit;
-
-                Response.Redirect("pepsol-edit.aspx", false);
-            }
-        }
-
-        protected void lbAdd_Click(object sender, EventArgs e)
-        {
-            if (_BLL.SessionIsActive(this))
-            {
-                Maintenance.content_code = VG.c_pepsol;
-                Maintenance.mode = VG.m_add;
-                Response.Redirect("pepsol-add.aspx", false);
-            }
-        }
-
-        protected void lbDelete_Click(object sender, EventArgs e)
-        {
-            if (_BLL.SessionIsActive(this))
-            {
-                LinkButton lbDelete = (LinkButton)sender;
-                string code = lbDelete.CommandArgument;
-                Boolean result = false;
-
-                result = _BLL.DeletePepsol(code);
-
-                if (result == false)
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to delete the entry.', 'error');", true);
-                }
-                else
-                {
-
-                    string transactionReferenceNumber = "";
-                    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Delete", "Code: " + code, Request.UserHostAddress.ToString()))
-                        transactionReferenceNumber = "UPCI-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmm") + "-" + DateTime.Now.ToString("ssff");
-
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Data has been deleted.','" + transactionReferenceNumber + "');", true);
-                    LoadMaintenanceData("", "");
-                }
+                txtMemberId.Text = "";
+                txtName.Text = "";
+                LoadMaintenanceData(txtMemberId.Text, txtName.Text);
             }
         }
         #endregion
@@ -630,5 +564,16 @@ namespace Template
         }
 
         #endregion
+
+        protected void ddReport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_BLL.SessionIsActive(this))
+            {
+                if (ddReport.SelectedValue == VG.ar_r_audit_log)
+                {
+                   
+                }
+            }
+        }
     }
 }

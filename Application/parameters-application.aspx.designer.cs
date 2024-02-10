@@ -15,6 +15,42 @@ namespace Template
     {
 
         /// <summary>
+        /// contentHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label contentHeader;
+
+        /// <summary>
+        /// mainBreadcrumb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label mainBreadcrumb;
+
+        /// <summary>
+        /// subItemBreadcrumb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label subItemBreadcrumb;
+
+        /// <summary>
+        /// cardTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label cardTitle;
+
+        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
@@ -150,13 +186,13 @@ namespace Template
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator24;
 
         /// <summary>
-        /// RegularExpressionValidator26 control.
+        /// revChurchName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator26;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revChurchName;
 
         /// <summary>
         /// Label4 control.
@@ -366,13 +402,13 @@ namespace Template
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator31;
 
         /// <summary>
-        /// RegularExpressionValidator33 control.
+        /// revReportHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator33;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revReportHeader;
 
         /// <summary>
         /// Label11 control.

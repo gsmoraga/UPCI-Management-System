@@ -72,6 +72,7 @@ namespace Template
         {
             if (_BLL.SessionIsActive(this))
             {
+                
                 Response.Redirect("dept-ministry-search.aspx", false);
             }
         }

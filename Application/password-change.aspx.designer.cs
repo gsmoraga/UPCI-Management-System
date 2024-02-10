@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Template {
-    
-    
-    public partial class password_change {
-        
+namespace Template
+{
+
+
+    public partial class password_change
+    {
+
         /// <summary>
         /// lblNewPasswordErrorMessage control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNewPasswordErrorMessage;
-        
+
         /// <summary>
         /// lblNewPasswordRepeatingErrorMessage control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNewPasswordRepeatingErrorMessage;
-        
+
         /// <summary>
         /// lblNewPasswordSequentialErrorMessage control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNewPasswordSequentialErrorMessage;
-        
+
         /// <summary>
         /// txtCurrentPassword control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCurrentPassword;
-        
+
         /// <summary>
         /// RequiredFieldValidator1 control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
+
         /// <summary>
         /// txtNewPassword control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNewPassword;
-        
+
         /// <summary>
         /// RequiredFieldValidator2 control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
-        
+
         /// <summary>
         /// NewPasswordValidator control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator NewPasswordValidator;
-        
+
         /// <summary>
         /// NewPasswordRepeatingValidator control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator NewPasswordRepeatingValidator;
-        
+
         /// <summary>
         /// NewPasswordSequentialValidator control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator NewPasswordSequentialValidator;
-        
+
         /// <summary>
         /// txtConfirmPassword control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
-        
+
         /// <summary>
         /// RequiredFieldValidator3 control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
-        
+
         /// <summary>
         /// CompareValidator1 control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
-        
+
         /// <summary>
         /// lblError control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace Template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
+
         /// <summary>
         /// lbChangePassword control.
         /// </summary>

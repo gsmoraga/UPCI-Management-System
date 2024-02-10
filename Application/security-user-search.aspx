@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UMS.Master" AutoEventWireup="true" CodeBehind="ministry-search.aspx.cs" Inherits="Template.ministry_search" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UMS.Master" AutoEventWireup="true" CodeBehind="security-user-search.aspx.cs" Inherits="Template.security_unlock_user" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" type="text/css" href="contents/css/gridview-pager.css" />
@@ -31,9 +31,7 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="home.aspx">Home</a></li>
                             <li class="breadcrumb-item active">
-                                <asp:Label ID="mainBreadcrumb" runat="server"></asp:Label>
-
-                            </li>
+                                <asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></li>
                         </ol>
                     </div>
                 </div>
@@ -61,7 +59,7 @@
                                             </div>
                                             <div class="col-sm-12 col-md-6" id="divSearch" runat="server" visible="false">
                                                 <div class="dataTables_filter">
-                                                    <asp:LinkButton ID="lbAdd" runat="server" CssClass="btn btn-sm btn-primary" OnClick="lbAdd_Click" Visible="false"><i class="fa fa-plus-circle mr-2"></i>Add</asp:LinkButton>
+                                                    <%--<asp:LinkButton ID="lbAdd" runat="server" CssClass="btn btn-sm btn-primary" OnClick="lbAdd_Click" Visible="false"><i class="fa fa-plus-circle mr-2"></i>Add</asp:LinkButton>--%>
                                                     <asp:TextBox ID="txtCode" runat="server" CssClass="form-control form-control-sm" placeholder="Search Code" autocomplete="off"></asp:TextBox>
                                                     <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control form-control-sm" placeholder="Search Description" autocomplete="off"></asp:TextBox>
                                                     <asp:LinkButton ID="lbSearch" runat="server" CssClass="btn btn-sm" OnClick="lbSearch_Click" ToolTip="Search"><i class="fa fa-search"></i></asp:LinkButton>
@@ -76,7 +74,7 @@
                                             <asp:GridView ID="gvMaintenance" runat="server" AllowPaging="True" CssClass="table table-bordered table-striped dataTable dtr-inline"
                                                 GridLines="None" CellPadding="4" PageSize="10" ForeColor="#333333" AllowSorting="true"
                                                 OnPageIndexChanging="gvMaintenance_PageIndexChanging" OnRowDataBound="gvMaintenance_RowDataBound"
-                                                OnRowCreated="gvMaintenance_OnRowCreated" OnSorting="gvMaintenance_Sorting" PagerSettings-Mode="NumericFirstLast"
+                                                OnSorting="gvMaintenance_Sorting" OnRowCreated="gvMaintenance_OnRowCreated" PagerSettings-Mode="NumericFirstLast"
                                                 PagerSettings-FirstPageText="First" PagerSettings-LastPageText="Last">
                                                 <AlternatingRowStyle BackColor="White" />
                                                 <EditRowStyle BackColor="#0A9D4E" />
@@ -92,13 +90,19 @@
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Action">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lbView" runat="server" CommandArgument='<%# Eval("Code")%>' ToolTip="View"
+                                                            <%--<asp:LinkButton ID="lbView" runat="server" CommandArgument='<%# Eval("Code")%>' ToolTip="View"
                                                                 Text="" OnClick="lbView_Click" class="mr-2"><i class="fa fa-eye text-dark" style="text-decoration:none"></i></asp:LinkButton>
                                                             <asp:LinkButton ID="lbEdit" runat="server" CommandArgument='<%# Eval("Code")%>' ToolTip="Edit"
                                                                 Text="" OnClick="lbEdit_Click" Visible="false" class="mr-2"><i class="fas fa-edit text-primary" style="text-decoration:none"></i></asp:LinkButton>
                                                             <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%# Eval("Code")%>'
                                                                 ToolTip="Delete" OnClientClick="return deleteAlert(this);" Text="" OnClick="lbDelete_Click"
-                                                                Visible="false" class="mr-2"><i class="bi bi-trash-fill text-danger" style="text-decoration:none"></i></asp:LinkButton>
+                                                                Visible="false" class="mr-2"><i class="bi bi-trash-fill text-danger" style="text-decoration:none"></i></asp:LinkButton>--%>
+                                                            <asp:LinkButton ID="lbUnlock" runat="server" CommandArgument='<%# Eval("Code")%>'
+                                                                ToolTip="Unlock" OnClientClick="return unlockUserAlert(this);" Text="" OnClick="lbUnlock_Click"
+                                                                Visible="false" class="mr-2"><i class="bi bi-unlock-fill text-dark" style="text-decoration:none"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="lbResetPassword" runat="server" CommandArgument='<%# Eval("Code")%>'
+                                                                ToolTip="Reset Password" OnClientClick="return resetPasswordAlert(this);" Text=""
+                                                                OnClick="lbResetPassword_Click" Visible="false" class="mr-2"><i class="bx bx-reset text-success" style="text-decoration:none"></i></asp:LinkButton>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                 </Columns>
@@ -107,15 +111,15 @@
                                             <div id="divPager" runat="server" class="form-inline mb-3" visible="false">
                                                 <asp:LinkButton ID="lbFirstPage" runat="server" ToolTip="First" OnClick="lbFirstPage_Click" Visible="false"><i class="fas fa-angle-double-left text-dark" style="text-decoration:none"></i></asp:LinkButton>
                                                 &nbsp; Page&nbsp;
-                                                <asp:DropDownList ID="ddPageNumber" runat="server" CssClass="custom-select" OnSelectedIndexChanged="ddPageNumber_SelectedIndexChanged"
-                                                    AutoPostBack="true">
-                                                </asp:DropDownList>
+                                            <asp:DropDownList ID="ddPageNumber" runat="server" CssClass="custom-select" OnSelectedIndexChanged="ddPageNumber_SelectedIndexChanged"
+                                                AutoPostBack="true">
+                                            </asp:DropDownList>
                                                 &nbsp; of&nbsp;
-                                                <asp:Label ID="lblTotalPageCount" runat="server" />
+                                            <asp:Label ID="lblTotalPageCount" runat="server" />
                                                 &nbsp;&nbsp;&nbsp;
-                                                <asp:LinkButton ID="lbPreviousPage" runat="server" ToolTip="Previous" OnClick="lbPreviousPage_Click"><i class="fas fa-angle-left text-dark" style="text-decoration:none"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="lbPreviousPage" runat="server" ToolTip="Previous" OnClick="lbPreviousPage_Click"><i class="fas fa-angle-left text-dark" style="text-decoration:none"></i></asp:LinkButton>
                                                 &emsp;
-                                                <asp:LinkButton ID="lbNextPage" runat="server" ToolTip="Next" OnClick="lbNextPage_Click"><i class="fas fa-angle-right  text-dark" style="text-decoration:none"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="lbNextPage" runat="server" ToolTip="Next" OnClick="lbNextPage_Click"><i class="fas fa-angle-right  text-dark" style="text-decoration:none"></i></asp:LinkButton>
                                                 <asp:LinkButton ID="lbLastPage" runat="server" ToolTip="Last" OnClick="lbLastPage_Click" Visible="false"><i class="fas fa-angle-double-right text-dark" style="text-decoration:none"></i></asp:LinkButton>
                                                 &emsp;
                                             </div>
@@ -136,15 +140,6 @@
                 </div>
             </div>
         </section>
-
-
-        <div class="row mt-3" runat="server" visible="false">
-            <div class="col-md-10 offset-md-1">
-                <div class="list-group">
-                </div>
-            </div>
-        </div>
-
     </div>
 
 
@@ -162,5 +157,4 @@
     <script src="contents/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="contents/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="contents/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
 </asp:Content>

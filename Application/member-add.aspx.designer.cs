@@ -240,24 +240,6 @@ namespace Template
         protected global::System.Web.UI.WebControls.DropDownList ddMinistryDepartment;
 
         /// <summary>
-        /// txtDateFirstAttend control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDateFirstAttend;
-
-        /// <summary>
-        /// revDatedFirstAttend control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revDatedFirstAttend;
-
-        /// <summary>
         /// ddCellGroup control.
         /// </summary>
         /// <remarks>
@@ -310,6 +292,24 @@ namespace Template
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPepsol;
+
+        /// <summary>
+        /// txtDateFirstAttend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateFirstAttend;
+
+        /// <summary>
+        /// revDatedFirstAttend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revDatedFirstAttend;
 
         /// <summary>
         /// ddStatus control.

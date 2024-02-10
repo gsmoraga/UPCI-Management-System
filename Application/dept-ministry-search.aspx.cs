@@ -70,7 +70,7 @@ namespace Template
                         }
 
                         gvMaintenance.PagerSettings.Visible = false; //hide Gridview Pager 
-                        LoadMaintenanceData("", "");
+                        LoadMaintenanceData(txtCode.Text, txtDescription.Text);
 
                         _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "", Request.UserHostAddress.ToString());
                     }
@@ -84,20 +84,24 @@ namespace Template
         #region Search
         protected void LoadMaintenanceData(string code, string description)
         {
-            Boolean result = false;
-            result = _BLL.FilterMinistryDepartment(gvMaintenance, code, description);
+            if (_BLL.SessionIsActive(this))
+            {
+                Boolean result = false;
+                result = _BLL.FilterMinistryDepartment(gvMaintenance, code, description);
 
-            if (result == false)
-            {
-                divExport.Visible = false;
-                divPager.Visible = false;
+                if (result == false)
+                {
+                    divExport.Visible = false;
+                    divPager.Visible = false;
+                }
+                else
+                {
+                    divExport.Visible = true;
+                    divPager.Visible = true;
+                    PopulatePager(gvMaintenance.PageCount);
+                }
             }
-            else
-            {
-                divExport.Visible = true;
-                divPager.Visible = true;
-                PopulatePager(gvMaintenance.PageCount);
-            }
+            
 
 
         }
@@ -146,6 +150,8 @@ namespace Template
                 Maintenance.entry_code = lbEdit.CommandArgument;
                 Maintenance.content_code = VG.c_ministry_department;
                 Maintenance.mode = "Edit";
+
+                _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Edit", "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString());
 
                 Response.Redirect("dept-ministry-edit.aspx", false);
             }

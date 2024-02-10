@@ -81,15 +81,12 @@ namespace Template
 
             if (result == false)
             {
-                //gvCheckBox.Visible = false;
-                //lbDeleteSelected.Visible = false;
                 divPager.Visible = true;
-                divExport.Visible = false;
+                divExport.Visible = true;
+                PopulatePager(gvMaintenance.PageCount);
             }
             else
             {
-                //gvCheckBox.Visible = true;
-                //lbDeleteSelected.Visible = true;
                 divPager.Visible = true;
                 divExport.Visible = true;
                 PopulatePager(gvMaintenance.PageCount);

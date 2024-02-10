@@ -87,6 +87,15 @@ namespace Template
         protected global::System.Web.UI.WebControls.LinkButton lbLogout;
 
         /// <summary>
+        /// lblName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblName;
+
+        /// <summary>
         /// menuMaintenance control.
         /// </summary>
         /// <remarks>
@@ -276,6 +285,24 @@ namespace Template
         protected global::System.Web.UI.WebControls.LinkButton lbMemberList;
 
         /// <summary>
+        /// liReports control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReports;
+
+        /// <summary>
+        /// lbReports control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbReports;
+
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>
@@ -283,5 +310,14 @@ namespace Template
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+
+        /// <summary>
+        /// lblChurchName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblChurchName;
     }
 }

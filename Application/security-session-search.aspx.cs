@@ -8,15 +8,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Text.RegularExpressions;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace Template
 {
-    public partial class pepsol_search : System.Web.UI.Page
+    public partial class security_session_search : System.Web.UI.Page
     {
         DAL _DAL = new DAL();
         private BLL _BLL = new BLL();
@@ -49,16 +48,21 @@ namespace Template
                             { }
                             else
                             {
-                                if (accessRights.Contains("&m3d,") || accessRights.Contains("&m3e,"))
+                                if (accessRights.Contains("&m" + Maintenance.content_code + "u,") || accessRights.Contains("&m" + Maintenance.content_code + "r,"))
                                 {
                                     divSearch.Visible = true;
                                     lbSearch.Visible = true;
                                     divExport.Visible = true;
                                 }
-                                if (accessRights.Contains("&m3a,"))
-                                {
-                                    lbAdd.Visible = true;
-                                }
+
+
+                                #region Titles
+
+                                contentHeader.Text = Maintenance.content_description;
+                                mainBreadcrumb.Text =  Maintenance.content_description;
+                                //subItemBreadcrumb.Text = Maintenance.mode;
+                                cardTitle.Text = Maintenance.content_description + " List";
+                                #endregion
                             }
                         }
 
@@ -75,11 +79,12 @@ namespace Template
         protected void LoadMaintenanceData(string code, string description)
         {
             Boolean result = false;
-            result = _BLL.FilterPepsol(gvMaintenance, code, description);
+            result = _BLL.FilterActiveSession(gvMaintenance, code, description);
 
             if (result == false)
             {
-                divExport.Visible = false;
+                divExport.Visible = true;
+                divSearch.Visible = true;
                 divPager.Visible = false;
             }
             else
@@ -115,62 +120,33 @@ namespace Template
         #region Action Buttons
         protected void lbView_Click(object sender, EventArgs e)
         {
-            if (_BLL.SessionIsActive(this))
-            {
-                LinkButton lbView = (LinkButton)sender;
-                Maintenance.entry_code = lbView.CommandArgument;
-                Maintenance.mode = VG.m_view;
+            LinkButton lbView = (LinkButton)sender;
+            Maintenance.entry_code = lbView.CommandArgument;
+            Maintenance.mode = "View";
 
-                _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString());
+            _BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "View", "Code: " + Maintenance.entry_code, Request.UserHostAddress.ToString());
 
-                Response.Redirect("pepsol-view.aspx", false);
-            }
+            Response.Redirect("maintenance-parameters.aspx", false);
         }
-
-        protected void lbEdit_Click(object sender, EventArgs e)
+        protected void lbRemoveSession_Click(object sender, EventArgs e)
         {
             if (_BLL.SessionIsActive(this))
             {
-                LinkButton lbEdit = (LinkButton)sender;
-                Maintenance.entry_code = lbEdit.CommandArgument;
-                Maintenance.mode = VG.m_edit;
+                LinkButton lbRemoveSession = (LinkButton)sender;
+                string userId = lbRemoveSession.CommandArgument;
 
-                Response.Redirect("pepsol-edit.aspx", false);
-            }
-        }
-
-        protected void lbAdd_Click(object sender, EventArgs e)
-        {
-            if (_BLL.SessionIsActive(this))
-            {
-                Maintenance.content_code = VG.c_pepsol;
-                Maintenance.mode = VG.m_add;
-                Response.Redirect("pepsol-add.aspx", false);
-            }
-        }
-
-        protected void lbDelete_Click(object sender, EventArgs e)
-        {
-            if (_BLL.SessionIsActive(this))
-            {
-                LinkButton lbDelete = (LinkButton)sender;
-                string code = lbDelete.CommandArgument;
-                Boolean result = false;
-
-                result = _BLL.DeletePepsol(code);
-
-                if (result == false)
+                if (_BLL.DeleteActiveSessionByUserId(userId) == false)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to delete the entry.', 'error');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "Swal.fire('Error encountered!', 'Unable to remove the session.', 'error');", true);
                 }
                 else
                 {
 
                     string transactionReferenceNumber = "";
-                    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Delete", "Code: " + code, Request.UserHostAddress.ToString()))
+                    if (_BLL.AddAuditLogEntry(Employee.user_id, Maintenance.content_code, "Delete", "User ID: " + userId, Request.UserHostAddress.ToString()))
                         transactionReferenceNumber = "UPCI-" + DateTime.Now.ToString("MMddyy") + "-" + DateTime.Now.ToString("HHmm") + "-" + DateTime.Now.ToString("ssff");
 
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Data has been deleted.','" + transactionReferenceNumber + "');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Script", "transactionAlert('Session has been removed.','" + transactionReferenceNumber + "');", true);
                     LoadMaintenanceData("", "");
                 }
             }
@@ -203,15 +179,13 @@ namespace Template
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                if (accessRights.Contains("&m" + Maintenance.content_code + "d,"))
+                if (Maintenance.bank_user_security_mode == "Session")
                 {
-                    LinkButton lb = (LinkButton)e.Row.FindControl("lbEdit");
+                    LinkButton lb = (LinkButton)e.Row.FindControl("lbRemoveSession");
                     lb.Visible = true;
-                }
-                if (accessRights.Contains("&m" + Maintenance.content_code + "d,"))
-                {
-                    LinkButton lb = (LinkButton)e.Row.FindControl("lbDelete");
-                    lb.Visible = true;
+
+                    LinkButton lbv = (LinkButton)e.Row.FindControl("lbView");
+                    lbv.Visible = false;
                 }
 
                 System.Data.DataView dv = (e.Row.DataItem as System.Data.DataRowView).DataView;
@@ -629,6 +603,10 @@ namespace Template
             row.Cells.AddRange(columns.ToArray());
         }
 
+
+
         #endregion
+
+
     }
 }

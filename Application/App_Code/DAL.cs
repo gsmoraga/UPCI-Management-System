@@ -12,652 +12,6 @@ public class DAL
     {
     }
 
-
-
-
-
-    #region Branch
-    /**
-    * Adds a branch entry with the given details to the database
-    * 
-    * @since version 1.0 
-    * @param string branchCode - unique code to identify the branch entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean AddBranch(string branchCode, string description, string region, string email)
-    {
-        //    try
-        {
-            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spAddBranch";
-
-                    cmd.Parameters.AddWithValue("@branch_code", branchCode);
-                    cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@region_code", region);
-                    cmd.Parameters.AddWithValue("@email", email);
-
-                    cmd.Connection = connection; cmd.CommandTimeout = 360;
-                    cmd.ExecuteNonQuery();
-
-                    return true;
-                }
-            }
-        }
-        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
-    }
-
-    /**
-    * Edits the branch entry that matches the code with the given description
-    * 
-    * @since version 1.0 
-    * @param string branchCode - unique code to identify the branch entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean EditBranch(string branchCode, string description, string email, string region_code)
-    {
-        //    try
-        {
-            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spEditBranch";
-
-                    cmd.Parameters.AddWithValue("@branch_code", branchCode);
-                    cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    //8/16/2023 Additional Parameter for Region
-                    cmd.Parameters.AddWithValue("@region", region_code);
-
-                    cmd.Connection = connection; cmd.CommandTimeout = 360;
-                    cmd.ExecuteNonQuery();
-
-                    return true;
-                }
-            }
-        }
-        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
-    }
-
-    /**
-    * Deletes the branch entry that matches the given code
-    * 
-    * @since version 1.0 
-    * @param string branchCode - unique code to identify the branch entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean DeleteBranch(string branchCode)
-    {
-        //    try
-        {
-            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spDeleteBranch";
-
-                    cmd.Parameters.AddWithValue("@branch_code", branchCode);
-
-                    cmd.Connection = connection; cmd.CommandTimeout = 360;
-                    cmd.ExecuteNonQuery();
-
-                    return true;
-                }
-            }
-        }
-        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
-    }
-
-    /**
-    * Returns the data table of branches that match the filter string
-    * 
-    * @since version 1.0 
-    * @param string code - code to search
-    * @param string description - description to search
-    * @return DataTable rows that match the string
-    */
-    public DataTable FilterBranch(string code, string description)
-    {
-        string cacheKey = "Filter" + VG.c_pepsol + "&" + code + "&" + description;
-        DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
-
-        if (dt == null)
-        {
-            //    try
-            {
-                using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-                {
-                    connection.Open();
-
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        using (SqlDataAdapter adp = new SqlDataAdapter())
-                        {
-                            dt = new DataTable();
-
-                            cmd.Connection = connection; cmd.CommandTimeout = 360;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spFilterBranch";
-
-                            cmd.Parameters.AddWithValue("@code", code);
-                            cmd.Parameters.AddWithValue("@description", description);
-
-                            adp.SelectCommand = cmd;
-                            adp.Fill(dt);
-
-                            HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
-
-                            return dt;
-                        }
-                    }
-                }
-            }
-            //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
-        }
-        else return dt;
-    }
-
-    /**
-    * Returns the data table row that matches the given unique code
-    * 
-    * @since version 1.0 
-    * @param string code - unique code identifier
-    * @return DataTable row that matches the code
-    */
-    public DataTable GetBranch(string code)
-    {
-        string cacheKey = "GetBranch" + code;
-        DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
-
-        if (dt == null)
-        {
-            //    try
-            {
-                using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-                {
-                    connection.Open();
-
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        using (SqlDataAdapter adp = new SqlDataAdapter())
-                        {
-                            dt = new DataTable();
-
-                            cmd.Connection = connection; cmd.CommandTimeout = 360;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spGetBranch";
-                            cmd.Parameters.AddWithValue("@code", code);
-
-                            adp.SelectCommand = cmd;
-                            adp.Fill(dt);
-
-                            HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
-
-                            return dt;
-                        }
-                    }
-                }
-            }
-            //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
-        }
-        else return dt;
-    }
-
-    public DataTable GetRegion()
-    {
-        //string cacheKey = "GetBranch" + code;
-        //DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
-
-        //if (dt == null)
-        //{
-        //    try
-        {
-            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    using (SqlDataAdapter adp = new SqlDataAdapter())
-                    {
-                        DataTable dt = new DataTable();
-
-                        cmd.Connection = connection; cmd.CommandTimeout = 360;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spGetRegion";
-                        //cmd.Parameters.AddWithValue("@code", code);
-
-                        adp.SelectCommand = cmd;
-                        adp.Fill(dt);
-
-                        //HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
-
-                        return dt;
-                    }
-                }
-            }
-        }
-        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
-        //}
-        //else return dt;
-    }
-    #endregion
-
-    #region Department
-    /**
-    * Adds a department entry with the given details to the database
-    * 
-    * @since version 1.0 
-    * @param string departmentCode - unique code to identify the department entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean AddDepartment(string departmentCode, string description, string divisionCode)
-    {
-        //    try
-        {
-            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spAddDepartment";
-
-                    cmd.Parameters.AddWithValue("@department_code", departmentCode);
-                    cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@ministry_code", divisionCode);
-
-                    cmd.Connection = connection; cmd.CommandTimeout = 360;
-                    cmd.ExecuteNonQuery();
-
-                    return true;
-                }
-            }
-        }
-        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
-    }
-
-    /**
-    * Edits the department entry that matches the code with the given description
-    * 
-    * @since version 1.0 
-    * @param string departmentCode - unique code to identify the department entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean EditDepartment(string departmentCode, string description, string divisionCode)
-    {
-        //    try
-        {
-            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spEditDepartment";
-
-                    cmd.Parameters.AddWithValue("@department_code", departmentCode);
-                    cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@ministry_code", divisionCode);
-
-                    cmd.Connection = connection; cmd.CommandTimeout = 360;
-                    cmd.ExecuteNonQuery();
-
-                    return true;
-                }
-            }
-        }
-        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
-    }
-
-    /**
-    * Deletes the department entry that matches the given code
-    * 
-    * @since version 1.0 
-    * @param string departmentCode - unique code to identify the department entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean DeleteDepartment(string departmentCode)
-    {
-        //    try
-        {
-            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spDeleteDepartment";
-
-                    cmd.Parameters.AddWithValue("@department_code", departmentCode);
-
-                    cmd.Connection = connection; cmd.CommandTimeout = 360;
-                    cmd.ExecuteNonQuery();
-
-                    return true;
-                }
-            }
-        }
-        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
-    }
-
-    /**
-    * Returns the data table of departments that match the filter string
-    * 
-    * @since version 1.0 
-    * @param string code - code to search
-    * @param string description - description to search
-    * @return DataTable rows that match the string
-    */
-    public DataTable FilterDepartment(string code, string description, string division)
-    {
-        string cacheKey = "Filter" + VG.c_ministry_department + "&" + code + "&" + description + "&" + division;
-        DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
-
-        if (dt == null)
-        {
-            //    try
-            {
-                using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-                {
-                    connection.Open();
-
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        using (SqlDataAdapter adp = new SqlDataAdapter())
-                        {
-                            dt = new DataTable();
-
-                            cmd.Connection = connection; cmd.CommandTimeout = 360;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spFilterDepartment";
-
-                            cmd.Parameters.AddWithValue("@code", code);
-                            cmd.Parameters.AddWithValue("@description", description);
-                            cmd.Parameters.AddWithValue("@division", division);
-
-                            adp.SelectCommand = cmd;
-                            adp.Fill(dt);
-
-                            HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
-
-                            return dt;
-                        }
-                    }
-                }
-            }
-            //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
-        }
-        else return dt;
-    }
-
-    /**
-    * Returns the data table row that matches the given unique code
-    * 
-    * @since version 1.0 
-    * @param string code - unique code identifier
-    * @return DataTable row that matches the code
-    */
-    public DataTable GetDepartment(string code)
-    {
-        string cacheKey = "GetDepartment" + code;
-        DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
-
-        if (dt == null)
-        {
-            //    try
-            {
-                using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-                {
-                    connection.Open();
-
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        using (SqlDataAdapter adp = new SqlDataAdapter())
-                        {
-                            dt = new DataTable();
-
-                            cmd.Connection = connection; cmd.CommandTimeout = 360;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spGetDepartment";
-
-                            cmd.Parameters.AddWithValue("@code", code);
-
-                            adp.SelectCommand = cmd;
-                            adp.Fill(dt);
-
-                            HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
-
-                            return dt;
-                        }
-                    }
-                }
-            }
-            //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
-        }
-        else return dt;
-    }
-
-    #endregion
-
-    #region Division
-    /**
-    * Adds a division entry with the given details to the database
-    * 
-    * @since version 1.0 
-    * @param string divisionCode - unique code to identify the division entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean AddDivision(string divisionCode, string description)
-    {
-        //    try
-        {
-            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spAddDivision";
-
-                    cmd.Parameters.AddWithValue("@code", divisionCode);
-                    cmd.Parameters.AddWithValue("@description", description);
-
-                    cmd.Connection = connection; cmd.CommandTimeout = 360;
-                    cmd.ExecuteNonQuery();
-
-                    return true;
-                }
-            }
-        }
-        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
-    }
-
-    /**
-    * Edits the division entry that matches the code with the given description
-    * 
-    * @since version 1.0 
-    * @param string divisionCode - unique code to identify the division entry
-    * @param string description - name or description of the entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean EditDivision(string divisionCode, string description)
-    {
-        //    try
-        {
-            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spEditDivision";
-
-                    cmd.Parameters.AddWithValue("@code", divisionCode);
-                    cmd.Parameters.AddWithValue("@description", description);
-
-                    cmd.Connection = connection; cmd.CommandTimeout = 360;
-                    cmd.ExecuteNonQuery();
-
-                    return true;
-                }
-            }
-        }
-        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
-    }
-
-    /**
-    * Deletes the division entry that matches the given code
-    * 
-    * @since version 1.0 
-    * @param string divisionCode - unique code to identify the division entry
-    * @return Boolean true if successful, false otherwise
-    */
-    public Boolean DeleteDivision(string divisionCode)
-    {
-        //    try
-        {
-            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spDeleteDivision";
-
-                    cmd.Parameters.AddWithValue("@code", divisionCode);
-
-                    cmd.Connection = connection; cmd.CommandTimeout = 360;
-                    cmd.ExecuteNonQuery();
-
-                    return true;
-                }
-            }
-        }
-        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
-    }
-
-    /**
-    * Returns the data table of divisions that match the filter string
-    * 
-    * @since version 1.0 
-    * @param string code - code to search
-    * @param string description - description to search
-    * @return DataTable rows that match the string
-    */
-    public DataTable FilterDivision(string code, string description)
-    {
-        string cacheKey = "Filter" + VG.c_ministry + "&" + code + "&" + description;
-        DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
-
-        if (dt == null)
-        {
-            //    try
-            {
-                using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-                {
-                    connection.Open();
-
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        using (SqlDataAdapter adp = new SqlDataAdapter())
-                        {
-                            dt = new DataTable();
-
-                            cmd.Connection = connection; cmd.CommandTimeout = 360;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spFilterDivision";
-
-                            cmd.Parameters.AddWithValue("@code", code);
-                            cmd.Parameters.AddWithValue("@description", description);
-
-                            adp.SelectCommand = cmd;
-                            adp.Fill(dt);
-
-                            HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
-
-                            return dt;
-                        }
-                    }
-                }
-            }
-            //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
-        }
-        else return dt;
-    }
-
-    /**
-    * Returns the data table row that matches the given unique code
-    * 
-    * @since version 1.0 
-    * @param string code - unique code identifier
-    * @return DataTable row that matches the code
-    */
-    public DataTable GetDivision(string code)
-    {
-        string cacheKey = "GetDivision" + code;
-        DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
-
-        if (dt == null)
-        {
-            //    try
-            {
-                using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-                {
-                    connection.Open();
-
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        using (SqlDataAdapter adp = new SqlDataAdapter())
-                        {
-                            dt = new DataTable();
-
-                            cmd.Connection = connection; cmd.CommandTimeout = 360;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spGetDivision";
-
-                            cmd.Parameters.AddWithValue("@code", code);
-
-                            adp.SelectCommand = cmd;
-                            adp.Fill(dt);
-
-                            HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
-
-                            return dt;
-                        }
-                    }
-                }
-            }
-            //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
-        }
-        else return dt;
-    }
-
-    #endregion
-
     #region UPCI
 
     #region Contents
@@ -792,8 +146,8 @@ public class DAL
         //}
         //else return dt;
     }
-    public Boolean AddMember(string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment, string dateFirstAttend
-        , string cell, string baptismal, string pepsol, string membershipStatus, string createdBy)
+    public Boolean AddMember(string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment, 
+        string cell, string baptismal, string pepsol, string memberStatus, string dateFirstAttend,string Status, string createdBy)
     {
         //    try
         {
@@ -815,12 +169,14 @@ public class DAL
                     cmd.Parameters.AddWithValue("@mobile_number", mobileNumber);
                     cmd.Parameters.AddWithValue("@ministry", ministry);
                     cmd.Parameters.AddWithValue("@ministry_department", ministryDepartment);
-                    cmd.Parameters.AddWithValue("@date_first_attend", dateFirstAttend);
                     cmd.Parameters.AddWithValue("@cell", cell);
                     cmd.Parameters.AddWithValue("@baptismal", baptismal);
                     cmd.Parameters.AddWithValue("@pepsol", pepsol);
-                    cmd.Parameters.AddWithValue("@membership_status", membershipStatus);
+                    cmd.Parameters.AddWithValue("@member_status", memberStatus);
+                    cmd.Parameters.AddWithValue("@date_first_attend", dateFirstAttend);
+                    cmd.Parameters.AddWithValue("@status", Status);
                     cmd.Parameters.AddWithValue("@created_by", createdBy);
+
 
 
                     cmd.Connection = connection; cmd.CommandTimeout = 360;
@@ -833,8 +189,8 @@ public class DAL
         //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
     }
 
-    public Boolean EditMember(string memberId, string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment, string dateFirstAttend
-        , string cell, string baptismal, string pepsol, string membershipStatus)
+    public Boolean EditMember(string memberId, string firstName, string middleName, string lastName, string gender, string birthdate, string email, string mobileNumber, string ministry, string ministryDepartment,
+        string cell, string baptismal, string pepsol,string memberStatus, string dateFirstAttend, string status)
     {
         //    try
         {
@@ -847,6 +203,7 @@ public class DAL
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "spMemberEdit";
 
+                    cmd.Parameters.AddWithValue("@member_id", memberId);
                     cmd.Parameters.AddWithValue("@first_name", firstName);
                     cmd.Parameters.AddWithValue("@middle_name", middleName);
                     cmd.Parameters.AddWithValue("@last_name", lastName);
@@ -856,12 +213,13 @@ public class DAL
                     cmd.Parameters.AddWithValue("@mobile_number", mobileNumber);
                     cmd.Parameters.AddWithValue("@ministry", ministry);
                     cmd.Parameters.AddWithValue("@ministry_department", ministryDepartment);
-                    cmd.Parameters.AddWithValue("@date_first_attend", dateFirstAttend);
                     cmd.Parameters.AddWithValue("@cell", cell);
                     cmd.Parameters.AddWithValue("@baptismal", baptismal);
                     cmd.Parameters.AddWithValue("@pepsol", pepsol);
-                    cmd.Parameters.AddWithValue("@membership_status", membershipStatus);
-                    cmd.Parameters.AddWithValue("@member_id", memberId);
+                    cmd.Parameters.AddWithValue("@member_status", memberStatus);
+                    cmd.Parameters.AddWithValue("@date_first_attend", dateFirstAttend);
+                    cmd.Parameters.AddWithValue("@status", status);
+                    
 
                     cmd.Connection = connection; cmd.CommandTimeout = 360;
                     cmd.ExecuteNonQuery();
@@ -949,6 +307,34 @@ public class DAL
         //}
         //else return dt;
     }
+    public Boolean SaveMemberAddress(string memberId, string street, string barangay, string city)
+    {
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spAddressSave";
+
+                    cmd.Parameters.AddWithValue("@member_id", memberId);
+                    cmd.Parameters.AddWithValue("@streey", street);
+                    cmd.Parameters.AddWithValue("@barangay", barangay);
+                    cmd.Parameters.AddWithValue("@city", city);
+
+                    cmd.Connection = connection; cmd.CommandTimeout = 360;
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return false; }
+    }
+
 
     #endregion
 
@@ -2089,11 +1475,7 @@ public class DAL
     */
     public DataTable FilterUser(string userID, string fullName, string accessUserID)
     {
-        //string cacheKey = "Filter" + VG.c_user + "&" + code + "&" + status;
-        //DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
 
-        //if (dt == null)
-        //{
         //    try
         {
             using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
@@ -2125,22 +1507,20 @@ public class DAL
             }
         }
         //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
-        //}
-        //else return dt;
+
     }
 
+
+
     /**
-    * Returns the data table of users that match the filter string
+    * Returns the data table row of the user that matches the given user ID
     * 
     * @since version 1.0 
-    * @param string code - code to search
-    * @param string description - description to search
-    * @param string userId - user ID of the current user
-    * @return DataTable rows that match the string
+    * @param string userId = unique ID of the user
+    * @return DataTable row that match the ID
     */
-    public DataTable FilterLockedUser(string code, string lastName, string firstName, string middleName, string userId, string userGroup, string division, string department, string branch, string status)
+    public DataTable GetUser(string userId)
     {
-        DataTable dt = new DataTable();
 
         //    try
         {
@@ -2152,23 +1532,18 @@ public class DAL
                 {
                     using (SqlDataAdapter adp = new SqlDataAdapter())
                     {
+                        DataTable dt = new DataTable();
+
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spFilterLockedUser";
+                        cmd.CommandText = "spUserGet";
 
-                        cmd.Parameters.AddWithValue("@code", code);
-                        cmd.Parameters.AddWithValue("@last_name", lastName);
-                        cmd.Parameters.AddWithValue("@first_name", firstName);
-                        cmd.Parameters.AddWithValue("@middle_name", middleName);
                         cmd.Parameters.AddWithValue("@user_id", userId);
-                        cmd.Parameters.AddWithValue("@user_group", userGroup);
-                        cmd.Parameters.AddWithValue("@division", division);
-                        cmd.Parameters.AddWithValue("@department", department);
-                        cmd.Parameters.AddWithValue("@branch", branch);
-                        cmd.Parameters.AddWithValue("@status", status);
 
                         adp.SelectCommand = cmd;
                         adp.Fill(dt);
+
+                        //HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
 
                         return dt;
                     }
@@ -2176,53 +1551,7 @@ public class DAL
             }
         }
         //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
-    }
 
-    /**
-    * Returns the data table row of the user that matches the given user ID
-    * 
-    * @since version 1.0 
-    * @param string userId = unique ID of the user
-    * @return DataTable row that match the ID
-    */
-    public DataTable GetUser(string userId)
-    {
-        //string cacheKey = "GetUser" + userId;
-        //DataTable dt = HttpContext.Current.Cache[cacheKey.ToLower()] as DataTable;
-
-        //if (dt == null)
-        {
-            //    try
-            {
-                using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
-                {
-                    connection.Open();
-
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        using (SqlDataAdapter adp = new SqlDataAdapter())
-                        {
-                            DataTable dt = new DataTable();
-
-                            cmd.Connection = connection; cmd.CommandTimeout = 360;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spGetUser";
-
-                            cmd.Parameters.AddWithValue("@user_id", userId);
-
-                            adp.SelectCommand = cmd;
-                            adp.Fill(dt);
-
-                            //HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
-
-                            return dt;
-                        }
-                    }
-                }
-            }
-            //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
-        }
-        //else return dt;
     }
 
     public DataTable GetUserDetails(string userId)
@@ -2383,39 +1712,39 @@ public class DAL
     #region User Group
     public DataTable CheckExistUserGroup(string groupCode)
     {
-        
+
         //if (dt == null)
         //{
-            //    try
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
             {
-                using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
                 {
-                    connection.Open();
-
-                    using (SqlCommand cmd = new SqlCommand())
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
                     {
-                        using (SqlDataAdapter adp = new SqlDataAdapter())
-                        {
-                            DataTable dt = new DataTable();
+                        DataTable dt = new DataTable();
 
-                            cmd.Connection = connection; cmd.CommandTimeout = 360;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spUserGroupCheckExist";
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spUserGroupCheckExist";
 
-                            cmd.Parameters.AddWithValue("@code", groupCode);
-                            
+                        cmd.Parameters.AddWithValue("@code", groupCode);
 
-                            adp.SelectCommand = cmd;
-                            adp.Fill(dt);
 
-                            //HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
 
-                            return dt;
-                        }
+                        //HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
+
+                        return dt;
                     }
                 }
             }
-            //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
         //}
         //else return dt;
     }
@@ -2543,37 +1872,37 @@ public class DAL
 
         //if (dt == null)
         //{
-            //    try
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
             {
-                using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
                 {
-                    connection.Open();
-
-                    using (SqlCommand cmd = new SqlCommand())
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
                     {
-                        using (SqlDataAdapter adp = new SqlDataAdapter())
-                        {
-                            DataTable dt = new DataTable();
+                        DataTable dt = new DataTable();
 
-                            cmd.Connection = connection; cmd.CommandTimeout = 360;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spUserGroupFilter";
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spUserGroupFilter";
 
-                            cmd.Parameters.AddWithValue("@code", code);
-                            cmd.Parameters.AddWithValue("@description", description);
-                            cmd.Parameters.AddWithValue("@user_group", userGroup);
+                        cmd.Parameters.AddWithValue("@code", code);
+                        cmd.Parameters.AddWithValue("@description", description);
+                        cmd.Parameters.AddWithValue("@user_group", userGroup);
 
-                            adp.SelectCommand = cmd;
-                            adp.Fill(dt);
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
 
-                            //HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
+                        //HttpContext.Current.Cache.Insert(cacheKey.ToLower(), dt, null, DateTime.Now.AddHours(10), System.Web.Caching.Cache.NoSlidingExpiration);
 
-                            return dt;
-                        }
+                        return dt;
                     }
                 }
             }
-            //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
         //}
         //else return dt;
     }
@@ -2711,6 +2040,51 @@ public class DAL
             return ds;
     }
 
+    #endregion
+
+    #region User Security
+    /**
+    * Returns the data table of users that match the filter string
+    * 
+    * @since version 1.0 
+    * @param string code - code to search
+    * @param string description - description to search
+    * @param string userId - user ID of the current user
+    * @return DataTable rows that match the string
+    */
+    public DataTable FilterLockedUser(string code, string fullName, string userId)
+    {
+        DataTable dt = new DataTable();
+
+        //    try
+        {
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["MainDatabase"].ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    using (SqlDataAdapter adp = new SqlDataAdapter())
+                    {
+                        cmd.Connection = connection; cmd.CommandTimeout = 360;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "spLockedUserFilter";
+
+                        cmd.Parameters.AddWithValue("@code", code);
+                        cmd.Parameters.AddWithValue("@full_name", fullName);
+                        cmd.Parameters.AddWithValue("@user_id", userId);
+
+
+                        adp.SelectCommand = cmd;
+                        adp.Fill(dt);
+
+                        return dt;
+                    }
+                }
+            }
+        }
+        //catch (Exception ex) { AddExceptionLogEntry(ex); return dt; }
+    }
     #endregion
 
     #endregion
@@ -2886,7 +2260,7 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spAddActiveSession";
+                    cmd.CommandText = "spActiveSessionAdd";
 
                     cmd.Parameters.AddWithValue("@session_id", sessionId);
                     cmd.Parameters.AddWithValue("@user_id", userId);
@@ -2919,7 +2293,7 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spDeleteActiveSessionByUserId";
+                    cmd.CommandText = "spActiveSessionDeleteByUserId";
 
                     cmd.Parameters.AddWithValue("@user_id", userId);
 
@@ -2951,7 +2325,7 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spDeleteActiveSessionBySessionId";
+                    cmd.CommandText = "spActiveSessionDeleteBySessionId";
 
                     cmd.Parameters.AddWithValue("@session_id", sessionId);
 
@@ -2994,7 +2368,7 @@ public class DAL
 
                             cmd.Connection = connection; cmd.CommandTimeout = 360;
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spFilterActiveSession";
+                            cmd.CommandText = "spActiveSessionFilter";
 
                             cmd.Parameters.AddWithValue("@session_id", sessionId);
                             cmd.Parameters.AddWithValue("@user_id", userId);
@@ -3043,7 +2417,7 @@ public class DAL
 
                             cmd.Connection = connection; cmd.CommandTimeout = 360;
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spGetActiveSession";
+                            cmd.CommandText = "spActiveSessionGet";
 
                             cmd.Parameters.AddWithValue("@session_id", sessionId);
                             cmd.Parameters.AddWithValue("@user_id", userId);
@@ -3086,7 +2460,7 @@ public class DAL
                     {
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spCheckActiveSession";
+                        cmd.CommandText = "spActiveSessionCheck";
 
                         cmd.Parameters.AddWithValue("@user_id", userId);
 
@@ -3164,7 +2538,7 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spAddAccessLogEntry";
+                    cmd.CommandText = "spAccessLogEntryAdd";
 
                     cmd.Parameters.AddWithValue("@code", code);
                     cmd.Parameters.AddWithValue("@user_id", userId);
@@ -3208,7 +2582,7 @@ public class DAL
                     {
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spAddAuditLogEntry";
+                        cmd.CommandText = "spAuditLogEntryAdd";
 
                         cmd.Parameters.AddWithValue("@user_id", userId);
                         cmd.Parameters.AddWithValue("@content", content);
@@ -3284,7 +2658,7 @@ public class DAL
                     {
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmd.CommandText = "spGetServerTime";
+                        cmd.CommandText = "spServerTimeGet";
 
                         adp.SelectCommand = cmd;
                         adp.Fill(dt);
@@ -3325,7 +2699,7 @@ public class DAL
 
                             cmd.Connection = connection; cmd.CommandTimeout = 360;
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.CommandText = "spFilterRecentActivity";
+                            cmd.CommandText = "spRecentActivityFilter";
 
                             cmd.Parameters.AddWithValue("@user_id", userId);
 
@@ -3362,7 +2736,7 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spAddExceptionLogEntry";
+                    cmd.CommandText = "spExceptionLogEntryAdd";
 
                     cmd.Parameters.AddWithValue("@user_id", Employee.user_id);
                     cmd.Parameters.AddWithValue("@terminal_id", Convert.ToString(HttpContext.Current.Request.UserHostAddress));
@@ -3413,7 +2787,7 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spChangePassword";
+                    cmd.CommandText = "spPasswordChange";
 
                     cmd.Parameters.AddWithValue("@user_id", userId);
                     cmd.Parameters.AddWithValue("@password", password);
@@ -3435,7 +2809,7 @@ public class DAL
     * @param string userId - unique identifier of the user
     * @return Boolean true if successful
     */
-    public Boolean ResetPassword(string userId)
+    public Boolean ResetPassword(string userId, string password)
     {
         //    try
         {
@@ -3446,9 +2820,10 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spResetPassword";
+                    cmd.CommandText = "spPasswordReset";
 
                     cmd.Parameters.AddWithValue("@user_id", userId);
+                    cmd.Parameters.AddWithValue("@password", password);
 
                     cmd.Connection = connection; cmd.CommandTimeout = 360;
                     cmd.ExecuteNonQuery();
@@ -3576,7 +2951,7 @@ public class DAL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "spAddPasswordHistory";
+                    cmd.CommandText = "spPasswordHistoryAdd";
 
                     cmd.Parameters.AddWithValue("@user_id", userId);
                     cmd.Parameters.AddWithValue("@password", password);
@@ -3615,7 +2990,7 @@ public class DAL
                     {
                         cmd.Connection = connection; cmd.CommandTimeout = 360;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "spFilterPasswordHistory";
+                        cmd.CommandText = "spPasswordHistoryFilter";
 
                         cmd.Parameters.AddWithValue("@user_id", userId);
                         cmd.Parameters.AddWithValue("@number_of_passwords", numberOfPasswords);

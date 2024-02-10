@@ -11,97 +11,133 @@ namespace Template
 {
 
 
-    public partial class pepsol_edit
+    public partial class report
     {
 
         /// <summary>
-        /// contentHeader control.
+        /// lblReportDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label contentHeader;
+        protected global::System.Web.UI.WebControls.Label lblReportDesc;
 
         /// <summary>
-        /// mainBreadcrumb control.
+        /// ddReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label mainBreadcrumb;
+        protected global::System.Web.UI.WebControls.DropDownList ddReport;
 
         /// <summary>
-        /// subItemBreadcrumb control.
+        /// ddAgeGroup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label subItemBreadcrumb;
+        protected global::System.Web.UI.WebControls.DropDownList ddAgeGroup;
 
         /// <summary>
-        /// cardTitle control.
+        /// ddMembershipStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label cardTitle;
+        protected global::System.Web.UI.WebControls.DropDownList ddMembershipStatus;
 
         /// <summary>
-        /// lblCode control.
+        /// txtMemberId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCode;
+        protected global::System.Web.UI.WebControls.TextBox txtMemberId;
 
         /// <summary>
-        /// txtDescription control.
+        /// txtName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescription;
+        protected global::System.Web.UI.WebControls.TextBox txtName;
 
         /// <summary>
-        /// RequiredFieldValidator2 control.
+        /// gvMaintenance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        protected global::System.Web.UI.WebControls.GridView gvMaintenance;
 
         /// <summary>
-        /// revDescription control.
+        /// divPager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revDescription;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPager;
 
         /// <summary>
-        /// btnCancel control.
+        /// lbFirstPage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
+        protected global::System.Web.UI.WebControls.LinkButton lbFirstPage;
 
         /// <summary>
-        /// btnSave control.
+        /// ddPageNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSave;
+        protected global::System.Web.UI.WebControls.DropDownList ddPageNumber;
+
+        /// <summary>
+        /// lblTotalPageCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalPageCount;
+
+        /// <summary>
+        /// lbPreviousPage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbPreviousPage;
+
+        /// <summary>
+        /// lbNextPage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbNextPage;
+
+        /// <summary>
+        /// lbLastPage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbLastPage;
     }
 }

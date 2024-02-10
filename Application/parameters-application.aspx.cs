@@ -40,25 +40,20 @@ namespace Template
                             { }
                             else
                             {
-                                #region Load Application Parameters
-                                if (Maintenance.content_code == VG.c_application_parameters)
-                                {
-                                    txtWebsiteUrl.Text = Maintenance.website_url;
-                                    txtEmail.Text = Maintenance.bank_email_address;
-                                    txtChurchHotline.Text = Maintenance.bank_hotline;
-                                    txtChurchName.Text = Maintenance.bank_name;
-                                    txtProfileExpiration.Text = Maintenance.profile_expiration_days;
-                                    txtEmailEngineSender.Text = Maintenance.email_engine_sender_address;
-                                    txtMaxMobileDevices.Text = Maintenance.max_allowed_mobile_devices;
-                                    txtProfileExpiryReminder.Text = Maintenance.profile_expiration_warning_days;
-                                    txtPasswordExpiryReminder.Text = Maintenance.password_expiration_warning_days;
-                                    txtReportHeader.Text = Maintenance.report_header;
-                                    txtSpecialCharactersAllowed.Text = Maintenance.allowed_special_characters_application;
-                                    txtSpecialCharactersNotAllowed.Text = Maintenance.restricted_username_special_characters;
-                                    txtTaskSummaryPurge.Text = Maintenance.task_summary_purge_days;
-                                    txtMaxRecordCount.Text = Maintenance.max_extractable_record_count;
+                                #region Validation
+                                revChurchName.ValidationExpression = Validation.RegexAlphanumericWithSpace;
+                                revChurchName.ErrorMessage = Validation.ErrorMessageAlphanumericWithSpace;
+                                revReportHeader.ValidationExpression = Validation.RegexAlphabeticWithSpace;
+                                revReportHeader.ErrorMessage = Validation.ErrorMessageAlphabeticWithSpace;
+                                #endregion
 
-                                }
+                                LoadApplicationParameters();
+
+                                #region Titles
+                                contentHeader.Text = Maintenance.content_description + " Maintenance";
+                                mainBreadcrumb.Text = Maintenance.content_description;
+                                subItemBreadcrumb.Text = Maintenance.mode;
+                                cardTitle.Text = Maintenance.content_description;
                                 #endregion
                             }
                         }
@@ -91,5 +86,35 @@ namespace Template
                 }
             }
         }
+
+
+        protected void LoadApplicationParameters()
+        {
+            if (_BLL.SessionIsActive(this))
+            {
+                #region Load Application Parameters
+                if (Maintenance.content_code == VG.c_application_parameters)
+                {
+                    txtWebsiteUrl.Text = Maintenance.website_url;
+                    txtEmail.Text = Maintenance.church_email_address;
+                    txtChurchHotline.Text = Maintenance.church_hotline;
+                    txtChurchName.Text = Maintenance.church_name;
+                    txtProfileExpiration.Text = Maintenance.profile_expiration_days;
+                    txtEmailEngineSender.Text = Maintenance.email_engine_sender_address;
+                    txtMaxMobileDevices.Text = Maintenance.max_allowed_mobile_devices;
+                    txtProfileExpiryReminder.Text = Maintenance.profile_expiration_warning_days;
+                    txtPasswordExpiryReminder.Text = Maintenance.password_expiration_warning_days;
+                    txtReportHeader.Text = Maintenance.report_header;
+                    txtSpecialCharactersAllowed.Text = Maintenance.allowed_special_characters_application;
+                    txtSpecialCharactersNotAllowed.Text = Maintenance.restricted_username_special_characters;
+                    txtTaskSummaryPurge.Text = Maintenance.task_summary_purge_days;
+                    txtMaxRecordCount.Text = Maintenance.max_extractable_record_count;
+
+                }
+                #endregion
+            }
+        }
+
+
     }
 }

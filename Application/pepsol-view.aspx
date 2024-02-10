@@ -10,13 +10,16 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>PEPSOL Maintenance</h1>
+                        <h1>
+                            <asp:Label ID="contentHeader" runat="server"></asp:Label></h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a>PEPSOL Maintenance</a></li>
-                            <li class="breadcrumb-item active">View</li>
+                            <li class="breadcrumb-item"><a href="home.aspx">Home</a></li>
+                            <li class="breadcrumb-item"><a>
+                                <asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></a></li>
+                            <li class="breadcrumb-item active">
+                                <asp:Label ID="subItemBreadcrumb" runat="server"></asp:Label></li>
                         </ol>
                     </div>
                 </div>
@@ -26,48 +29,54 @@
 
         <!-- Main content -->
         <section class="content">
-            <!-- Default box -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">View</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-                            <%--<h3 class="text-dark">Ministry Details</h3>--%>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <asp:Label ID="cardTitle" runat="server"></asp:Label></h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
                             <div class="row">
-                                <div class="col-12 col-sm-12">
-                                    <div class="info-box bg-light">
-                                        <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Code</span>
-                                            <span class="info-box-number text-center text-muted mb-0">
-                                                <asp:Label ID="lblCode" runat="server"></asp:Label></span>
+                                <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                                    <%--<h3 class="text-dark">Ministry Details</h3>--%>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12">
+                                            <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text text-center text-muted">Code</span>
+                                                    <span class="info-box-number text-center text-muted mb-0">
+                                                        <asp:Label ID="lblCode" runat="server"></asp:Label></span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-12">
-                                    <div class="info-box bg-light">
-                                        <div class="info-box-content">
-                                            <span class="info-box-text text-center text-muted">Descrtiption</span>
-                                            <span class="info-box-number text-center text-muted mb-0">
-                                                <asp:Label ID="lblDescription" runat="server"></asp:Label></span>
+                                        <div class="col-12 col-sm-12">
+                                            <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text text-center text-muted">Description</span>
+                                                    <span class="info-box-number text-center text-muted mb-0">
+                                                        <asp:Label ID="lblDescription" runat="server"></asp:Label></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /.card-body -->
                     </div>
                 </div>
-                <!-- /.card-body -->
             </div>
+
             <!-- /.card -->
-            <div class="row">
-                <div class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-6">
                     <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" OnClick="btnCancel_Click">Back</asp:LinkButton>
                 </div>
             </div>

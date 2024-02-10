@@ -9,122 +9,123 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Change Password</title>
-<%--    <link rel="stylesheet" type="text/css" href="contents/css/bootstrap.min.css" />
-    <script type="text/javascript" src="contents/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="contents/js/sweetalert2.all.min.js"></script>--%>
-
-    <!-- Contents -->
-
-    <!-- Nice Admin Template
-    <!-- Vendor CSS Files -->
-    <link href="contents/NiceAdmin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="contents/NiceAdmin/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-    <link href="contents/NiceAdmin/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="contents/NiceAdmin/vendor/remixicon/remixicon.css" rel="stylesheet" />
-    <!-- Template Main CSS File -->
-    <link href="contents/NiceAdmin/css/style.css" rel="stylesheet" />
-
-    <!-- Maan Contents Template -->
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="contents/AdminLTE/plugins/fontawesome-free/css/all.min.css" />
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="contents/AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="contents/AdminLTE/dist/css/adminlte.min.css" />
+    <!-- Maan Template -->
     <link rel="stylesheet" type="text/css" href="contents/css/jquery-ui.min.css" />
-    <link rel="stylesheet" type="text/css" href="contents/css/bootstrap.min.css" />
-    <script type="text/javascript" src="contents/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="contents/js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="contents/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="contents/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="contents/js/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="contents/js/main.js"></script>
 </head>
 <body>
-    <div class="text-center mb-3">
-        <img src="contents/images/upci-logo.png" alt="UPCI Management System" />
-    </div>
     <form id="Form1" runat="server">
-        <div class="row justify-content-center">
-            <div class="col-md-8" style="font-size: small">
-                <div class="card">
-                    <div class="card-header">
-                        Change Password
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group row align-items-baseline">
-                            <label for="lblPasswordGuidelines" class="col-md-4 col-form-label text-md-right">
-                                Password Guidelines</label>
-                            <div class="col-md-4">
-                                <li>
-                                    <asp:Label runat="server" ID="lblNewPasswordErrorMessage"></asp:Label></li>
+            <div class="content">
+                <br />
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card card-outline card-primary">
+                            <div class="card-header text-center">
+                                <img alt="" src="contents/images/ums-logo.png" height="120" width="340" />
+                            </div>
+                            <div class="card-body">
+                                <p class="login-box-msg">You are only one step a way from your new password, change your password now.</p>
                                 <br />
-                                <li><i class="chevron right icon"></i>
-                                    <asp:Label runat="server" ID="lblNewPasswordRepeatingErrorMessage"></asp:Label></li>
-                                <br />
-                                <li><i class="chevron right icon"></i>
-                                    <asp:Label runat="server" ID="lblNewPasswordSequentialErrorMessage"></asp:Label></li>
+                                <p class="login-box-msg"><b>Password Guidelines</b></p>
+                                <div class="form-group row align-items-baseline">
+                                    <label for="lblPasswordGuidelines" class="col-md-4 col-form-label text-md-right">
+                                        </label>
+                                    <div class="col-md-4">
+                                        <li>
+                                            <asp:Label runat="server" ID="lblNewPasswordErrorMessage"></asp:Label></li>
+                                        <br />
+                                        <li><i class="chevron right icon"></i>
+                                            <asp:Label runat="server" ID="lblNewPasswordRepeatingErrorMessage"></asp:Label></li>
+                                        <br />
+                                        <li><i class="chevron right icon"></i>
+                                            <asp:Label runat="server" ID="lblNewPasswordSequentialErrorMessage"></asp:Label></li>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row align-items-start">
+                                    <label for="txtCurrentPassword" class="col-md-4 col-form-label text-md-right">
+                                        Current Password</label>
+                                    <div class="col-md-4">
+                                        <asp:TextBox runat="server" ID="txtCurrentPassword" MaxLength="50" TextMode="Password"
+                                            class="form-control" autocomplete="off"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ValidationGroup="changePasswordValidation"
+                                            ErrorMessage="Required field." ControlToValidate="txtCurrentPassword" ForeColor="Red"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
+                                <div class="form-group row align-items-start">
+                                    <label for="txtNewPassword" class="col-md-4 col-form-label text-md-right">
+                                        New Password</label>
+                                    <div class="col-md-4">
+                                        <asp:TextBox runat="server" ID="txtNewPassword" MaxLength="50" TextMode="Password"
+                                            class="form-control" autocomplete="off"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ValidationGroup="changePasswordValidation"
+                                            ErrorMessage="Required field." ControlToValidate="txtNewPassword" ForeColor="Red"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="NewPasswordValidator" runat="server" ValidationGroup="changePasswordValidation"
+                                            ErrorMessage="First condition not met.<br/>" ControlToValidate="txtNewPassword"
+                                            ValidationExpression="" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="NewPasswordRepeatingValidator" runat="server"
+                                            ValidationGroup="changePasswordValidation" Enabled="false" ErrorMessage="Second condition not met.<br/>"
+                                            ControlToValidate="txtNewPassword" ValidationExpression="" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="NewPasswordSequentialValidator" runat="server"
+                                            ValidationGroup="changePasswordValidation" Enabled="false" ErrorMessage="Third condition not met.<br/>"
+                                            ControlToValidate="txtNewPassword" ValidationExpression="" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                                    </div>
+                                </div>
+                                <div class="form-group row align-items-start">
+                                    <label for="txtConfirmPassword" class="col-md-4 col-form-label text-md-right">
+                                        Confirm Password</label>
+                                    <div class="col-md-4">
+                                        <asp:TextBox runat="server" ID="txtConfirmPassword" MaxLength="50" TextMode="Password"
+                                            class="form-control" autocomplete="off"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ValidationGroup="changePasswordValidation"
+                                            ErrorMessage="Required field." ControlToValidate="txtConfirmPassword" ForeColor="Red"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+                                        <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="New password and confirmation password do not match."
+                                            ValidationGroup="changePasswordValidation" ControlToCompare="txtNewPassword"
+                                            ControlToValidate="txtConfirmPassword" ForeColor="RED" Display="Dynamic"></asp:CompareValidator>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 offset-md-3 text-center">
+                                    <asp:Label runat="server" ID="lblError" ForeColor="Red"></asp:Label>
+                                    <br />
+                                    &nbsp;
+                                </div>
+                                <div class="col-md-4 offset-md-4">
+                                    <asp:LinkButton runat="server" class="btn btn-primary btn-sm" ID="lbChangePassword"
+                                        OnClick="lbChangePassword_Click" OnClientClick="if(Page_ClientValidate('changePasswordValidation')) {if(this.value === 'Please wait...') { return false; } else { this.value = 'Please wait...'; }}"
+                                        Text="Change Password" CausesValidation="true" ValidationGroup="changePasswordValidation"></asp:LinkButton>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row align-items-start">
-                            <label for="txtCurrentPassword" class="col-md-4 col-form-label text-md-right">
-                                Current Password</label>
-                            <div class="col-md-4">
-                                <asp:TextBox runat="server" ID="txtCurrentPassword" MaxLength="50" TextMode="Password"
-                                    class="form-control" autocomplete="off"></asp:TextBox>
-                            </div>
-                            <div class="col-md-4">
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ValidationGroup="changePasswordValidation"
-                                    ErrorMessage="Required field." ControlToValidate="txtCurrentPassword" ForeColor="Red"
-                                    Display="Dynamic"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="form-group row align-items-start">
-                            <label for="txtNewPassword" class="col-md-4 col-form-label text-md-right">
-                                New Password</label>
-                            <div class="col-md-4">
-                                <asp:TextBox runat="server" ID="txtNewPassword" MaxLength="50" TextMode="Password"
-                                    class="form-control" autocomplete="off"></asp:TextBox>
-                            </div>
-                            <div class="col-md-4">
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ValidationGroup="changePasswordValidation"
-                                    ErrorMessage="Required field." ControlToValidate="txtNewPassword" ForeColor="Red"
-                                    Display="Dynamic"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="NewPasswordValidator" runat="server" ValidationGroup="changePasswordValidation"
-                                    ErrorMessage="First condition not met.<br/>" ControlToValidate="txtNewPassword"
-                                    ValidationExpression="" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
-                                <asp:RegularExpressionValidator ID="NewPasswordRepeatingValidator" runat="server"
-                                    ValidationGroup="changePasswordValidation" Enabled="false" ErrorMessage="Second condition not met.<br/>"
-                                    ControlToValidate="txtNewPassword" ValidationExpression="" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
-                                <asp:RegularExpressionValidator ID="NewPasswordSequentialValidator" runat="server"
-                                    ValidationGroup="changePasswordValidation" Enabled="false" ErrorMessage="Third condition not met.<br/>"
-                                    ControlToValidate="txtNewPassword" ValidationExpression="" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
-                            </div>
-                        </div>
-                        <div class="form-group row align-items-start">
-                            <label for="txtConfirmPassword" class="col-md-4 col-form-label text-md-right">
-                                Confirm Password</label>
-                            <div class="col-md-4">
-                                <asp:TextBox runat="server" ID="txtConfirmPassword" MaxLength="50" TextMode="Password"
-                                    class="form-control" autocomplete="off"></asp:TextBox>
-                            </div>
-                            <div class="col-md-4">
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ValidationGroup="changePasswordValidation"
-                                    ErrorMessage="Required field." ControlToValidate="txtConfirmPassword" ForeColor="Red"
-                                    Display="Dynamic"></asp:RequiredFieldValidator>
-                                <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="New password and confirmation password do not match."
-                                    ValidationGroup="changePasswordValidation" ControlToCompare="txtNewPassword"
-                                    ControlToValidate="txtConfirmPassword" ForeColor="RED" Display="Dynamic"></asp:CompareValidator>
-                            </div>
-                        </div>
-                        <div class="col-md-6 offset-md-3 text-center">
-                            <asp:Label runat="server" ID="lblError" ForeColor="Red"></asp:Label>
-                            <br />
-                            &nbsp;
-                        </div>
-                        <div class="col-md-4 offset-md-4">
-                            <asp:LinkButton runat="server" class="btn btn-primary btn-sm" ID="lbChangePassword"
-                                OnClick="lbChangePassword_Click" OnClientClick="if(Page_ClientValidate('changePasswordValidation')) {if(this.value === 'Please wait...') { return false; } else { this.value = 'Please wait...'; }}"
-                                Text="Change Password" CausesValidation="true" ValidationGroup="changePasswordValidation"></asp:LinkButton>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+      
+
+
+
+
+
+
+
         <script type="text/javascript" language="javascript">
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);

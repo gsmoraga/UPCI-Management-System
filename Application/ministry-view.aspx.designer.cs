@@ -15,6 +15,42 @@ namespace Template
     {
 
         /// <summary>
+        /// contentHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label contentHeader;
+
+        /// <summary>
+        /// mainBreadcrumb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label mainBreadcrumb;
+
+        /// <summary>
+        /// subItemBreadcrumb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label subItemBreadcrumb;
+
+        /// <summary>
+        /// cardTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label cardTitle;
+
+        /// <summary>
         /// lblCode control.
         /// </summary>
         /// <remarks>

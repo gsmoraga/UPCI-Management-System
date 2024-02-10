@@ -10,28 +10,29 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Security Parameters
+                        <h1><asp:Label ID="contentHeader" runat="server"></asp:Label>
                         </h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item">Maintenance</li>
-                            <li class="breadcrumb-item active">Security Parameters</li>
+                            <li class="breadcrumb-item"><a href="home.aspx">Home</a></li>
+                            <li class="breadcrumb-item">
+                                <asp:Label ID="mainBreadcrumb" runat="server"></asp:Label></li>
                         </ol>
                     </div>
                 </div>
+
             </div>
             <!-- /.container-fluid -->
         </section>
 
         <!-- Main content -->
         <section class="content">
-            <div class="row">
-                <div class="col-md-12">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Security Parameters
+                            <h3 class="card-title"><asp:label ID="cardTitle" runat="server"></asp:label>
                             </h3>
 
                             <div class="card-tools">
@@ -225,14 +226,16 @@
                     </div>
                     <!-- Card -->
                 </div>
+
             </div>
             <div class="row">
-                <div class="col-12">
+                <div class="col-10">
                     <asp:LinkButton runat="server" class="btn btn-success float-right" ID="lbSaveSecurityParameters" OnClick="lbSaveSecurityParameters_Click" Text="Save Changes"
                         OnClientClick="if(Page_ClientValidate('securityParametersValidation')) { if(this.value === 'Please wait...') { return false; } else { this.value = 'Please wait...'; }}"
                         CausesValidation="true" ValidationGroup="securityParametersValidation"></asp:LinkButton>
                 </div>
             </div>
+            <br />
         </section>
         <!-- /.content -->
     </div>
