@@ -1,1 +1,1 @@
-Management System is a system that can manage and monitor the numbers of Employee/Members of an organization.
+UPCI Member Management System is a system that can manage and monitor the numbers of Members of an organization.
